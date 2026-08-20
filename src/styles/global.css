@@ -1,0 +1,31 @@
+/* System font stack only. No web fonts. */
+:root {
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  line-height: 1.5;
+  color: #111;
+  background: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}

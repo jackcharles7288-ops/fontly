@@ -1,0 +1,29 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  canonical: string;
+}
+
+const { title, description, h1, canonical } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <main>
+      <h1>{h1}</h1>
+      <slot />
+    </main>
+  </body>
+</html>

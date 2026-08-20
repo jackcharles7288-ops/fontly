@@ -1,0 +1,90 @@
+---
+description: Content collection schema and article conversion rules for Fontly.
+globs: src/content/**
+---
+
+# Fontly content rules
+
+## Two collections, from the start
+
+- src/content/pages/ for the seventeen tool pages and the homepage
+- src/content/blog/ for blog posts
+
+Both are declared in `src/content.config.ts`, not in `src/content/config.ts`.
+Astro 7 moved the file. Every collection also needs an explicit loader, so each
+one is defined with `loader: glob(...)` pointing at its own folder. Create both
+in the first phase, even though the blog is built later. Retrofitting a second
+collection later means touching routing.
+
+## Frontmatter schema for pages
+
+Define it with Zod so a bad page fails the build instead of shipping broken.
+
+- title, string, the title tag, maximum 60 characters, validated
+- h1, string, the visible heading, may differ from the title
+- description, string, meta description, maximum 155 characters, validated
+- no `slug` field at all. Astro reserves `slug`, and putting it in a Zod schema
+  throws `ContentSchemaContainsSlugError`. The URL comes from the filename
+  instead, so the file is named for the slug and `index.md` is the homepage
+- primaryKeyword, string
+- toolCategories, array of category ids from categories.ts
+- faq, array of objects with q and a
+- relatedTools, array of page slugs, not URLs
+- publishedDate, date
+- updatedDate, date
+
+The blog collection uses the same shape minus toolCategories, plus a
+required date.
+
+## Rules that must hold structurally
+
+- The faq array feeds two things from one source: the visible accordion and
+  the FAQPage JSON-LD. A FAQ is never written twice.
+- relatedTools holds slugs. The component looks each one up in pages.ts. If
+  a slug has no matching page that exists yet, silently omit that link. An
+  earlier prototype shipped eleven related-tool links where nine were 404s.
+  That must now be structurally impossible.
+- Use plain independent <details> elements for the FAQ, not a
+  one-at-a-time accordion. Answers stay in the HTML source when collapsed.
+- In-body internal links are absolute URLs, so they return 404 until every
+  page exists. Add a build-time link checker that fails the build.
+
+## Converting an article from Notion into Markdown
+
+Articles are written in Notion by the owner and converted, never written
+here. An agent asked to write article copy will invent the very facts these
+articles were written to debunk. Do not write, extend, summarise or improve
+article prose. Convert only.
+
+Delete these before converting:
+
+- the yellow progress callout
+- the red pre-publish checklist
+- the blue self-audit callout
+- everything from the Phase 9 header downwards
+- the tool embed token, for example BUBBLE_TOOL_EMBED
+
+Lift these into frontmatter: title tag, meta description, H1, slug,
+primary keyword.
+
+Move the FAQ out of the body and into the faq array as q and a pairs.
+
+Turn "More Font Tools" into relatedTools slugs.
+
+Do not paste JSON-LD into the Markdown. Schema.astro generates it.
+
+## Titles and meta descriptions are already written
+
+Every title tag and meta description was written and character-counted by
+hand in Notion. Copy them verbatim. Do not rewrite, shorten, optimise or
+regenerate them. If one exceeds the Zod limit, report it and stop rather
+than editing it yourself.
+
+## Keyword ownership
+
+- One page, one primary keyword, one H1. Never reuse a primary keyword.
+- The homepage primary keyword is "cool fonts". It is not
+  "font generator copy paste", which an older draft used.
+- Long-tail questions become FAQ entries or H2 sections on an existing
+  page, never new pages.
+- Cannibalisation is defined by search intent, not by shared words.

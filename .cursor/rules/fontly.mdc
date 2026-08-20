@@ -1,0 +1,170 @@
+---
+description: Fontly core project rules. Static Astro font generator site.
+alwaysApply: true
+---
+
+# Fontly build rules
+
+## What this project is
+
+Fontly is a static font generator website. Visitors type text, the tool
+renders it in many Unicode styles, and they copy a style to paste into
+Instagram, TikTok, Discord or WhatsApp. Every page carries a long article
+below the tool. The tool is the hero and sits above the fold on every page.
+
+The owner is a beginner. When you make a decision that was not specified,
+say so in one line and say why. If something asked for is technically wrong
+or would hurt speed, say so instead of quietly doing it. If a phase is not
+finished, say it is not finished. Never report work as done that you have
+not verified.
+
+## Priorities, in this exact order
+
+1. Page speed. This site competes against slow, ad-heavy pages. Speed is
+   the product. If a feature costs speed, the feature loses.
+2. Correctness. Every character the tool outputs must be the right Unicode
+   code point. One wrong character makes the whole site look amateur.
+3. Content manageability. Editing an article must never mean touching code.
+4. Accessibility and honesty. Real buttons, real focus states, no fake
+   claims anywhere in the interface.
+5. Variety of styles. Last, deliberately. Forty correct styles beat three
+   hundred sloppy ones.
+
+## Hard constraints
+
+Breaking any of these means the work has to be redone.
+
+- No React, Vue, Svelte or Preact. Not even as an Astro integration. Zero
+  UI framework JavaScript reaches the browser.
+- No Tailwind, Bootstrap or any CSS framework. Hand-written CSS only.
+- No web fonts. Not Google Fonts, not self-hosted, not one. System font
+  stack only. This is about correctness, not performance: the whole site is
+  about rendering unusual characters in the reader's own system font, and a
+  web font would hide the exact rendering failures the articles document.
+- No jQuery, no lodash, no UI libraries.
+- No third-party script except Cloudflare Web Analytics, added last and
+  deferred.
+- No server, no database, no API routes. Output is pure static HTML, CSS
+  and JS.
+- No ads, no ad slots, no cookie banner, no popup, no newsletter modal.
+- No embedded video, no social widget, no comment system.
+- Do not add any library, framework or dependency without asking first.
+
+## Speed budget
+
+Non-negotiable. Report the real measured number after each phase,
+including the ones that fail.
+
+- JavaScript: under 15 KB gzipped for the whole tool
+- CSS: under 15 KB gzipped, critical CSS inlined
+- Zero web font requests
+- Zero third-party requests on first load
+- LCP element is server-rendered text or cards, never an image
+- CLS exactly 0
+- INP under 200 ms while typing, measured at 4x CPU throttling
+- Roughly 1,500 DOM nodes per page or fewer
+
+Field data is what ranks, not Lighthouse. Google uses real Chrome visits
+over a rolling 28-day window at the 75th percentile. Do not chase a
+perfect lab score.
+
+## Stack
+
+- Astro, latest stable, static output, no UI framework integration
+- Astro content collections with Markdown for all content
+- Vanilla JavaScript for the generator, one module, loaded deferred
+- Plain hand-written CSS
+- System font stack only
+- @astrojs/sitemap
+- Cloudflare Web Analytics as the single script tag, at the very end,
+  deferred
+- Deployed to Cloudflare Pages from a GitHub repo. Build command
+  astro build, output directory dist. Do not install a Cloudflare adapter:
+  the build is fully static and an adapter is only needed for
+  server-rendered output. The owner pushes from Cursor's Source Control
+  panel.
+
+## Honesty rules
+
+- Never invent a number, date, percentage or capability. If a fact belongs
+  in the interface and it was not given to you, ask or leave a TODO.
+- Never hardcode a style count anywhere. Render it from styles.length.
+- These exact claims are banned because an earlier prototype shipped them
+  and they are false: "Works Everywhere", any device-compatibility
+  percentage such as "99%", and any hardcoded count such as "130+ styles".
+- Never hardcode a compatibility claim of any kind.
+- No statistic appears in the interface unless the owner supplies it.
+- Only document features that exist and have been tested. Do not list
+  keyboard shortcuts, or anything else, that has not been verified working.
+
+## Accessibility
+
+- Every interactive element is a real button or anchor, never a clickable
+  div.
+- Visible focus outlines. Do not remove them.
+- Body text contrast at least 4.5 to 1.
+- The whole tool works with a keyboard alone, in a sensible tab order.
+- Copy confirmation is announced in an aria-live="polite" region, so screen
+  reader users hear it and not only sighted users.
+- Respect prefers-reduced-motion on any transition.
+- FAQ answers are present in the HTML source even when visually collapsed.
+
+## SEO
+
+- One h1 per page, taken from frontmatter.
+- Canonical URL on every page. Site is https://fontly.cool. Trailing
+  slashes consistent everywhere.
+- Add BreadcrumbList structured data on every page. It is the only
+  structured data on this site that still changes what a searcher sees.
+- Keep FAQPage and SoftwareApplication JSON-LD for machine understanding
+  only. Do not claim they produce a visible search feature. FAQ rich
+  results stopped appearing for every site on 7 May 2026, and HowTo was
+  deprecated on desktop on 13 September 2023.
+- @astrojs/sitemap generating /sitemap-index.xml, with robots.txt in
+  public/ pointing to it.
+- A real 404 page linking back to the homepage and the live tool pages.
+- Semantic HTML. Headings in order, no skipped levels.
+- No tag pages, no category archives, no date archives, no pagination.
+- Internal linking is hub and spoke, three to five genuinely related links
+  per page. Never link every page to every other page.
+
+## Folder structure
+
+- `src/content.config.ts`. Astro 7 moved this file out of the content folder.
+  Beside it sit `src/content/pages/` and `src/content/blog/`
+- src/data/styles.ts, src/data/categories.ts, src/data/pages.ts
+- src/layouts/PageLayout.astro
+- src/components/Tool.astro, Faq.astro, RelatedTools.astro, Schema.astro,
+  Previews.astro
+- src/scripts/generator.js
+- src/styles/global.css
+- src/pages/[...slug].astro and src/pages/404.astro
+- public/robots.txt
+
+Adding a new page must mean adding one Markdown file and nothing else.
+
+The filename is the URL. Astro derives an entry's id from its filename and the
+route uses that id, so `bubble-text-generator.md` serves
+`/bubble-text-generator/`. Name every file exactly for the slug fixed in the
+keyword map, never a shortened version of it. There is no `slug` frontmatter
+field on this site: Astro reserves that word, and a field Astro silently ignores
+is exactly the kind of invisible trap these rules exist to prevent. The single
+exception is the homepage, `index.md`, which the catch-all route maps to the site
+root rather than to `/index/`.
+
+## Build order. Stop after each phase and wait for review.
+
+1. Astro project, folder structure, content collection config with Zod
+   validation, layout, global CSS with the system font stack, and one
+   Markdown page rendering end to end with a placeholder where the tool
+   goes. No tool logic at all in this phase.
+2. Style data and the generator function in isolation. Print every
+   character of every style to the console. Nothing in the browser yet.
+3. The tool component and the browser script. Report gzipped JS size.
+4. FAQ, related tools, schema, 404, sitemap, robots.txt, canonicals.
+5. A second page and then a third page added from Markdown only, to prove
+   the structure holds without touching any other file.
+6. Cloudflare Pages deploy config and the analytics snippet. Then report
+   every acceptance number honestly, including the ones that fail.
+
+Do not skip ahead. Do not build a later phase because it seems easy.

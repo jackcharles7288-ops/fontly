@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => {
+    // index.md has entry id "index"; map it to the site root, not /index/.
+    const routeSlug = page.id === 'index' ? undefined : page.id;
+    return {
+      params: { slug: routeSlug },
+      props: { page },
+    };
+  });
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+
+const path = page.id === 'index' ? '/' : `/${page.id}/`;
+const canonical = new URL(path, Astro.site).href;
+---
+
+<PageLayout
+  title={page.data.title}
+  description={page.data.description}
+  h1={page.data.h1}
+  canonical={canonical}
+>
+  <Content />
+</PageLayout>

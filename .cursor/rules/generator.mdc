@@ -1,0 +1,146 @@
+---
+description: Unicode generator correctness and tool interaction rules for Fontly.
+globs: src/scripts/**,src/data/**,src/components/Tool.astro
+---
+
+# Fontly generator rules
+
+## Code point handling. Get this exactly right.
+
+Most of these styles live above U+FFFF, which means each character is two
+UTF-16 code units in JavaScript. Naive code breaks in two ways and both
+must be handled explicitly.
+
+- Never use charCodeAt, and never index a string with square brackets when
+  mapping. Iterate with for (const ch of str), or spread the string, or use
+  codePointAt, so a styled character is never split in half.
+- Never use str.length as the user-facing character count. It reports two
+  per styled letter. Report both numbers with plain-language labels, for
+  example "12 characters, 24 on X/Twitter". The first is the code point
+  count, the second is the UTF-16 length. This is a genuine competitor
+  gap. Make it visible, not hidden in a tooltip.
+
+Build the mapping as an offset calculation, not a hand-typed lookup table.
+Each block in Mathematical Alphanumeric Symbols holds uppercase A to Z at
+a base, then lowercase a to z twenty-six code points later.
+
+## Style record shape
+
+Each entry in styles.ts carries an id, a display name, a category, an
+uppercase base, a lowercase base, a substitutions map of code point
+overrides, a digits field where null means digits pass through unchanged,
+and a risk field which is one of safe, uneven, or check-old-devices.
+risk is a compatibility claim governed by the honesty rules. It must never
+be assigned by assumption and never carry the same value on every style.
+Only two grounds are valid: a Unicode fact checkable without a device, where
+a style drawn from more than one Unicode block is uneven because font fallback
+resolves per block, or real device testing at stage 10. Anything else stays
+unset, and unset is a correct answer rather than a gap waiting to be filled.
+
+## The six cursive styles, with exact bases
+
+- bold-script, Bold Script, uppercase U+1D4D0, lowercase U+1D4EA
+- script, Classic Script, uppercase U+1D49C, lowercase U+1D4B6
+- bold-italic, Bold Italic, uppercase U+1D468, lowercase U+1D482
+- italic, Italic Script, uppercase U+1D434, lowercase U+1D44E
+- sans-italic, Handwriting, uppercase U+1D608, lowercase U+1D622
+- sans-bold-italic, Slanted, uppercase U+1D63C, lowercase U+1D656
+
+## The substitution gaps that every cheap generator gets wrong
+
+Unicode did not duplicate letters it had already encoded elsewhere, so
+some slots inside these blocks are reserved and empty. Calculating the
+offset without overriding them makes those letters render as blanks or
+tofu.
+
+Classic Script needs eleven overrides, all from Letterlike Symbols:
+B is U+212C, E is U+2130, F is U+2131, H is U+210B, I is U+2110,
+L is U+2112, M is U+2133, R is U+211B, lowercase e is U+212F,
+lowercase g is U+210A, lowercase o is U+2134.
+
+Italic Script needs one override: lowercase h is U+210E.
+
+After implementing this, print all fifty-two characters of every style to
+the console so they can be checked against these lists. Do not say it
+works. Show the output.
+
+## Digits and unconvertible input
+
+Cursive digits do not exist in Unicode. There is no cursive five. For
+every cursive style, digits pass through unchanged, and the tool shows a
+small persistent note on those cards saying numbers stay plain, so nobody
+thinks the tool is broken. Other styles such as circled and bold do have
+digits, which is why digits is a field and not a hardcoded assumption.
+
+Anything the generator cannot convert, including accented letters and any
+non-Latin script, passes through unchanged. Never substitute a lookalike
+character as a guess.
+
+## Performance rules for the tool
+
+An earlier prototype re-rendered one hundred and thirty style cards on
+every keystroke and janked badly on mobile. Do not repeat that.
+
+- Debounce the input at roughly 120 ms before re-rendering.
+- Use an IntersectionObserver so only cards currently in the viewport get
+  recalculated. Offscreen cards recalculate when they scroll into view.
+- Build the card list once at page load. On updates, set textContent on
+  the existing output nodes. Never rebuild the DOM, never use innerHTML in
+  a loop, never recreate card elements.
+- Render the card list server-side in Astro so the page is useful before
+  any JavaScript runs. JavaScript only wires up interactivity.
+- No layout shift. Cards must have their final dimensions before JS runs.
+
+## Tool features, in build order
+
+Build these in this order. Do not start a later one before an earlier one
+is correct and reviewed.
+
+1. One input field above the fold with a real label. Prefill it with the
+   page's own test phrase rather than leaving it empty, for example
+   "Soda Pop 40" on the bubble page and "Wumpus" on the Discord page.
+2. Category sections driven by toolCategories in the page frontmatter.
+   Each category gets a visible heading with its real name. No generic
+   labels such as "Style 47" anywhere.
+3. A card per style showing the real style name, the user's text rendered
+   in it, and a copy button.
+4. Copy via the async Clipboard API with a document.execCommand fallback.
+   Announce success in the aria-live region.
+5. The dual character counter described above.
+6. A quiet per-card risk indicator driven by the risk field. Render it only
+   when a style actually carries a value. No value means no badge, never a
+   default badge.
+7. Case transform buttons: UPPER, lower, Title, aLt. Pure string
+   operations on the input before styling.
+8. A search box that filters the visible style cards by name and category.
+   Provide a real empty state. Filtering must not cause layout shift.
+9. Favourites, toggled by a star on each card, and a recently-used list.
+   Both persist in localStorage. Render both section shells server-side
+   with their empty states, so reading localStorage on load causes no
+   layout shift.
+10. Platform previews: Instagram bio, Discord nickname, X display name and
+    TikTok display name, showing the user's text in a chosen style inside
+    a realistic frame. No follower counts, no like counts, no timestamps,
+    no invented engagement numbers of any kind. Frame chrome only.
+11. A decorated section, clearly labelled and separate from the plain
+    styles, where a style is a base alphabet wrapped in symbols. Never
+    present a wrapped variant as if it were a distinct alphabet.
+
+## Deferred until every character is verified correct
+
+Do not build these until the generator has been checked against the code
+point lists above and the owner has confirmed it.
+
+- The combo builder: base style, plus an optional separator between
+  letters, plus an optional wrapper around the text, with a live preview
+  and a copy button. When it is built, the dual character counter must be
+  visible inside the combo panel, because separators multiply the
+  character count and silently break platform bio limits. Label combo
+  output as decoration, not as a font.
+- A random style button.
+- Keyboard shortcuts. If they are ever added, document only the ones
+  actually tested.
+
+The reason for deferring is ordering, not dislike. The earlier prototype
+shipped a combo builder and a random button while its characters were
+still wrong.

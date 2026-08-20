@@ -1,3 +1,73 @@
 ---
-// Phase 4 fills this component with JSON-LD structured data.
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Breadcrumb {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  pageId: string;
+  title: string;
+  description: string;
+  canonical: string;
+  h1: string;
+  faq: FaqItem[];
+  breadcrumbs: Breadcrumb[];
+  hasTool: boolean;
+}
+
+const { title, description, canonical, h1, faq, breadcrumbs, hasTool } = Astro.props;
+
+// JSON-LD is for machine understanding only. Do not claim FAQ or app markup
+// produces a visible Google search feature. FAQ rich results stopped for every
+// site on 7 May 2026. HowTo is not generated (deprecated on desktop 13 Sep 2023).
+
+const graphs: Record<string, unknown>[] = [];
+
+if (breadcrumbs.length > 0) {
+  graphs.push({
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  });
+}
+if (hasTool) {
+  graphs.push({
+    '@type': 'WebApplication',
+    name: h1,
+    description,
+    url: canonical,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+  });
+}
+
+if (faq.length > 0) {
+  graphs.push({
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    })),
+  });
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': graphs,
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

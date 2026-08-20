@@ -1,3 +1,40 @@
 ---
-// Phase 4 fills this 404 page.
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import { hrefForPageId } from '../data/pages';
+
+const allPages = await getCollection('pages');
+const toolPages = allPages.filter(
+  (page) => page.id !== 'index' && page.data.toolCategories.length > 0,
+);
+const home = allPages.find((page) => page.id === 'index');
 ---
+
+<PageLayout
+  title="Page not found"
+  description="That page is not on Fontly. Go back to the homepage or open a live font tool."
+  h1="Page not found"
+  noindex={true}
+>
+  <div class="not-found article">
+    <p class="not-found__lede">
+      That address is not a page on this site. Use the homepage or one of the tools below.
+    </p>
+    <ul class="not-found__list">
+      {
+        home ? (
+          <li>
+            <a href={hrefForPageId(home.id)}>{home.data.title}</a>
+          </li>
+        ) : null
+      }
+      {
+        toolPages.map((page) => (
+          <li>
+            <a href={hrefForPageId(page.id)}>{page.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</PageLayout>

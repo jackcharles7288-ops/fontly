@@ -53,7 +53,8 @@ Breaking any of these means the work has to be redone.
 ## Speed budget
 
 Non-negotiable. Report the real measured number after each phase,
-including the ones that fail.
+including the ones that fail. Every phase report must state the measured
+CLS and INP numbers, or state plainly that they were not measured and why.
 
 - JavaScript: under 15 KB gzipped for the whole tool
 - CSS: under 15 KB gzipped, critical CSS inlined
@@ -112,9 +113,14 @@ perfect lab score.
 ## SEO
 
 - One h1 per page, taken from frontmatter.
-- Canonical URL on every page. Site is https://fontly.cool. Trailing
+- Canonical URL on every real page. Site is https://fontly.cool. Trailing
   slashes consistent everywhere.
-- Add BreadcrumbList structured data on every page. It is the only
+- The 404 page carries no canonical and does carry a noindex robots directive.
+  An error document is served at every broken URL a visitor types; a canonical
+  on it would claim those URLs are one indexable page, and
+  https://fontly.cool/404/ is not a real route this site generates.
+- Add BreadcrumbList structured data on sub-pages. Omit it on the homepage,
+  where a single self-pointing crumb describes no real position. It is the only
   structured data on this site that still changes what a searcher sees.
 - Keep FAQPage and SoftwareApplication JSON-LD for machine understanding
   only. Do not claim they produce a visible search feature. FAQ rich
@@ -137,6 +143,7 @@ perfect lab score.
 - src/components/Tool.astro, Faq.astro, RelatedTools.astro, Schema.astro,
   Previews.astro
 - src/scripts/generator.js
+- src/scripts/tool.js
 - src/styles/global.css
 - src/pages/[...slug].astro and src/pages/404.astro
 - public/robots.txt
@@ -151,6 +158,19 @@ field on this site: Astro reserves that word, and a field Astro silently ignores
 is exactly the kind of invisible trap these rules exist to prevent. The single
 exception is the homepage, `index.md`, which the catch-all route maps to the site
 root rather than to `/index/`.
+
+## Layout constants
+
+- The article reading measure is 43.75rem (680px at a 16px root). Chosen inside
+  the 680 to 720 px range; rem so it respects a raised browser default font size.
+- The tool section is capped at 52rem rather than full width. That cap is a
+  deliberate decision; do not re-choose it from scratch later. The tool remains
+  free to be wider than the article measure.
+- The h1 sits inside the article measure. Only the tool section uses the wider
+  cap. One left edge for all prose (h1, article body, FAQ, related tools).
+- No table of contents.
+- One accent colour only.
+- Tips render as callout boxes.
 
 ## Build order. Stop after each phase and wait for review.
 

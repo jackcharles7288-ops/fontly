@@ -29,3 +29,239 @@ body {
   outline: 2px solid #111;
   outline-offset: 2px;
 }
+
+main {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.article {
+  max-width: 43.75rem;
+  margin-top: 2rem;
+  margin-inline: auto;
+}
+
+/* Title block: same measure as prose, tighter top spacing under main padding. */
+.article--title {
+  margin-top: 0;
+}
+
+.article--title h1 {
+  margin: 0 0 0.5rem;
+}
+
+/* First prose block after the title shares the same column; keep spacing modest. */
+.article--title + .article {
+  margin-top: 0.75rem;
+}
+
+/* Tool — Phase 3 features 1–6 only. Keep small. Free to exceed article measure. */
+.tool {
+  margin: 0 0 2rem;
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+.tool__label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.tool__input {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  font-size: 1.05rem;
+  border: 1px solid #333;
+  border-radius: 0.25rem;
+  background: #fff;
+  color: #111;
+}
+
+.tool__live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.tool-card__counter {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.tool__category {
+  margin-top: 1.5rem;
+}
+
+.tool__category-heading {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.tool__cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tool-card {
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  /* Reserve space so SSR output and later textContent updates share a stable floor. */
+  min-height: 7.5rem;
+}
+
+.tool-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.tool-card__name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.tool-card__risk {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #444;
+  border: 1px solid #999;
+  border-radius: 0.2rem;
+  padding: 0.1rem 0.35rem;
+}
+
+.tool-card__output {
+  margin: 0;
+  min-height: 2.5rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.tool-card__digits-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.tool-card__copy {
+  margin-top: 0.6rem;
+  padding: 0.4rem 0.85rem;
+  font: inherit;
+  font-size: 0.9rem;
+  color: #111;
+  background: #f0f0f0;
+  border: 1px solid #333;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.tool-card__copy:hover {
+  background: #e4e4e4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-card__copy {
+    transition: none;
+  }
+}
+
+/* FAQ — independent <details>, answers stay in the HTML source when collapsed. */
+.faq {
+  max-width: 43.75rem;
+  margin: 2rem auto 0;
+}
+
+.faq__heading,
+.related__heading {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.faq__list {
+  margin: 0;
+  padding: 0;
+}
+
+.faq__item {
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  padding: 0.65rem 0.75rem;
+  margin: 0 0 0.5rem;
+}
+
+.faq__question {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.faq__answer {
+  margin: 0.5rem 0 0;
+}
+
+.faq__answer p {
+  margin: 0;
+}
+
+/* Related tools */
+.related {
+  max-width: 43.75rem;
+  margin: 2rem auto 0;
+}
+
+.related__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.related__item {
+  margin: 0 0 0.4rem;
+}
+
+.related__link {
+  color: #111;
+  text-decoration: underline;
+}
+
+.related__link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* 404 */
+.not-found {
+  margin-top: 1rem;
+}
+
+.not-found__lede {
+  margin: 0 0 1rem;
+}
+
+.not-found__list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.not-found__list a {
+  color: #111;
+}
+

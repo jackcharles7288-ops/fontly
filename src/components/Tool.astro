@@ -1,3 +1,101 @@
 ---
-// Phase 3 fills this component with the font generator tool UI.
+import { styles, type Style } from '../data/styles';
+import { categories } from '../data/categories';
+import { applyStyle, countCharacters } from '../scripts/generator.js';
+
+interface Props {
+  toolCategories: string[];
+  testPhrase?: string;
+  /** Content entry id (filename without extension), used in the missing-phrase warning. */
+  pageFile: string;
+}
+
+const { toolCategories, testPhrase, pageFile } = Astro.props;
+
+if (testPhrase === undefined) {
+  console.warn(
+    `[fontly] Missing testPhrase in src/content/pages/${pageFile}.md — input will be left empty.`,
+  );
+}
+
+const prefill = testPhrase ?? '';
+
+const categoryLookup = new Map(categories.map((c) => [c.id, c]));
+
+const sections = toolCategories.map((id) => {
+  const category = categoryLookup.get(id);
+  if (!category) {
+    throw new Error(
+      `[fontly] Unknown toolCategories id "${id}" in src/content/pages/${pageFile}.md — every id must exist in src/data/categories.ts.`,
+    );
+  }
+  const sectionStyles = styles.filter((s) => s.category === id);
+  return { category, styles: sectionStyles };
+});
+
+const riskLabel: Record<string, string> = {
+  uneven: 'Uneven',
+  safe: 'Safe',
+  'check-old-devices': 'Check old devices',
+};
 ---
+
+<section class="tool" data-tool id="fontly-tool">
+  <div class="tool__controls">
+    <label class="tool__label" for="tool-input">Your text</label>
+    <input
+      class="tool__input"
+      type="text"
+      id="tool-input"
+      name="tool-input"
+      value={prefill}
+      autocomplete="off"
+      spellcheck="false"
+    />
+  </div>
+
+  <div class="tool__live" data-copy-status aria-live="polite"></div>
+
+  {
+    sections.map(({ category, styles: sectionStyles }) => (
+      <section class="tool__category" data-category={category.id}>
+        <h2 class="tool__category-heading">{category.name}</h2>
+        <ul class="tool__cards">
+          {sectionStyles.map((style) => {
+            const output = applyStyle(prefill, style);
+            const count = countCharacters(output);
+            return (
+              <li
+                class="tool-card"
+                data-style-id={style.id}
+                data-needs-update="false"
+              >
+                <div class="tool-card__header">
+                  <h3 class="tool-card__name">{style.name}</h3>
+                  {style.risk ? (
+                    <span class="tool-card__risk">{riskLabel[style.risk] ?? style.risk}</span>
+                  ) : null}
+                </div>
+                <p class="tool-card__output" data-output>{output}</p>
+                <p class="tool-card__counter" data-counter>
+                  <span data-counter-codepoints>{count.codePoints}</span> characters,{' '}
+                  <span data-counter-utf16>{count.utf16Length}</span> units
+                </p>
+                {style.digits === null ? (
+                  <p class="tool-card__digits-note">Numbers stay plain.</p>
+                ) : null}
+                <button type="button" class="tool-card__copy" data-copy>
+                  Copy
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))
+  }
+</section>
+
+<script>
+  import '../scripts/tool.js';
+</script>

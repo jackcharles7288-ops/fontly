@@ -8,17 +8,16 @@ const faqItem = z.object({
 });
 
 // Astro 7 reserves `slug` for entry id generation, so it cannot appear in
-// the Zod schema. Frontmatter may still include `slug`; it becomes entry.id.
-// See Phase 1 report for the difference from content.mdc.
+// the Zod schema. The URL comes from the filename instead.
 const pageFields = {
   title: z.string().max(60),
   h1: z.string(),
   description: z.string().max(155),
   primaryKeyword: z.string(),
-  faq: z.array(faqItem),
-  relatedTools: z.array(z.string()),
-  publishedDate: z.coerce.date(),
-  updatedDate: z.coerce.date(),
+  faq: z.array(faqItem).default([]),
+  relatedTools: z.array(z.string()).default([]),
+  publishedDate: z.coerce.date().optional(),
+  updatedDate: z.coerce.date().optional(),
 };
 
 const pages = defineCollection({
@@ -26,6 +25,7 @@ const pages = defineCollection({
   schema: z.object({
     ...pageFields,
     toolCategories: z.array(z.string()),
+    testPhrase: z.string().optional(),
   }),
 });
 

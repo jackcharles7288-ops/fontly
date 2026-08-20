@@ -27,23 +27,38 @@ Define it with Zod so a bad page fails the build instead of shipping broken.
   throws `ContentSchemaContainsSlugError`. The URL comes from the filename
   instead, so the file is named for the slug and `index.md` is the homepage
 - primaryKeyword, string
-- toolCategories, array of category ids from categories.ts
-- faq, array of objects with q and a
-- relatedTools, array of page slugs, not URLs
-- publishedDate, date
-- updatedDate, date
+- toolCategories, ordered array of category ids. Each id must exist in
+  src/data/categories.ts. This is the list of tool sections that page
+  renders, in order — not a yes/no switch that turns the tool on.
+- testPhrase, optional string, the input prefill for that page's tool
+- faq, array of objects with q and a, defaults to an empty array, never required
+- relatedTools, array of page slugs, not URLs, defaults to an empty array,
+  never required
+- publishedDate, optional date
+- updatedDate, optional date
 
 The blog collection uses the same shape minus toolCategories, plus a
 required date.
+
+## Who may create page files
+
+Never create a new Markdown file for a real page on your own initiative,
+and never invent a title, description, H1 or FAQ. Articles are written by
+the owner outside this repository. You may create a page file only when the
+owner supplies the exact frontmatter values in the prompt, and in that case
+the body must stay a single clearly marked placeholder line until the owner
+pastes the real article.
 
 ## Rules that must hold structurally
 
 - The faq array feeds two things from one source: the visible accordion and
   the FAQPage JSON-LD. A FAQ is never written twice.
-- relatedTools holds slugs. The component looks each one up in pages.ts. If
-  a slug has no matching page that exists yet, silently omit that link. An
-  earlier prototype shipped eleven related-tool links where nine were 404s.
-  That must now be structurally impossible.
+- relatedTools holds slugs. RelatedTools reads the content collection and
+  takes each link's text from that page's own frontmatter title. A slug with
+  no entry in the collection is omitted, never rendered as a dead link. A
+  hand-written copy of page titles is banned. An earlier prototype shipped
+  eleven related-tool links where nine were 404s; that must now be
+  structurally impossible.
 - Use plain independent <details> elements for the FAQ, not a
   one-at-a-time accordion. Answers stay in the HTML source when collapsed.
 - In-body internal links are absolute URLs, so they return 404 until every
@@ -62,10 +77,12 @@ Delete these before converting:
 - the red pre-publish checklist
 - the blue self-audit callout
 - everything from the Phase 9 header downwards
-- the tool embed token, for example BUBBLE_TOOL_EMBED
 
-Lift these into frontmatter: title tag, meta description, H1, slug,
-primary keyword.
+Do not delete the tool embed token (for example BUBBLE_TOOL_EMBED). Replace the
+whole token line with the single line TOOL PLACEHOLDER, which is the marker the
+route splits on to mount the tool.
+
+Lift these into frontmatter: title tag, meta description, H1, primary keyword.
 
 Move the FAQ out of the body and into the faq array as q and a pairs.
 

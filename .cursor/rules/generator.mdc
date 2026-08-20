@@ -16,9 +16,13 @@ must be handled explicitly.
   codePointAt, so a styled character is never split in half.
 - Never use str.length as the user-facing character count. It reports two
   per styled letter. Report both numbers with plain-language labels, for
-  example "12 characters, 24 on X/Twitter". The first is the code point
-  count, the second is the UTF-16 length. This is a genuine competitor
-  gap. Make it visible, not hidden in a tooltip.
+  example "12 characters, 24 units". The first is the code point count, the
+  second is the UTF-16 length. This is a genuine competitor gap. Make it
+  visible, not hidden in a tooltip.
+- Platform names are banned in any counter label, badge or note. Which
+  platforms count Plane 1 characters as two is an open, unverified question
+  on this project. Naming a platform is a compatibility claim, and
+  unverified compatibility claims are forbidden.
 
 Build the mapping as an offset calculation, not a hand-typed lookup table.
 Each block in Mathematical Alphanumeric Symbols holds uppercase A to Z at
@@ -106,7 +110,12 @@ is correct and reviewed.
    in it, and a copy button.
 4. Copy via the async Clipboard API with a document.execCommand fallback.
    Announce success in the aria-live region.
-5. The dual character counter described above.
+5. A dual character counter on every style card. Each card counts its own
+   styled output, not the raw input and not another style's output. Classic
+   Script reports fewer UTF-16 units than the other cursive styles for the
+   same letters, because eleven of its characters come from Letterlike
+   Symbols in the Basic Multilingual Plane. A single page-level counter
+   would therefore print a wrong number next to most cards.
 6. A quiet per-card risk indicator driven by the risk field. Render it only
    when a style actually carries a value. No value means no badge, never a
    default badge.
@@ -126,6 +135,11 @@ is correct and reviewed.
     styles, where a style is a base alphabet wrapped in symbols. Never
     present a wrapped variant as if it were a distinct alphabet.
 
+The sticky copy bar is deferred on scope, not dropped, and not because of
+layout shift. A sticky bar whose space is reserved in normal flow from the
+start does not cause layout shift. It is deferred because it is not one of
+the eleven steps. It stays on the deferred list.
+
 ## Deferred until every character is verified correct
 
 Do not build these until the generator has been checked against the code
@@ -140,6 +154,8 @@ point lists above and the owner has confirmed it.
 - A random style button.
 - Keyboard shortcuts. If they are ever added, document only the ones
   actually tested.
+- The sticky copy bar (deferred on scope: it is not one of the eleven
+  steps above, not because of layout shift).
 
 The reason for deferring is ordering, not dislike. The earlier prototype
 shipped a combo builder and a random button while its characters were

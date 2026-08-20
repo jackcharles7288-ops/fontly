@@ -58,9 +58,8 @@ export function applyStyle(text, style) {
 
 /**
  * Returns both character counts for a string: the code point count (what a
- * person counts as "characters") and the UTF-16 length (what platforms like
- * X/Twitter count, since styled letters are two code units). Never collapse
- * this into a single str.length answer.
+ * person counts as "characters") and the UTF-16 length (Plane 1 letters are
+ * two code units each). Never collapse this into a single str.length answer.
  * @param {string} text
  * @returns {{ codePoints: number, utf16Length: number }}
  */

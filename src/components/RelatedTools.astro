@@ -1,3 +1,38 @@
 ---
-// Phase 4 fills this component with related tool links.
+import { getCollection } from 'astro:content';
+import { hrefForPageId } from '../data/pages';
+
+interface Props {
+  slugs: string[];
+}
+
+const { slugs } = Astro.props;
+const collection = await getCollection('pages');
+const byId = new Map(collection.map((page) => [page.id, page]));
+
+const links = slugs.flatMap((slug) => {
+  const page = byId.get(slug);
+  if (!page) return [];
+  return [
+    {
+      href: hrefForPageId(page.id),
+      title: page.data.title,
+    },
+  ];
+});
 ---
+
+{
+  links.length > 0 ? (
+    <section class="related" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="related__heading">More font tools</h2>
+      <ul class="related__list">
+        {links.map((link) => (
+          <li class="related__item">
+            <a class="related__link" href={link.href}>{link.title}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ) : null
+}

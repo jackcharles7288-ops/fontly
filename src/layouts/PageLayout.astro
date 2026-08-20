@@ -5,10 +5,12 @@ interface Props {
   title: string;
   description: string;
   h1: string;
-  canonical: string;
+  /** Omit on the 404 document — an error page must not claim a single indexable URL. */
+  canonical?: string;
+  noindex?: boolean;
 }
 
-const { title, description, h1, canonical } = Astro.props;
+const { title, description, h1, canonical, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,11 +20,16 @@ const { title, description, h1, canonical } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {canonical ? <link rel="canonical" href={canonical} /> : null}
+    {noindex ? <meta name="robots" content="noindex" /> : null}
+    <slot name="head" />
   </head>
   <body>
     <main>
-      <h1>{h1}</h1>
+      {/* h1 sits in the article measure so it shares one left edge with prose. */}
+      <div class="article article--title">
+        <h1>{h1}</h1>
+      </div>
       <slot />
     </main>
   </body>

@@ -1,6 +1,25 @@
 ---
-import { getCollection, render } from 'astro:content';
+// Undocumented API: createSatteriMarkdownProcessor is not in Astro's published
+// docs. The documented alternative is satteri() on markdown.processor together
+// with satteriHeadingIdsPlugin. We pin @astrojs/markdown-satteri at an exact
+// version because this path renders every article body for the TOOL PLACEHOLDER split.
+import * as markdownSatteri from '@astrojs/markdown-satteri';
+import { getCollection } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
+import Tool from '../components/Tool.astro';
+import Faq from '../components/Faq.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+import Schema from '../components/Schema.astro';
+
+const SATTERI_PINNED_VERSION = '0.3.7';
+const createSatteriMarkdownProcessor = markdownSatteri.createSatteriMarkdownProcessor;
+
+if (typeof createSatteriMarkdownProcessor !== 'function') {
+  throw new Error(
+    `[fontly] @astrojs/markdown-satteri@${SATTERI_PINNED_VERSION}: createSatteriMarkdownProcessor is missing or not a function. ` +
+      `Documented alternative: configure satteri() on markdown.processor together with satteriHeadingIdsPlugin.`,
+  );
+}
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -15,10 +34,47 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { Content } = await render(page);
+const pageFile = `${page.id}.md`;
 
 const path = page.id === 'index' ? '/' : `/${page.id}/`;
 const canonical = new URL(path, Astro.site).href;
+
+// Replace the exact body line TOOL PLACEHOLDER with the Tool component.
+// Sätteri turns that line into <p>TOOL PLACEHOLDER</p>; split on that HTML.
+const PLACEHOLDER_LINE = 'TOOL PLACEHOLDER';
+const PLACEHOLDER_HTML = `<p>${PLACEHOLDER_LINE}</p>`;
+const processor = await createSatteriMarkdownProcessor();
+const { code: articleHtml } = await processor.render(page.body ?? '');
+
+const markerCount = articleHtml.split(PLACEHOLDER_HTML).length - 1;
+const hasToolCategories = page.data.toolCategories.length > 0;
+
+if (hasToolCategories && markerCount === 0) {
+  throw new Error(
+    `[fontly] Page src/content/pages/${pageFile} sets toolCategories but the rendered HTML contains no TOOL PLACEHOLDER marker.`,
+  );
+}
+if (markerCount > 1) {
+  throw new Error(
+    `[fontly] Page src/content/pages/${pageFile} contains TOOL PLACEHOLDER more than once (${markerCount} times). Exactly one marker is required.`,
+  );
+}
+if (!hasToolCategories && markerCount === 1) {
+  throw new Error(
+    `[fontly] Page src/content/pages/${pageFile} contains TOOL PLACEHOLDER but sets no toolCategories.`,
+  );
+}
+
+const parts = articleHtml.split(PLACEHOLDER_HTML);
+const hasPlaceholder = markerCount === 1;
+
+const breadcrumbs =
+  page.id === 'index'
+    ? []
+    : [
+        { name: 'Home', url: 'https://fontly.cool/' },
+        { name: page.data.h1, url: canonical },
+      ];
 ---
 
 <PageLayout
@@ -27,5 +83,28 @@ const canonical = new URL(path, Astro.site).href;
   h1={page.data.h1}
   canonical={canonical}
 >
-  <Content />
+  <Schema
+    slot="head"
+    pageId={page.id}
+    title={page.data.title}
+    description={page.data.description}
+    canonical={canonical}
+    h1={page.data.h1}
+    faq={page.data.faq}
+    breadcrumbs={breadcrumbs}
+    hasTool={hasToolCategories}
+  />
+  {parts[0] ? <div class="article" set:html={parts[0]} /> : null}
+  {
+    hasPlaceholder ? (
+      <Tool
+        toolCategories={page.data.toolCategories}
+        testPhrase={page.data.testPhrase}
+        pageFile={page.id}
+      />
+    ) : null
+  }
+  {parts[1] ? <div class="article" set:html={parts[1]} /> : null}
+  <Faq items={page.data.faq} />
+  <RelatedTools slugs={page.data.relatedTools} />
 </PageLayout>

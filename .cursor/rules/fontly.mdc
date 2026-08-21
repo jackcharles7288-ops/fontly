@@ -143,7 +143,7 @@ perfect lab score.
 - src/data/styles.ts, src/data/categories.ts, src/data/pages.ts
 - src/layouts/PageLayout.astro
 - src/components/Tool.astro, Faq.astro, RelatedTools.astro, Schema.astro,
-  Previews.astro
+  Previews.astro, Header.astro, Footer.astro
 - src/scripts/generator.js
 - src/scripts/tool.js
 - src/styles/global.css
@@ -161,18 +161,54 @@ is exactly the kind of invisible trap these rules exist to prevent. The single
 exception is the homepage, `index.md`, which the catch-all route maps to the site
 root rather than to `/index/`.
 
-## Layout constants
+## Layout and visual design
 
-- The article reading measure is 43.75rem (680px at a 16px root). Chosen inside
-  the 680 to 720 px range; rem so it respects a raised browser default font size.
-- The tool section is capped at 52rem rather than full width. That cap is a
-  deliberate decision; do not re-choose it from scratch later. The tool remains
-  free to be wider than the article measure.
+These rules come from the Notion design document. Agents cannot read Notion, so
+they live here. Changing them without an explicit owner decision is a bug.
+
+- Reading width is 680 to 720 px. Satisfied by 43.75rem (680px at a 16px root);
+  rem so it respects a raised browser default font size. Do not re-choose it.
+- The tool section is capped at 72rem. The earlier 52rem cap was a mistake; the
+  design document says the tool runs full width within that wider measure. Do
+  not re-choose it from scratch later. The tool remains the only element wider
+  than the article spine.
 - The h1 sits inside the article measure. Only the tool section uses the wider
-  cap. One left edge for all prose (h1, article body, FAQ, related tools).
-- No table of contents.
-- One accent colour only.
-- Tips render as callout boxes.
+  cap. One left edge for all prose (h1, article body, FAQ, related tools). Do
+  not move the heading to match the tool edge; the tool gets a visible boundary
+  instead so it reads as one object.
+- One accent colour only, as a single CSS custom property (`--accent`). Edit
+  that one line to retheme. Do not repeat the hex literal elsewhere in the
+  stylesheet. Links, buttons, and the copy-button state use it. Nothing else
+  on the site is coloured. Once chosen, every future page reuses the same
+  values with no per-page restyling.
+- System sans-serif only, with generous line-height for body copy next to dense
+  Unicode examples. Zero web fonts — not Google Fonts, not self-hosted, not
+  one `@font-face`. Hard constraint for correctness: a web font would hide the
+  exact rendering failures the articles document.
+- A table of contents is banned on every page, permanently.
+- The mini sticky tool bar is specified in the design document but deferred on
+  scope. Do not build it in an early phase.
+- The visually distinct callout and tip box is specified in the design document
+  but deferred until articles are converted, because there is no real tip
+  content to put in it yet. When built, tips render as callout boxes.
+- Site header: `Header.astro` in normal document flow (not sticky), rendered
+  immediately above `<main>`. Entire content is the single word Fontly as a
+  link to `/`. No navigation links of any kind until more than one page is
+  live — links to pages that do not exist are banned. Semantic `<header>`.
+  Full-width background with a bottom border is fine; the inner content must
+  use the same 43.75rem measure as the article spine (h1, hero, prose, FAQ,
+  related tools) so those elements share one left edge. The tool at 72rem is
+  the only element wider than that spine.
+- Site footer: `Footer.astro` in normal document flow, immediately below
+  `<main>`. Entire content is three things only: the word Fontly, the address
+  contact@fontly.cool as a mailto: link, and the line © 2026 Fontly. No
+  tagline, nav list, social links, or legal page. Same 43.75rem inner measure
+  as the article spine, semantic `<footer>`.
+- No count may appear in visible prose until `styles.length` actually reaches
+  it. That is why "200+" was deleted from the owner's hero intro line and must
+  be restored only at launch. Title tags and meta descriptions that still
+  carry an untrue count are temporary owner copy, not a licence to invent new
+  counts in the interface.
 
 ## Build order. Stop after each phase and wait for review.
 

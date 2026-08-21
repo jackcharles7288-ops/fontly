@@ -1,5 +1,5 @@
 ---
-import { styles, type Style } from '../data/styles';
+import { styles } from '../data/styles';
 import { categories } from '../data/categories';
 import { applyStyle, countCharacters } from '../scripts/generator.js';
 
@@ -19,6 +19,8 @@ if (testPhrase === undefined) {
 }
 
 const prefill = testPhrase ?? '';
+const inputCount = countCharacters(prefill);
+const inputHasDigit = /\d/.test(prefill);
 
 const categoryLookup = new Map(categories.map((c) => [c.id, c]));
 
@@ -33,11 +35,10 @@ const sections = toolCategories.map((id) => {
   return { category, styles: sectionStyles };
 });
 
-const riskLabel: Record<string, string> = {
-  uneven: 'Uneven',
-  safe: 'Safe',
-  'check-old-devices': 'Check old devices',
-};
+// Chips: All, then categories that actually have styles on this page, then Favourites.
+const filterChips = sections
+  .filter((s) => s.styles.length > 0)
+  .map((s) => ({ id: s.category.id, label: s.category.name }));
 ---
 
 <section class="tool" data-tool id="fontly-tool">
@@ -52,9 +53,44 @@ const riskLabel: Record<string, string> = {
       autocomplete="off"
       spellcheck="false"
     />
+    <p class="tool__input-meta">
+      <span class="tool__char-count"
+        ><span data-input-codepoints>{inputCount.codePoints}</span> characters</span
+      >
+      <span class="tool__style-count">{styles.length} styles</span>
+    </p>
   </div>
 
   <div class="tool__live" data-copy-status aria-live="polite"></div>
+
+  <div class="tool__filters" role="toolbar" aria-label="Filter styles">
+    <button
+      type="button"
+      class="tool__chip is-active"
+      data-filter="all"
+      aria-pressed="true">All</button
+    >
+    {
+      filterChips.map((chip) => (
+        <button
+          type="button"
+          class="tool__chip"
+          data-filter={chip.id}
+          aria-pressed="false"
+        >
+          {chip.label}
+        </button>
+      ))
+    }
+    <button
+      type="button"
+      class="tool__chip"
+      data-filter="favourites"
+      aria-pressed="false">Favourites</button
+    >
+  </div>
+
+  <p class="tool__empty" data-favourites-empty hidden>No favourites yet. Tap the star on a card to save it.</p>
 
   {
     sections.map(({ category, styles: sectionStyles }) => (
@@ -64,29 +100,54 @@ const riskLabel: Record<string, string> = {
           {sectionStyles.map((style) => {
             const output = applyStyle(prefill, style);
             const count = countCharacters(output);
+            const showDigitNote = style.digits === null && inputHasDigit;
             return (
               <li
                 class="tool-card"
                 data-style-id={style.id}
+                data-category={style.category}
+                data-favourite="false"
                 data-needs-update="false"
+                data-has-digit-note={style.digits === null ? 'true' : 'false'}
               >
                 <div class="tool-card__header">
                   <h3 class="tool-card__name">{style.name}</h3>
-                  {style.risk ? (
-                    <span class="tool-card__risk">{riskLabel[style.risk] ?? style.risk}</span>
+                  {style.caveat ? (
+                    <span class="tool-card__risk">{style.caveat}</span>
                   ) : null}
+                  <button
+                    type="button"
+                    class="tool-card__fav"
+                    data-fav
+                    aria-pressed="false"
+                    aria-label={`Favourite ${style.name}`}
+                  >
+                    ★
+                  </button>
                 </div>
                 <p class="tool-card__output" data-output>{output}</p>
-                <p class="tool-card__counter" data-counter>
-                  <span data-counter-codepoints>{count.codePoints}</span> characters,{' '}
-                  <span data-counter-utf16>{count.utf16Length}</span> units
-                </p>
-                {style.digits === null ? (
-                  <p class="tool-card__digits-note">Numbers stay plain.</p>
-                ) : null}
-                <button type="button" class="tool-card__copy" data-copy>
-                  Copy
-                </button>
+                <div class="tool-card__footer">
+                  <div class="tool-card__meta">
+                    <p class="tool-card__units">
+                      <span data-counter-utf16>{count.utf16Length}</span> units
+                    </p>
+                    {style.digits === null ? (
+                      <p
+                        class="tool-card__digits-note"
+                        data-digits-note
+                        hidden={!showDigitNote}
+                      >
+                        Numbers stay plain.
+                      </p>
+                    ) : null}
+                    {style.caseNote ? (
+                      <p class="tool-card__case-note">{style.caseNote}</p>
+                    ) : null}
+                  </div>
+                  <button type="button" class="tool-card__copy" data-copy>
+                    Copy
+                  </button>
+                </div>
               </li>
             );
           })}

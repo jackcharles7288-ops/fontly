@@ -31,6 +31,9 @@ Define it with Zod so a bad page fails the build instead of shipping broken.
   src/data/categories.ts. This is the list of tool sections that page
   renders, in order — not a yes/no switch that turns the tool on.
 - testPhrase, optional string, the input prefill for that page's tool
+- heroIntro, optional string, short copy under the h1 and above the tool.
+  Comes from the owner's Notion article and is never written by an agent.
+  Omit the field (and the element) when absent.
 - faq, array of objects with q and a, defaults to an empty array, never required
 - relatedTools, array of page slugs, not URLs, defaults to an empty array,
   never required

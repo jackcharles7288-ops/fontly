@@ -33,13 +33,31 @@ a base, then lowercase a to z twenty-six code points later.
 Each entry in styles.ts carries an id, a display name, a category, an
 uppercase base, a lowercase base, a substitutions map of code point
 overrides, a digits field where null means digits pass through unchanged,
-and a risk field which is one of safe, uneven, or check-old-devices.
-risk is a compatibility claim governed by the honesty rules. It must never
-be assigned by assumption and never carry the same value on every style.
-Only two grounds are valid: a Unicode fact checkable without a device, where
-a style drawn from more than one Unicode block is uneven because font fallback
-resolves per block, or real device testing at stage 10. Anything else stays
-unset, and unset is a correct answer rather than a gap waiting to be filled.
+a risk field kept as an editorial note for the article writer, a public
+`caveat` string for the badge (or null), and an optional `caseNote` when
+one case folds onto the other.
+
+## Badge rule (public caveat)
+
+A badge may state only a property recorded in Unicode's own character data —
+for example an alphabet drawn from more than one block, or emoji presentation
+attached to a specific character. A badge may never predict what a device,
+platform or application will do. The distinction is not whether the wording is
+reassuring or cautious, because a warning is an assertion too; it is whether
+anyone can verify it without owning the device.
+
+Two badges satisfy that rule today: the multi-block Classic Script alphabet
+("Uneven") and Circled capital M ("Capital M may show as emoji"). Everything
+else renders nothing. Silence is the honest default.
+
+Do not revive "Safe", "Check old devices", platform names, or any other
+prediction about rendering on hardware. Plane membership alone is not a badge:
+ten of thirteen styles already sit on the supplementary plane, so warning on
+one card would imply the rest were verified fine, which nobody has established.
+
+The blueprint's risk column remains an editorial note for the article writer.
+Promoting a planning value into a public label turns it into a promise. The
+UI reads `caveat` only; `risk` is never shown as a badge.
 
 ## The six cursive styles, with exact bases
 

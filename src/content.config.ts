@@ -26,6 +26,7 @@ const pages = defineCollection({
     ...pageFields,
     toolCategories: z.array(z.string()),
     testPhrase: z.string().optional(),
+    heroIntro: z.string().optional(),
   }),
 });
 

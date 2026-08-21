@@ -22,14 +22,36 @@ function convertChar(ch, style) {
     if (Object.prototype.hasOwnProperty.call(style.substitutions, ch)) {
       return String.fromCodePoint(style.substitutions[ch]);
     }
-    return String.fromCodePoint(style.uppercaseBase + (code - UPPER_A));
+    if (style.uppercaseBase !== null) {
+      return String.fromCodePoint(style.uppercaseBase + (code - UPPER_A));
+    }
+    // Half-covered style: fold capitals onto the lowercase alphabet that exists.
+    if (style.lowercaseBase !== null) {
+      const lower = String.fromCodePoint(code + 0x20);
+      if (Object.prototype.hasOwnProperty.call(style.substitutions, lower)) {
+        return String.fromCodePoint(style.substitutions[lower]);
+      }
+      return String.fromCodePoint(style.lowercaseBase + (code - UPPER_A));
+    }
+    return ch;
   }
 
   if (code >= LOWER_A && code <= LOWER_Z) {
     if (Object.prototype.hasOwnProperty.call(style.substitutions, ch)) {
       return String.fromCodePoint(style.substitutions[ch]);
     }
-    return String.fromCodePoint(style.lowercaseBase + (code - LOWER_A));
+    if (style.lowercaseBase !== null) {
+      return String.fromCodePoint(style.lowercaseBase + (code - LOWER_A));
+    }
+    // Half-covered style: fold lowercase onto the capital alphabet that exists.
+    if (style.uppercaseBase !== null) {
+      const upper = String.fromCodePoint(code - 0x20);
+      if (Object.prototype.hasOwnProperty.call(style.substitutions, upper)) {
+        return String.fromCodePoint(style.substitutions[upper]);
+      }
+      return String.fromCodePoint(style.uppercaseBase + (code - LOWER_A));
+    }
+    return ch;
   }
 
   if (code >= DIGIT_0 && code <= DIGIT_9) {

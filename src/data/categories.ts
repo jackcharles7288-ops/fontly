@@ -3,8 +3,9 @@ export interface Category {
   name: string;
 }
 
-// Only the category the six cursive styles built in Phase 2 need.
-// New categories get added here only when a style that needs them exists.
 export const categories: Category[] = [
   { id: 'cursive', name: 'Cursive & Script' },
+  { id: 'bold', name: 'Bold' },
+  { id: 'bubble', name: 'Bubble' },
+  { id: 'gothic', name: 'Gothic' },
 ];

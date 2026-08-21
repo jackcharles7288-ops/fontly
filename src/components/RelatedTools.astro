@@ -16,7 +16,7 @@ const links = slugs.flatMap((slug) => {
   return [
     {
       href: hrefForPageId(page.id),
-      title: page.data.title,
+      label: page.data.h1,
     },
   ];
 });
@@ -29,7 +29,7 @@ const links = slugs.flatMap((slug) => {
       <ul class="related__list">
         {links.map((link) => (
           <li class="related__item">
-            <a class="related__link" href={link.href}>{link.title}</a>
+            <a class="related__link" href={link.href}>{link.label}</a>
           </li>
         ))}
       </ul>

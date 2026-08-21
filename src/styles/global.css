@@ -42,18 +42,15 @@ main {
   margin-inline: auto;
 }
 
-/* Title block: same measure as prose, tighter top spacing under main padding. */
+/* Title block: same measure as prose. Bottom gap is explicit so it does not
+   depend on whether the next sibling is prose, the tool, or nothing. */
 .article--title {
   margin-top: 0;
+  margin-bottom: 0.75rem;
 }
 
 .article--title h1 {
-  margin: 0 0 0.5rem;
-}
-
-/* First prose block after the title shares the same column; keep spacing modest. */
-.article--title + .article {
-  margin-top: 0.75rem;
+  margin: 0;
 }
 
 /* Tool — Phase 3 features 1–6 only. Keep small. Free to exceed article measure. */

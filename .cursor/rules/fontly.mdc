@@ -79,11 +79,13 @@ perfect lab score.
 - @astrojs/sitemap
 - Cloudflare Web Analytics as the single script tag, at the very end,
   deferred
-- Deployed to Cloudflare Pages from a GitHub repo. Build command
-  astro build, output directory dist. Do not install a Cloudflare adapter:
-  the build is fully static and an adapter is only needed for
-  server-rendered output. The owner pushes from Cursor's Source Control
-  panel.
+- Deployed to Cloudflare Pages from a GitHub repo. Host build command
+  npx astro build, output directory dist. Cloudflare does not put
+  node_modules/.bin on the shell path, so bare `astro build` fails with
+  exit code 127. Proved on a real failed build on 21 August 2026. Do not
+  install a Cloudflare adapter: the build is fully static and an adapter
+  is only needed for server-rendered output. The owner pushes from
+  Cursor's Source Control panel.
 
 ## Honesty rules
 

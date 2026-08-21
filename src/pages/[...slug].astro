@@ -94,7 +94,7 @@ const breadcrumbs =
     breadcrumbs={breadcrumbs}
     hasTool={hasToolCategories}
   />
-  {parts[0] ? <div class="article" set:html={parts[0]} /> : null}
+  {parts[0]?.trim() ? <div class="article" set:html={parts[0]} /> : null}
   {
     hasPlaceholder ? (
       <Tool
@@ -104,7 +104,7 @@ const breadcrumbs =
       />
     ) : null
   }
-  {parts[1] ? <div class="article" set:html={parts[1]} /> : null}
+  {parts[1]?.trim() ? <div class="article" set:html={parts[1]} /> : null}
   <Faq items={page.data.faq} />
   <RelatedTools slugs={page.data.relatedTools} />
 </PageLayout>

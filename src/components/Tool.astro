@@ -53,6 +53,11 @@ const filterChips = sections
       autocomplete="off"
       spellcheck="false"
     />
+    <div class="tool__case" role="group" aria-label="Case transforms">
+      <button type="button" class="tool__case-btn" data-case="upper">UPPERCASE</button>
+      <button type="button" class="tool__case-btn" data-case="lower">lowercase</button>
+      <button type="button" class="tool__case-btn" data-case="title">Title Case</button>
+    </div>
     <p class="tool__input-meta">
       <span class="tool__char-count"
         ><span data-input-codepoints>{inputCount.codePoints}</span> characters</span
@@ -63,34 +68,48 @@ const filterChips = sections
 
   <div class="tool__live" data-copy-status aria-live="polite"></div>
 
-  <div class="tool__filters" role="toolbar" aria-label="Filter styles">
-    <button
-      type="button"
-      class="tool__chip is-active"
-      data-filter="all"
-      aria-pressed="true">All</button
-    >
-    {
-      filterChips.map((chip) => (
-        <button
-          type="button"
-          class="tool__chip"
-          data-filter={chip.id}
-          aria-pressed="false"
-        >
-          {chip.label}
-        </button>
-      ))
-    }
-    <button
-      type="button"
-      class="tool__chip"
-      data-filter="favourites"
-      aria-pressed="false">Favourites</button
-    >
+  <div class="tool__toolbar">
+    <div class="tool__filters" role="toolbar" aria-label="Filter styles">
+      <button
+        type="button"
+        class="tool__chip is-active"
+        data-filter="all"
+        aria-pressed="true">All</button
+      >
+      {
+        filterChips.map((chip) => (
+          <button
+            type="button"
+            class="tool__chip"
+            data-filter={chip.id}
+            aria-pressed="false"
+          >
+            {chip.label}
+          </button>
+        ))
+      }
+      <button
+        type="button"
+        class="tool__chip"
+        data-filter="favourites"
+        aria-pressed="false">Favourites</button
+      >
+    </div>
+    <div class="tool__search">
+      <label class="tool__search-label" for="tool-search">Search styles</label>
+      <input
+        class="tool__search-input"
+        type="search"
+        id="tool-search"
+        name="tool-search"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
   </div>
 
   <p class="tool__empty" data-favourites-empty hidden>No favourites yet. Tap the star on a card to save it.</p>
+  <p class="tool__empty" data-search-empty hidden>No styles match that search.</p>
 
   {
     sections.map(({ category, styles: sectionStyles }) => (
@@ -105,6 +124,7 @@ const filterChips = sections
               <li
                 class="tool-card"
                 data-style-id={style.id}
+                data-style-name={style.name.toLowerCase()}
                 data-category={style.category}
                 data-favourite="false"
                 data-needs-update="false"
@@ -115,39 +135,72 @@ const filterChips = sections
                   {style.caveat ? (
                     <span class="tool-card__risk">{style.caveat}</span>
                   ) : null}
-                  <button
-                    type="button"
-                    class="tool-card__fav"
-                    data-fav
-                    aria-pressed="false"
-                    aria-label={`Favourite ${style.name}`}
-                  >
-                    ★
-                  </button>
+                  <div class="tool-card__actions">
+                    <button
+                      type="button"
+                      class="tool-card__icon tool-card__fav"
+                      data-fav
+                      aria-pressed="false"
+                      aria-label={`Add ${style.name} to favourites`}
+                    >
+                      <span aria-hidden="true">★</span>
+                    </button>
+                    <button
+                      type="button"
+                      class="tool-card__icon tool-card__copy"
+                      data-copy
+                      aria-label={`Copy ${style.name}`}
+                    >
+                      <span class="tool-card__copy-icons" aria-hidden="true">
+                        <svg
+                          class="tool-card__svg tool-card__svg--copy"
+                          viewBox="0 0 24 24"
+                          width="18"
+                          height="18"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <svg
+                          class="tool-card__svg tool-card__svg--done"
+                          viewBox="0 0 24 24"
+                          width="18"
+                          height="18"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M20 6 9 17l-5-5"></path>
+                        </svg>
+                      </span>
+                    </button>
+                  </div>
                 </div>
                 <p class="tool-card__output" data-output>{output}</p>
-                <div class="tool-card__footer">
-                  <div class="tool-card__meta">
-                    <p class="tool-card__units">
-                      <span data-counter-utf16>{count.utf16Length}</span> units
-                    </p>
-                    {style.digits === null ? (
-                      <p
-                        class="tool-card__digits-note"
-                        data-digits-note
-                        hidden={!showDigitNote}
-                      >
-                        Numbers stay plain.
-                      </p>
-                    ) : null}
-                    {style.caseNote ? (
-                      <p class="tool-card__case-note">{style.caseNote}</p>
-                    ) : null}
-                  </div>
-                  <button type="button" class="tool-card__copy" data-copy>
-                    Copy
-                  </button>
-                </div>
+                <p class="tool-card__units">
+                  <span data-counter-utf16>{count.utf16Length}</span> units
+                </p>
+                {style.digits === null ? (
+                  <p
+                    class:list={[
+                      'tool-card__digits-note',
+                      { 'is-quiet': !showDigitNote },
+                    ]}
+                    data-digits-note
+                  >
+                    Numbers stay plain.
+                  </p>
+                ) : null}
+                {style.caseNote ? (
+                  <p class="tool-card__case-note">{style.caseNote}</p>
+                ) : null}
               </li>
             );
           })}

@@ -49,6 +49,26 @@ function textHasDigit(text) {
 }
 
 /**
+ * Title-case by code point so astral characters are not split.
+ * @param {string} text
+ * @returns {string}
+ */
+function toTitleCase(text) {
+  let out = '';
+  let atWordStart = true;
+  for (const ch of text) {
+    if (/\s/u.test(ch)) {
+      out += ch;
+      atWordStart = true;
+      continue;
+    }
+    out += atWordStart ? ch.toUpperCase() : ch.toLowerCase();
+    atWordStart = false;
+  }
+  return out;
+}
+
+/**
  * @param {string} text
  * @param {HTMLElement} card
  * @returns {void}
@@ -69,7 +89,8 @@ function updateCard(card, text) {
   if (card.getAttribute('data-has-digit-note') === 'true') {
     const note = card.querySelector('[data-digits-note]');
     if (note instanceof HTMLElement) {
-      note.hidden = !(style.digits === null && textHasDigit(text));
+      // Visibility keeps the note's line reserved; do not use hidden (display:none).
+      note.classList.toggle('is-quiet', !(style.digits === null && textHasDigit(text)));
     }
   }
 
@@ -122,6 +143,21 @@ function announce(message) {
   });
 }
 
+/**
+ * @param {HTMLButtonElement} favBtn
+ * @param {string} styleName
+ * @param {boolean} isFav
+ * @returns {void}
+ */
+function syncFavButton(favBtn, styleName, isFav) {
+  favBtn.setAttribute('aria-pressed', isFav ? 'true' : 'false');
+  favBtn.classList.toggle('is-on', isFav);
+  favBtn.setAttribute(
+    'aria-label',
+    isFav ? `Remove ${styleName} from favourites` : `Add ${styleName} to favourites`,
+  );
+}
+
 function initTool() {
   const root = document.querySelector('[data-tool]');
   if (!(root instanceof HTMLElement)) return;
@@ -129,8 +165,10 @@ function initTool() {
   const input = root.querySelector('#tool-input');
   if (!(input instanceof HTMLInputElement)) return;
 
+  const searchInput = root.querySelector('#tool-search');
   const inputCpEl = root.querySelector('[data-input-codepoints]');
   const emptyFavEl = root.querySelector('[data-favourites-empty]');
+  const emptySearchEl = root.querySelector('[data-search-empty]');
 
   /** @type {NodeListOf<HTMLElement>} */
   const cards = root.querySelectorAll('.tool-card');
@@ -167,9 +205,10 @@ function initTool() {
     const isFav = id !== null && favourites.has(id);
     card.setAttribute('data-favourite', isFav ? 'true' : 'false');
     const favBtn = card.querySelector('[data-fav]');
+    const nameEl = card.querySelector('.tool-card__name');
+    const styleName = nameEl?.textContent?.trim() || 'style';
     if (favBtn instanceof HTMLButtonElement) {
-      favBtn.setAttribute('aria-pressed', isFav ? 'true' : 'false');
-      favBtn.classList.toggle('is-on', isFav);
+      syncFavButton(favBtn, styleName, isFav);
     }
   }
 
@@ -216,10 +255,16 @@ function initTool() {
   }
 
   /**
+   * Chip filter AND search query. Both must pass for a card to show.
    * @returns {void}
    */
   function applyFilter() {
-    let anyFavVisible = false;
+    const query =
+      searchInput instanceof HTMLInputElement
+        ? searchInput.value.trim().toLowerCase()
+        : '';
+    let anyFavMatch = false;
+    let anyShown = false;
 
     for (const section of sections) {
       const catId = section.getAttribute('data-category');
@@ -229,30 +274,43 @@ function initTool() {
 
       for (const card of sectionCards) {
         const isFav = card.getAttribute('data-favourite') === 'true';
-        let show = false;
+        const name = card.getAttribute('data-style-name') || '';
+        let chipOk = false;
         if (activeFilter === 'all') {
-          show = true;
+          chipOk = true;
         } else if (activeFilter === 'favourites') {
-          show = isFav;
-          if (show) anyFavVisible = true;
+          chipOk = isFav;
+          if (chipOk) anyFavMatch = true;
         } else {
-          show = catId === activeFilter;
+          chipOk = catId === activeFilter;
         }
+        const searchOk = query === '' || name.includes(query);
+        const show = chipOk && searchOk;
         card.hidden = !show;
-        if (show) visibleInSection += 1;
+        if (show) {
+          visibleInSection += 1;
+          anyShown = true;
+        }
       }
 
       if (activeFilter === 'favourites') {
         section.hidden = visibleInSection === 0;
       } else if (activeFilter === 'all') {
-        section.hidden = false;
+        section.hidden = visibleInSection === 0 && query !== '';
       } else {
-        section.hidden = catId !== activeFilter;
+        section.hidden = catId !== activeFilter || visibleInSection === 0;
       }
     }
 
     if (emptyFavEl instanceof HTMLElement) {
-      emptyFavEl.hidden = !(activeFilter === 'favourites' && !anyFavVisible);
+      emptyFavEl.hidden = !(
+        activeFilter === 'favourites' &&
+        query === '' &&
+        !anyFavMatch
+      );
+    }
+    if (emptySearchEl instanceof HTMLElement) {
+      emptySearchEl.hidden = !(query !== '' && !anyShown);
     }
   }
 
@@ -263,9 +321,27 @@ function initTool() {
     }, DEBOUNCE_MS);
   });
 
+  if (searchInput instanceof HTMLInputElement) {
+    searchInput.addEventListener('input', () => {
+      applyFilter();
+    });
+  }
+
   root.addEventListener('click', async (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
+
+    const caseBtn = target.closest('[data-case]');
+    if (caseBtn instanceof HTMLButtonElement && root.contains(caseBtn)) {
+      const mode = caseBtn.getAttribute('data-case');
+      if (mode === 'upper') input.value = input.value.toUpperCase();
+      else if (mode === 'lower') input.value = input.value.toLowerCase();
+      else if (mode === 'title') input.value = toTitleCase(input.value);
+      else return;
+      // Same refresh path as debounced typing — no second update mechanism.
+      refreshVisible(input.value);
+      return;
+    }
 
     const chip = target.closest('.tool__chip');
     if (chip instanceof HTMLButtonElement && root.contains(chip)) {
@@ -295,9 +371,9 @@ function initTool() {
       writeFavourites(favourites);
       const isFav = favourites.has(id);
       card.setAttribute('data-favourite', isFav ? 'true' : 'false');
-      favBtn.setAttribute('aria-pressed', isFav ? 'true' : 'false');
-      favBtn.classList.toggle('is-on', isFav);
-      // Re-apply only when the Favourites filter is active (reorder/filter after click).
+      const nameEl = card.querySelector('.tool-card__name');
+      const styleName = nameEl?.textContent?.trim() || 'style';
+      syncFavButton(favBtn, styleName, isFav);
       if (activeFilter === 'favourites') applyFilter();
       return;
     }
@@ -316,11 +392,12 @@ function initTool() {
       announce(`Copied ${styleName}`);
       const prev = copyTimers.get(button);
       if (prev !== undefined) clearTimeout(prev);
-      button.textContent = 'Copied';
+      // Class toggle only — button box size is reserved in CSS from first paint.
+      button.classList.add('is-copied');
       copyTimers.set(
         button,
         setTimeout(() => {
-          button.textContent = 'Copy';
+          button.classList.remove('is-copied');
           copyTimers.delete(button);
         }, COPY_LABEL_MS),
       );

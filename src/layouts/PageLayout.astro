@@ -21,7 +21,7 @@ const { title, description, h1, canonical, noindex = false, heroIntro } = Astro.
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {canonical ? <link rel="canonical" href={canonical} /> : null}

@@ -209,6 +209,25 @@ they live here. Changing them without an explicit owner decision is a bug.
   be restored only at launch. Title tags and meta descriptions that still
   carry an untrue count are temporary owner copy, not a licence to invent new
   counts in the interface.
+- Tool style card layout: a header row with the style name, an optional caveat
+  badge, and two icon buttons aligned right (favourite and copy); then the
+  styled sample; then one compact line for the unit count. Quiet digit and case
+  notes may sit under that line. Any icon-only control must carry an accessible
+  name that includes the style name. No element may appear after first paint
+  without its space reserved — copy confirmation uses a fixed icon-button box;
+  digit notes use visibility, not display:none, when quiet.
+- Tool card grid breakpoints on `.tool__cards`: one column below 40rem (640px
+  at a 16px root), two columns from 40rem to 60rem (640px to 960px), three
+  columns above 60rem (960px). No fixed column count outside these queries.
+- This tool receives long strings with no spaces as normal input (usernames,
+  gaming tags, Discord names). Any container that holds user text or generated
+  output must wrap unbroken tokens (`overflow-wrap: anywhere` on `.article` and
+  `.tool-card__output`). A grid column must never be sized by its own content —
+  use `minmax(0, 1fr)`, not bare `1fr`. Found on a real phone: a fifty-four
+  character sentinel with no spaces made the homepage body occupy about 69% of
+  a 702px-wide screenshot (~485px), so the browser scaled the whole page down
+  and 16px body text arrived at around 11px. `initial-scale=1` alone only swaps
+  that for sideways scroll; wrapping the overflow is the fix.
 
 ## Build order. Stop after each phase and wait for review.
 

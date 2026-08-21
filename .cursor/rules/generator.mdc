@@ -112,6 +112,20 @@ every keystroke and janked badly on mobile. Do not repeat that.
 - Render the card list server-side in Astro so the page is useful before
   any JavaScript runs. JavaScript only wires up interactivity.
 - No layout shift. Cards must have their final dimensions before JS runs.
+- Never read a layout property after writing to the DOM in the same frame.
+  All layout reads happen before all DOM writes. Card visibility comes from
+  a Set updated in the IntersectionObserver callback from
+  `entry.isIntersecting` only — never from `getBoundingClientRect` or any
+  other measured geometry. The layout-reading APIs
+  `getBoundingClientRect`, `getClientRects`, `offsetWidth`, `offsetHeight`,
+  `offsetTop`, `offsetLeft`, `offsetParent`, `clientWidth`, `clientHeight`,
+  `scrollWidth`, `scrollHeight`, `scrollTop`, `scrollLeft`, `scrollIntoView`,
+  `getComputedStyle`, `checkVisibility`, `focus`, and `innerText` are banned
+  inside the input handler, the debounce callback, the card render/update
+  path, and the filter path. They are permitted only in page-load setup or
+  inside an explicit `requestAnimationFrame` that carries a one-line comment
+  naming the read and why it cannot be avoided. Do not wrap a whole update
+  in `requestAnimationFrame` to paper over a read-after-write.
 
 ## Tool features, in build order
 

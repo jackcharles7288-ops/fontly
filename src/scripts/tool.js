@@ -144,6 +144,20 @@ function initTool() {
   /** @type {WeakMap<HTMLButtonElement, ReturnType<typeof setTimeout>>} */
   const copyTimers = new WeakMap();
 
+  /** @type {Map<string, HTMLElement>} */
+  const cardById = new Map();
+  for (const card of cards) {
+    const id = card.getAttribute('data-style-id');
+    if (id) cardById.set(id, card);
+  }
+
+  /**
+   * Cards currently intersecting the viewport. Updated only from
+   * IntersectionObserver entry.isIntersecting — never from measured geometry.
+   * @type {Set<string>}
+   */
+  const visibleIds = new Set();
+
   let activeFilter = 'all';
   const favourites = readFavourites();
 
@@ -163,11 +177,17 @@ function initTool() {
     (entries) => {
       const text = input.value;
       for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
         const card = entry.target;
         if (!(card instanceof HTMLElement)) continue;
-        if (card.getAttribute('data-needs-update') === 'true') {
-          updateCard(card, text);
+        const id = card.getAttribute('data-style-id');
+        if (!id) continue;
+        if (entry.isIntersecting) {
+          visibleIds.add(id);
+          if (card.getAttribute('data-needs-update') === 'true') {
+            updateCard(card, text);
+          }
+        } else {
+          visibleIds.delete(id);
         }
       }
     },
@@ -187,15 +207,11 @@ function initTool() {
       inputCpEl.textContent = String(countCharacters(text).codePoints);
     }
     for (const card of cards) {
-      const rect = card.getBoundingClientRect();
-      const inView =
-        rect.bottom > 0 &&
-        rect.top < (window.innerHeight || document.documentElement.clientHeight);
-      if (inView) {
-        updateCard(card, text);
-      } else {
-        card.setAttribute('data-needs-update', 'true');
-      }
+      card.setAttribute('data-needs-update', 'true');
+    }
+    for (const id of visibleIds) {
+      const card = cardById.get(id);
+      if (card) updateCard(card, text);
     }
   }
 

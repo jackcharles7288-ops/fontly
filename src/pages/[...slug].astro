@@ -105,6 +105,11 @@ const breadcrumbs =
       />
     ) : null
   }
+  {
+    page.data.heroIntroBelow ? (
+      <p class="hero-intro hero-intro--below">{page.data.heroIntroBelow}</p>
+    ) : null
+  }
   {parts[1]?.trim() ? <div class="article" set:html={parts[1]} /> : null}
   <Faq items={page.data.faq} />
   <RelatedTools slugs={page.data.relatedTools} />

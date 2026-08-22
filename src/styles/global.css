@@ -13,6 +13,11 @@
   box-sizing: border-box;
 }
 
+/* Author display values beat the UA [hidden] rule. Keep this unbeatable. */
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   font-family:
@@ -102,27 +107,36 @@ main {
   margin: 0;
 }
 
+@media (max-width: 39.99rem) {
+  .article--title h1 {
+    font-size: 1.5rem; /* 24px at a 16px root — two lines on a 360px phone */
+    line-height: 1.25;
+  }
+}
+
 /* Hero intro — article measure, under the h1. Omitted when frontmatter lacks it. */
 .hero-intro {
   max-width: 43.75rem;
   margin: 0 auto 1rem;
 }
 
-/* Tool — wider than the article spine; neutral boundary as one object. */
+.hero-intro--below {
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 39.99rem) {
+  .hero-intro {
+    font-size: 0.9375rem; /* 15px at a 16px root — floor for this round */
+    line-height: 1.45;
+  }
+}
+
+/* Tool — wider than the article spine; sits on the page background. */
 .tool {
   margin: 0 0 2rem;
   max-width: 72rem;
   margin-inline: auto;
-  padding: 1.25rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-}
-
-.tool__label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 0.35rem;
+  min-width: 0;
 }
 
 .tool__input {
@@ -132,25 +146,57 @@ main {
   font: inherit;
   font-size: 1.05rem;
   border: 1px solid #333;
-  border-radius: 0.25rem;
+  border-radius: 0.35rem;
   background: #fff;
   color: #111;
+}
+
+/* #767676 on #fff is 4.54:1 — meets 4.5:1. Firefox needs opacity: 1. */
+.tool__input::placeholder {
+  color: #767676;
+  opacity: 1;
+}
+
+.tool__below {
+  margin-top: 1.5rem;
 }
 
 .tool__input-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 1.25rem;
-  margin: 0.5rem 0 0;
+  margin: 0;
   font-size: 0.9rem;
+  line-height: 1.35;
+  min-height: 1.35rem;
   color: #333;
+}
+
+.tool__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
 }
 
 .tool__case {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-top: 0.5rem;
+  min-height: 2.1rem;
+}
+
+@media (min-width: 60rem) {
+  .tool__row {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .tool__search {
+    margin-left: auto;
+    max-width: 18rem;
+    width: 18rem;
+  }
 }
 
 .tool__case-btn {
@@ -186,43 +232,51 @@ main {
 
 .tool__toolbar {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 0.75rem 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
   margin: 1rem 0 0;
+  min-width: 0;
+}
+
+.tool__filters-wrap {
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .tool__filters {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.4rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  min-width: 0;
+  overscroll-behavior-x: contain;
 }
 
-.tool__search {
-  flex: 1 1 12rem;
-  min-width: 10rem;
+.tool__filters-cue {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2.25rem;
+  pointer-events: none;
+  background: linear-gradient(to right, rgb(255 255 255 / 0), #fff 65%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.1rem;
+  color: #555;
 }
 
-.tool__search-label {
+.tool__filters-chevron {
   display: block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.tool__search-input {
-  display: block;
-  width: 100%;
-  padding: 0.4rem 0.6rem;
-  font: inherit;
-  font-size: 0.95rem;
-  border: 1px solid #333;
-  border-radius: 0.25rem;
-  background: #fff;
-  color: #111;
+  flex-shrink: 0;
 }
 
 .tool__chip {
+  flex: 0 0 auto;
   padding: 0.35rem 0.75rem;
   font: inherit;
   font-size: 0.85rem;
@@ -231,6 +285,27 @@ main {
   border: 1px solid var(--border);
   border-radius: 0.25rem;
   cursor: pointer;
+}
+
+.tool__search {
+  min-width: 0;
+}
+
+.tool__search-input {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  font: inherit;
+  font-size: 0.9rem;
+  border: 1px solid #333;
+  border-radius: 0.25rem;
+  background: #fff;
+  color: #111;
+}
+
+.tool__search-input::placeholder {
+  color: #767676;
+  opacity: 1;
 }
 
 .tool__chip.is-active {
@@ -422,7 +497,8 @@ main {
 }
 
 /* Quiet note stays in flow so its line is reserved; visibility only. */
-.tool-card__digits-note.is-quiet {
+.tool-card__digits-note.is-quiet,
+.tool-card__units.is-quiet {
   visibility: hidden;
 }
 

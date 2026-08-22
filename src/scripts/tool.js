@@ -80,17 +80,29 @@ function updateCard(card, text) {
   if (!style) return;
   const outputEl = card.querySelector('[data-output]');
   if (!(outputEl instanceof HTMLElement)) return;
-  const styled = applyStyle(text, style);
+  const empty = text.length === 0;
+  const source = empty ? style.name : text;
+  const styled = applyStyle(source, style);
   outputEl.textContent = styled;
   const { utf16Length } = countCharacters(styled);
   const utfEl = card.querySelector('[data-counter-utf16]');
   if (utfEl) utfEl.textContent = String(utf16Length);
+  const unitsEl = card.querySelector('.tool-card__units');
+  if (unitsEl instanceof HTMLElement) {
+    // Empty input: no box. Typing is an interaction; DEBOUNCE_MS is 120, so
+    // the later reserved-height growth is excluded from CLS.
+    unitsEl.hidden = empty;
+  }
 
   if (card.getAttribute('data-has-digit-note') === 'true') {
     const note = card.querySelector('[data-digits-note]');
     if (note instanceof HTMLElement) {
-      // Visibility keeps the note's line reserved; do not use hidden (display:none).
-      note.classList.toggle('is-quiet', !(style.digits === null && textHasDigit(text)));
+      note.hidden = empty;
+      // Once text exists, visibility keeps the note's line reserved.
+      note.classList.toggle(
+        'is-quiet',
+        !(style.digits === null && textHasDigit(text)),
+      );
     }
   }
 

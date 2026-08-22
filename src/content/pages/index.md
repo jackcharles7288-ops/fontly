@@ -10,7 +10,9 @@ toolCategories:
   - bubble
   - gothic
 heroIntro: >-
-  Type your text once and turn it into cool fonts you can copy and paste anywhere: Instagram bios, TikTok captions, Discord names, Steam profiles, gaming tags, and more. Fontly is a free online font generator. No app, no signup, nothing to download, and it works on any phone or computer.
+  Type your text once and turn it into cool fonts you can copy and paste anywhere: Instagram bios, TikTok captions, Discord names, Steam profiles, gaming tags, and more.
+heroIntroBelow: >-
+  Fontly is a free online font generator. No app, no signup, nothing to download, and it works on any phone or computer.
 # Temporary subset of the homepage FAQ (full article has twelve). Owner will
 # replace this with the complete set when the Notion article is converted.
 faq:

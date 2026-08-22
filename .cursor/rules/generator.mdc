@@ -126,6 +126,15 @@ every keystroke and janked badly on mobile. Do not repeat that.
   inside an explicit `requestAnimationFrame` that carries a one-line comment
   naming the read and why it cannot be avoided. Do not wrap a whole update
   in `requestAnimationFrame` to paper over a read-after-write.
+- Filtering is visibility only. It toggles `hidden` on existing cards and
+  sections. It is never a second render path, never innerHTML, and never
+  recreates nodes. Search and the active chip combine with AND.
+- Every interactive control needs a state that is both visible on screen
+  and exposed to assistive technology (for example `aria-pressed` on the
+  favourite star, not a class alone).
+- A control that exists in the markup is not shipped until its behaviour is
+  proven by the code path that reads it. Listing the markup is not evidence
+  that the control is wired.
 
 ## Tool features, in build order
 

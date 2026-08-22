@@ -228,6 +228,27 @@ they live here. Changing them without an explicit owner decision is a bug.
   a 702px-wide screenshot (~485px), so the browser scaled the whole page down
   and 16px body text arrived at around 11px. `initial-scale=1` alone only swaps
   that for sideways scroll; wrapping the overflow is the fix.
+- A phone visitor must see at least one style card without scrolling. Measured
+  on a real phone at 360px, the H1 and intro consumed about half the visible
+  page and zero cards appeared above the fold.
+- The hero intro belongs above the tool, but it must stay short there. Any
+  overflow prose moves below the tool rather than being rewritten. Owner-written
+  copy may be split or have a clause deleted, but never reworded.
+- A placeholder never replaces an accessible name. The text input keeps a
+  real `aria-label` (or a visually hidden label) even when it also has a
+  placeholder.
+- Any horizontally scrolling row must scroll inside its own box (`overflow-x:
+  auto` on the row, `max-width: 100%`, `min-width: 0`) and must not widen the
+  document. Check `document.documentElement.scrollWidth` at 360px. A CSS-only
+  right-edge fade plus a decorative inline SVG chevron is the scroll cue.
+  The overlay is `pointer-events: none` and `aria-hidden`. A static fade may
+  remain after the row is scrolled to the end; do not add a scroll handler.
+- Content-dependent behaviour belongs in frontmatter, never as a string
+  literal in a route or component.
+- `[hidden]` stays unbeatable via the reset rule `display: none !important`.
+- Reserved heights exist for first paint, not for typing, because shifts
+  within 500 ms of an interaction are excluded from CLS.
+- A scroll affordance is CSS-only; no handler may read scroll or box geometry.
 
 ## Build order. Stop after each phase and wait for review.
 

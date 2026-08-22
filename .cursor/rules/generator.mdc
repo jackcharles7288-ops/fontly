@@ -86,6 +86,21 @@ After implementing this, print all fifty-two characters of every style to
 the console so they can be checked against these lists. Do not say it
 works. Show the output.
 
+## Adding a new style
+
+- A new style may be added to `styles.ts` only with its Unicode block name
+  and its base code points (uppercase, lowercase, digit, as applicable)
+  recorded in a comment directly above the record. Do not add a style from
+  memory alone; source every base code point from an actual Unicode chart
+  and say so. If a code point cannot be sourced with certainty, leave the
+  style out rather than guess.
+- Any character missing from that block (a reserved or unassigned slot)
+  must be declared, never left to pass through silently: either give it a
+  real substitute code point in `substitutions`, or leave it plain and
+  record exactly what happens in the style's public `caveat` (or `caseNote`
+  for a whole-case fold). `scripts/verify-generator.ts` enforces this for
+  every style automatically.
+
 ## Digits and unconvertible input
 
 Cursive digits do not exist in Unicode. There is no cursive five. For

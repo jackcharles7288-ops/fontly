@@ -8,4 +8,5 @@ export const categories: Category[] = [
   { id: 'bold', name: 'Bold' },
   { id: 'bubble', name: 'Bubble' },
   { id: 'gothic', name: 'Gothic' },
+  { id: 'other', name: 'Other' },
 ];

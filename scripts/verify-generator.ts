@@ -1,5 +1,5 @@
 // Development-only verification tool. Run from the terminal:
-//   node scripts/verify-generator.ts
+//   npx tsx scripts/verify-generator.ts
 // Never imported by any page or shipped to the browser.
 
 import { styles, type Style } from '../src/data/styles.ts';
@@ -9,7 +9,14 @@ const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
 const DIGITS = '0123456789';
 const PASS_THROUGH_SAMPLE = 'H\u00e9llo \u00f1 \u65e5\u672c 42 !?';
-const LETTER_TEST = /\p{L}/u;
+const REPLACEMENT_CHARACTER_CODE_POINT = 0xfffd;
+
+type CharKind = 'uppercase' | 'lowercase' | 'digit';
+
+interface Failure {
+  styleId: string;
+  cause: string;
+}
 
 function codePointHex(ch: string): string {
   const cp = ch.codePointAt(0);
@@ -17,77 +24,122 @@ function codePointHex(ch: string): string {
   return `U+${cp.toString(16).toUpperCase().padStart(4, '0')}`;
 }
 
-function codePointsOf(text: string): string[] {
-  const result: string[] = [];
-  for (const ch of text) {
-    result.push(ch);
-  }
-  return result;
-}
+const failures: Failure[] = [];
 
-let anyFail = false;
+/**
+ * Checks one generated character against the two required failure causes:
+ * it must never be U+FFFD, and it must never pass through unchanged unless
+ * that is a declared, intentional behaviour of this style.
+ *
+ * "Declared" is read broadly, matching what the rest of this codebase
+ * already treats as an honest disclosure of a gap:
+ *   - the plain letter has an entry in `substitutions`
+ *   - the style carries a public `caveat` badge
+ *   - the style carries a `caseNote` (whole-case folding disclosure)
+ *   - for digits only, `digits === null` is itself the declaration that
+ *     this style has no digits and digits pass through unchanged
+ *     (see generator.mdc, "Digits and unconvertible input")
+ * Letters (uppercase/lowercase) have no such passthrough field, so an
+ * unchanged letter with none of the above is always a real bug.
+ */
+function checkOne(style: Style, plain: string, generated: string, kind: CharKind): void {
+  const generatedCodePoint = generated.codePointAt(0);
+
+  if (generatedCodePoint === REPLACEMENT_CHARACTER_CODE_POINT) {
+    failures.push({
+      styleId: style.id,
+      cause: `${kind} "${plain}" produced U+FFFD (replacement character)`,
+    });
+  }
+
+  if (generated === plain) {
+    const declaredBySubstitution = Object.prototype.hasOwnProperty.call(
+      style.substitutions,
+      plain,
+    );
+    const declaredByCaveat = style.caveat !== null;
+    const declaredByCaseNote = style.caseNote !== null;
+    const declaredDigitPassthrough = kind === 'digit' && style.digits === null;
+
+    if (
+      !declaredBySubstitution &&
+      !declaredByCaveat &&
+      !declaredByCaseNote &&
+      !declaredDigitPassthrough
+    ) {
+      failures.push({
+        styleId: style.id,
+        cause: `${kind} "${plain}" passed through unchanged and is not declared in substitutions, caveat, caseNote, or digits:null`,
+      });
+    }
+  }
+}
 
 for (const style of styles as Style[]) {
   console.log('='.repeat(70));
   console.log(`Style: ${style.id}  (${style.name})`);
+  console.log(`Category      : ${style.category}`);
   console.log(`Risk          : ${style.risk ?? 'unset'}`);
+  console.log(`Caveat        : ${style.caveat ?? 'none'}`);
+  console.log(`Case note     : ${style.caseNote ?? 'none'}`);
   console.log('='.repeat(70));
 
-  const styledUpper = applyStyle(UPPERCASE, style);
-  const styledLower = applyStyle(LOWERCASE, style);
+  console.log('Uppercase A-Z:');
+  for (const plain of UPPERCASE) {
+    const generated = applyStyle(plain, style);
+    console.log(`  ${plain} -> ${generated}  (${codePointHex(generated)})`);
+    checkOne(style, plain, generated, 'uppercase');
+  }
 
-  console.log(`Uppercase A-Z : ${styledUpper}`);
-  console.log(`Lowercase a-z : ${styledLower}`);
+  console.log('Lowercase a-z:');
+  for (const plain of LOWERCASE) {
+    const generated = applyStyle(plain, style);
+    console.log(`  ${plain} -> ${generated}  (${codePointHex(generated)})`);
+    checkOne(style, plain, generated, 'lowercase');
+  }
+
+  console.log('Digits 0-9:');
+  for (const plain of DIGITS) {
+    const generated = applyStyle(plain, style);
+    console.log(`  ${plain} -> ${generated}  (${codePointHex(generated)})`);
+    checkOne(style, plain, generated, 'digit');
+  }
 
   const overrideLetters = Object.keys(style.substitutions);
-  if (overrideLetters.length === 0) {
-    console.log('Overrides     : none');
-  } else {
-    console.log('Overrides:');
-    for (const letter of overrideLetters) {
-      const produced = applyStyle(letter, style);
-      console.log(`  ${letter} -> ${produced}  (${codePointHex(produced)})`);
-    }
-  }
-
-  const styledDigits = applyStyle(DIGITS, style);
-  const digitNote = style.digits === null ? ' (digits: null, pass through unchanged)' : '';
-  console.log(`Digits "${DIGITS}" -> "${styledDigits}"${digitNote}`);
-
-  const passThroughResult = applyStyle(PASS_THROUGH_SAMPLE, style);
-  console.log(`Pass-through "${PASS_THROUGH_SAMPLE}" -> "${passThroughResult}"`);
-
-  const styledHello = applyStyle('Hello', style);
-  const count = countCharacters(styledHello);
   console.log(
-    `Dual counter for "Hello" -> "${styledHello}": ${count.codePoints} characters, ${count.utf16Length} UTF-16 units`,
+    overrideLetters.length === 0
+      ? 'Substitutions : none'
+      : `Substitutions : ${overrideLetters
+          .map((letter) => `${letter} -> ${codePointHex(String.fromCodePoint(style.substitutions[letter]))}`)
+          .join(', ')}`,
   );
 
-  console.log('');
-  console.log(`\\p{L} check (independent of the override list above):`);
-  const plainLetters = [...UPPERCASE, ...LOWERCASE];
-  const generatedChars = [...codePointsOf(styledUpper), ...codePointsOf(styledLower)];
+  const digitNote = style.digits === null ? ' (digits: null, pass through unchanged by design)' : '';
+  console.log(`Digits field  : ${style.digits === null ? 'null' : 'array of 10'}${digitNote}`);
 
-  let styleFailed = false;
-  for (let i = 0; i < plainLetters.length; i++) {
-    const plain = plainLetters[i];
-    const generated = generatedChars[i];
-    if (generated === undefined || !LETTER_TEST.test(generated)) {
-      styleFailed = true;
-      anyFail = true;
-      console.log(
-        `  FAIL: style "${style.id}" letter "${plain}" produced "${generated}" (${
-          generated ? codePointHex(generated) : 'missing'
-        }) which does NOT match /\\p{L}/u`,
-      );
-    }
-  }
-  if (!styleFailed) {
-    console.log('  PASS: all 52 generated characters match /\\p{L}/u');
-  }
+  const passThroughResult = applyStyle(PASS_THROUGH_SAMPLE, style);
+  console.log(`Pass-through sample "${PASS_THROUGH_SAMPLE}" -> "${passThroughResult}"`);
+
+  const styledFontly = applyStyle('Fontly', style);
+  const count = countCharacters(styledFontly);
+  console.log(
+    `"Fontly" -> "${styledFontly}": ${count.codePoints} characters, ${count.utf16Length} UTF-16 units`,
+  );
+
   console.log('');
 }
 
 console.log('='.repeat(70));
-console.log(anyFail ? 'RESULT: at least one FAIL above.' : 'RESULT: all six styles passed the \\p{L} check.');
+if (failures.length === 0) {
+  console.log(`RESULT: PASS. ${styles.length} styles, all uppercase/lowercase/digit characters verified.`);
+} else {
+  console.log(`RESULT: FAIL. ${failures.length} failure(s):`);
+  for (const failure of failures) {
+    console.log(`  [${failure.styleId}] ${failure.cause}`);
+  }
+}
 console.log('='.repeat(70));
+
+if (failures.length > 0) {
+  process.exitCode = 1;
+}

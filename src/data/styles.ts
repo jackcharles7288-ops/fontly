@@ -226,4 +226,81 @@ export const styles: Style[] = [
     caveat: null,
     caseNote: null,
   },
+
+  // --- other ---
+  // Mathematical Alphanumeric Symbols block (U+1D400-U+1D7FF), monospace set.
+  // Uppercase base U+1D670, lowercase base U+1D68A, digit base U+1D7F6.
+  // Verified against the block's own letter table: all 26 uppercase, all 26
+  // lowercase and all 10 digits are assigned in this set with no gaps.
+  {
+    id: 'monospace',
+    name: 'Monospace',
+    category: 'other',
+    uppercaseBase: 0x1d670,
+    lowercaseBase: 0x1d68a,
+    substitutions: {},
+    digits: digitRange(0x1d7f6),
+    risk: null,
+    caveat: null,
+    caseNote: null,
+  },
+  // Mathematical Alphanumeric Symbols block (U+1D400-U+1D7FF), double-struck
+  // set. Uppercase base U+1D538, lowercase base U+1D552, digit base U+1D7D8.
+  // Seven capitals are reserved (unassigned) in this block because Unicode
+  // already had double-struck ("blackboard bold") letters for them in the
+  // Letterlike Symbols block (U+2100-U+214F): C, H, N, P, Q, R, Z. All 26
+  // lowercase and all 10 digits are assigned in the Mathematical block with
+  // no gaps.
+  {
+    id: 'double-struck',
+    name: 'Double-struck',
+    category: 'other',
+    uppercaseBase: 0x1d538,
+    lowercaseBase: 0x1d552,
+    substitutions: {
+      C: 0x2102,
+      H: 0x210d,
+      N: 0x2115,
+      P: 0x2119,
+      Q: 0x211a,
+      R: 0x211d,
+      Z: 0x2124,
+    },
+    digits: digitRange(0x1d7d8),
+    risk: null,
+    caveat: null,
+    caseNote: null,
+  },
+  // Mathematical Alphanumeric Symbols block (U+1D400-U+1D7FF), sans-serif
+  // (plain, non-bold, non-italic) set. Uppercase base U+1D5A0, lowercase
+  // base U+1D5BA, digit base U+1D7E2. All 26 uppercase, all 26 lowercase and
+  // all 10 digits are assigned in this set with no gaps.
+  {
+    id: 'sans-serif',
+    name: 'Sans-serif',
+    category: 'other',
+    uppercaseBase: 0x1d5a0,
+    lowercaseBase: 0x1d5ba,
+    substitutions: {},
+    digits: digitRange(0x1d7e2),
+    risk: null,
+    caveat: null,
+    caseNote: null,
+  },
+  // Halfwidth and Fullwidth Forms block (U+FF00-U+FFEF).
+  // Uppercase base U+FF21, lowercase base U+FF41, digit base U+FF10. All 26
+  // uppercase, all 26 lowercase and all 10 digits are assigned with no gaps;
+  // this block exists for lossless round-trip with CJK legacy encodings.
+  {
+    id: 'fullwidth',
+    name: 'Fullwidth',
+    category: 'other',
+    uppercaseBase: 0xff21,
+    lowercaseBase: 0xff41,
+    substitutions: {},
+    digits: digitRange(0xff10),
+    risk: null,
+    caveat: null,
+    caseNote: null,
+  },
 ];

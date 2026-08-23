@@ -101,6 +101,24 @@ works. Show the output.
   for a whole-case fold). `scripts/verify-generator.ts` enforces this for
   every style automatically.
 
+## Decorations are not styles
+
+- A decoration is a wrapper: a prefix and a suffix of real Unicode characters
+  placed around the visitor's text, which is copied through exactly as typed
+  with its letters unconverted. Decorations live in `src/data/decorations.ts`.
+  They never enter `styles.ts`, they are never a category in
+  `categories.ts`, and they never count in `styles.length` or in the visible
+  style counter. Never present a decoration as an alphabet or a font.
+- Every decoration character is recorded with its Unicode block name and its
+  code point in a comment directly above the record, exactly as a style's base
+  code points are. Source each one from an actual Unicode chart; if a code
+  point cannot be sourced with certainty, leave the decoration out.
+- A character with emoji presentation is declared, never hidden: it is named in
+  the report and in that decoration's public `caveat`, so the card carries the
+  same quiet badge a style would. `scripts/verify-generator.ts` prints every
+  prefix and suffix character with its code point and fails on U+FFFD, and on
+  any character with emoji presentation that has no caveat.
+
 ## Digits and unconvertible input
 
 Cursive digits do not exist in Unicode. There is no cursive five. For

@@ -133,6 +133,7 @@ main {
 
 /* Tool — wider than the article spine; sits on the page background. */
 .tool {
+  --preview-size: 1.5rem;
   margin: 0 0 2rem;
   max-width: 72rem;
   margin-inline: auto;
@@ -186,14 +187,53 @@ main {
   min-height: 2.1rem;
 }
 
+.tool__end {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.tool__preview {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.tool__preview-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: #333;
+  white-space: nowrap;
+}
+
+.tool__preview-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.tool__preview-input {
+  width: 6.5rem;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
 @media (min-width: 60rem) {
   .tool__row {
     flex-direction: row;
     align-items: center;
   }
 
-  .tool__search {
+  .tool__end {
+    flex-direction: row;
+    align-items: center;
     margin-left: auto;
+  }
+
+  .tool__search {
     max-width: 18rem;
     width: 18rem;
   }
@@ -332,6 +372,20 @@ main {
   margin: 0 0 0.75rem;
   font-size: 1.15rem;
   font-weight: 600;
+}
+
+/* Decorated section — wrappers, not another alphabet category. The rule and
+   the wider gap are what separate it from the style sections above. */
+.tool__decorated {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.tool__section-note {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: #555;
 }
 
 /* One column by default; two from 40rem; three from 60rem.
@@ -473,7 +527,7 @@ main {
 .tool-card__output {
   margin: 0;
   min-height: 2.5rem;
-  font-size: 1.5rem;
+  font-size: var(--preview-size, 1.5rem);
   line-height: 1.35;
   /* Usernames and tags have no spaces — wrap mid-token instead of overflowing. */
   overflow-wrap: anywhere;

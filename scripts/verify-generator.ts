@@ -3,6 +3,7 @@
 // Never imported by any page or shipped to the browser.
 
 import { styles, type Style } from '../src/data/styles.ts';
+import { decorations, applyDecoration } from '../src/data/decorations.ts';
 import { applyStyle, countCharacters } from '../src/scripts/generator.js';
 
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -14,7 +15,7 @@ const REPLACEMENT_CHARACTER_CODE_POINT = 0xfffd;
 type CharKind = 'uppercase' | 'lowercase' | 'digit';
 
 interface Failure {
-  styleId: string;
+  subject: string;
   cause: string;
 }
 
@@ -47,7 +48,7 @@ function checkOne(style: Style, plain: string, generated: string, kind: CharKind
 
   if (generatedCodePoint === REPLACEMENT_CHARACTER_CODE_POINT) {
     failures.push({
-      styleId: style.id,
+      subject: style.id,
       cause: `${kind} "${plain}" produced U+FFFD (replacement character)`,
     });
   }
@@ -68,7 +69,7 @@ function checkOne(style: Style, plain: string, generated: string, kind: CharKind
       !declaredDigitPassthrough
     ) {
       failures.push({
-        styleId: style.id,
+        subject: style.id,
         cause: `${kind} "${plain}" passed through unchanged and is not declared in substitutions, caveat, caseNote, or digits:null`,
       });
     }
@@ -129,13 +130,57 @@ for (const style of styles as Style[]) {
   console.log('');
 }
 
+// Decorations are wrappers, not styles. Every prefix and suffix character is
+// printed with its code point; a character carrying emoji presentation must be
+// declared in the decoration's caveat (see generator.mdc).
+const EMOJI_PRESENTATION = /\p{Emoji_Presentation}/u;
+
+for (const decoration of decorations) {
+  console.log('='.repeat(70));
+  console.log(`Decoration: ${decoration.id}  (${decoration.name})`);
+  console.log(`Caveat        : ${decoration.caveat ?? 'none'}`);
+  console.log('='.repeat(70));
+
+  for (const [part, text] of [
+    ['Prefix', decoration.prefix],
+    ['Suffix', decoration.suffix],
+  ] as const) {
+    for (const ch of text) {
+      const emojiNote = EMOJI_PRESENTATION.test(ch) ? '  [emoji presentation]' : '';
+      console.log(`  ${part}: ${ch}  (${codePointHex(ch)})${emojiNote}`);
+
+      if (ch.codePointAt(0) === REPLACEMENT_CHARACTER_CODE_POINT) {
+        failures.push({
+          subject: decoration.id,
+          cause: `${part.toLowerCase()} character is U+FFFD (replacement character)`,
+        });
+      }
+      if (EMOJI_PRESENTATION.test(ch) && decoration.caveat === null) {
+        failures.push({
+          subject: decoration.id,
+          cause: `${part.toLowerCase()} character ${codePointHex(ch)} carries emoji presentation and is not declared in caveat`,
+        });
+      }
+    }
+  }
+
+  const wrapped = applyDecoration('Fontly', decoration);
+  const wrappedCount = countCharacters(wrapped);
+  console.log(
+    `"Fontly" -> "${wrapped}": ${wrappedCount.codePoints} characters, ${wrappedCount.utf16Length} UTF-16 units`,
+  );
+  console.log('');
+}
+
 console.log('='.repeat(70));
 if (failures.length === 0) {
-  console.log(`RESULT: PASS. ${styles.length} styles, all uppercase/lowercase/digit characters verified.`);
+  console.log(
+    `RESULT: PASS. ${styles.length} styles, all uppercase/lowercase/digit characters verified. ${decorations.length} decorations, every prefix and suffix character verified.`,
+  );
 } else {
   console.log(`RESULT: FAIL. ${failures.length} failure(s):`);
   for (const failure of failures) {
-    console.log(`  [${failure.styleId}] ${failure.cause}`);
+    console.log(`  [${failure.subject}] ${failure.cause}`);
   }
 }
 console.log('='.repeat(70));

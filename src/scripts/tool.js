@@ -1,13 +1,21 @@
 // Browser wiring only. Mapping lives in generator.js — do not duplicate it.
 import { applyStyle, countCharacters } from './generator.js';
 import { styles } from '../data/styles.ts';
+import { decorations, applyDecoration } from '../data/decorations.ts';
 
 const DEBOUNCE_MS = 120;
 const COPY_LABEL_MS = 2000;
 const FAV_STORAGE_KEY = 'fontly-favourites';
+const RECENTS_STORAGE_KEY = 'fontly-recents';
+const RECENTS_MAX = 8;
+const PREVIEW_SIZES = ['1.125rem', '1.5rem', '1.875rem'];
 
 /** @type {Map<string, import('../data/styles.ts').Style>} */
 const styleById = new Map(styles.map((s) => [s.id, s]));
+
+/** Wrappers, not styles. Ids never collide with a style id. */
+/** @type {Map<string, import('../data/decorations.ts').Decoration>} */
+const decorationById = new Map(decorations.map((d) => [d.id, d]));
 
 /**
  * @returns {Set<string>}
@@ -33,6 +41,34 @@ function writeFavourites(favs) {
     localStorage.setItem(FAV_STORAGE_KEY, JSON.stringify([...favs]));
   } catch {
     // Quota or private mode — favourites stay session-only.
+  }
+}
+
+/**
+ * Most-recent first. Membership only — never used to reorder the DOM.
+ * @returns {string[]}
+ */
+function readRecents() {
+  try {
+    const raw = localStorage.getItem(RECENTS_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter((id) => typeof id === 'string').slice(0, RECENTS_MAX);
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * @param {string[]} ids
+ * @returns {void}
+ */
+function writeRecents(ids) {
+  try {
+    localStorage.setItem(RECENTS_STORAGE_KEY, JSON.stringify(ids));
+  } catch {
+    // Quota or private mode — recents stay session-only.
   }
 }
 
@@ -74,15 +110,19 @@ function toTitleCase(text) {
  * @returns {void}
  */
 function updateCard(card, text) {
-  const id = card.getAttribute('data-style-id');
+  const id = card.getAttribute('data-card-id');
   if (!id) return;
   const style = styleById.get(id);
-  if (!style) return;
+  const decoration = style === undefined ? decorationById.get(id) : undefined;
+  if (style === undefined && decoration === undefined) return;
   const outputEl = card.querySelector('[data-output]');
   if (!(outputEl instanceof HTMLElement)) return;
   const empty = text.length === 0;
-  const source = empty ? style.name : text;
-  const styled = applyStyle(source, style);
+  // Empty input: the sample is the card's own name, styles and decorations alike.
+  const source = empty ? (style ?? decoration).name : text;
+  const styled = style
+    ? applyStyle(source, style)
+    : applyDecoration(source, /** @type {NonNullable<typeof decoration>} */ (decoration));
   outputEl.textContent = styled;
   const { utf16Length } = countCharacters(styled);
   const utfEl = card.querySelector('[data-counter-utf16]');
@@ -94,7 +134,7 @@ function updateCard(card, text) {
     unitsEl.hidden = empty;
   }
 
-  if (card.getAttribute('data-has-digit-note') === 'true') {
+  if (style && card.getAttribute('data-has-digit-note') === 'true') {
     const note = card.querySelector('[data-digits-note]');
     if (note instanceof HTMLElement) {
       note.hidden = empty;
@@ -157,16 +197,16 @@ function announce(message) {
 
 /**
  * @param {HTMLButtonElement} favBtn
- * @param {string} styleName
+ * @param {string} cardName
  * @param {boolean} isFav
  * @returns {void}
  */
-function syncFavButton(favBtn, styleName, isFav) {
+function syncFavButton(favBtn, cardName, isFav) {
   favBtn.setAttribute('aria-pressed', isFav ? 'true' : 'false');
   favBtn.classList.toggle('is-on', isFav);
   favBtn.setAttribute(
     'aria-label',
-    isFav ? `Remove ${styleName} from favourites` : `Add ${styleName} to favourites`,
+    isFav ? `Remove ${cardName} from favourites` : `Add ${cardName} to favourites`,
   );
 }
 
@@ -180,7 +220,9 @@ function initTool() {
   const searchInput = root.querySelector('#tool-search');
   const inputCpEl = root.querySelector('[data-input-codepoints]');
   const emptyFavEl = root.querySelector('[data-favourites-empty]');
+  const emptyRecentsEl = root.querySelector('[data-recents-empty]');
   const emptySearchEl = root.querySelector('[data-search-empty]');
+  const previewInput = root.querySelector('#tool-preview-size');
 
   /** @type {NodeListOf<HTMLElement>} */
   const cards = root.querySelectorAll('.tool-card');
@@ -197,7 +239,7 @@ function initTool() {
   /** @type {Map<string, HTMLElement>} */
   const cardById = new Map();
   for (const card of cards) {
-    const id = card.getAttribute('data-style-id');
+    const id = card.getAttribute('data-card-id');
     if (id) cardById.set(id, card);
   }
 
@@ -210,17 +252,18 @@ function initTool() {
 
   let activeFilter = 'all';
   const favourites = readFavourites();
+  let recents = readRecents();
 
   // Mark favourites only — do not reorder cards on load (avoids layout shift).
   for (const card of cards) {
-    const id = card.getAttribute('data-style-id');
+    const id = card.getAttribute('data-card-id');
     const isFav = id !== null && favourites.has(id);
     card.setAttribute('data-favourite', isFav ? 'true' : 'false');
     const favBtn = card.querySelector('[data-fav]');
     const nameEl = card.querySelector('.tool-card__name');
-    const styleName = nameEl?.textContent?.trim() || 'style';
+    const cardName = nameEl?.textContent?.trim() || 'card';
     if (favBtn instanceof HTMLButtonElement) {
-      syncFavButton(favBtn, styleName, isFav);
+      syncFavButton(favBtn, cardName, isFav);
     }
   }
 
@@ -230,7 +273,7 @@ function initTool() {
       for (const entry of entries) {
         const card = entry.target;
         if (!(card instanceof HTMLElement)) continue;
-        const id = card.getAttribute('data-style-id');
+        const id = card.getAttribute('data-card-id');
         if (!id) continue;
         if (entry.isIntersecting) {
           visibleIds.add(id);
@@ -276,6 +319,7 @@ function initTool() {
         ? searchInput.value.trim().toLowerCase()
         : '';
     let anyFavMatch = false;
+    let anyRecentMatch = false;
     let anyShown = false;
 
     for (const section of sections) {
@@ -286,13 +330,17 @@ function initTool() {
 
       for (const card of sectionCards) {
         const isFav = card.getAttribute('data-favourite') === 'true';
-        const name = card.getAttribute('data-style-name') || '';
+        const name = card.getAttribute('data-card-name') || '';
+        const id = card.getAttribute('data-card-id') || '';
         let chipOk = false;
         if (activeFilter === 'all') {
           chipOk = true;
         } else if (activeFilter === 'favourites') {
           chipOk = isFav;
           if (chipOk) anyFavMatch = true;
+        } else if (activeFilter === 'recent') {
+          chipOk = recents.includes(id);
+          if (chipOk) anyRecentMatch = true;
         } else {
           chipOk = catId === activeFilter;
         }
@@ -305,7 +353,7 @@ function initTool() {
         }
       }
 
-      if (activeFilter === 'favourites') {
+      if (activeFilter === 'favourites' || activeFilter === 'recent') {
         section.hidden = visibleInSection === 0;
       } else if (activeFilter === 'all') {
         section.hidden = visibleInSection === 0 && query !== '';
@@ -319,6 +367,13 @@ function initTool() {
         activeFilter === 'favourites' &&
         query === '' &&
         !anyFavMatch
+      );
+    }
+    if (emptyRecentsEl instanceof HTMLElement) {
+      emptyRecentsEl.hidden = !(
+        activeFilter === 'recent' &&
+        query === '' &&
+        !anyRecentMatch
       );
     }
     if (emptySearchEl instanceof HTMLElement) {
@@ -373,7 +428,7 @@ function initTool() {
     if (favBtn instanceof HTMLButtonElement) {
       const card = favBtn.closest('.tool-card');
       if (!(card instanceof HTMLElement)) return;
-      const id = card.getAttribute('data-style-id');
+      const id = card.getAttribute('data-card-id');
       if (!id) return;
       if (favourites.has(id)) {
         favourites.delete(id);
@@ -384,8 +439,8 @@ function initTool() {
       const isFav = favourites.has(id);
       card.setAttribute('data-favourite', isFav ? 'true' : 'false');
       const nameEl = card.querySelector('.tool-card__name');
-      const styleName = nameEl?.textContent?.trim() || 'style';
-      syncFavButton(favBtn, styleName, isFav);
+      const cardName = nameEl?.textContent?.trim() || 'card';
+      syncFavButton(favBtn, cardName, isFav);
       if (activeFilter === 'favourites') applyFilter();
       return;
     }
@@ -397,11 +452,20 @@ function initTool() {
     const output = card.querySelector('[data-output]');
     if (!(output instanceof HTMLElement)) return;
     const nameEl = card.querySelector('.tool-card__name');
-    const styleName = nameEl?.textContent?.trim() || 'style';
+    const cardName = nameEl?.textContent?.trim() || 'card';
     const text = output.textContent ?? '';
     const ok = await copyText(text);
     if (ok) {
-      announce(`Copied ${styleName}`);
+      const copiedId = card.getAttribute('data-card-id');
+      if (copiedId) {
+        recents = [copiedId, ...recents.filter((x) => x !== copiedId)].slice(
+          0,
+          RECENTS_MAX,
+        );
+        writeRecents(recents);
+        if (activeFilter === 'recent') applyFilter();
+      }
+      announce(`Copied ${cardName}`);
       const prev = copyTimers.get(button);
       if (prev !== undefined) clearTimeout(prev);
       // Class toggle only — button box size is reserved in CSS from first paint.
@@ -417,6 +481,14 @@ function initTool() {
       announce('Copy failed');
     }
   });
+
+  if (previewInput instanceof HTMLInputElement) {
+    previewInput.addEventListener('input', () => {
+      const index = Number(previewInput.value);
+      const size = PREVIEW_SIZES[index] ?? PREVIEW_SIZES[1];
+      root.style.setProperty('--preview-size', size);
+    });
+  }
 }
 
 initTool();

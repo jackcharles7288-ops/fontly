@@ -28,6 +28,9 @@ const pages = defineCollection({
     testPhrase: z.string().optional(),
     heroIntro: z.string().optional(),
     heroIntroBelow: z.string().optional(),
+    // Renders the Decorated wrapper section at the end of the tool. Optional
+    // with a false default, so pages that omit it still validate.
+    showDecorations: z.boolean().default(false),
   }),
 });
 

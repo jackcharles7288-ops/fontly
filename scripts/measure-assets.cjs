@@ -26,11 +26,15 @@ if (!fs.existsSync(jsPath)) {
   process.exit(1);
 }
 
-const styleMatch = html.match(/<style>([\s\S]*?)<\/style>/);
-if (!styleMatch) {
+const styleMatches = [...html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/g)];
+if (styleMatches.length === 0) {
   console.error(`measure-assets: no inline <style> found in ${path.resolve(htmlPath)}`);
   process.exit(1);
 }
+// Prefer the largest block: a noscript helper style must not displace the real sheet.
+const styleMatch = styleMatches.reduce((best, cur) =>
+  cur[1].length > best[1].length ? cur : best,
+);
 
 const jsBytes = fs.readFileSync(jsPath);
 const cssBytes = Buffer.from(styleMatch[1], 'utf8');

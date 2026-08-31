@@ -95,6 +95,17 @@ const breadcrumbs =
     breadcrumbs={breadcrumbs}
     hasTool={hasToolCategories}
   />
+  {
+    hasPlaceholder ? (
+      <noscript slot="head">
+        <style is:inline>
+          .tool__category[data-mounted='false'] {
+            display: none !important;
+          }
+        </style>
+      </noscript>
+    ) : null
+  }
   {parts[0]?.trim() ? <div class="article" set:html={parts[0]} /> : null}
   {
     hasPlaceholder ? (

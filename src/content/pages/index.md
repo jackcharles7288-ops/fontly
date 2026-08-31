@@ -9,9 +9,10 @@ toolCategories:
   - bold
   - bubble
   - gothic
-  - other
   - small
+  - other
 showDecorations: true
+showEffects: true
 heroIntro: >-
   Type your text once and turn it into cool fonts you can copy and paste anywhere: Instagram bios, TikTok captions, Discord names, Steam profiles, gaming tags, and more.
 heroIntroBelow: >-

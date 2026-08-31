@@ -4,6 +4,7 @@
 
 import { styles, type Style } from '../src/data/styles.ts';
 import { decorations, applyDecoration } from '../src/data/decorations.ts';
+import { effects, applyEffect } from '../src/data/effects.ts';
 import { applyStyle, countCharacters } from '../src/scripts/generator.js';
 
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -204,6 +205,43 @@ for (const decoration of decorations) {
   console.log('');
 }
 
+// Effects are combining marks, not styles or wrappers. Every mark must be
+// Unicode general category Mn or Me — a wrong code point that is not a
+// combining mark must never ship.
+const COMBINING_MARK = /[\p{Mn}\p{Me}]/u;
+
+for (const effect of effects) {
+  console.log('='.repeat(70));
+  console.log(`Effect: ${effect.id}  (${effect.name})`);
+  console.log(`Caveat        : ${effect.caveat ?? 'none'}`);
+  console.log('='.repeat(70));
+
+  for (const ch of effect.mark) {
+    console.log(`  Mark: ${ch}  (${codePointHex(ch)})`);
+    reportEmojiProperty(ch, effect.id);
+
+    if (ch.codePointAt(0) === REPLACEMENT_CHARACTER_CODE_POINT) {
+      failures.push({
+        subject: effect.id,
+        cause: 'effect mark is U+FFFD (replacement character)',
+      });
+    }
+    if (!COMBINING_MARK.test(ch)) {
+      failures.push({
+        subject: effect.id,
+        cause: `effect mark ${codePointHex(ch)} is not a combining mark (Unicode general category Mn or Me)`,
+      });
+    }
+  }
+
+  const applied = applyEffect('Fontly Test', effect);
+  const appliedCount = countCharacters(applied);
+  console.log(
+    `"Fontly Test" -> "${applied}": ${appliedCount.codePoints} characters, ${appliedCount.utf16Length} UTF-16 units`,
+  );
+  console.log('');
+}
+
 console.log('='.repeat(70));
 console.log('EMOJI PROPERTY REPORT');
 console.log('Characters with Emoji property but not Emoji_Presentation (non-ASCII only):');
@@ -216,7 +254,7 @@ console.log('='.repeat(70));
 console.log('='.repeat(70));
 if (failures.length === 0) {
   console.log(
-    `RESULT: PASS. ${styles.length} styles, all uppercase/lowercase/digit characters verified. ${decorations.length} decorations, every prefix and suffix character verified.`,
+    `RESULT: PASS. ${styles.length} styles, all uppercase/lowercase/digit characters verified. ${decorations.length} decorations, every prefix and suffix character verified. ${effects.length} effects, every mark a combining mark.`,
   );
 } else {
   console.log(`RESULT: FAIL. ${failures.length} failure(s):`);

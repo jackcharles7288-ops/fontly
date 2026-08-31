@@ -31,6 +31,9 @@ const pages = defineCollection({
     // Renders the Decorated wrapper section at the end of the tool. Optional
     // with a false default, so pages that omit it still validate.
     showDecorations: z.boolean().default(false),
+    // Renders the Effects combining-mark section. Optional with a false
+    // default, so pages that omit it still validate.
+    showEffects: z.boolean().default(false),
   }),
 });
 

@@ -2,6 +2,7 @@
 import { styles } from '../data/styles';
 import { categories } from '../data/categories';
 import { decorations, applyDecoration } from '../data/decorations';
+import { effects, applyEffect } from '../data/effects';
 import { applyStyle, countCharacters } from '../scripts/generator.js';
 
 interface Props {
@@ -9,11 +10,13 @@ interface Props {
   testPhrase?: string;
   /** Renders the Decorated wrapper section after the last style category. */
   showDecorations?: boolean;
+  /** Renders the Effects combining-mark section after the last style category. */
+  showEffects?: boolean;
   /** Content entry id (filename without extension), used in the missing-phrase warning. */
   pageFile: string;
 }
 
-const { toolCategories, testPhrase, showDecorations = false, pageFile } = Astro.props;
+const { toolCategories, testPhrase, showDecorations = false, showEffects = false, pageFile } = Astro.props;
 
 if (testPhrase === undefined) {
   console.warn(
@@ -102,8 +105,36 @@ const decoratedSection: Section = {
   }),
 };
 
+// Effects are combining marks, not alphabets or wrappers: their own section,
+// never a category in categories.ts, and never counted in styles.length.
+const effectsSection: Section = {
+  id: 'effects',
+  heading: 'Effects',
+  note: 'Marks added over your text, letters unchanged.',
+  decorated: true,
+  cards: effects.map((effect) => {
+    const output = applyEffect(effect.name, effect);
+    return {
+      id: effect.id,
+      name: effect.name,
+      searchName: effect.name.toLowerCase(),
+      output,
+      utf16Length: countCharacters(output).utf16Length,
+      caveat: effect.caveat,
+      caveatNote: effect.caveatNote,
+      caseNote: null,
+      digitsPassThrough: false,
+    };
+  }),
+};
+
 const renderDecorated = showDecorations && decoratedSection.cards.length > 0;
-const sections = renderDecorated ? [...styleSections, decoratedSection] : styleSections;
+const renderEffects = showEffects && effectsSection.cards.length > 0;
+const sections = [
+  ...styleSections,
+  ...(renderEffects ? [effectsSection] : []),
+  ...(renderDecorated ? [decoratedSection] : []),
+];
 
 // Chips: All, then style categories present on this page, then Decorated,
 // then Favourites, then Recents last.
@@ -149,6 +180,18 @@ const filterChips = styleSections
               {chip.label}
             </button>
           ))
+        }
+        {
+          renderEffects ? (
+            <button
+              type="button"
+              class="tool__chip"
+              data-filter="effects"
+              aria-pressed="false"
+            >
+              Effects
+            </button>
+          ) : null
         }
         {
           renderDecorated ? (

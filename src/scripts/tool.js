@@ -2,6 +2,7 @@
 import { applyStyle, countCharacters } from './generator.js';
 import { styles } from '../data/styles.ts';
 import { decorations, applyDecoration } from '../data/decorations.ts';
+import { effects, applyEffect } from '../data/effects.ts';
 
 const DEBOUNCE_MS = 120;
 const COPY_LABEL_MS = 2000;
@@ -16,6 +17,10 @@ const styleById = new Map(styles.map((s) => [s.id, s]));
 /** Wrappers, not styles. Ids never collide with a style id. */
 /** @type {Map<string, import('../data/decorations.ts').Decoration>} */
 const decorationById = new Map(decorations.map((d) => [d.id, d]));
+
+/** Combining marks, not styles. Ids never collide with a style id. */
+/** @type {Map<string, import('../data/effects.ts').Effect>} */
+const effectById = new Map(effects.map((e) => [e.id, e]));
 
 /**
  * @returns {Set<string>}
@@ -114,15 +119,18 @@ function updateCard(card, text) {
   if (!id) return;
   const style = styleById.get(id);
   const decoration = style === undefined ? decorationById.get(id) : undefined;
-  if (style === undefined && decoration === undefined) return;
+  const effect = style === undefined && decoration === undefined ? effectById.get(id) : undefined;
+  if (style === undefined && decoration === undefined && effect === undefined) return;
   const outputEl = card.querySelector('[data-output]');
   if (!(outputEl instanceof HTMLElement)) return;
   const empty = text.length === 0;
-  // Empty input: the sample is the card's own name, styles and decorations alike.
-  const source = empty ? (style ?? decoration).name : text;
+  // Empty input: the sample is the card's own name, styles, decorations and effects alike.
+  const source = empty ? (style ?? decoration ?? effect).name : text;
   const styled = style
     ? applyStyle(source, style)
-    : applyDecoration(source, /** @type {NonNullable<typeof decoration>} */ (decoration));
+    : decoration
+      ? applyDecoration(source, decoration)
+      : applyEffect(source, /** @type {NonNullable<typeof effect>} */ (effect));
   outputEl.textContent = styled;
   const { utf16Length } = countCharacters(styled);
   const utfEl = card.querySelector('[data-counter-utf16]');

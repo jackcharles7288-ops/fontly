@@ -10,6 +10,8 @@ const FAV_STORAGE_KEY = 'fontly-favourites';
 const RECENTS_STORAGE_KEY = 'fontly-recents';
 const RECENTS_MAX = 8;
 const PREVIEW_SIZES = ['1.125rem', '1.5rem', '1.875rem'];
+const SECTION_ROOT_MARGIN = '800px';
+const CARD_ROOT_MARGIN = '200px';
 
 /** @type {Map<string, import('../data/styles.ts').Style>} */
 const styleById = new Map(styles.map((s) => [s.id, s]));
@@ -21,6 +23,20 @@ const decorationById = new Map(decorations.map((d) => [d.id, d]));
 /** Combining marks, not styles. Ids never collide with a style id. */
 /** @type {Map<string, import('../data/effects.ts').Effect>} */
 const effectById = new Map(effects.map((e) => [e.id, e]));
+
+/**
+ * Catalogue row used for filtering and mounting. Not the DOM.
+ * @typedef {{
+ *   id: string,
+ *   name: string,
+ *   searchName: string,
+ *   category: string,
+ *   caveat: string | null,
+ *   caveatNote: string | null,
+ *   caseNote: string | null,
+ *   digitsPassThrough: boolean,
+ * }} CardData
+ */
 
 /**
  * @returns {Set<string>}
@@ -110,6 +126,49 @@ function toTitleCase(text) {
 }
 
 /**
+ * @param {string} categoryId
+ * @returns {CardData[]}
+ */
+function catalogForCategory(categoryId) {
+  if (categoryId === 'decorated') {
+    return decorations.map((decoration) => ({
+      id: decoration.id,
+      name: decoration.name,
+      searchName: decoration.name.toLowerCase(),
+      category: 'decorated',
+      caveat: decoration.caveat,
+      caveatNote: null,
+      caseNote: null,
+      digitsPassThrough: false,
+    }));
+  }
+  if (categoryId === 'effects') {
+    return effects.map((effect) => ({
+      id: effect.id,
+      name: effect.name,
+      searchName: effect.name.toLowerCase(),
+      category: 'effects',
+      caveat: effect.caveat,
+      caveatNote: effect.caveatNote,
+      caseNote: null,
+      digitsPassThrough: false,
+    }));
+  }
+  return styles
+    .filter((style) => style.category === categoryId)
+    .map((style) => ({
+      id: style.id,
+      name: style.name,
+      searchName: style.name.toLowerCase(),
+      category: categoryId,
+      caveat: style.caveat,
+      caveatNote: style.caveatNote ?? null,
+      caseNote: style.caseNote,
+      digitsPassThrough: style.digits === null,
+    }));
+}
+
+/**
  * @param {string} text
  * @param {HTMLElement} card
  * @returns {void}
@@ -155,6 +214,18 @@ function updateCard(card, text) {
   }
 
   card.setAttribute('data-needs-update', 'false');
+}
+
+/**
+ * Recompute a card when its output may be read but typing skipped it.
+ * @param {HTMLElement} card
+ * @param {string} text
+ * @returns {void}
+ */
+function ensureCardFresh(card, text) {
+  if (card.getAttribute('data-needs-update') === 'true') {
+    updateCard(card, text);
+  }
 }
 
 /**
@@ -231,9 +302,9 @@ function initTool() {
   const emptyRecentsEl = root.querySelector('[data-recents-empty]');
   const emptySearchEl = root.querySelector('[data-search-empty]');
   const previewInput = root.querySelector('#tool-preview-size');
+  const cardTemplate = root.querySelector('#tool-card-template');
+  if (!(cardTemplate instanceof HTMLTemplateElement)) return;
 
-  /** @type {NodeListOf<HTMLElement>} */
-  const cards = root.querySelectorAll('.tool-card');
   /** @type {NodeListOf<HTMLElement>} */
   const sections = root.querySelectorAll('.tool__category');
   /** @type {NodeListOf<HTMLButtonElement>} */
@@ -244,12 +315,11 @@ function initTool() {
   /** @type {WeakMap<HTMLButtonElement, ReturnType<typeof setTimeout>>} */
   const copyTimers = new WeakMap();
 
-  /** @type {Map<string, HTMLElement>} */
+  /**
+   * Live registry of mounted cards. Mounting adds entries; never a frozen NodeList.
+   * @type {Map<string, HTMLElement>}
+   */
   const cardById = new Map();
-  for (const card of cards) {
-    const id = card.getAttribute('data-card-id');
-    if (id) cardById.set(id, card);
-  }
 
   /**
    * Cards currently intersecting the viewport. Updated only from
@@ -262,20 +332,18 @@ function initTool() {
   const favourites = readFavourites();
   let recents = readRecents();
 
-  // Mark favourites only — do not reorder cards on load (avoids layout shift).
-  for (const card of cards) {
-    const id = card.getAttribute('data-card-id');
-    const isFav = id !== null && favourites.has(id);
-    card.setAttribute('data-favourite', isFav ? 'true' : 'false');
-    const favBtn = card.querySelector('[data-fav]');
-    const nameEl = card.querySelector('.tool-card__name');
-    const cardName = nameEl?.textContent?.trim() || 'card';
-    if (favBtn instanceof HTMLButtonElement) {
-      syncFavButton(favBtn, cardName, isFav);
-    }
+  /**
+   * Catalogue keyed by section id, built once from data imports.
+   * @type {Map<string, CardData[]>}
+   */
+  const catalogByCategory = new Map();
+  for (const section of sections) {
+    const catId = section.getAttribute('data-category');
+    if (!catId) continue;
+    catalogByCategory.set(catId, catalogForCategory(catId));
   }
 
-  const observer = new IntersectionObserver(
+  const cardObserver = new IntersectionObserver(
     (entries) => {
       const text = input.value;
       for (const entry of entries) {
@@ -293,11 +361,160 @@ function initTool() {
         }
       }
     },
-    { root: null, rootMargin: '0px', threshold: 0 },
+    { root: null, rootMargin: CARD_ROOT_MARGIN, threshold: 0 },
   );
 
-  for (const card of cards) {
-    observer.observe(card);
+  /**
+   * Adds a mounted card to the live registry and starts observing it.
+   * @param {HTMLElement} card
+   * @returns {void}
+   */
+  function registerCard(card) {
+    const id = card.getAttribute('data-card-id');
+    if (!id || cardById.has(id)) return;
+    cardById.set(id, card);
+    const isFav = favourites.has(id);
+    card.setAttribute('data-favourite', isFav ? 'true' : 'false');
+    const favBtn = card.querySelector('[data-fav]');
+    const nameEl = card.querySelector('.tool-card__name');
+    const cardName = nameEl?.textContent?.trim() || 'card';
+    if (favBtn instanceof HTMLButtonElement) {
+      syncFavButton(favBtn, cardName, isFav);
+    }
+    cardObserver.observe(card);
+  }
+
+  /**
+   * @param {CardData} data
+   * @returns {HTMLElement}
+   */
+  function createCardFromTemplate(data) {
+    const fragment = cardTemplate.content.cloneNode(true);
+    const card = /** @type {HTMLElement | null} */ (
+      fragment.querySelector('.tool-card')
+    );
+    if (!(card instanceof HTMLElement)) {
+      throw new Error('[fontly] Card template is missing .tool-card');
+    }
+
+    card.setAttribute('data-card-id', data.id);
+    card.setAttribute('data-card-name', data.searchName);
+    card.setAttribute('data-category', data.category);
+    card.setAttribute('data-favourite', 'false');
+    card.setAttribute('data-needs-update', 'false');
+    card.setAttribute('data-has-digit-note', data.digitsPassThrough ? 'true' : 'false');
+
+    const nameEl = card.querySelector('.tool-card__name');
+    if (nameEl) nameEl.textContent = data.name;
+
+    const riskEl = card.querySelector('.tool-card__risk');
+    if (riskEl instanceof HTMLElement) {
+      if (data.caveat) {
+        riskEl.textContent = data.caveat;
+        riskEl.hidden = false;
+      } else {
+        riskEl.hidden = true;
+        riskEl.textContent = '';
+      }
+    }
+
+    const favBtn = card.querySelector('[data-fav]');
+    if (favBtn instanceof HTMLButtonElement) {
+      favBtn.setAttribute('aria-label', `Add ${data.name} to favourites`);
+    }
+    const copyBtn = card.querySelector('[data-copy]');
+    if (copyBtn instanceof HTMLButtonElement) {
+      copyBtn.setAttribute('aria-label', `Copy ${data.name}`);
+    }
+
+    const digitsNote = card.querySelector('[data-digits-note]');
+    if (digitsNote instanceof HTMLElement) {
+      digitsNote.hidden = true;
+      if (!data.digitsPassThrough) {
+        digitsNote.remove();
+      }
+    }
+
+    const caseNote = card.querySelector('.tool-card__case-note');
+    if (caseNote instanceof HTMLElement) {
+      if (data.caseNote) {
+        caseNote.textContent = data.caseNote;
+        caseNote.hidden = false;
+      } else {
+        caseNote.remove();
+      }
+    }
+
+    const caveatNote = card.querySelector('.tool-card__caveat-note');
+    if (caveatNote instanceof HTMLElement) {
+      if (data.caveatNote) {
+        caveatNote.textContent = data.caveatNote;
+        caveatNote.hidden = false;
+      } else {
+        caveatNote.remove();
+      }
+    }
+
+    // Empty-input sample: the card's own name, converted.
+    updateCard(card, '');
+    return card;
+  }
+
+  /**
+   * @param {HTMLElement} section
+   * @returns {void}
+   */
+  function mountSection(section) {
+    if (section.getAttribute('data-mounted') === 'true') return;
+    const catId = section.getAttribute('data-category');
+    if (!catId) return;
+    const list = section.querySelector('.tool__cards');
+    if (!(list instanceof HTMLElement)) return;
+    const catalog = catalogByCategory.get(catId) ?? [];
+    const fragment = document.createDocumentFragment();
+    for (const data of catalog) {
+      const card = createCardFromTemplate(data);
+      fragment.appendChild(card);
+    }
+    list.appendChild(fragment);
+    section.setAttribute('data-mounted', 'true');
+    for (const card of list.querySelectorAll('.tool-card')) {
+      if (card instanceof HTMLElement) {
+        registerCard(card);
+        // Apply current input if the visitor has already typed.
+        if (input.value.length > 0) {
+          updateCard(card, input.value);
+        }
+      }
+    }
+  }
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const section = entry.target;
+        if (!(section instanceof HTMLElement)) continue;
+        if (section.getAttribute('data-mounted') === 'true') {
+          sectionObserver.unobserve(section);
+          continue;
+        }
+        mountSection(section);
+        sectionObserver.unobserve(section);
+      }
+    },
+    { root: null, rootMargin: SECTION_ROOT_MARGIN, threshold: 0 },
+  );
+
+  // Register the first section's server-rendered cards; observe the rest to mount.
+  for (const section of sections) {
+    if (section.getAttribute('data-mounted') === 'true') {
+      for (const card of section.querySelectorAll('.tool-card')) {
+        if (card instanceof HTMLElement) registerCard(card);
+      }
+    } else {
+      sectionObserver.observe(section);
+    }
   }
 
   /**
@@ -308,7 +525,8 @@ function initTool() {
     if (inputCpEl) {
       inputCpEl.textContent = String(countCharacters(text).codePoints);
     }
-    for (const card of cards) {
+    // Live registry — every mounted card, never a frozen NodeList.
+    for (const card of cardById.values()) {
       card.setAttribute('data-needs-update', 'true');
     }
     for (const id of visibleIds) {
@@ -318,7 +536,29 @@ function initTool() {
   }
 
   /**
-   * Chip filter AND search query. Both must pass for a card to show.
+   * Chip and search decided from catalogue data, not from mounted DOM.
+   * @param {CardData} data
+   * @param {string} query
+   * @returns {boolean}
+   */
+  function cardMatches(data, query) {
+    let chipOk = false;
+    if (activeFilter === 'all') {
+      chipOk = true;
+    } else if (activeFilter === 'favourites') {
+      chipOk = favourites.has(data.id);
+    } else if (activeFilter === 'recent') {
+      chipOk = recents.includes(data.id);
+    } else {
+      chipOk = data.category === activeFilter;
+    }
+    const searchOk = query === '' || data.searchName.includes(query);
+    return chipOk && searchOk;
+  }
+
+  /**
+   * Chip filter AND search query. Matching is decided from data lists.
+   * A match inside an unmounted section mounts that section.
    * @returns {void}
    */
   function applyFilter() {
@@ -332,32 +572,32 @@ function initTool() {
 
     for (const section of sections) {
       const catId = section.getAttribute('data-category');
-      /** @type {NodeListOf<HTMLElement>} */
-      const sectionCards = section.querySelectorAll('.tool-card');
-      let visibleInSection = 0;
+      if (!catId) continue;
+      const catalog = catalogByCategory.get(catId) ?? [];
+      /** @type {CardData[]} */
+      const matching = [];
+      for (const data of catalog) {
+        if (!cardMatches(data, query)) continue;
+        matching.push(data);
+        if (activeFilter === 'favourites') anyFavMatch = true;
+        if (activeFilter === 'recent') anyRecentMatch = true;
+        anyShown = true;
+      }
 
-      for (const card of sectionCards) {
-        const isFav = card.getAttribute('data-favourite') === 'true';
-        const name = card.getAttribute('data-card-name') || '';
-        const id = card.getAttribute('data-card-id') || '';
-        let chipOk = false;
-        if (activeFilter === 'all') {
-          chipOk = true;
-        } else if (activeFilter === 'favourites') {
-          chipOk = isFav;
-          if (chipOk) anyFavMatch = true;
-        } else if (activeFilter === 'recent') {
-          chipOk = recents.includes(id);
-          if (chipOk) anyRecentMatch = true;
-        } else {
-          chipOk = catId === activeFilter;
-        }
-        const searchOk = query === '' || name.includes(query);
-        const show = chipOk && searchOk;
-        card.hidden = !show;
-        if (show) {
-          visibleInSection += 1;
-          anyShown = true;
+      if (matching.length > 0 && section.getAttribute('data-mounted') !== 'true') {
+        mountSection(section);
+      }
+
+      const visibleInSection = matching.length;
+      const matchIds = new Set(matching.map((d) => d.id));
+
+      if (section.getAttribute('data-mounted') === 'true') {
+        for (const data of catalog) {
+          const card = cardById.get(data.id);
+          if (!(card instanceof HTMLElement)) continue;
+          const show = matchIds.has(data.id);
+          card.hidden = !show;
+          if (show) ensureCardFresh(card, input.value);
         }
       }
 
@@ -457,6 +697,7 @@ function initTool() {
     if (!(button instanceof HTMLButtonElement)) return;
     const card = button.closest('.tool-card');
     if (!(card instanceof HTMLElement)) return;
+    ensureCardFresh(card, input.value);
     const output = card.querySelector('[data-output]');
     if (!(output instanceof HTMLElement)) return;
     const nameEl = card.querySelector('.tool-card__name');

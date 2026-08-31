@@ -346,6 +346,284 @@ export const decorations: Decoration[] = [
     suffix: '▁',
     caveat: null,
   },
+  // CJK Symbols and Punctuation block (U+3000-U+303F).
+  // Prefix U+3008 LEFT ANGLE BRACKET, suffix U+3009 RIGHT ANGLE BRACKET.
+  // Fullwidth forms — visibly wider than the narrow mathematical pair
+  // U+27E8/U+27E9 in 'angle-brackets'.
+  {
+    id: 'wide-angle-brackets',
+    name: 'Wide Angle Brackets',
+    prefix: '〈',
+    suffix: '〉',
+    caveat: null,
+  },
+  // CJK Symbols and Punctuation block (U+3000-U+303F).
+  // Prefix U+300A LEFT DOUBLE ANGLE BRACKET, suffix U+300B RIGHT DOUBLE ANGLE BRACKET.
+  // Fullwidth forms — visibly wider than the narrow mathematical pair
+  // U+27EA/U+27EB in 'double-angle'.
+  {
+    id: 'wide-double-angle-brackets',
+    name: 'Wide Double Angle Brackets',
+    prefix: '《',
+    suffix: '》',
+    caveat: null,
+  },
+  // CJK Symbols and Punctuation block (U+3000-U+303F).
+  // Prefix U+3014 LEFT TORTOISE SHELL BRACKET, suffix U+3015 RIGHT TORTOISE SHELL BRACKET.
+  // Single-line strokes — 'tortoise-shell' (U+3018/U+3019) is the
+  // double-lined white form.
+  {
+    id: 'plain-tortoise-shell',
+    name: 'Plain Tortoise Shell',
+    prefix: '〔',
+    suffix: '〕',
+    caveat: null,
+  },
+  // CJK Symbols and Punctuation block (U+3000-U+303F).
+  // Prefix U+301A LEFT WHITE SQUARE BRACKET, suffix U+301B RIGHT WHITE SQUARE BRACKET.
+  // Fullwidth forms — visibly wider than the narrow mathematical pair
+  // U+27E6/U+27E7 in 'white-square-brackets'.
+  {
+    id: 'wide-white-square-brackets',
+    name: 'Wide White Square Brackets',
+    prefix: '〚',
+    suffix: '〛',
+    caveat: null,
+  },
+  // CJK Symbols and Punctuation block (U+3000-U+303F).
+  // Prefix U+301C WAVE DASH, suffix U+301C.
+  {
+    id: 'wave-dash',
+    name: 'Wave Dash',
+    prefix: '〜',
+    suffix: '〜',
+    caveat: null,
+  },
+  // CJK Symbols and Punctuation block (U+3000-U+303F).
+  // Prefix U+301D REVERSED DOUBLE PRIME QUOTATION MARK, suffix U+301E DOUBLE PRIME QUOTATION MARK.
+  {
+    id: 'double-prime-quotes',
+    name: 'Double Prime Quotes',
+    prefix: '〝',
+    suffix: '〞',
+    caveat: null,
+  },
+  // General Punctuation block (U+2000-U+206F).
+  // Prefix U+2035 REVERSED PRIME, suffix U+2032 PRIME.
+  {
+    id: 'primes',
+    name: 'Primes',
+    prefix: '‵',
+    suffix: '′',
+    caveat: null,
+  },
+  // General Punctuation block (U+2000-U+206F).
+  // Prefix U+2036 REVERSED DOUBLE PRIME, suffix U+2033 DOUBLE PRIME.
+  {
+    id: 'double-primes',
+    name: 'Double Primes',
+    prefix: '‶',
+    suffix: '″',
+    caveat: null,
+  },
+  // General Punctuation block (U+2000-U+206F).
+  // Prefix U+2020 DAGGER, suffix U+2020.
+  {
+    id: 'dagger',
+    name: 'Dagger',
+    prefix: '†',
+    suffix: '†',
+    caveat: null,
+  },
+  // General Punctuation block (U+2000-U+206F).
+  // Prefix U+2021 DOUBLE DAGGER, suffix U+2021.
+  {
+    id: 'double-dagger',
+    name: 'Double Dagger',
+    prefix: '‡',
+    suffix: '‡',
+    caveat: null,
+  },
+  // Latin-1 Supplement block (U+0080-U+00FF).
+  // Prefix U+00A7 SECTION SIGN, suffix U+00A7.
+  {
+    id: 'section-sign',
+    name: 'Section Sign',
+    prefix: '§',
+    suffix: '§',
+    caveat: null,
+  },
+  // Latin-1 Supplement block (U+0080-U+00FF).
+  // Prefix U+00B6 PILCROW SIGN, suffix U+00B6.
+  {
+    id: 'pilcrow',
+    name: 'Pilcrow',
+    prefix: '¶',
+    suffix: '¶',
+    caveat: null,
+  },
+  // General Punctuation block (U+2000-U+206F).
+  // Prefix U+2045 LEFT SQUARE BRACKET WITH QUILL, suffix U+2046 RIGHT SQUARE BRACKET WITH QUILL.
+  {
+    id: 'square-brackets-quill',
+    name: 'Square Brackets with Quill',
+    prefix: '⁅',
+    suffix: '⁆',
+    caveat: null,
+  },
+  // General Punctuation block (U+2000-U+206F).
+  // Prefix U+204A TIRONIAN SIGN ET, suffix U+204A.
+  {
+    id: 'tironian-et',
+    name: 'Tironian Et',
+    prefix: '⁊',
+    suffix: '⁊',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2766 FLORAL HEART, suffix U+2766.
+  {
+    id: 'floral-heart',
+    name: 'Floral Heart',
+    prefix: '❦',
+    suffix: '❦',
+    caveat: null,
+  },
+  // Miscellaneous Symbols block (U+2600-U+26FF).
+  // Prefix U+2690 WHITE FLAG, suffix U+2691 BLACK FLAG.
+  {
+    id: 'flags',
+    name: 'Flags',
+    prefix: '⚐',
+    suffix: '⚑',
+    caveat: null,
+  },
+  // General Punctuation block (U+2000-U+206F).
+  // Prefix U+203B REFERENCE MARK, suffix U+203B.
+  {
+    id: 'reference-mark',
+    name: 'Reference Mark',
+    prefix: '※',
+    suffix: '※',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25C6 BLACK DIAMOND, suffix U+25C6.
+  {
+    id: 'black-diamond',
+    name: 'Black Diamond',
+    prefix: '◆',
+    suffix: '◆',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25C7 WHITE DIAMOND, suffix U+25C7.
+  {
+    id: 'white-diamond',
+    name: 'White Diamond',
+    prefix: '◇',
+    suffix: '◇',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25C8 WHITE DIAMOND CONTAINING BLACK SMALL DIAMOND, suffix U+25C8.
+  {
+    id: 'diamond-in-diamond',
+    name: 'Diamond in Diamond',
+    prefix: '◈',
+    suffix: '◈',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25A0 BLACK SQUARE, suffix U+25A0.
+  {
+    id: 'black-square',
+    name: 'Black Square',
+    prefix: '■',
+    suffix: '■',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25A1 WHITE SQUARE, suffix U+25A1.
+  {
+    id: 'white-square',
+    name: 'White Square',
+    prefix: '□',
+    suffix: '□',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25B2 BLACK UP-POINTING TRIANGLE, suffix U+25B2.
+  {
+    id: 'up-triangle',
+    name: 'Up Triangle',
+    prefix: '▲',
+    suffix: '▲',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25B3 WHITE UP-POINTING TRIANGLE, suffix U+25B3.
+  {
+    id: 'white-up-triangle',
+    name: 'White Up Triangle',
+    prefix: '△',
+    suffix: '△',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25BC BLACK DOWN-POINTING TRIANGLE, suffix U+25BC.
+  {
+    id: 'down-triangle',
+    name: 'Down Triangle',
+    prefix: '▼',
+    suffix: '▼',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25BD WHITE DOWN-POINTING TRIANGLE, suffix U+25BD.
+  {
+    id: 'white-down-triangle',
+    name: 'White Down Triangle',
+    prefix: '▽',
+    suffix: '▽',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25CB WHITE CIRCLE, suffix U+25CB.
+  {
+    id: 'white-circle',
+    name: 'White Circle',
+    prefix: '○',
+    suffix: '○',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25CF BLACK CIRCLE, suffix U+25CF.
+  {
+    id: 'black-circle',
+    name: 'Black Circle',
+    prefix: '●',
+    suffix: '●',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2732 OPEN CENTRE ASTERISK, suffix U+2732.
+  {
+    id: 'open-asterisk',
+    name: 'Open Asterisk',
+    prefix: '✲',
+    suffix: '✲',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2735 EIGHT POINTED PINWHEEL STAR, suffix U+2735.
+  {
+    id: 'pinwheel-star-eight',
+    name: 'Eight Pointed Pinwheel Star',
+    prefix: '✵',
+    suffix: '✵',
+    caveat: null,
+  },
 ];
 
 /**

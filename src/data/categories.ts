@@ -6,7 +6,8 @@ export interface Category {
 export const categories: Category[] = [
   { id: 'cursive', name: 'Cursive & Script' },
   { id: 'bold', name: 'Bold' },
-  { id: 'bubble', name: 'Bubble' },
+  { id: 'bubble', name: 'Bubble & Squared' },
   { id: 'gothic', name: 'Gothic' },
   { id: 'other', name: 'Other' },
+  { id: 'small', name: 'Small & Tiny' },
 ];

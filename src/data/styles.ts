@@ -24,6 +24,11 @@ export interface Style {
    */
   caveat: string | null;
   /**
+   * Sentence-length caveat under the card output. null = no note.
+   * Short badge text lives in `caveat`; full Unicode facts live here.
+   */
+  caveatNote?: string | null;
+  /**
    * Quiet case-fold disclosure when one case is mapped onto the other.
    * null = full alphabet, no note.
    */
@@ -167,7 +172,9 @@ export const styles: Style[] = [
     digits: CIRCLED_DIGITS,
     risk: 'uneven',
     // U+24C2 capital M has emoji presentation (metro sign).
-    caveat: 'Capital M may show as emoji',
+    caveat: 'Emoji',
+    caveatNote:
+      'Unicode records the circled capital M at U+24C2 as an emoji character, so some apps draw it as a coloured symbol instead of a letter.',
     caseNote: null,
   },
   {
@@ -301,6 +308,159 @@ export const styles: Style[] = [
     digits: digitRange(0xff10),
     risk: null,
     caveat: null,
+    caseNote: null,
+  },
+
+  // --- small ---
+  // Phonetic Extensions (U+1D00-U+1D7F), Latin Extended-B, IPA Extensions and
+  // Latin Extended Additional. Small capital letters, all Basic Multilingual
+  // Plane. Both input cases map to these small-capital forms. Code points
+  // verified assigned against the Unicode charts. x has NO small-capital form,
+  // so x and X stay plain. Digits have no small-capital form, stay plain.
+  {
+    id: 'small-caps',
+    name: 'Small Caps',
+    category: 'small',
+    uppercaseBase: null,
+    lowercaseBase: null,
+    substitutions: {
+      A: 0x1d00, a: 0x1d00,
+      B: 0x0299, b: 0x0299,
+      C: 0x1d04, c: 0x1d04,
+      D: 0x1d05, d: 0x1d05,
+      E: 0x1d07, e: 0x1d07,
+      F: 0xa730, f: 0xa730,
+      G: 0x0262, g: 0x0262,
+      H: 0x029c, h: 0x029c,
+      I: 0x026a, i: 0x026a,
+      J: 0x1d0a, j: 0x1d0a,
+      K: 0x1d0b, k: 0x1d0b,
+      L: 0x029f, l: 0x029f,
+      M: 0x1d0d, m: 0x1d0d,
+      N: 0x0274, n: 0x0274,
+      O: 0x1d0f, o: 0x1d0f,
+      P: 0x1d18, p: 0x1d18,
+      Q: 0xa7af, q: 0xa7af,
+      R: 0x0280, r: 0x0280,
+      S: 0xa731, s: 0xa731,
+      T: 0x1d1b, t: 0x1d1b,
+      U: 0x1d1c, u: 0x1d1c,
+      V: 0x1d20, v: 0x1d20,
+      W: 0x1d21, w: 0x1d21,
+      Y: 0x028f, y: 0x028f,
+      Z: 0x1d22, z: 0x1d22,
+    },
+    digits: null,
+    risk: null,
+    caveat: 'Partial',
+    caveatNote:
+      'Unicode has no small-capital X, so x stays plain. Capitals and lowercase both appear as small capitals.',
+    caseNote: null,
+  },
+  // Phonetic Extensions, Superscripts and Subscripts (U+2070-U+209C), and
+  // Spacing Modifier Letters. Superscript modifier letters, all BMP. Both input
+  // cases map to these. Code points verified assigned against the Unicode
+  // charts. q has no superscript form, stays plain.
+  {
+    id: 'superscript',
+    name: 'Superscript',
+    category: 'small',
+    uppercaseBase: null,
+    lowercaseBase: null,
+    substitutions: {
+      A: 0x1d43, a: 0x1d43,
+      B: 0x1d47, b: 0x1d47,
+      C: 0x1d9c, c: 0x1d9c,
+      D: 0x1d48, d: 0x1d48,
+      E: 0x1d49, e: 0x1d49,
+      F: 0x1da0, f: 0x1da0,
+      G: 0x1d4d, g: 0x1d4d,
+      H: 0x02b0, h: 0x02b0,
+      I: 0x2071, i: 0x2071,
+      J: 0x02b2, j: 0x02b2,
+      K: 0x1d4f, k: 0x1d4f,
+      L: 0x02e1, l: 0x02e1,
+      M: 0x1d50, m: 0x1d50,
+      N: 0x207f, n: 0x207f,
+      O: 0x1d52, o: 0x1d52,
+      P: 0x1d56, p: 0x1d56,
+      R: 0x02b3, r: 0x02b3,
+      S: 0x02e2, s: 0x02e2,
+      T: 0x1d57, t: 0x1d57,
+      U: 0x1d58, u: 0x1d58,
+      V: 0x1d5b, v: 0x1d5b,
+      W: 0x02b7, w: 0x02b7,
+      X: 0x02e3, x: 0x02e3,
+      Y: 0x02b8, y: 0x02b8,
+      Z: 0x1dbb, z: 0x1dbb,
+    },
+    digits: [
+      String.fromCodePoint(0x2070),
+      String.fromCodePoint(0x00b9),
+      String.fromCodePoint(0x00b2),
+      String.fromCodePoint(0x00b3),
+      ...Array.from({ length: 6 }, (_, i) => String.fromCodePoint(0x2074 + i)),
+    ],
+    risk: null,
+    caveat: 'Partial',
+    caveatNote:
+      'Unicode has no superscript q, so q stays plain. Raised letters are lowercase forms, so capitals are not preserved.',
+    caseNote: null,
+  },
+  // Superscripts and Subscripts (U+2070-U+209C), Phonetic Extensions and Latin
+  // Extended-C. Subscript modifier letters, all BMP. Both input cases map to
+  // these. Code points verified assigned against the Unicode charts. Only the
+  // seventeen letters listed exist; b, c, d, f, g, q, w, y and z stay plain.
+  {
+    id: 'subscript',
+    name: 'Subscript',
+    category: 'small',
+    uppercaseBase: null,
+    lowercaseBase: null,
+    substitutions: {
+      A: 0x2090, a: 0x2090,
+      E: 0x2091, e: 0x2091,
+      H: 0x2095, h: 0x2095,
+      I: 0x1d62, i: 0x1d62,
+      J: 0x2c7c, j: 0x2c7c,
+      K: 0x2096, k: 0x2096,
+      L: 0x2097, l: 0x2097,
+      M: 0x2098, m: 0x2098,
+      N: 0x2099, n: 0x2099,
+      O: 0x2092, o: 0x2092,
+      P: 0x209a, p: 0x209a,
+      R: 0x1d63, r: 0x1d63,
+      S: 0x209b, s: 0x209b,
+      T: 0x209c, t: 0x209c,
+      U: 0x1d64, u: 0x1d64,
+      V: 0x1d65, v: 0x1d65,
+      X: 0x2093, x: 0x2093,
+    },
+    digits: digitRange(0x2080),
+    risk: null,
+    caveat: 'Partial',
+    caveatNote:
+      'Nine letters have no subscript form in Unicode, so b, c, d, f, g, q, w, y and z stay plain. Lowered letters are lowercase forms, so capitals are not preserved.',
+    caseNote: null,
+  },
+
+  // --- bubble ---
+  // Enclosed Alphanumeric Supplement (U+1F100-U+1F1FF), squared Latin capital
+  // letters A-Z at U+1F130-U+1F149. Squared capitals only; both input cases map
+  // to these. Code points verified assigned and free of emoji presentation
+  // against the Unicode charts (not the negative squared range U+1F170-).
+  {
+    id: 'squared',
+    name: 'Squared',
+    category: 'bubble',
+    uppercaseBase: 0x1f130,
+    lowercaseBase: null,
+    substitutions: {},
+    digits: null,
+    risk: null,
+    caveat: 'Caps only',
+    caveatNote:
+      "Unicode's squared letters are capitals only, so lowercase letters appear as squared capitals.",
     caseNote: null,
   },
 ];

@@ -59,20 +59,48 @@ function checkOne(style: Style, plain: string, generated: string, kind: CharKind
       plain,
     );
     const declaredByCaveat = style.caveat !== null;
+    const declaredByCaveatNote = style.caveatNote != null && style.caveatNote !== '';
     const declaredByCaseNote = style.caseNote !== null;
     const declaredDigitPassthrough = kind === 'digit' && style.digits === null;
 
     if (
       !declaredBySubstitution &&
       !declaredByCaveat &&
+      !declaredByCaveatNote &&
       !declaredByCaseNote &&
       !declaredDigitPassthrough
     ) {
       failures.push({
         subject: style.id,
-        cause: `${kind} "${plain}" passed through unchanged and is not declared in substitutions, caveat, caseNote, or digits:null`,
+        cause: `${kind} "${plain}" passed through unchanged and is not declared in substitutions, caveat, caveatNote, caseNote, or digits:null`,
       });
     }
+  }
+}
+
+const EMOJI_PRESENTATION = /\p{Emoji_Presentation}/u;
+const EMOJI = /\p{Emoji}/u;
+
+interface EmojiPropertyFinding {
+  codePointHex: string;
+  ch: string;
+  subject: string;
+}
+
+const emojiPropertyFindings: EmojiPropertyFinding[] = [];
+
+/** Report-only: Emoji property without Emoji_Presentation, excluding ASCII. */
+function reportEmojiProperty(ch: string, subject: string): void {
+  const cp = ch.codePointAt(0);
+  if (cp === undefined || cp < 0x80) return;
+  if (EMOJI.test(ch) && !EMOJI_PRESENTATION.test(ch)) {
+    emojiPropertyFindings.push({ codePointHex: codePointHex(ch), ch, subject });
+  }
+}
+
+function scanText(text: string, subject: string): void {
+  for (const ch of text) {
+    reportEmojiProperty(ch, subject);
   }
 }
 
@@ -82,6 +110,7 @@ for (const style of styles as Style[]) {
   console.log(`Category      : ${style.category}`);
   console.log(`Risk          : ${style.risk ?? 'unset'}`);
   console.log(`Caveat        : ${style.caveat ?? 'none'}`);
+  console.log(`Caveat note   : ${style.caveatNote ?? 'none'}`);
   console.log(`Case note     : ${style.caseNote ?? 'none'}`);
   console.log('='.repeat(70));
 
@@ -90,6 +119,7 @@ for (const style of styles as Style[]) {
     const generated = applyStyle(plain, style);
     console.log(`  ${plain} -> ${generated}  (${codePointHex(generated)})`);
     checkOne(style, plain, generated, 'uppercase');
+    scanText(generated, style.id);
   }
 
   console.log('Lowercase a-z:');
@@ -97,6 +127,7 @@ for (const style of styles as Style[]) {
     const generated = applyStyle(plain, style);
     console.log(`  ${plain} -> ${generated}  (${codePointHex(generated)})`);
     checkOne(style, plain, generated, 'lowercase');
+    scanText(generated, style.id);
   }
 
   console.log('Digits 0-9:');
@@ -104,6 +135,7 @@ for (const style of styles as Style[]) {
     const generated = applyStyle(plain, style);
     console.log(`  ${plain} -> ${generated}  (${codePointHex(generated)})`);
     checkOne(style, plain, generated, 'digit');
+    scanText(generated, style.id);
   }
 
   const overrideLetters = Object.keys(style.substitutions);
@@ -133,7 +165,6 @@ for (const style of styles as Style[]) {
 // Decorations are wrappers, not styles. Every prefix and suffix character is
 // printed with its code point; a character carrying emoji presentation must be
 // declared in the decoration's caveat (see generator.mdc).
-const EMOJI_PRESENTATION = /\p{Emoji_Presentation}/u;
 
 for (const decoration of decorations) {
   console.log('='.repeat(70));
@@ -148,6 +179,7 @@ for (const decoration of decorations) {
     for (const ch of text) {
       const emojiNote = EMOJI_PRESENTATION.test(ch) ? '  [emoji presentation]' : '';
       console.log(`  ${part}: ${ch}  (${codePointHex(ch)})${emojiNote}`);
+      reportEmojiProperty(ch, decoration.id);
 
       if (ch.codePointAt(0) === REPLACEMENT_CHARACTER_CODE_POINT) {
         failures.push({
@@ -171,6 +203,15 @@ for (const decoration of decorations) {
   );
   console.log('');
 }
+
+console.log('='.repeat(70));
+console.log('EMOJI PROPERTY REPORT');
+console.log('Characters with Emoji property but not Emoji_Presentation (non-ASCII only):');
+for (const finding of emojiPropertyFindings) {
+  console.log(`  ${finding.codePointHex}  ${finding.ch}  ${finding.subject}`);
+}
+console.log(`Total: ${emojiPropertyFindings.length}`);
+console.log('='.repeat(70));
 
 console.log('='.repeat(70));
 if (failures.length === 0) {

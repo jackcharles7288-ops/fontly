@@ -97,6 +97,155 @@ export const decorations: Decoration[] = [
     suffix: '\u2501\u2501',
     caveat: null,
   },
+  // CJK Symbols and Punctuation block (U+3000-U+303F).
+  // Prefix U+300C LEFT CORNER BRACKET, suffix U+300D RIGHT CORNER BRACKET.
+  {
+    id: 'corner-brackets',
+    name: 'Corner Brackets',
+    prefix: '「',
+    suffix: '」',
+    caveat: null,
+  },
+  // CJK Symbols and Punctuation block (U+3000-U+303F).
+  // Prefix U+3016 LEFT WHITE LENTICULAR BRACKET, suffix U+3017 RIGHT WHITE
+  // LENTICULAR BRACKET.
+  {
+    id: 'white-lenticular',
+    name: 'White Lenticular',
+    prefix: '〖',
+    suffix: '〗',
+    caveat: null,
+  },
+  // CJK Symbols and Punctuation block (U+3000-U+303F).
+  // Prefix U+3018 LEFT WHITE TORTOISE SHELL BRACKET, suffix U+3019 RIGHT WHITE
+  // TORTOISE SHELL BRACKET.
+  {
+    id: 'tortoise-shell',
+    name: 'Tortoise Shell',
+    prefix: '〘',
+    suffix: '〙',
+    caveat: null,
+  },
+  // Miscellaneous Mathematical Symbols-A block (U+27C0-U+27EF).
+  // Prefix U+27E8 MATHEMATICAL LEFT ANGLE BRACKET, suffix U+27E9 MATHEMATICAL
+  // RIGHT ANGLE BRACKET.
+  {
+    id: 'angle-brackets',
+    name: 'Angle Brackets',
+    prefix: '⟨',
+    suffix: '⟩',
+    caveat: null,
+  },
+  // Miscellaneous Mathematical Symbols-A block (U+27C0-U+27EF).
+  // Prefix U+27EA MATHEMATICAL LEFT DOUBLE ANGLE BRACKET, suffix U+27EB
+  // MATHEMATICAL RIGHT DOUBLE ANGLE BRACKET.
+  {
+    id: 'double-angle',
+    name: 'Double Angle',
+    prefix: '⟪',
+    suffix: '⟫',
+    caveat: null,
+  },
+  // Miscellaneous Technical block (U+2300-U+23FF).
+  // Prefix U+2308 LEFT CEILING, suffix U+2309 RIGHT CEILING.
+  {
+    id: 'ceiling',
+    name: 'Ceiling',
+    prefix: '⌈',
+    suffix: '⌉',
+    caveat: null,
+  },
+  // Miscellaneous Technical block (U+2300-U+23FF).
+  // Prefix U+230A LEFT FLOOR, suffix U+230B RIGHT FLOOR.
+  {
+    id: 'floor',
+    name: 'Floor',
+    prefix: '⌊',
+    suffix: '⌋',
+    caveat: null,
+  },
+  // Miscellaneous Symbols block (U+2600-U+26FF).
+  // Prefix U+2606 WHITE STAR, suffix U+2606.
+  {
+    id: 'hollow-star',
+    name: 'Hollow Star',
+    prefix: '☆',
+    suffix: '☆',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2729 STRESS OUTLINED WHITE STAR, suffix U+2729.
+  {
+    id: 'open-sparkle',
+    name: 'Open Sparkle',
+    prefix: '✩',
+    suffix: '✩',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2730 SHADOWED WHITE STAR, suffix U+2730.
+  {
+    id: 'bold-sparkle',
+    name: 'Bold Sparkle',
+    prefix: '✰',
+    suffix: '✰',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+272F PINWHEEL STAR, suffix U+272F.
+  {
+    id: 'pinwheel-star',
+    name: 'Pinwheel Star',
+    prefix: '✯',
+    suffix: '✯',
+    caveat: null,
+  },
+  // Miscellaneous Symbols block (U+2600-U+26FF).
+  // Prefix U+2661 WHITE HEART SUIT, suffix U+2661. The outline heart suit, not
+  // the emoji red heart U+2764.
+  {
+    id: 'hollow-heart',
+    name: 'Hollow Heart',
+    prefix: '♡',
+    suffix: '♡',
+    caveat: null,
+  },
+  // Buginese block (U+1A00-U+1A1F).
+  // Prefix U+1A12 BUGINESE LETTER LEBA, suffix U+1A12.
+  {
+    id: 'wave',
+    name: 'Wave',
+    prefix: 'ᨒ',
+    suffix: 'ᨒ',
+    caveat: null,
+  },
+  // Mathematical Operators block (U+2200-U+22FF).
+  // Prefix U+224B TRIPLE TILDE, suffix U+224B.
+  {
+    id: 'triple-tilde',
+    name: 'Triple Tilde',
+    prefix: '≋',
+    suffix: '≋',
+    caveat: null,
+  },
+  // Mathematical Operators block (U+2200-U+22FF).
+  // Prefix U+22C6 STAR OPERATOR, suffix U+22C6.
+  {
+    id: 'star-operator',
+    name: 'Star Operator',
+    prefix: '⋆',
+    suffix: '⋆',
+    caveat: null,
+  },
+  // CJK Unified Ideographs block (U+4E00-U+9FFF).
+  // Prefix U+5F61, suffix U+5F61. A Han ideograph used decoratively as wings.
+  {
+    id: 'gaming-wings',
+    name: 'Gaming Wings',
+    prefix: '彡',
+    suffix: '彡',
+    caveat: null,
+  },
 ];
 
 /**

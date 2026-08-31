@@ -33,6 +33,7 @@ interface Card {
   output: string;
   utf16Length: number;
   caveat: string | null;
+  caveatNote: string | null;
   caseNote: string | null;
   digitsPassThrough: boolean;
 }
@@ -70,6 +71,7 @@ const styleSections: Section[] = toolCategories.map((id) => {
           output,
           utf16Length: countCharacters(output).utf16Length,
           caveat: style.caveat,
+          caveatNote: style.caveatNote ?? null,
           caseNote: style.caseNote,
           digitsPassThrough: style.digits === null,
         };
@@ -93,6 +95,7 @@ const decoratedSection: Section = {
       output,
       utf16Length: countCharacters(output).utf16Length,
       caveat: decoration.caveat,
+      caveatNote: null,
       caseNote: null,
       digitsPassThrough: false,
     };
@@ -328,6 +331,7 @@ const filterChips = styleSections
                 </p>
               ) : null}
               {card.caseNote ? <p class="tool-card__case-note">{card.caseNote}</p> : null}
+              {card.caveatNote ? <p class="tool-card__caveat-note">{card.caveatNote}</p> : null}
             </li>
           ))}
         </ul>

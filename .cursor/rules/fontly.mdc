@@ -57,13 +57,34 @@ including the ones that fail. Every phase report must state the measured
 CLS and INP numbers, or state plainly that they were not measured and why.
 
 - JavaScript: under 15 KB gzipped for the whole tool
-- CSS: under 15 KB gzipped, critical CSS inlined
+- CSS: under 15 KB gzipped, critical CSS inlined (`build.inlineStylesheets:
+  'always'` in astro.config.mjs since d64d81b; no .css file is emitted;
+  PageSpeed's Render-blocking requests insight disappeared as a result — do
+  not reverse without a measured regression)
+- HTML: under 25 KB gzipped per page, and raw HTML under 200 KB. Currently
+  10 KB gzipped and 87 KB raw at 77 cards. Raw size matters as much as
+  gzipped because parse work is done on uncompressed bytes.
 - Zero web font requests
 - Zero third-party requests on first load
 - LCP element is server-rendered text or cards, never an image
 - CLS exactly 0
 - INP under 200 ms while typing, measured at 4x CPU throttling
 - Roughly 1,500 DOM nodes per page or fewer
+
+### Measurement rules
+
+- Cold-load scores come from pagespeed.web.dev only. Local Lighthouse in
+  DevTools has been retired on this project after readings of 73, 79, 81, 63
+  and 53 on builds that PageSpeed scored 99 and 100. It is not comparable and
+  must not be quoted.
+- All gzipped sizes come from `scripts/measure-assets.cjs` and no other
+  tool. Two compressors produced 9,991 and 10,238 bytes for the same file,
+  so figures from different tools cannot be compared. Record raw bytes
+  alongside gzipped, because raw is tool-independent.
+- Never count a bare class name in built HTML. The stylesheet is inlined, so
+  a bare class name also matches its own CSS selector. Count
+  `class="the-name"` instead. Attribute counts such as `data-card-id` are
+  unaffected.
 
 Field data is what ranks, not Lighthouse. Google uses real Chrome visits
 over a rolling 28-day window at the 75th percentile. Do not chase a

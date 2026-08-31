@@ -186,7 +186,7 @@ export const styles: Style[] = [
     substitutions: {},
     digits: null,
     risk: null,
-    caveat: null,
+    caveat: 'Lowercase only',
     caseNote: 'Capitals fold to lowercase',
   },
   {
@@ -198,7 +198,7 @@ export const styles: Style[] = [
     substitutions: {},
     digits: null,
     risk: null,
-    caveat: null,
+    caveat: 'Caps only',
     caseNote: 'Lowercase folds to capitals',
   },
 

@@ -246,6 +246,106 @@ export const decorations: Decoration[] = [
     suffix: '彡',
     caveat: null,
   },
+  // Miscellaneous Mathematical Symbols-A block (U+27C0-U+27EF).
+  // Prefix U+27E6 MATHEMATICAL LEFT WHITE SQUARE BRACKET, suffix U+27E7
+  // MATHEMATICAL RIGHT WHITE SQUARE BRACKET.
+  {
+    id: 'white-square-brackets',
+    name: 'White Square Brackets',
+    prefix: '⟦',
+    suffix: '⟧',
+    caveat: null,
+  },
+  // Miscellaneous Mathematical Symbols-B block (U+2980-U+29FF).
+  // Prefix U+2985 LEFT WHITE PARENTHESIS, suffix U+2986 RIGHT WHITE PARENTHESIS.
+  {
+    id: 'double-parens',
+    name: 'Double Parentheses',
+    prefix: '⦅',
+    suffix: '⦆',
+    caveat: null,
+  },
+  // General Punctuation block (U+2000-U+206F).
+  // Prefix U+2042 ASTERISM, suffix U+2042.
+  {
+    id: 'asterism',
+    name: 'Asterism',
+    prefix: '⁂',
+    suffix: '⁂',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2756 BLACK DIAMOND MINUS WHITE X, suffix U+2756.
+  {
+    id: 'diamond-x',
+    name: 'Diamond',
+    prefix: '❖',
+    suffix: '❖',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2724 HEAVY FOUR BALLOON-SPOKED ASTERISK, suffix U+2724.
+  {
+    id: 'balloon-asterisk',
+    name: 'Balloon Asterisk',
+    prefix: '✤',
+    suffix: '✤',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2725 FOUR CLUB-SPOKED ASTERISK, suffix U+2725.
+  {
+    id: 'club-asterisk',
+    name: 'Club Asterisk',
+    prefix: '✥',
+    suffix: '✥',
+    caveat: null,
+  },
+  // Thai block (U+0E00-U+0E7F).
+  // Prefix U+0E5B THAI CHARACTER KHOMUT, suffix U+0E5B.
+  {
+    id: 'khomut',
+    name: 'Khomut',
+    prefix: '๛',
+    suffix: '๛',
+    caveat: null,
+  },
+  // Miscellaneous Symbols block (U+2600-U+26FF).
+  // Prefix U+269D OUTLINED WHITE STAR, suffix U+269D.
+  {
+    id: 'outlined-star',
+    name: 'Outlined Star',
+    prefix: '⚝',
+    suffix: '⚝',
+    caveat: null,
+  },
+  // CJK Unified Ideographs block (U+4E00-U+9FFF).
+  // Prefix U+4E42, suffix U+4E42. A Han ideograph used decoratively as a cross.
+  {
+    id: 'cjk-cross',
+    name: 'Cross',
+    prefix: '乂',
+    suffix: '乂',
+    caveat: null,
+  },
+  // Box Drawing block (U+2500-U+257F).
+  // Prefix U+2500 BOX DRAWINGS LIGHT HORIZONTAL, suffix U+2500.
+  {
+    id: 'light-line',
+    name: 'Light Line',
+    prefix: '─',
+    suffix: '─',
+    caveat: null,
+  },
+  // Block Elements block (U+2580-U+259F).
+  // Prefix U+2581 LOWER ONE EIGHTH BLOCK, suffix U+2581.
+  {
+    id: 'low-block',
+    name: 'Low Block',
+    prefix: '▁',
+    suffix: '▁',
+    caveat: null,
+  },
 ];
 
 /**

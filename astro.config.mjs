@@ -7,4 +7,7 @@ export default defineConfig({
   site: 'https://fontly.cool',
   trailingSlash: 'always',
   integrations: [sitemap()],
+  build: {
+    inlineStylesheets: 'always',
+  },
 });

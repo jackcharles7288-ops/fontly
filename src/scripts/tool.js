@@ -476,15 +476,17 @@ function initTool() {
       announce(`Copied ${cardName}`);
       const prev = copyTimers.get(button);
       if (prev !== undefined) clearTimeout(prev);
-      // Class toggle only — button box size is reserved in CSS from first paint.
-      button.classList.add('is-copied');
-      copyTimers.set(
-        button,
-        setTimeout(() => {
-          button.classList.remove('is-copied');
-          copyTimers.delete(button);
-        }, COPY_LABEL_MS),
-      );
+      const useEl = button.querySelector('use');
+      if (useEl instanceof SVGUseElement) {
+        useEl.setAttribute('href', '#icon-done');
+        copyTimers.set(
+          button,
+          setTimeout(() => {
+            useEl.setAttribute('href', '#icon-copy');
+            copyTimers.delete(button);
+          }, COPY_LABEL_MS),
+        );
+      }
     } else {
       announce('Copy failed');
     }

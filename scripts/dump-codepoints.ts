@@ -1,8 +1,10 @@
-// Development-only dump of every decoration character's Unicode properties.
+// Development-only dump of every decoration and effect character's Unicode
+// properties.
 // Prints: code point, character, name, General_Category, Emoji, Emoji_Presentation.
 // Run: npx tsx scripts/dump-codepoints.ts
 
 import { decorations } from '../src/data/decorations.ts';
+import { effects } from '../src/data/effects.ts';
 
 const NAMES: Record<number, string> = {
   0x2727: 'WHITE FOUR POINTED STAR',
@@ -126,6 +128,81 @@ const NAMES: Record<number, string> = {
   0x275e: 'HEAVY DOUBLE COMMA QUOTATION MARK ORNAMENT',
   0x2760: 'HEAVY LOW SINGLE COMMA QUOTATION MARK ORNAMENT',
   0x2761: 'HEAVY LOW DOUBLE COMMA QUOTATION MARK ORNAMENT',
+  0x2e28: 'LEFT DOUBLE PARENTHESIS',
+  0x2e29: 'RIGHT DOUBLE PARENTHESIS',
+  0x2e22: 'TOP LEFT HALF BRACKET',
+  0x2e23: 'TOP RIGHT HALF BRACKET',
+  0x2e24: 'BOTTOM LEFT HALF BRACKET',
+  0x2e25: 'BOTTOM RIGHT HALF BRACKET',
+  0x2e26: 'LEFT SIDEWAYS U BRACKET',
+  0x2e27: 'RIGHT SIDEWAYS U BRACKET',
+  0x2983: 'LEFT WHITE CURLY BRACKET',
+  0x2984: 'RIGHT WHITE CURLY BRACKET',
+  0x2997: 'LEFT BLACK TORTOISE SHELL BRACKET',
+  0x2998: 'RIGHT BLACK TORTOISE SHELL BRACKET',
+  0x298b: 'LEFT SQUARE BRACKET WITH UNDERBAR',
+  0x298c: 'RIGHT SQUARE BRACKET WITH UNDERBAR',
+  0x2619: 'REVERSED ROTATED FLORAL HEART BULLET',
+  0x2767: 'ROTATED FLORAL HEART BULLET',
+  0x261a: 'BLACK LEFT POINTING INDEX',
+  0x261b: 'BLACK RIGHT POINTING INDEX',
+  0x25b8: 'BLACK RIGHT-POINTING SMALL TRIANGLE',
+  0x25c2: 'BLACK LEFT-POINTING SMALL TRIANGLE',
+  0x273d: 'HEAVY TEARDROP-SPOKED ASTERISK',
+  0x273f: 'BLACK FLORETTE',
+  0x2742: 'CIRCLED OPEN CENTRE EIGHT POINTED STAR',
+  0x2745: 'TIGHT TRIFOLIATE SNOWFLAKE',
+  0x2746: 'HEAVY CHEVRON SNOWFLAKE',
+  0x274a: 'EIGHT TEARDROP-SPOKED PROPELLER ASTERISK',
+  0x274d: 'SHADOWED WHITE CIRCLE',
+  0x2751: 'LOWER RIGHT SHADOWED WHITE SQUARE',
+  0x275a: 'HEAVY VERTICAL BAR',
+  0x25c9: 'FISHEYE',
+  0x2664: 'WHITE SPADE SUIT',
+  0x2667: 'WHITE CLUB SUIT',
+  0x2058: 'FOUR DOT PUNCTUATION',
+  0x22c8: 'BOWTIE',
+  0x221e: 'INFINITY',
+  0x0336: 'COMBINING LONG STROKE OVERLAY',
+  0x0335: 'COMBINING SHORT STROKE OVERLAY',
+  0x0338: 'COMBINING LONG SOLIDUS OVERLAY',
+  0x0337: 'COMBINING SHORT SOLIDUS OVERLAY',
+  0x0334: 'COMBINING TILDE OVERLAY',
+  0x0332: 'COMBINING LOW LINE',
+  0x0333: 'COMBINING DOUBLE LOW LINE',
+  0x0305: 'COMBINING OVERLINE',
+  0x033f: 'COMBINING DOUBLE OVERLINE',
+  0x0307: 'COMBINING DOT ABOVE',
+  0x0323: 'COMBINING DOT BELOW',
+  0x0308: 'COMBINING DIAERESIS',
+  0x030a: 'COMBINING RING ABOVE',
+  0x030c: 'COMBINING CARON',
+  0x0301: 'COMBINING ACUTE ACCENT',
+  0x0300: 'COMBINING GRAVE ACCENT',
+  0x033d: 'COMBINING X ABOVE',
+  0x030d: 'COMBINING VERTICAL LINE ABOVE',
+  0x20dd: 'COMBINING ENCLOSING CIRCLE',
+  0x20de: 'COMBINING ENCLOSING SQUARE',
+  0x20df: 'COMBINING ENCLOSING DIAMOND',
+  0x0302: 'COMBINING CIRCUMFLEX ACCENT',
+  0x0303: 'COMBINING TILDE',
+  0x0306: 'COMBINING BREVE',
+  0x0309: 'COMBINING HOOK ABOVE',
+  0x030b: 'COMBINING DOUBLE ACUTE ACCENT',
+  0x030f: 'COMBINING DOUBLE GRAVE ACCENT',
+  0x0311: 'COMBINING INVERTED BREVE',
+  0x0324: 'COMBINING DIAERESIS BELOW',
+  0x0325: 'COMBINING RING BELOW',
+  0x032c: 'COMBINING CARON BELOW',
+  0x032d: 'COMBINING CIRCUMFLEX ACCENT BELOW',
+  0x032e: 'COMBINING BREVE BELOW',
+  0x0330: 'COMBINING TILDE BELOW',
+  0x0353: 'COMBINING X BELOW',
+  0x0359: 'COMBINING ASTERISK BELOW',
+  0x035b: 'COMBINING ZIGZAG ABOVE',
+  0x20d6: 'COMBINING LEFTWARDS ARROW ABOVE',
+  0x20d7: 'COMBINING RIGHTWARDS ARROW ABOVE',
+  0x20e0: 'COMBINING ENCLOSING CIRCLE BACKSLASH',
 };
 
 function gc(ch: string): string {
@@ -162,29 +239,33 @@ function gc(ch: string): string {
   return '??';
 }
 
+function rowFor(ch: string): string {
+  const cp = ch.codePointAt(0)!;
+  const hex = 'U+' + cp.toString(16).toUpperCase().padStart(4, '0');
+  const name = NAMES[cp] ?? '(name not in table)';
+  const category = gc(ch);
+  const emoji = /\p{Emoji}/u.test(ch) ? 'yes' : 'no';
+  const emojiPres = /\p{Emoji_Presentation}/u.test(ch) ? 'yes' : 'no';
+  return `| ${hex} | ${ch} | ${name} | ${category} | ${emoji} | ${emojiPres} |`;
+}
+
 const rows: string[] = [];
+rows.push('DECORATIONS');
 rows.push('| Code point | Char | Name | GC | Emoji | Emoji_Presentation |');
 rows.push('|------------|------|------|----|-------|--------------------|');
 
 for (const d of decorations) {
-  for (const ch of d.prefix) {
-    const cp = ch.codePointAt(0)!;
-    const hex = 'U+' + cp.toString(16).toUpperCase().padStart(4, '0');
-    const name = NAMES[cp] ?? '(name not in table)';
-    const category = gc(ch);
-    const emoji = /\p{Emoji}/u.test(ch) ? 'yes' : 'no';
-    const emojiPres = /\p{Emoji_Presentation}/u.test(ch) ? 'yes' : 'no';
-    rows.push(`| ${hex} | ${ch} | ${name} | ${category} | ${emoji} | ${emojiPres} |`);
-  }
-  for (const ch of d.suffix) {
-    const cp = ch.codePointAt(0)!;
-    const hex = 'U+' + cp.toString(16).toUpperCase().padStart(4, '0');
-    const name = NAMES[cp] ?? '(name not in table)';
-    const category = gc(ch);
-    const emoji = /\p{Emoji}/u.test(ch) ? 'yes' : 'no';
-    const emojiPres = /\p{Emoji_Presentation}/u.test(ch) ? 'yes' : 'no';
-    rows.push(`| ${hex} | ${ch} | ${name} | ${category} | ${emoji} | ${emojiPres} |`);
-  }
+  for (const ch of d.prefix) rows.push(rowFor(ch));
+  for (const ch of d.suffix) rows.push(rowFor(ch));
+}
+
+rows.push('');
+rows.push('EFFECTS');
+rows.push('| Code point | Char | Name | GC | Emoji | Emoji_Presentation |');
+rows.push('|------------|------|------|----|-------|--------------------|');
+
+for (const e of effects) {
+  rows.push(rowFor(e.mark));
 }
 
 console.log(rows.join('\n'));

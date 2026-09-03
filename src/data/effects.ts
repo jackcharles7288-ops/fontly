@@ -199,6 +199,150 @@ export const effects: Effect[] = [
     caveatNote:
       'Unicode designs enclosing marks for one character at a time, so a whole word may look uneven in some fonts.',
   },
+  // Combining Diacritical Marks block (U+0300-U+036F).
+  // Accents above the letter, one mark per character, spaces left bare.
+  {
+    id: 'circumflex',
+    name: 'Circumflex',
+    mark: '̂',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'tilde',
+    name: 'Tilde',
+    mark: '̃',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'breve',
+    name: 'Breve',
+    mark: '̆',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'hook-above',
+    name: 'Hook Above',
+    mark: '̉',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'double-acute',
+    name: 'Double Acute',
+    mark: '̋',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'double-grave',
+    name: 'Double Grave',
+    mark: '̏',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'inverted-breve',
+    name: 'Inverted Breve',
+    mark: '̑',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  // Combining Diacritical Marks block (U+0300-U+036F).
+  // Marks below the letter, one mark per character, spaces left bare.
+  {
+    id: 'diaeresis-below',
+    name: 'Diaeresis Below',
+    mark: '̤',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'ring-below',
+    name: 'Ring Below',
+    mark: '̥',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'caron-below',
+    name: 'Caron Below',
+    mark: '̬',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'circumflex-below',
+    name: 'Circumflex Below',
+    mark: '̭',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'breve-below',
+    name: 'Breve Below',
+    mark: '̮',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'tilde-below',
+    name: 'Tilde Below',
+    mark: '̰',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'x-below',
+    name: 'X Below',
+    mark: '͓',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'asterisk-below',
+    name: 'Asterisk Below',
+    mark: '͙',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  {
+    id: 'zigzag-above',
+    name: 'Zigzag Above',
+    mark: '͛',
+    applyToSpaces: false,
+    caveat: null,
+    caveatNote: null,
+  },
+  // Combining Diacritical Marks for Symbols block (U+20D0-U+20FF).
+  // An enclosing mark, category Me — same caveat as the other enclosing
+  // effects, word for word.
+  {
+    id: 'enclosing-circle-backslash',
+    name: 'Enclosing Circle Backslash',
+    mark: '⃠',
+    applyToSpaces: false,
+    caveat: 'Uneven',
+    caveatNote:
+      'Unicode designs enclosing marks for one character at a time, so a whole word may look uneven in some fonts.',
+  },
 ];
 
 /**

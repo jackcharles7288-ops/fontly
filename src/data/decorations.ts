@@ -624,6 +624,252 @@ export const decorations: Decoration[] = [
     suffix: '✵',
     caveat: null,
   },
+  // Supplemental Punctuation block (U+2E00-U+2E7F).
+  // Prefix U+2E28 LEFT DOUBLE PARENTHESIS, suffix U+2E29 RIGHT DOUBLE
+  // PARENTHESIS. Two nested curved strokes, unlike the single thick outline
+  // of 'double-parens' (U+2985/U+2986).
+  {
+    id: 'nested-parentheses',
+    name: 'Nested Parentheses',
+    prefix: '⸨',
+    suffix: '⸩',
+    caveat: null,
+  },
+  // Supplemental Punctuation block (U+2E00-U+2E7F).
+  // Prefix U+2E22 TOP LEFT HALF BRACKET, suffix U+2E23 TOP RIGHT HALF
+  // BRACKET. Brackets that cap only the top of the text.
+  {
+    id: 'top-half-brackets',
+    name: 'Top Half Brackets',
+    prefix: '⸢',
+    suffix: '⸣',
+    caveat: null,
+  },
+  // Supplemental Punctuation block (U+2E00-U+2E7F).
+  // Prefix U+2E24 BOTTOM LEFT HALF BRACKET, suffix U+2E25 BOTTOM RIGHT HALF
+  // BRACKET. Brackets that sit under only the bottom of the text.
+  {
+    id: 'bottom-half-brackets',
+    name: 'Bottom Half Brackets',
+    prefix: '⸤',
+    suffix: '⸥',
+    caveat: null,
+  },
+  // Supplemental Punctuation block (U+2E00-U+2E7F).
+  // Prefix U+2E26 LEFT SIDEWAYS U BRACKET, suffix U+2E27 RIGHT SIDEWAYS U
+  // BRACKET. U-shaped strokes lying on their sides.
+  {
+    id: 'sideways-u-brackets',
+    name: 'Sideways U Brackets',
+    prefix: '⸦',
+    suffix: '⸧',
+    caveat: null,
+  },
+  // Miscellaneous Mathematical Symbols-B block (U+2980-U+29FF).
+  // Prefix U+2983 LEFT WHITE CURLY BRACKET, suffix U+2984 RIGHT WHITE CURLY
+  // BRACKET. The only curly braces in the catalogue.
+  {
+    id: 'white-curly-brackets',
+    name: 'White Curly Brackets',
+    prefix: '⦃',
+    suffix: '⦄',
+    caveat: null,
+  },
+  // Miscellaneous Mathematical Symbols-B block (U+2980-U+29FF).
+  // Prefix U+2997 LEFT BLACK TORTOISE SHELL BRACKET, suffix U+2998 RIGHT
+  // BLACK TORTOISE SHELL BRACKET. Solid filled shells, unlike the outline
+  // forms in 'tortoise-shell' and 'plain-tortoise-shell'.
+  {
+    id: 'black-tortoise-shell',
+    name: 'Black Tortoise Shell',
+    prefix: '⦗',
+    suffix: '⦘',
+    caveat: null,
+  },
+  // Miscellaneous Mathematical Symbols-B block (U+2980-U+29FF).
+  // Prefix U+298B LEFT SQUARE BRACKET WITH UNDERBAR, suffix U+298C RIGHT
+  // SQUARE BRACKET WITH UNDERBAR.
+  {
+    id: 'square-brackets-underbar',
+    name: 'Square Brackets with Underbar',
+    prefix: '⦋',
+    suffix: '⦌',
+    caveat: null,
+  },
+  // Miscellaneous Symbols and Dingbats blocks.
+  // Prefix U+2619 REVERSED ROTATED FLORAL HEART BULLET, suffix U+2767
+  // ROTATED FLORAL HEART BULLET. The traditional facing pair of vine-leaf
+  // ornaments used in letterpress printing.
+  {
+    id: 'vine-leaves',
+    name: 'Facing Vine Leaves',
+    prefix: '☙',
+    suffix: '❧',
+    caveat: null,
+  },
+  // Miscellaneous Symbols block (U+2600-U+26FF).
+  // Prefix U+261A BLACK LEFT POINTING INDEX, suffix U+261B BLACK RIGHT
+  // POINTING INDEX. A pointing hand on each side.
+  {
+    id: 'pointing-hands',
+    name: 'Pointing Hands',
+    prefix: '☚',
+    suffix: '☛',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25B8 BLACK RIGHT-POINTING SMALL TRIANGLE, suffix U+25C2 BLACK
+  // LEFT-POINTING SMALL TRIANGLE. The two triangles point inward at the text.
+  {
+    id: 'inward-triangles',
+    name: 'Inward Triangles',
+    prefix: '▸',
+    suffix: '◂',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+273D HEAVY TEARDROP-SPOKED ASTERISK, suffix U+273D.
+  {
+    id: 'teardrop-asterisk',
+    name: 'Teardrop Asterisk',
+    prefix: '✽',
+    suffix: '✽',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+273F BLACK FLORETTE, suffix U+273F. A solid flower head.
+  {
+    id: 'black-florette',
+    name: 'Black Florette',
+    prefix: '✿',
+    suffix: '✿',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2742 CIRCLED OPEN CENTRE EIGHT POINTED STAR, suffix U+2742.
+  {
+    id: 'circled-star',
+    name: 'Circled Star',
+    prefix: '❂',
+    suffix: '❂',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2745 TIGHT TRIFOLIATE SNOWFLAKE, suffix U+2745. Three-bladed
+  // snowflake, unlike the six-pointed U+2746.
+  {
+    id: 'trifoliate-snowflake',
+    name: 'Trifoliate Snowflake',
+    prefix: '❅',
+    suffix: '❅',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2746 HEAVY CHEVRON SNOWFLAKE, suffix U+2746. Six-pointed
+  // chevron snowflake, unlike the three-bladed U+2745.
+  {
+    id: 'chevron-snowflake',
+    name: 'Chevron Snowflake',
+    prefix: '❆',
+    suffix: '❆',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+274A EIGHT TEARDROP-SPOKED PROPELLER ASTERISK, suffix U+274A.
+  {
+    id: 'propeller-asterisk',
+    name: 'Propeller Asterisk',
+    prefix: '❊',
+    suffix: '❊',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+274D SHADOWED WHITE CIRCLE, suffix U+274D. A circle with a
+  // drop shadow, unlike the plain rings U+25CB and U+25CF.
+  {
+    id: 'shadowed-circle',
+    name: 'Shadowed Circle',
+    prefix: '❍',
+    suffix: '❍',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2751 LOWER RIGHT SHADOWED WHITE SQUARE, suffix U+2751. A square
+  // with a drop shadow, unlike the plain squares U+25A0 and U+25A1.
+  {
+    id: 'shadowed-square',
+    name: 'Shadowed Square',
+    prefix: '❑',
+    suffix: '❑',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+275A HEAVY VERTICAL BAR, suffix U+275A. A solid upright slab,
+  // unlike the horizontal rules U+2500 and U+2501.
+  {
+    id: 'heavy-vertical-bar',
+    name: 'Heavy Vertical Bar',
+    prefix: '❚',
+    suffix: '❚',
+    caveat: null,
+  },
+  // Geometric Shapes block (U+25A0-U+25FF).
+  // Prefix U+25C9 FISHEYE, suffix U+25C9. A ring with a solid dot inside.
+  {
+    id: 'fisheye',
+    name: 'Fisheye',
+    prefix: '◉',
+    suffix: '◉',
+    caveat: null,
+  },
+  // Miscellaneous Symbols block (U+2600-U+26FF).
+  // Prefix U+2664 WHITE SPADE SUIT, suffix U+2664. The outline spade; the
+  // solid U+2660 is rejected for carrying the Emoji property.
+  {
+    id: 'white-spade',
+    name: 'White Spade',
+    prefix: '♤',
+    suffix: '♤',
+    caveat: null,
+  },
+  // Miscellaneous Symbols block (U+2600-U+26FF).
+  // Prefix U+2667 WHITE CLUB SUIT, suffix U+2667. The outline club; the
+  // solid U+2663 is rejected for carrying the Emoji property.
+  {
+    id: 'white-club',
+    name: 'White Club',
+    prefix: '♧',
+    suffix: '♧',
+    caveat: null,
+  },
+  // General Punctuation block (U+2000-U+206F).
+  // Prefix U+2058 FOUR DOT PUNCTUATION, suffix U+2058. Four dots in a
+  // horizontal row.
+  {
+    id: 'four-dots',
+    name: 'Four Dots',
+    prefix: '⁘',
+    suffix: '⁘',
+    caveat: null,
+  },
+  // Mathematical Operators block (U+2200-U+22FF).
+  // Prefix U+22C8 BOWTIE, suffix U+22C8. Two triangles joined tip to tip.
+  {
+    id: 'bowtie',
+    name: 'Bowtie',
+    prefix: '⋈',
+    suffix: '⋈',
+    caveat: null,
+  },
+  // Mathematical Operators block (U+2200-U+22FF).
+  // Prefix U+221E INFINITY, suffix U+221E.
+  {
+    id: 'infinity',
+    name: 'Infinity',
+    prefix: '∞',
+    suffix: '∞',
+    caveat: null,
+  },
 ];
 
 /**

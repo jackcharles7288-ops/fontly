@@ -39,6 +39,8 @@ interface Card {
   caveatNote: string | null;
   caseNote: string | null;
   digitsPassThrough: boolean;
+  /** Space-separated membership ids for data-categories. */
+  membership: string;
 }
 
 interface Section {
@@ -62,6 +64,7 @@ function styleCard(style: (typeof styles)[number]): Card {
     caveatNote: style.caveatNote ?? null,
     caseNote: style.caseNote,
     digitsPassThrough: style.digits === null,
+    membership: style.categories.join(' '),
   };
 }
 
@@ -80,6 +83,7 @@ function decorationCards(): Card[] {
       caveatNote: null,
       caseNote: null,
       digitsPassThrough: false,
+      membership: 'decorated',
     };
   });
 }
@@ -97,6 +101,7 @@ function effectCards(): Card[] {
       caveatNote: effect.caveatNote,
       caseNote: null,
       digitsPassThrough: false,
+      membership: 'effects',
     };
   });
 }
@@ -135,9 +140,18 @@ const sections: Section[] = toolCategories.map((id) => {
   };
 });
 
-const filterChips = sections
-  .filter((section) => section.cards.length > 0)
-  .map((section) => ({ id: section.id, label: section.heading }));
+const sectionById = new Map(sections.map((section) => [section.id, section]));
+// Chip order follows categories.ts. cool-fonts is a chip with no section.
+const filterChips = categories
+  .filter((category) => {
+    if (category.id === 'all' || category.id === 'favourites' || category.id === 'recent') {
+      return false;
+    }
+    if (category.id === 'cool-fonts') return true;
+    const section = sectionById.get(category.id);
+    return section !== undefined && section.cards.length > 0;
+  })
+  .map((category) => ({ id: category.id, label: category.name }));
 ---
 
 <section class="tool" data-tool id="fontly-tool">
@@ -302,6 +316,7 @@ const filterChips = sections
       data-card-id=""
       data-card-name=""
       data-category=""
+      data-categories=""
       data-favourite="false"
       data-needs-update="false"
       data-has-digit-note="false"
@@ -367,6 +382,7 @@ const filterChips = sections
                     data-card-id={card.id}
                     data-card-name={card.searchName}
                     data-category={section.id}
+                    data-categories={card.membership}
                     data-favourite="false"
                     data-needs-update="false"
                     data-has-digit-note={card.digitsPassThrough ? 'true' : 'false'}

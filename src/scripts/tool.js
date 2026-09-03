@@ -31,6 +31,7 @@ const effectById = new Map(effects.map((e) => [e.id, e]));
  *   name: string,
  *   searchName: string,
  *   category: string,
+ *   membership: string,
  *   caveat: string | null,
  *   caveatNote: string | null,
  *   caseNote: string | null,
@@ -136,6 +137,7 @@ function catalogForCategory(categoryId) {
       name: decoration.name,
       searchName: decoration.name.toLowerCase(),
       category: 'decorated',
+      membership: 'decorated',
       caveat: decoration.caveat,
       caveatNote: null,
       caseNote: null,
@@ -148,6 +150,7 @@ function catalogForCategory(categoryId) {
       name: effect.name,
       searchName: effect.name.toLowerCase(),
       category: 'effects',
+      membership: 'effects',
       caveat: effect.caveat,
       caveatNote: effect.caveatNote,
       caseNote: null,
@@ -161,6 +164,7 @@ function catalogForCategory(categoryId) {
       name: style.name,
       searchName: style.name.toLowerCase(),
       category: categoryId,
+      membership: style.categories.join(' '),
       caveat: style.caveat,
       caveatNote: style.caveatNote ?? null,
       caseNote: style.caseNote,
@@ -407,6 +411,7 @@ function initTool() {
     card.setAttribute('data-card-id', data.id);
     card.setAttribute('data-card-name', data.searchName);
     card.setAttribute('data-category', data.category);
+    card.setAttribute('data-categories', data.membership);
     card.setAttribute('data-favourite', 'false');
     card.setAttribute('data-needs-update', 'false');
     card.setAttribute('data-has-digit-note', data.digitsPassThrough ? 'true' : 'false');
@@ -558,7 +563,7 @@ function initTool() {
     } else if (activeFilter === 'recent') {
       chipOk = recents.includes(data.id);
     } else {
-      chipOk = data.category === activeFilter;
+      chipOk = data.membership.split(' ').includes(activeFilter);
     }
     const searchOk = query === '' || data.searchName.includes(query);
     return chipOk && searchOk;
@@ -617,7 +622,9 @@ function initTool() {
       } else if (activeFilter === 'all') {
         section.hidden = visibleInSection === 0 && query !== '';
       } else {
-        section.hidden = catId !== activeFilter || visibleInSection === 0;
+        // Membership chip: hide the whole section (heading and note included)
+        // when no card in this section matches.
+        section.hidden = visibleInSection === 0;
       }
     }
 

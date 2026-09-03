@@ -5,7 +5,6 @@ description: "Free cool font generator with 200+ styles. Type once, then copy an
 primaryKeyword: cool fonts
 testPhrase: Fontly
 toolCategories:
-  - cool-fonts
   - cursive
   - bold
   - italic

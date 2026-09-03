@@ -5,6 +5,7 @@ export interface Category {
 
 export const categories: Category[] = [
   { id: 'all', name: 'All' },
+  // Chip with no section of its own. Do not add it back to toolCategories.
   // every alphabet style
   { id: 'cool-fonts', name: 'Cool Fonts' },
   // script letterforms

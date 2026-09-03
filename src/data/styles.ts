@@ -322,7 +322,9 @@ export const styles: Style[] = [
   // Latin Extended Additional. Small capital letters, all Basic Multilingual
   // Plane. Both input cases map to these small-capital forms. Code points
   // verified assigned against the Unicode charts. x has NO small-capital form,
-  // so x and X stay plain. Digits have no small-capital form, stay plain.
+  // so x and X stay plain. This site ships no small-capital Q (U+A7AF is
+  // Unicode 11.0 and renders as tofu), so q and Q stay plain. Digits have no
+  // small-capital form, stay plain.
   {
     id: 'small-caps',
     name: 'Small Caps',
@@ -346,7 +348,6 @@ export const styles: Style[] = [
       N: 0x0274, n: 0x0274,
       O: 0x1d0f, o: 0x1d0f,
       P: 0x1d18, p: 0x1d18,
-      Q: 0xa7af, q: 0xa7af,
       R: 0x0280, r: 0x0280,
       S: 0xa731, s: 0xa731,
       T: 0x1d1b, t: 0x1d1b,
@@ -360,7 +361,7 @@ export const styles: Style[] = [
     risk: null,
     caveat: 'Partial',
     caveatNote:
-      'Unicode has no small-capital X, so x stays plain. Capitals and lowercase both appear as small capitals.',
+      'Unicode has no small-capital X, so x stays plain. This site ships no small-capital Q, so q stays plain. Capitals and lowercase both appear as small capitals.',
     caseNote: null,
   },
   // Phonetic Extensions, Superscripts and Subscripts (U+2070-U+209C), and

@@ -33,6 +33,12 @@ export interface Style {
    * null = full alphabet, no note.
    */
   caseNote: string | null;
+  /**
+   * When true, applyStyle reverses the mapped output by code-point cluster
+   * (base character plus its combining marks). Unset means no reversal.
+   * Used by styles like upside-down that only read correctly backwards.
+   */
+  reverse?: boolean;
 }
 
 /** Ten digit characters from a contiguous Mathematical Alphanumeric block. */
@@ -462,5 +468,76 @@ export const styles: Style[] = [
     caveatNote:
       "Unicode's squared letters are capitals only, so lowercase letters appear as squared capitals.",
     caseNote: null,
+  },
+
+  // --- other ---
+  // Upside-down: turned Latin letters (IPA/Phonetic Extensions), turned
+  // capitals from Letterlike Symbols (U+2132, U+2141, U+2142), FOR ALL U+2200
+  // (a turned A by design), UP TACK U+22A5 and INTERSECTION U+2229 (the
+  // standard flipped T and U), reversed E U+018E, open letters U+0186/U+0254,
+  // open E U+0190 as flipped 3, turned capital V U+0245, turned sans-serif
+  // capital Y U+2144, and the 6/9 swap. Every target is a real code point
+  // used for exactly this shape; nothing is borrowed from an unrelated
+  // script (no Deseret, no Greek, no Canadian syllabics).
+  // This site ships no flipped form for capitals B, D, J, K, Q, R or digits
+  // 2, 4, 5, 7 — those pass through unchanged and the card says so. (Turned
+  // capital K U+A7B0 and turned capital T U+A7B1 exist since Unicode 7.0 but
+  // are held back on font coverage; T currently uses UP TACK.)
+  // H, I, N, O, S, X, Z, l, o, s, x, z, 0, 1, 8 are rotationally symmetric.
+  // Punctuation: only ? -> U+00BF and ! -> U+00A1 are mapped, the genuine
+  // inverted marks encoded in Latin-1 for this purpose. The period, quote
+  // and comma are left unchanged: U+02D9 is a spacing accent, not a period,
+  // and swapping comma/apostrophe corrupts real words such as "don't".
+  {
+    id: 'upside-down',
+    name: 'Upside Down',
+    category: 'other',
+    uppercaseBase: null,
+    lowercaseBase: null,
+    substitutions: {
+      A: 0x2200,
+      C: 0x0186,
+      E: 0x018e,
+      F: 0x2132,
+      G: 0x2141,
+      L: 0x2142,
+      M: 0x0057,
+      P: 0x0064,
+      T: 0x22a5,
+      U: 0x2229,
+      V: 0x0245,
+      W: 0x004d,
+      Y: 0x2144,
+      a: 0x0250,
+      b: 0x0071,
+      c: 0x0254,
+      d: 0x0070,
+      e: 0x01dd,
+      f: 0x025f,
+      g: 0x0183,
+      h: 0x0265,
+      i: 0x1d09,
+      j: 0x027e,
+      k: 0x029e,
+      m: 0x026f,
+      n: 0x0075,
+      p: 0x0064,
+      q: 0x0062,
+      r: 0x0279,
+      t: 0x0287,
+      u: 0x006e,
+      v: 0x028c,
+      w: 0x028d,
+      y: 0x028e,
+      '?': 0x00bf,
+      '!': 0x00a1,
+    },
+    digits: ['0', '1', '2', 'Ɛ', '4', '5', '9', '7', '8', '6'],
+    risk: null,
+    caveat: 'Partial',
+      caveatNote:
+        'This site ships no flipped form for capitals B, D, J, K, Q and R or for digits 2, 4, 5 and 7, so those stay plain. The text is reversed so it reads when the page is turned upside down.',
+    caseNote: null,
+    reverse: true,
   },
 ];

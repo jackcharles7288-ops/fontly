@@ -59,13 +59,46 @@ function convertChar(ch, style) {
     return style.digits[code - DIGIT_0];
   }
 
+  // Style-specific punctuation overrides (upside-down maps ? to ¿, ! to ¡).
+  // Existing styles declare no punctuation keys, so this branch never fires
+  // for them and their output is unchanged.
+  if (Object.prototype.hasOwnProperty.call(style.substitutions, ch)) {
+    return String.fromCodePoint(style.substitutions[ch]);
+  }
+
   // Accented letters, non-Latin scripts, punctuation, spaces: unconvertible,
   // so they pass through unchanged. Never guess a lookalike.
   return ch;
 }
 
 /**
- * Converts a whole string into the given style.
+ * Reverses a string by code point, keeping each combining mark fused to the
+ * base character it followed. A cluster is one non-mark code point plus any
+ * marks (Mn, Mc, Me) after it; only whole clusters are reordered, so a mark
+ * can never land on a different letter. A mark typed at the very start of
+ * the input has no base and stays a standalone cluster.
+ * Never touches UTF-16 units: no str.length, no charCodeAt, no split('').
+ * @param {string} text
+ * @returns {string}
+ */
+const COMBINING_MARK = /\p{M}/u;
+
+function reverseByCluster(text) {
+  const clusters = [];
+  for (const ch of text) {
+    if (COMBINING_MARK.test(ch) && clusters.length > 0) {
+      clusters[clusters.length - 1] += ch;
+    } else {
+      clusters.push(ch);
+    }
+  }
+  clusters.reverse();
+  return clusters.join('');
+}
+
+/**
+ * Converts a whole string into the given style. Characters are mapped first;
+ * a style with reverse: true then has its mapped output reversed by cluster.
  * @param {string} text
  * @param {import('../data/styles.js').Style} style
  * @returns {string}
@@ -74,6 +107,9 @@ export function applyStyle(text, style) {
   let result = '';
   for (const ch of text) {
     result += convertChar(ch, style);
+  }
+  if (style.reverse) {
+    return reverseByCluster(result);
   }
   return result;
 }

@@ -163,6 +163,68 @@ for (const style of styles as Style[]) {
   console.log('');
 }
 
+// Reversal styles: the mapped output must be reversed by code-point cluster,
+// and reversal must be a pure permutation — the code point count can never
+// change. The fixed expected strings below pin the whole mapping table, not
+// just the direction: they were re-derived by hand from the Unicode charts
+// and are built from code points so this file stays ASCII.
+const upsideDown = styles.find((s) => s.id === 'upside-down');
+if (upsideDown) {
+  const fixedCases: [string, number[]][] = [
+    ['Ab', [0x0071, 0x2200]],
+    [
+      'Hello World',
+      [0x0070, 0x006c, 0x0279, 0x006f, 0x004d, 0x0020, 0x006f, 0x006c, 0x006c, 0x01dd, 0x0048],
+    ],
+    [
+      UPPERCASE,
+      [
+        0x005a, 0x2144, 0x0058, 0x004d, 0x0245, 0x2229, 0x22a5, 0x0053, 0x0052, 0x0051, 0x0064,
+        0x004f, 0x004e, 0x0057, 0x2142, 0x004b, 0x004a, 0x0049, 0x0048, 0x2141, 0x2132, 0x018e,
+        0x0044, 0x0186, 0x0042, 0x2200,
+      ],
+    ],
+    [
+      LOWERCASE + DIGITS,
+      [
+        0x0036, 0x0038, 0x0037, 0x0039, 0x0035, 0x0034, 0x0190, 0x0032, 0x0031, 0x0030, 0x007a,
+        0x028e, 0x0078, 0x028d, 0x028c, 0x006e, 0x0287, 0x0073, 0x0279, 0x0062, 0x0064, 0x006f,
+        0x0075, 0x026f, 0x006c, 0x029e, 0x027e, 0x1d09, 0x0265, 0x0183, 0x025f, 0x01dd, 0x0070,
+        0x0254, 0x0071, 0x0250,
+      ],
+    ],
+  ];
+  for (const [input, expectedCps] of fixedCases) {
+    const expected = String.fromCodePoint(...expectedCps);
+    const actual = applyStyle(input, upsideDown);
+    const label = input.length > 12 ? input.slice(0, 12) + '...' : input;
+    console.log(
+      `Reversal fixed check: applyStyle("${label}", upside-down) -> "${actual}" (expected "${expected}")`,
+    );
+    if (actual !== expected) {
+      failures.push({
+        subject: 'upside-down',
+        cause: `applyStyle("${input}") produced "${actual}", expected "${expected}"`,
+      });
+    }
+  }
+}
+
+for (const style of styles as Style[]) {
+  if (!style.reverse) continue;
+  for (const sample of [UPPERCASE + LOWERCASE + DIGITS, PASS_THROUGH_SAMPLE]) {
+    const out = applyStyle(sample, style);
+    const inCount = countCharacters(sample).codePoints;
+    const outCount = countCharacters(out).codePoints;
+    if (inCount !== outCount) {
+      failures.push({
+        subject: style.id,
+        cause: `reversal changed the code point count: ${inCount} in, ${outCount} out`,
+      });
+    }
+  }
+}
+
 // Decorations are wrappers, not styles. Every prefix and suffix character is
 // printed with its code point; a character carrying emoji presentation must be
 // declared in the decoration's caveat (see generator.mdc).

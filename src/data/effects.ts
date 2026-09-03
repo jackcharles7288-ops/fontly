@@ -170,35 +170,6 @@ export const effects: Effect[] = [
     caveat: null,
     caveatNote: null,
   },
-  // Combining Diacritical Marks for Symbols block (U+20D0-U+20FF).
-  // Enclosing marks are designed for a single character.
-  {
-    id: 'enclosing-circle',
-    name: 'Enclosing Circle',
-    mark: '⃝',
-    applyToSpaces: false,
-    caveat: 'Uneven',
-    caveatNote:
-      'Unicode designs enclosing marks for one character at a time, so a whole word may look uneven in some fonts.',
-  },
-  {
-    id: 'enclosing-square',
-    name: 'Enclosing Square',
-    mark: '⃞',
-    applyToSpaces: false,
-    caveat: 'Uneven',
-    caveatNote:
-      'Unicode designs enclosing marks for one character at a time, so a whole word may look uneven in some fonts.',
-  },
-  {
-    id: 'enclosing-diamond',
-    name: 'Enclosing Diamond',
-    mark: '⃟',
-    applyToSpaces: false,
-    caveat: 'Uneven',
-    caveatNote:
-      'Unicode designs enclosing marks for one character at a time, so a whole word may look uneven in some fonts.',
-  },
   // Combining Diacritical Marks block (U+0300-U+036F).
   // Accents above the letter, one mark per character, spaces left bare.
   {
@@ -330,18 +301,6 @@ export const effects: Effect[] = [
     applyToSpaces: false,
     caveat: null,
     caveatNote: null,
-  },
-  // Combining Diacritical Marks for Symbols block (U+20D0-U+20FF).
-  // An enclosing mark, category Me — same caveat as the other enclosing
-  // effects, word for word.
-  {
-    id: 'enclosing-circle-backslash',
-    name: 'Enclosing Circle Backslash',
-    mark: '⃠',
-    applyToSpaces: false,
-    caveat: 'Uneven',
-    caveatNote:
-      'Unicode designs enclosing marks for one character at a time, so a whole word may look uneven in some fonts.',
   },
 ];
 

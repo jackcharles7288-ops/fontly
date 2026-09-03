@@ -16,7 +16,12 @@ toolCategories:
   - number
   - upside-down
   - effects
-  - decorated
+  - stars
+  - hearts
+  - brackets
+  - shapes
+  - lines
+  - symbols
 showDecorations: true
 showEffects: true
 heroIntro: >-

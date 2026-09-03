@@ -1,6 +1,8 @@
 export interface Category {
   id: string;
   name: string;
+  /** false = this category is a section but does not appear in the chip row. */
+  chip?: boolean;
 }
 
 export const categories: Category[] = [
@@ -24,14 +26,30 @@ export const categories: Category[] = [
   { id: 'fancy', name: 'Fancy' },
   // spacing is the style, not the letterform
   { id: 'aesthetic', name: 'Aesthetic' },
+  // Chip with no section of its own. Do not add it back to toolCategories.
+  // hearts, flowers, snowflakes, stars and sparkles
+  { id: 'cute', name: 'Cute' },
   // converts the digits 0 to 9
   { id: 'number', name: 'Number' },
   // turned letters with reversed order
   { id: 'upside-down', name: 'Upside Down' },
   // a combining mark added over unchanged letters
   { id: 'effects', name: 'Effects' },
+  // Chip with no section of its own. Do not add it back to toolCategories.
   // characters wrapped around unchanged letters
   { id: 'decorated', name: 'Decorated' },
   { id: 'favourites', name: 'Favourites' },
   { id: 'recent', name: 'Recent' },
+  // star and sparkle characters
+  { id: 'stars', name: 'Stars & Sparkles', chip: false },
+  // heart, flower and snowflake characters
+  { id: 'hearts', name: 'Hearts & Flowers', chip: false },
+  // paired bracket characters
+  { id: 'brackets', name: 'Brackets', chip: false },
+  // geometric shape characters
+  { id: 'shapes', name: 'Shapes', chip: false },
+  // line, wave and dot-run characters
+  { id: 'lines', name: 'Lines & Waves', chip: false },
+  // everything else, by character
+  { id: 'symbols', name: 'Marks & Symbols', chip: false },
 ];

@@ -29,6 +29,29 @@ const inputCount = countCharacters(prefill);
 
 const categoryLookup = new Map(categories.map((c) => [c.id, c]));
 
+const DECORATION_GROUP_IDS = new Set(
+  categories.filter((c) => c.chip === false).map((c) => c.id),
+);
+
+for (const decoration of decorations) {
+  if (!DECORATION_GROUP_IDS.has(decoration.group)) {
+    throw new Error(
+      `[fontly] Unknown decoration group "${decoration.group}" on id "${decoration.id}" — every group must be one of the six chip:false ids in src/data/categories.ts.`,
+    );
+  }
+}
+
+/**
+ * Membership string for a decoration card. cute is derived from stars/hearts.
+ */
+function decorationMembership(group: string): string {
+  let membership = `decorated ${group}`;
+  if (group === 'stars' || group === 'hearts') {
+    membership += ' cute';
+  }
+  return membership;
+}
+
 interface Card {
   id: string;
   name: string;
@@ -68,24 +91,26 @@ function styleCard(style: (typeof styles)[number]): Card {
   };
 }
 
-// Decorations and effects get their section id from the kind of record, not
-// from a categories field on each of the 124 records.
-function decorationCards(): Card[] {
-  return decorations.map((decoration) => {
-    const output = applyDecoration(decoration.name, decoration);
-    return {
-      id: decoration.id,
-      name: decoration.name,
-      searchName: decoration.name.toLowerCase(),
-      output,
-      utf16Length: countCharacters(output).utf16Length,
-      caveat: decoration.caveat,
-      caveatNote: null,
-      caseNote: null,
-      digitsPassThrough: false,
-      membership: 'decorated',
-    };
-  });
+// Decorations get their section from the group field; cute is derived in
+// decorationMembership, never stored on a record.
+function decorationCards(groupId: string): Card[] {
+  return decorations
+    .filter((decoration) => decoration.group === groupId)
+    .map((decoration) => {
+      const output = applyDecoration(decoration.name, decoration);
+      return {
+        id: decoration.id,
+        name: decoration.name,
+        searchName: decoration.name.toLowerCase(),
+        output,
+        utf16Length: countCharacters(output).utf16Length,
+        caveat: decoration.caveat,
+        caveatNote: null,
+        caseNote: null,
+        digitsPassThrough: false,
+        membership: decorationMembership(decoration.group),
+      };
+    });
 }
 
 function effectCards(): Card[] {
@@ -113,13 +138,13 @@ const sections: Section[] = toolCategories.map((id) => {
       `[fontly] Unknown toolCategories id "${id}" in src/content/pages/${pageFile}.md — every id must exist in src/data/categories.ts.`,
     );
   }
-  if (id === 'decorated') {
+  if (DECORATION_GROUP_IDS.has(id)) {
     return {
       id: category.id,
       heading: category.name,
       note: 'Decoration wrapped around your text, letters unchanged.',
       decorated: true,
-      cards: showDecorations ? decorationCards() : [],
+      cards: showDecorations ? decorationCards(id) : [],
     };
   }
   if (id === 'effects') {
@@ -141,13 +166,21 @@ const sections: Section[] = toolCategories.map((id) => {
 });
 
 const sectionById = new Map(sections.map((section) => [section.id, section]));
-// Chip order follows categories.ts. cool-fonts is a chip with no section.
+// Chip order follows categories.ts. cool-fonts, cute and decorated are chips
+// with no section. Entries with chip: false are sections only.
 const filterChips = categories
   .filter((category) => {
+    if (category.chip === false) return false;
     if (category.id === 'all' || category.id === 'favourites' || category.id === 'recent') {
       return false;
     }
-    if (category.id === 'cool-fonts') return true;
+    if (
+      category.id === 'cool-fonts' ||
+      category.id === 'cute' ||
+      category.id === 'decorated'
+    ) {
+      return true;
+    }
     const section = sectionById.get(category.id);
     return section !== undefined && section.cards.length > 0;
   })

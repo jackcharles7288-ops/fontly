@@ -3,6 +3,7 @@ import { applyStyle, countCharacters } from './generator.js';
 import { styles } from '../data/styles.ts';
 import { decorations, applyDecoration } from '../data/decorations.ts';
 import { effects, applyEffect } from '../data/effects.ts';
+import { categories } from '../data/categories.ts';
 
 const DEBOUNCE_MS = 120;
 const COPY_LABEL_MS = 2000;
@@ -23,6 +24,23 @@ const decorationById = new Map(decorations.map((d) => [d.id, d]));
 /** Combining marks, not styles. Ids never collide with a style id. */
 /** @type {Map<string, import('../data/effects.ts').Effect>} */
 const effectById = new Map(effects.map((e) => [e.id, e]));
+
+const DECORATION_GROUP_IDS = new Set(
+  categories.filter((c) => c.chip === false).map((c) => c.id),
+);
+
+/**
+ * Membership string for a decoration card. cute is derived from stars/hearts.
+ * @param {string} group
+ * @returns {string}
+ */
+function decorationMembership(group) {
+  let membership = `decorated ${group}`;
+  if (group === 'stars' || group === 'hearts') {
+    membership += ' cute';
+  }
+  return membership;
+}
 
 /**
  * Catalogue row used for filtering and mounting. Not the DOM.
@@ -131,18 +149,20 @@ function toTitleCase(text) {
  * @returns {CardData[]}
  */
 function catalogForCategory(categoryId) {
-  if (categoryId === 'decorated') {
-    return decorations.map((decoration) => ({
-      id: decoration.id,
-      name: decoration.name,
-      searchName: decoration.name.toLowerCase(),
-      category: 'decorated',
-      membership: 'decorated',
-      caveat: decoration.caveat,
-      caveatNote: null,
-      caseNote: null,
-      digitsPassThrough: false,
-    }));
+  if (DECORATION_GROUP_IDS.has(categoryId)) {
+    return decorations
+      .filter((decoration) => decoration.group === categoryId)
+      .map((decoration) => ({
+        id: decoration.id,
+        name: decoration.name,
+        searchName: decoration.name.toLowerCase(),
+        category: categoryId,
+        membership: decorationMembership(decoration.group),
+        caveat: decoration.caveat,
+        caveatNote: null,
+        caseNote: null,
+        digitsPassThrough: false,
+      }));
   }
   if (categoryId === 'effects') {
     return effects.map((effect) => ({

@@ -108,7 +108,7 @@ function scanText(text: string, subject: string): void {
 for (const style of styles as Style[]) {
   console.log('='.repeat(70));
   console.log(`Style: ${style.id}  (${style.name})`);
-  console.log(`Category      : ${style.category}`);
+  console.log(`Categories    : ${style.categories.join(', ')}`);
   console.log(`Risk          : ${style.risk ?? 'unset'}`);
   console.log(`Caveat        : ${style.caveat ?? 'none'}`);
   console.log(`Caveat note   : ${style.caveatNote ?? 'none'}`);

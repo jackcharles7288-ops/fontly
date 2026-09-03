@@ -155,7 +155,7 @@ function catalogForCategory(categoryId) {
     }));
   }
   return styles
-    .filter((style) => style.category === categoryId)
+    .filter((style) => style.categories.includes(categoryId))
     .map((style) => ({
       id: style.id,
       name: style.name,
@@ -316,17 +316,18 @@ function initTool() {
   const copyTimers = new WeakMap();
 
   /**
-   * Live registry of mounted cards. Mounting adds entries; never a frozen NodeList.
-   * @type {Map<string, HTMLElement>}
+   * Live registry of mounted cards. One style id may have several DOM nodes
+   * (one per section it belongs to). Mounting appends; never a frozen NodeList.
+   * @type {Map<string, HTMLElement[]>}
    */
   const cardById = new Map();
 
   /**
-   * Cards currently intersecting the viewport. Updated only from
-   * IntersectionObserver entry.isIntersecting — never from measured geometry.
-   * @type {Set<string>}
+   * Cards currently intersecting the viewport. Stores elements, not ids, so
+   * two copies of the same style can be visible independently.
+   * @type {Set<HTMLElement>}
    */
-  const visibleIds = new Set();
+  const visibleCards = new Set();
 
   let activeFilter = 'all';
   const favourites = readFavourites();
@@ -352,12 +353,12 @@ function initTool() {
         const id = card.getAttribute('data-card-id');
         if (!id) continue;
         if (entry.isIntersecting) {
-          visibleIds.add(id);
+          visibleCards.add(card);
           if (card.getAttribute('data-needs-update') === 'true') {
             updateCard(card, text);
           }
         } else {
-          visibleIds.delete(id);
+          visibleCards.delete(card);
         }
       }
     },
@@ -371,8 +372,14 @@ function initTool() {
    */
   function registerCard(card) {
     const id = card.getAttribute('data-card-id');
-    if (!id || cardById.has(id)) return;
-    cardById.set(id, card);
+    if (!id) return;
+    const list = cardById.get(id);
+    if (list) {
+      if (list.includes(card)) return;
+      list.push(card);
+    } else {
+      cardById.set(id, [card]);
+    }
     const isFav = favourites.has(id);
     card.setAttribute('data-favourite', isFav ? 'true' : 'false');
     const favBtn = card.querySelector('[data-fav]');
@@ -525,13 +532,14 @@ function initTool() {
     if (inputCpEl) {
       inputCpEl.textContent = String(countCharacters(text).codePoints);
     }
-    // Live registry — every mounted card, never a frozen NodeList.
-    for (const card of cardById.values()) {
-      card.setAttribute('data-needs-update', 'true');
+    // Live registry — every mounted copy of every card.
+    for (const copies of cardById.values()) {
+      for (const card of copies) {
+        card.setAttribute('data-needs-update', 'true');
+      }
     }
-    for (const id of visibleIds) {
-      const card = cardById.get(id);
-      if (card) updateCard(card, text);
+    for (const card of visibleCards) {
+      updateCard(card, text);
     }
   }
 
@@ -593,11 +601,14 @@ function initTool() {
 
       if (section.getAttribute('data-mounted') === 'true') {
         for (const data of catalog) {
-          const card = cardById.get(data.id);
-          if (!(card instanceof HTMLElement)) continue;
+          const copies = cardById.get(data.id) ?? [];
           const show = matchIds.has(data.id);
-          card.hidden = !show;
-          if (show) ensureCardFresh(card, input.value);
+          for (const card of copies) {
+            if (card.getAttribute('data-category') !== catId) continue;
+            if (!(card instanceof HTMLElement)) continue;
+            card.hidden = !show;
+            if (show) ensureCardFresh(card, input.value);
+          }
         }
       }
 
@@ -685,10 +696,16 @@ function initTool() {
       }
       writeFavourites(favourites);
       const isFav = favourites.has(id);
-      card.setAttribute('data-favourite', isFav ? 'true' : 'false');
+      const copies = cardById.get(id) ?? [];
       const nameEl = card.querySelector('.tool-card__name');
       const cardName = nameEl?.textContent?.trim() || 'card';
-      syncFavButton(favBtn, cardName, isFav);
+      for (const copy of copies) {
+        copy.setAttribute('data-favourite', isFav ? 'true' : 'false');
+        const copyFav = copy.querySelector('[data-fav]');
+        if (copyFav instanceof HTMLButtonElement) {
+          syncFavButton(copyFav, cardName, isFav);
+        }
+      }
       if (activeFilter === 'favourites') applyFilter();
       return;
     }

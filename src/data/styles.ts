@@ -3,7 +3,7 @@ export type Risk = 'safe' | 'uneven' | 'check-old-devices';
 export interface Style {
   id: string;
   name: string;
-  category: string;
+  categories: string[];
   /** First code point of uppercase A, or null if capitals fold onto lowercase. */
   uppercaseBase: number | null;
   /** First code point of lowercase a, or null if lowercase folds onto capitals. */
@@ -57,7 +57,7 @@ export const styles: Style[] = [
   {
     id: 'bold-script',
     name: 'Bold Script',
-    category: 'cursive',
+    categories: ['cool-fonts', 'cursive', 'bold', 'fancy'],
     uppercaseBase: 0x1d4d0,
     lowercaseBase: 0x1d4ea,
     substitutions: {},
@@ -69,7 +69,7 @@ export const styles: Style[] = [
   {
     id: 'script',
     name: 'Classic Script',
-    category: 'cursive',
+    categories: ['cool-fonts', 'cursive', 'fancy'],
     uppercaseBase: 0x1d49c,
     lowercaseBase: 0x1d4b6,
     substitutions: {
@@ -93,7 +93,7 @@ export const styles: Style[] = [
   {
     id: 'bold-italic',
     name: 'Bold Italic',
-    category: 'cursive',
+    categories: ['cool-fonts', 'cursive', 'italic', 'bold', 'fancy'],
     uppercaseBase: 0x1d468,
     lowercaseBase: 0x1d482,
     substitutions: {},
@@ -105,7 +105,7 @@ export const styles: Style[] = [
   {
     id: 'italic',
     name: 'Italic Script',
-    category: 'cursive',
+    categories: ['cool-fonts', 'cursive', 'italic', 'fancy'],
     uppercaseBase: 0x1d434,
     lowercaseBase: 0x1d44e,
     substitutions: {
@@ -119,7 +119,7 @@ export const styles: Style[] = [
   {
     id: 'sans-italic',
     name: 'Handwriting',
-    category: 'cursive',
+    categories: ['cool-fonts', 'italic'],
     uppercaseBase: 0x1d608,
     lowercaseBase: 0x1d622,
     substitutions: {},
@@ -131,7 +131,7 @@ export const styles: Style[] = [
   {
     id: 'sans-bold-italic',
     name: 'Slanted',
-    category: 'cursive',
+    categories: ['cool-fonts', 'italic', 'bold'],
     uppercaseBase: 0x1d63c,
     lowercaseBase: 0x1d656,
     substitutions: {},
@@ -145,7 +145,7 @@ export const styles: Style[] = [
   {
     id: 'bold-serif',
     name: 'Bold',
-    category: 'bold',
+    categories: ['cool-fonts', 'bold', 'number'],
     uppercaseBase: 0x1d400,
     lowercaseBase: 0x1d41a,
     substitutions: {},
@@ -157,7 +157,7 @@ export const styles: Style[] = [
   {
     id: 'bold-sans',
     name: 'Bold Sans',
-    category: 'bold',
+    categories: ['cool-fonts', 'bold', 'number'],
     uppercaseBase: 0x1d5d4,
     lowercaseBase: 0x1d5ee,
     substitutions: {},
@@ -171,7 +171,7 @@ export const styles: Style[] = [
   {
     id: 'circled',
     name: 'Circled',
-    category: 'bubble',
+    categories: ['cool-fonts', 'bubble', 'number'],
     uppercaseBase: 0x24b6,
     lowercaseBase: 0x24d0,
     substitutions: {},
@@ -186,7 +186,7 @@ export const styles: Style[] = [
   {
     id: 'parenthesized',
     name: 'Parenthesized',
-    category: 'bubble',
+    categories: ['cool-fonts', 'bubble'],
     uppercaseBase: null,
     lowercaseBase: 0x249c,
     substitutions: {},
@@ -198,7 +198,7 @@ export const styles: Style[] = [
   {
     id: 'negative-circled',
     name: 'Filled Circled',
-    category: 'bubble',
+    categories: ['cool-fonts', 'bubble'],
     uppercaseBase: 0x1f150,
     lowercaseBase: null,
     substitutions: {},
@@ -212,7 +212,7 @@ export const styles: Style[] = [
   {
     id: 'fraktur',
     name: 'Fraktur',
-    category: 'gothic',
+    categories: ['cool-fonts', 'gothic', 'fancy'],
     uppercaseBase: 0x1d504,
     lowercaseBase: 0x1d51e,
     substitutions: {
@@ -230,7 +230,7 @@ export const styles: Style[] = [
   {
     id: 'bold-fraktur',
     name: 'Bold Fraktur',
-    category: 'gothic',
+    categories: ['cool-fonts', 'gothic', 'bold', 'fancy'],
     uppercaseBase: 0x1d56c,
     lowercaseBase: 0x1d586,
     substitutions: {},
@@ -248,7 +248,7 @@ export const styles: Style[] = [
   {
     id: 'monospace',
     name: 'Monospace',
-    category: 'other',
+    categories: ['cool-fonts', 'aesthetic', 'number'],
     uppercaseBase: 0x1d670,
     lowercaseBase: 0x1d68a,
     substitutions: {},
@@ -267,7 +267,7 @@ export const styles: Style[] = [
   {
     id: 'double-struck',
     name: 'Double-struck',
-    category: 'other',
+    categories: ['cool-fonts', 'fancy', 'number'],
     uppercaseBase: 0x1d538,
     lowercaseBase: 0x1d552,
     substitutions: {
@@ -291,7 +291,7 @@ export const styles: Style[] = [
   {
     id: 'sans-serif',
     name: 'Sans-serif',
-    category: 'other',
+    categories: ['cool-fonts', 'number'],
     uppercaseBase: 0x1d5a0,
     lowercaseBase: 0x1d5ba,
     substitutions: {},
@@ -307,7 +307,7 @@ export const styles: Style[] = [
   {
     id: 'fullwidth',
     name: 'Fullwidth',
-    category: 'other',
+    categories: ['cool-fonts', 'aesthetic', 'number'],
     uppercaseBase: 0xff21,
     lowercaseBase: 0xff41,
     substitutions: {},
@@ -328,7 +328,7 @@ export const styles: Style[] = [
   {
     id: 'small-caps',
     name: 'Small Caps',
-    category: 'small',
+    categories: ['cool-fonts', 'small'],
     uppercaseBase: null,
     lowercaseBase: null,
     substitutions: {
@@ -371,7 +371,7 @@ export const styles: Style[] = [
   {
     id: 'superscript',
     name: 'Superscript',
-    category: 'small',
+    categories: ['cool-fonts', 'small', 'number'],
     uppercaseBase: null,
     lowercaseBase: null,
     substitutions: {
@@ -421,7 +421,7 @@ export const styles: Style[] = [
   {
     id: 'subscript',
     name: 'Subscript',
-    category: 'small',
+    categories: ['cool-fonts', 'small', 'number'],
     uppercaseBase: null,
     lowercaseBase: null,
     substitutions: {
@@ -459,7 +459,7 @@ export const styles: Style[] = [
   {
     id: 'squared',
     name: 'Squared',
-    category: 'bubble',
+    categories: ['cool-fonts', 'bubble'],
     uppercaseBase: 0x1f130,
     lowercaseBase: null,
     substitutions: {},
@@ -492,7 +492,7 @@ export const styles: Style[] = [
   {
     id: 'upside-down',
     name: 'Upside Down',
-    category: 'other',
+    categories: ['cool-fonts', 'upside-down', 'number'],
     uppercaseBase: null,
     lowercaseBase: null,
     substitutions: {

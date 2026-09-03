@@ -50,46 +50,25 @@ interface Section {
   cards: Card[];
 }
 
-const styleSections: Section[] = toolCategories.map((id) => {
-  const category = categoryLookup.get(id);
-  if (!category) {
-    throw new Error(
-      `[fontly] Unknown toolCategories id "${id}" in src/content/pages/${pageFile}.md — every id must exist in src/data/categories.ts.`,
-    );
-  }
+function styleCard(style: (typeof styles)[number]): Card {
+  const output = applyStyle(style.name, style);
   return {
-    id: category.id,
-    heading: category.name,
-    note: null,
-    decorated: false,
-    cards: styles
-      .filter((style) => style.category === id)
-      .map((style) => {
-        // Empty input: the sample is the style's own name.
-        const output = applyStyle(style.name, style);
-        return {
-          id: style.id,
-          name: style.name,
-          searchName: style.name.toLowerCase(),
-          output,
-          utf16Length: countCharacters(output).utf16Length,
-          caveat: style.caveat,
-          caveatNote: style.caveatNote ?? null,
-          caseNote: style.caseNote,
-          digitsPassThrough: style.digits === null,
-        };
-      }),
+    id: style.id,
+    name: style.name,
+    searchName: style.name.toLowerCase(),
+    output,
+    utf16Length: countCharacters(output).utf16Length,
+    caveat: style.caveat,
+    caveatNote: style.caveatNote ?? null,
+    caseNote: style.caseNote,
+    digitsPassThrough: style.digits === null,
   };
-});
+}
 
-// Decorations are wrappers, not alphabets: their own section, never a category
-// in categories.ts, and never counted in styles.length.
-const decoratedSection: Section = {
-  id: 'decorated',
-  heading: 'Decorated',
-  note: 'Decoration wrapped around your text, letters unchanged.',
-  decorated: true,
-  cards: decorations.map((decoration) => {
+// Decorations and effects get their section id from the kind of record, not
+// from a categories field on each of the 124 records.
+function decorationCards(): Card[] {
+  return decorations.map((decoration) => {
     const output = applyDecoration(decoration.name, decoration);
     return {
       id: decoration.id,
@@ -102,17 +81,11 @@ const decoratedSection: Section = {
       caseNote: null,
       digitsPassThrough: false,
     };
-  }),
-};
+  });
+}
 
-// Effects are combining marks, not alphabets or wrappers: their own section,
-// never a category in categories.ts, and never counted in styles.length.
-const effectsSection: Section = {
-  id: 'effects',
-  heading: 'Effects',
-  note: 'Marks added over your text, letters unchanged.',
-  decorated: true,
-  cards: effects.map((effect) => {
+function effectCards(): Card[] {
+  return effects.map((effect) => {
     const output = applyEffect(effect.name, effect);
     return {
       id: effect.id,
@@ -125,20 +98,44 @@ const effectsSection: Section = {
       caseNote: null,
       digitsPassThrough: false,
     };
-  }),
-};
+  });
+}
 
-const renderDecorated = showDecorations && decoratedSection.cards.length > 0;
-const renderEffects = showEffects && effectsSection.cards.length > 0;
-const sections = [
-  ...styleSections,
-  ...(renderEffects ? [effectsSection] : []),
-  ...(renderDecorated ? [decoratedSection] : []),
-];
+const sections: Section[] = toolCategories.map((id) => {
+  const category = categoryLookup.get(id);
+  if (!category) {
+    throw new Error(
+      `[fontly] Unknown toolCategories id "${id}" in src/content/pages/${pageFile}.md — every id must exist in src/data/categories.ts.`,
+    );
+  }
+  if (id === 'decorated') {
+    return {
+      id: category.id,
+      heading: category.name,
+      note: 'Decoration wrapped around your text, letters unchanged.',
+      decorated: true,
+      cards: showDecorations ? decorationCards() : [],
+    };
+  }
+  if (id === 'effects') {
+    return {
+      id: category.id,
+      heading: category.name,
+      note: 'Marks added over your text, letters unchanged.',
+      decorated: true,
+      cards: showEffects ? effectCards() : [],
+    };
+  }
+  return {
+    id: category.id,
+    heading: category.name,
+    note: null,
+    decorated: false,
+    cards: styles.filter((style) => style.categories.includes(id)).map(styleCard),
+  };
+});
 
-// Chips: All, then style categories present on this page, then Decorated,
-// then Favourites, then Recents last.
-const filterChips = styleSections
+const filterChips = sections
   .filter((section) => section.cards.length > 0)
   .map((section) => ({ id: section.id, label: section.heading }));
 ---
@@ -205,30 +202,6 @@ const filterChips = styleSections
               {chip.label}
             </button>
           ))
-        }
-        {
-          renderEffects ? (
-            <button
-              type="button"
-              class="tool__chip"
-              data-filter="effects"
-              aria-pressed="false"
-            >
-              Effects
-            </button>
-          ) : null
-        }
-        {
-          renderDecorated ? (
-            <button
-              type="button"
-              class="tool__chip"
-              data-filter="decorated"
-              aria-pressed="false"
-            >
-              Decorated
-            </button>
-          ) : null
         }
         <button
           type="button"

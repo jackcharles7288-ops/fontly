@@ -288,7 +288,7 @@ export const decorations: Decoration[] = [
   {
     id: 'double-parens',
     group: 'brackets',
-    name: 'Double Parentheses',
+    name: 'White Parentheses',
     prefix: '⦅',
     suffix: '⦆',
     caveat: null,
@@ -698,7 +698,7 @@ export const decorations: Decoration[] = [
   {
     id: 'nested-parentheses',
     group: 'brackets',
-    name: 'Nested Parentheses',
+    name: 'Double Parentheses',
     prefix: '⸨',
     suffix: '⸩',
     caveat: null,

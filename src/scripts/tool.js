@@ -3,7 +3,6 @@ import { applyStyle, countCharacters } from './generator.js';
 import { styles } from '../data/styles.ts';
 import { decorations, applyDecoration } from '../data/decorations.ts';
 import { effects, applyEffect } from '../data/effects.ts';
-import { categories } from '../data/categories.ts';
 
 const DEBOUNCE_MS = 120;
 const COPY_LABEL_MS = 2000;
@@ -25,8 +24,13 @@ const decorationById = new Map(decorations.map((d) => [d.id, d]));
 /** @type {Map<string, import('../data/effects.ts').Effect>} */
 const effectById = new Map(effects.map((e) => [e.id, e]));
 
+const groupSectionsRaw =
+  document.querySelector('[data-tool]')?.getAttribute('data-group-sections') ?? '';
+if (!groupSectionsRaw.trim()) {
+  console.error('[fontly] Missing or empty data-group-sections attribute');
+}
 const DECORATION_GROUP_IDS = new Set(
-  categories.filter((c) => c.chip === false).map((c) => c.id),
+  groupSectionsRaw.trim() ? groupSectionsRaw.trim().split(/\s+/) : [],
 );
 
 /**

@@ -1,6 +1,13 @@
 export interface Category {
   id: string;
   name: string;
+  /**
+   * Chip label and section heading do different jobs. The chip label stays
+   * short because the whole chip row must fit on one line. The heading
+   * carries the full search phrase because the section H2 is the ranking
+   * surface. When heading is absent, the H2 falls back to name.
+   */
+  heading?: string;
   /** false = this category is a section but does not appear in the chip row. */
   chip?: boolean;
 }
@@ -11,30 +18,30 @@ export const categories: Category[] = [
   // every alphabet style
   { id: 'cool-fonts', name: 'Cool Fonts' },
   // script letterforms
-  { id: 'cursive', name: 'Cursive' },
+  { id: 'cursive', name: 'Cursive', heading: 'Cursive Fonts' },
   // bold weight
-  { id: 'bold', name: 'Bold' },
+  { id: 'bold', name: 'Bold', heading: 'Bold Fonts' },
   // slanted letterforms
-  { id: 'italic', name: 'Italic' },
+  { id: 'italic', name: 'Italic', heading: 'Italic Fonts' },
   // letter inside an enclosure
-  { id: 'bubble', name: 'Bubble' },
+  { id: 'bubble', name: 'Bubble', heading: 'Bubble Text' },
   // Fraktur letterforms
-  { id: 'gothic', name: 'Gothic' },
+  { id: 'gothic', name: 'Gothic', heading: 'Gothic Fonts' },
   // small or raised or lowered letterforms
-  { id: 'small', name: 'Small' },
+  { id: 'small', name: 'Small', heading: 'Small Text' },
   // ornamental letterforms, not a weight or slant change
-  { id: 'fancy', name: 'Fancy' },
+  { id: 'fancy', name: 'Fancy', heading: 'Fancy Text' },
   // spacing is the style, not the letterform
-  { id: 'aesthetic', name: 'Aesthetic' },
+  { id: 'aesthetic', name: 'Aesthetic', heading: 'Aesthetic Fonts' },
   // Chip with no section of its own. Do not add it back to toolCategories.
   // hearts, flowers, snowflakes, stars and sparkles
   { id: 'cute', name: 'Cute' },
   // converts the digits 0 to 9
-  { id: 'number', name: 'Number' },
+  { id: 'number', name: 'Number', heading: 'Number Fonts' },
   // turned letters with reversed order
-  { id: 'upside-down', name: 'Upside Down' },
+  { id: 'upside-down', name: 'Upside Down', heading: 'Upside Down Text' },
   // a combining mark added over unchanged letters
-  { id: 'effects', name: 'Effects' },
+  { id: 'effects', name: 'Effects', heading: 'Text Effects' },
   // Chip with no section of its own. Do not add it back to toolCategories.
   // characters wrapped around unchanged letters
   { id: 'decorated', name: 'Decorated' },

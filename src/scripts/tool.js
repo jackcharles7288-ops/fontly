@@ -1,8 +1,9 @@
 // Browser wiring only. Mapping lives in generator.js — do not duplicate it.
-import { applyStyle, countCharacters } from './generator.js';
+import { applyStyle, applyCombination, countCharacters } from './generator.js';
 import { styles } from '../data/styles.ts';
 import { decorations, applyDecoration } from '../data/decorations.ts';
 import { effects, applyEffect } from '../data/effects.ts';
+import { combinations } from '../data/combinations.ts';
 
 const DEBOUNCE_MS = 120;
 const COPY_LABEL_MS = 2000;
@@ -23,6 +24,10 @@ const decorationById = new Map(decorations.map((d) => [d.id, d]));
 /** Combining marks, not styles. Ids never collide with a style id. */
 /** @type {Map<string, import('../data/effects.ts').Effect>} */
 const effectById = new Map(effects.map((e) => [e.id, e]));
+
+/** Alphabet + decoration pairs. Ids never collide with a style id. */
+/** @type {Map<string, import('../data/combinations.ts').Combination>} */
+const combinationById = new Map(combinations.map((c) => [c.id, c]));
 
 const groupSectionsRaw =
   document.querySelector('[data-tool]')?.getAttribute('data-group-sections') ?? '';
@@ -181,6 +186,22 @@ function catalogForCategory(categoryId) {
       digitsPassThrough: false,
     }));
   }
+  if (categoryId === 'combined') {
+    return combinations.map((combination) => {
+      const style = styleById.get(combination.style);
+      return {
+        id: combination.id,
+        name: combination.name,
+        searchName: combination.name.toLowerCase(),
+        category: 'combined',
+        membership: combination.categories.join(' '),
+        caveat: style ? style.caveat : null,
+        caveatNote: style && style.caveatNote ? style.caveatNote : null,
+        caseNote: style ? style.caseNote : null,
+        digitsPassThrough: style ? style.digits === null : false,
+      };
+    });
+  }
   return styles
     .filter((style) => style.categories.includes(categoryId))
     .map((style) => ({
@@ -207,17 +228,32 @@ function updateCard(card, text) {
   const style = styleById.get(id);
   const decoration = style === undefined ? decorationById.get(id) : undefined;
   const effect = style === undefined && decoration === undefined ? effectById.get(id) : undefined;
-  if (style === undefined && decoration === undefined && effect === undefined) return;
+  const combination =
+    style === undefined && decoration === undefined && effect === undefined
+      ? combinationById.get(id)
+      : undefined;
+  if (style === undefined && decoration === undefined && effect === undefined && combination === undefined)
+    return;
   const outputEl = card.querySelector('[data-output]');
   if (!(outputEl instanceof HTMLElement)) return;
   const empty = text.length === 0;
   // Empty input: the sample is the card's own name, styles, decorations and effects alike.
-  const source = empty ? (style ?? decoration ?? effect).name : text;
+  const source = empty ? (style ?? decoration ?? effect ?? combination).name : text;
   const styled = style
     ? applyStyle(source, style)
     : decoration
       ? applyDecoration(source, decoration)
-      : applyEffect(source, /** @type {NonNullable<typeof effect>} */ (effect));
+      : combination
+        ? applyCombination(
+            source,
+            /** @type {NonNullable<import('../data/styles.ts').Style>} */ (
+              styleById.get(combination.style)
+            ),
+            /** @type {NonNullable<import('../data/decorations.ts').Decoration>} */ (
+              decorationById.get(combination.decoration)
+            ),
+          )
+        : applyEffect(source, /** @type {NonNullable<typeof effect>} */ (effect));
   outputEl.textContent = styled;
   const { utf16Length } = countCharacters(styled);
   const utfEl = card.querySelector('[data-counter-utf16]');
@@ -229,7 +265,7 @@ function updateCard(card, text) {
     unitsEl.hidden = empty;
   }
 
-  if (style && card.getAttribute('data-has-digit-note') === 'true') {
+  if ((style ?? combination) && card.getAttribute('data-has-digit-note') === 'true') {
     const note = card.querySelector('[data-digits-note]');
     if (note instanceof HTMLElement) {
       note.hidden = empty;

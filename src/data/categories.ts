@@ -45,6 +45,8 @@ export const categories: Category[] = [
   // Chip with no section of its own. Do not add it back to toolCategories.
   // characters wrapped around unchanged letters
   { id: 'decorated', name: 'Decorated' },
+  // an alphabet wrapped in a decoration
+  { id: 'combined', name: 'Combined', heading: 'Combined Fonts' },
   { id: 'favourites', name: 'Favourites' },
   { id: 'recent', name: 'Recent' },
   // star and sparkle characters

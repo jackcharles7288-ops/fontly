@@ -115,6 +115,18 @@ export function applyStyle(text, style) {
 }
 
 /**
+ * Cross-kind combination: one alphabet plus one decoration.
+ * Style first, wrap second. Neither applier inspects the wrapped text.
+ * @param {string} text
+ * @param {import('../data/styles.js').Style} style
+ * @param {import('../data/decorations.ts').Decoration} decoration
+ * @returns {string}
+ */
+export function applyCombination(text, style, decoration) {
+  return decoration.prefix + applyStyle(text, style) + decoration.suffix;
+}
+
+/**
  * Returns both character counts for a string: the code point count (what a
  * person counts as "characters") and the UTF-16 length (Plane 1 letters are
  * two code units each). Never collapse this into a single str.length answer.

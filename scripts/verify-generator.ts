@@ -5,7 +5,8 @@
 import { styles, type Style } from '../src/data/styles.ts';
 import { decorations, applyDecoration } from '../src/data/decorations.ts';
 import { effects, applyEffect } from '../src/data/effects.ts';
-import { applyStyle, countCharacters } from '../src/scripts/generator.js';
+import { combinations } from '../src/data/combinations.ts';
+import { applyStyle, applyCombination, countCharacters } from '../src/scripts/generator.js';
 
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
@@ -313,10 +314,71 @@ for (const finding of emojiPropertyFindings) {
 console.log(`Total: ${emojiPropertyFindings.length}`);
 console.log('='.repeat(70));
 
+// Combinations are alphabet + decoration pairs built as a cross product of two
+// id lists. Structural checks only: count, id uniqueness across the whole
+// catalogue, reference resolution, and pairwise output distinctness. Zero new
+// code points by construction — no mapping is checked here.
+console.log('='.repeat(70));
+console.log('COMBINATIONS');
+console.log('='.repeat(70));
+
+if (combinations.length !== 156) {
+  failures.push({
+    subject: 'combinations',
+    cause: `expected exactly 156 combinations, found ${combinations.length}`,
+  });
+}
+
+const styleIds = new Set(styles.map((s) => s.id));
+const decorationIds = new Set(decorations.map((d) => d.id));
+const effectIds = new Set(effects.map((e) => e.id));
+const catalogueIds = new Set<string>([...styleIds, ...decorationIds, ...effectIds]);
+for (const combination of combinations) {
+  if (catalogueIds.has(combination.id)) {
+    failures.push({
+      subject: combination.id,
+      cause: `combination id collides with an existing catalogue id "${combination.id}"`,
+    });
+  }
+  catalogueIds.add(combination.id);
+  if (!styleIds.has(combination.style)) {
+    failures.push({
+      subject: combination.id,
+      cause: `referenced style id "${combination.style}" does not exist in src/data/styles.ts`,
+    });
+  }
+  if (!decorationIds.has(combination.decoration)) {
+    failures.push({
+      subject: combination.id,
+      cause: `referenced decoration id "${combination.decoration}" does not exist in src/data/decorations.ts`,
+    });
+  }
+}
+
+const styleById = new Map(styles.map((s) => [s.id, s]));
+const decorationById = new Map(decorations.map((d) => [d.id, d]));
+const outputByValue = new Map<string, string>();
+for (const combination of combinations) {
+  const style = styleById.get(combination.style);
+  const decoration = decorationById.get(combination.decoration);
+  if (!style || !decoration) continue;
+  const output = applyCombination('Fontly 1', style, decoration);
+  const existing = outputByValue.get(output);
+  if (existing !== undefined) {
+    failures.push({
+      subject: combination.id,
+      cause: `produces the same output as "${existing}" for the same input`,
+    });
+  } else {
+    outputByValue.set(output, combination.id);
+  }
+}
+console.log(`Checked ${combinations.length} combinations: count, unique ids across the catalogue, resolved references, distinct outputs.`);
+
 console.log('='.repeat(70));
 if (failures.length === 0) {
   console.log(
-    `RESULT: PASS. ${styles.length} styles, all uppercase/lowercase/digit characters verified. ${decorations.length} decorations, every prefix and suffix character verified. ${effects.length} effects, every mark a combining mark.`,
+    `RESULT: PASS. ${styles.length} styles, all uppercase/lowercase/digit characters verified. ${decorations.length} decorations, every prefix and suffix character verified. ${effects.length} effects, every mark a combining mark. ${combinations.length} combinations, structure verified.`,
   );
 } else {
   console.log(`RESULT: FAIL. ${failures.length} failure(s):`);

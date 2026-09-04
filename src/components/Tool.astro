@@ -3,7 +3,8 @@ import { styles } from '../data/styles';
 import { categories } from '../data/categories';
 import { decorations, applyDecoration } from '../data/decorations';
 import { effects, applyEffect } from '../data/effects';
-import { applyStyle, countCharacters } from '../scripts/generator.js';
+import { combinations } from '../data/combinations';
+import { applyStyle, applyCombination, countCharacters } from '../scripts/generator.js';
 
 interface Props {
   toolCategories: string[];
@@ -141,6 +142,29 @@ function effectCards(): Card[] {
   });
 }
 
+const styleById = new Map(styles.map((s) => [s.id, s]));
+const decorationById = new Map(decorations.map((d) => [d.id, d]));
+
+function combinationCards(): Card[] {
+  return combinations.map((combination) => {
+    const style = styleById.get(combination.style)!;
+    const decoration = decorationById.get(combination.decoration)!;
+    const output = applyCombination(combination.name, style, decoration);
+    return {
+      id: combination.id,
+      name: combination.name,
+      searchName: combination.name.toLowerCase(),
+      output,
+      utf16Length: countCharacters(output).utf16Length,
+      caveat: style.caveat,
+      caveatNote: style.caveatNote ?? null,
+      caseNote: style.caseNote,
+      digitsPassThrough: style.digits === null,
+      membership: combination.categories.join(' '),
+    };
+  });
+}
+
 const sections: Section[] = toolCategories.map((id) => {
   const category = categoryLookup.get(id);
   if (!category) {
@@ -164,6 +188,15 @@ const sections: Section[] = toolCategories.map((id) => {
       note: 'Marks added over your text, letters unchanged.',
       decorated: true,
       cards: showEffects ? effectCards() : [],
+    };
+  }
+  if (id === 'combined') {
+    return {
+      id: category.id,
+      heading: category.heading ?? category.name,
+      note: 'An alphabet wrapped in a decoration.',
+      decorated: true,
+      cards: combinationCards(),
     };
   }
   return {
@@ -489,7 +522,7 @@ const filterChips = categories
         ><span data-input-codepoints>{inputCount.codePoints}</span> characters</span
       >
       <span class="tool__style-count"
-        >{styles.length + decorations.length + effects.length} styles</span
+        >{styles.length + decorations.length + effects.length + combinations.length} styles</span
       >
     </p>
   </div>

@@ -106,9 +106,12 @@ works. Show the output.
 - A decoration is a wrapper: a prefix and a suffix of real Unicode characters
   placed around the visitor's text, which is copied through exactly as typed
   with its letters unconverted. Decorations live in `src/data/decorations.ts`.
-  They never enter `styles.ts`, they are never a category in
-  `categories.ts`, and they never count in `styles.length` or in the visible
-  style counter. Never present a decoration as an alphabet or a font.
+  They never enter `styles.ts`, and they are never a category membership on
+  an alphabet record. The visible catalogue counter must equal
+  `styles.length + decorations.length + effects.length`, never a hardcoded
+  number and never `styles.length` alone. That counter drifted when
+  decorations and effects were added while the interface still rendered
+  `styles.length`. Never present a decoration as an alphabet or a font.
 - Every decoration character is recorded with its Unicode block name and its
   code point in a comment directly above the record, exactly as a style's base
   code points are. Source each one from an actual Unicode chart; if a code

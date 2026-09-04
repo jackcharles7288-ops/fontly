@@ -488,7 +488,9 @@ const filterChips = categories
       <span class="tool__char-count"
         ><span data-input-codepoints>{inputCount.codePoints}</span> characters</span
       >
-      <span class="tool__style-count">{styles.length} styles</span>
+      <span class="tool__style-count"
+        >{styles.length + decorations.length + effects.length} styles</span
+      >
     </p>
   </div>
 </section>

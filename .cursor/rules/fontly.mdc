@@ -112,7 +112,10 @@ perfect lab score.
 
 - Never invent a number, date, percentage or capability. If a fact belongs
   in the interface and it was not given to you, ask or leave a TODO.
-- Never hardcode a style count anywhere. Render it from styles.length.
+- Never hardcode a style count anywhere. Render it from
+  `styles.length + decorations.length + effects.length`. The old rule to
+  render from `styles.length` alone drifted when decorations and effects
+  were added.
 - These exact claims are banned because an earlier prototype shipped them
   and they are false: "Works Everywhere", any device-compatibility
   percentage such as "99%", and any hardcoded count such as "130+ styles".

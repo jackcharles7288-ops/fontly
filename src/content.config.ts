@@ -34,6 +34,9 @@ const pages = defineCollection({
     // Renders the Effects combining-mark section. Optional with a false
     // default, so pages that omit it still validate.
     showEffects: z.boolean().default(false),
+    // Renders the Combined alphabet+decoration section. Optional with a false
+    // default, so pages that omit it still validate.
+    showCombined: z.boolean().default(false),
   }),
 });
 

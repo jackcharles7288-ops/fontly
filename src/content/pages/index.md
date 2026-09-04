@@ -1,7 +1,7 @@
 ---
-title: "Cool Font Generator – Copy and Paste 200+ Cool Fonts"
+title: "Cool Font Generator – Copy and Paste 300+ Cool Fonts"
 h1: "Cool Font Generator: Copy and Paste Cool Fonts"
-description: "Free cool font generator with 200+ styles. Type once, then copy and paste cool fonts into Instagram, TikTok, Discord, Steam and gaming names."
+description: "Free cool font generator with 300+ styles. Type once, then copy and paste cool fonts into Instagram, TikTok, Discord, Steam and gaming names."
 primaryKeyword: cool fonts
 testPhrase: Fontly
 toolCategories:
@@ -25,6 +25,7 @@ toolCategories:
   - symbols
 showDecorations: true
 showEffects: true
+showCombined: true
 heroIntro: >-
   Type your text once and turn it into cool fonts you can copy and paste anywhere: Instagram bios, TikTok captions, Discord names, Steam profiles, gaming tags, and more.
 heroIntroBelow: >-

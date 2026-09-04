@@ -234,6 +234,10 @@ function updateCard(card, text) {
       : undefined;
   if (style === undefined && decoration === undefined && effect === undefined && combination === undefined)
     return;
+  // Combination cards look up by pair id; digit notes and applyCombination need the parent alphabet.
+  const parentStyle = combination
+    ? /** @type {NonNullable<import('../data/styles.ts').Style>} */ (styleById.get(combination.style))
+    : style;
   const outputEl = card.querySelector('[data-output]');
   if (!(outputEl instanceof HTMLElement)) return;
   const empty = text.length === 0;
@@ -246,9 +250,7 @@ function updateCard(card, text) {
       : combination
         ? applyCombination(
             source,
-            /** @type {NonNullable<import('../data/styles.ts').Style>} */ (
-              styleById.get(combination.style)
-            ),
+            parentStyle,
             /** @type {NonNullable<import('../data/decorations.ts').Decoration>} */ (
               decorationById.get(combination.decoration)
             ),
@@ -272,7 +274,7 @@ function updateCard(card, text) {
       // Once text exists, visibility keeps the note's line reserved.
       note.classList.toggle(
         'is-quiet',
-        !(style.digits === null && textHasDigit(text)),
+        !(parentStyle.digits === null && textHasDigit(text)),
       );
     }
   }

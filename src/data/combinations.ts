@@ -62,9 +62,16 @@ for (const id of DECORATION_IDS) {
 export const combinations: Combination[] = [];
 for (const styleId of STYLE_IDS) {
   const style = styleById.get(styleId)!;
-  const categories = [...style.categories.filter((c) => c !== 'cool-fonts'), 'combined', 'decorated'];
   for (const decorationId of DECORATION_IDS) {
     const decoration = decorationById.get(decorationId)!;
+    const categories = [
+      ...style.categories.filter((c) => c !== 'cool-fonts'),
+      'combined',
+      'decorated',
+    ];
+    if (decoration.group === 'stars' || decoration.group === 'hearts') {
+      categories.push('cute');
+    }
     combinations.push({
       id: `${styleId}--${decorationId}`,
       name: `${style.name} + ${decoration.name}`,

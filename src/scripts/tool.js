@@ -7,8 +7,8 @@ import { combinations } from '../data/combinations.ts';
 
 const DEBOUNCE_MS = 120;
 const COPY_LABEL_MS = 2000;
-const FAV_STORAGE_KEY = 'fontly-favourites';
-const RECENTS_STORAGE_KEY = 'fontly-recents';
+const FAV_STORAGE_KEY = 'fonti-favourites';
+const RECENTS_STORAGE_KEY = 'fonti-recents';
 const RECENTS_MAX = 8;
 const PREVIEW_SIZES = ['1.125rem', '1.5rem', '1.875rem'];
 const SECTION_ROOT_MARGIN = '800px';
@@ -32,7 +32,7 @@ const combinationById = new Map(combinations.map((c) => [c.id, c]));
 const groupSectionsRaw =
   document.querySelector('[data-tool]')?.getAttribute('data-group-sections') ?? '';
 if (!groupSectionsRaw.trim()) {
-  console.error('[fontly] Missing or empty data-group-sections attribute');
+  console.error('[fonti] Missing or empty data-group-sections attribute');
 }
 const DECORATION_GROUP_IDS = new Set(
   groupSectionsRaw.trim() ? groupSectionsRaw.trim().split(/\s+/) : [],
@@ -467,7 +467,7 @@ function initTool() {
       fragment.querySelector('.tool-card')
     );
     if (!(card instanceof HTMLElement)) {
-      throw new Error('[fontly] Card template is missing .tool-card');
+      throw new Error('[fonti] Card template is missing .tool-card');
     }
 
     card.setAttribute('data-card-id', data.id);

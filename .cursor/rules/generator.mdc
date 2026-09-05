@@ -1,9 +1,9 @@
 ---
-description: Unicode generator correctness and tool interaction rules for Fontly.
+description: Unicode generator correctness and tool interaction rules for Fonti.
 globs: src/scripts/**,src/data/**,src/components/Tool.astro
 ---
 
-# Fontly generator rules
+# Fonti generator rules
 
 ## Code point handling. Get this exactly right.
 

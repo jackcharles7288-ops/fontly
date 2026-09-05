@@ -16,7 +16,7 @@ const createSatteriMarkdownProcessor = markdownSatteri.createSatteriMarkdownProc
 
 if (typeof createSatteriMarkdownProcessor !== 'function') {
   throw new Error(
-    `[fontly] @astrojs/markdown-satteri@${SATTERI_PINNED_VERSION}: createSatteriMarkdownProcessor is missing or not a function. ` +
+    `[fonti] @astrojs/markdown-satteri@${SATTERI_PINNED_VERSION}: createSatteriMarkdownProcessor is missing or not a function. ` +
       `Documented alternative: configure satteri() on markdown.processor together with satteriHeadingIdsPlugin.`,
   );
 }
@@ -51,17 +51,17 @@ const hasToolCategories = page.data.toolCategories.length > 0;
 
 if (hasToolCategories && markerCount === 0) {
   throw new Error(
-    `[fontly] Page src/content/pages/${pageFile} sets toolCategories but the rendered HTML contains no TOOL PLACEHOLDER marker.`,
+    `[fonti] Page src/content/pages/${pageFile} sets toolCategories but the rendered HTML contains no TOOL PLACEHOLDER marker.`,
   );
 }
 if (markerCount > 1) {
   throw new Error(
-    `[fontly] Page src/content/pages/${pageFile} contains TOOL PLACEHOLDER more than once (${markerCount} times). Exactly one marker is required.`,
+    `[fonti] Page src/content/pages/${pageFile} contains TOOL PLACEHOLDER more than once (${markerCount} times). Exactly one marker is required.`,
   );
 }
 if (!hasToolCategories && markerCount === 1) {
   throw new Error(
-    `[fontly] Page src/content/pages/${pageFile} contains TOOL PLACEHOLDER but sets no toolCategories.`,
+    `[fonti] Page src/content/pages/${pageFile} contains TOOL PLACEHOLDER but sets no toolCategories.`,
   );
 }
 
@@ -72,7 +72,7 @@ const breadcrumbs =
   page.id === 'index'
     ? []
     : [
-        { name: 'Home', url: 'https://fontly.cool/' },
+        { name: 'Home', url: new URL('/', Astro.site).href },
         { name: page.data.h1, url: canonical },
       ];
 ---

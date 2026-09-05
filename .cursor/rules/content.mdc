@@ -1,9 +1,9 @@
 ---
-description: Content collection schema and article conversion rules for Fontly.
+description: Content collection schema and article conversion rules for Fonti.
 globs: src/content/**
 ---
 
-# Fontly content rules
+# Fonti content rules
 
 ## Two collections, from the start
 

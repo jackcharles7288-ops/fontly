@@ -3,7 +3,7 @@ title: "Cool Font Generator – Copy and Paste 300+ Cool Fonts"
 h1: "Cool Font Generator: Copy and Paste Cool Fonts"
 description: "Free cool font generator with 300+ styles. Type once, then copy and paste cool fonts into Instagram, TikTok, Discord, Steam and gaming names."
 primaryKeyword: cool fonts
-testPhrase: Fontly
+testPhrase: Fonti
 toolCategories:
   - cursive
   - bold
@@ -29,13 +29,13 @@ showCombined: true
 heroIntro: >-
   Type your text once and turn it into cool fonts you can copy and paste anywhere: Instagram bios, TikTok captions, Discord names, Steam profiles, gaming tags, and more.
 heroIntroBelow: >-
-  Fontly is a free online font generator. No app, no signup, nothing to download, and it works on any phone or computer.
+  Fonti is a free online font generator. No app, no signup, nothing to download, and it works on any phone or computer.
 # Temporary subset of the homepage FAQ (full article has twelve). Owner will
 # replace this with the complete set when the Notion article is converted.
 faq:
   - q: Are these real fonts?
     a: >-
-      No, and that's actually why they work. Fontly converts your letters into
+      No, and that's actually why they work. Fonti converts your letters into
       special Unicode characters that look like different fonts but are ordinary
       text. That's why you can paste them into places that don't allow font
       changes, like an Instagram bio. Nothing is installed on your device.
@@ -47,7 +47,7 @@ faq:
       characters.
   - q: Do I need to download or install anything?
     a: >-
-      No. Fontly is an online tool that runs in your browser, so there's nothing
+      No. Fonti is an online tool that runs in your browser, so there's nothing
       to download, no app to update, and no account to make. It behaves the same
       on a phone, a tablet, and a desktop, which is the easy part of using Unicode
       characters instead of font files.

@@ -155,10 +155,10 @@ for (const style of styles as Style[]) {
   const passThroughResult = applyStyle(PASS_THROUGH_SAMPLE, style);
   console.log(`Pass-through sample "${PASS_THROUGH_SAMPLE}" -> "${passThroughResult}"`);
 
-  const styledFontly = applyStyle('Fontly', style);
-  const count = countCharacters(styledFontly);
+  const styledFonti = applyStyle('Fonti', style);
+  const count = countCharacters(styledFonti);
   console.log(
-    `"Fontly" -> "${styledFontly}": ${count.codePoints} characters, ${count.utf16Length} UTF-16 units`,
+    `"Fonti" -> "${styledFonti}": ${count.codePoints} characters, ${count.utf16Length} UTF-16 units`,
   );
 
   console.log('');
@@ -260,10 +260,10 @@ for (const decoration of decorations) {
     }
   }
 
-  const wrapped = applyDecoration('Fontly', decoration);
+  const wrapped = applyDecoration('Fonti', decoration);
   const wrappedCount = countCharacters(wrapped);
   console.log(
-    `"Fontly" -> "${wrapped}": ${wrappedCount.codePoints} characters, ${wrappedCount.utf16Length} UTF-16 units`,
+    `"Fonti" -> "${wrapped}": ${wrappedCount.codePoints} characters, ${wrappedCount.utf16Length} UTF-16 units`,
   );
   console.log('');
 }
@@ -297,10 +297,10 @@ for (const effect of effects) {
     }
   }
 
-  const applied = applyEffect('Fontly Test', effect);
+  const applied = applyEffect('Fonti Test', effect);
   const appliedCount = countCharacters(applied);
   console.log(
-    `"Fontly Test" -> "${applied}": ${appliedCount.codePoints} characters, ${appliedCount.utf16Length} UTF-16 units`,
+    `"Fonti Test" -> "${applied}": ${appliedCount.codePoints} characters, ${appliedCount.utf16Length} UTF-16 units`,
   );
   console.log('');
 }
@@ -362,7 +362,7 @@ for (const combination of combinations) {
   const style = styleById.get(combination.style);
   const decoration = decorationById.get(combination.decoration);
   if (!style || !decoration) continue;
-  const output = applyCombination('Fontly 1', style, decoration);
+  const output = applyCombination('Fonti 1', style, decoration);
   const existing = outputByValue.get(output);
   if (existing !== undefined) {
     failures.push({

@@ -30,7 +30,7 @@ const {
 
 if (testPhrase === undefined) {
   console.warn(
-    `[fontly] Missing testPhrase in src/content/pages/${pageFile}.md — input will be left empty.`,
+    `[fonti] Missing testPhrase in src/content/pages/${pageFile}.md — input will be left empty.`,
   );
 }
 
@@ -49,14 +49,14 @@ const groupSectionsAttr = categories
   .join(' ');
 if (!groupSectionsAttr) {
   throw new Error(
-    `[fontly] data-group-sections would be empty — no chip:false categories in src/data/categories.ts.`,
+    `[fonti] data-group-sections would be empty — no chip:false categories in src/data/categories.ts.`,
   );
 }
 
 for (const decoration of decorations) {
   if (!DECORATION_GROUP_IDS.has(decoration.group)) {
     throw new Error(
-      `[fontly] Unknown decoration group "${decoration.group}" on id "${decoration.id}" — every group must be one of the six chip:false ids in src/data/categories.ts.`,
+      `[fonti] Unknown decoration group "${decoration.group}" on id "${decoration.id}" — every group must be one of the six chip:false ids in src/data/categories.ts.`,
     );
   }
 }
@@ -178,7 +178,7 @@ const sections: Section[] = toolCategories.map((id) => {
   const category = categoryLookup.get(id);
   if (!category) {
     throw new Error(
-      `[fontly] Unknown toolCategories id "${id}" in src/content/pages/${pageFile}.md — every id must exist in src/data/categories.ts.`,
+      `[fonti] Unknown toolCategories id "${id}" in src/content/pages/${pageFile}.md — every id must exist in src/data/categories.ts.`,
     );
   }
   if (DECORATION_GROUP_IDS.has(id)) {
@@ -239,7 +239,7 @@ const filterChips = categories
   .map((category) => ({ id: category.id, label: category.name }));
 ---
 
-<section class="tool" data-tool id="fontly-tool" data-group-sections={groupSectionsAttr}>
+<section class="tool" data-tool id="fonti-tool" data-group-sections={groupSectionsAttr}>
   <svg class="tool__sprite" aria-hidden="true" focusable="false">
     <symbol
       id="icon-copy"

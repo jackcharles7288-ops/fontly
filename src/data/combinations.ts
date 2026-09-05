@@ -50,12 +50,12 @@ const decorationById = new Map(decorations.map((d) => [d.id, d]));
 
 for (const id of STYLE_IDS) {
   if (!styleById.has(id)) {
-    throw new Error(`[fontly] combinations.ts: unknown style id "${id}"`);
+    throw new Error(`[fonti] combinations.ts: unknown style id "${id}"`);
   }
 }
 for (const id of DECORATION_IDS) {
   if (!decorationById.has(id)) {
-    throw new Error(`[fontly] combinations.ts: unknown decoration id "${id}"`);
+    throw new Error(`[fonti] combinations.ts: unknown decoration id "${id}"`);
   }
 }
 

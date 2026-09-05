@@ -1,13 +1,13 @@
 ---
-description: Fontly core project rules. Static Astro font generator site.
+description: Fonti core project rules. Static Astro font generator site.
 alwaysApply: true
 ---
 
-# Fontly build rules
+# Fonti build rules
 
 ## What this project is
 
-Fontly is a static font generator website. Visitors type text, the tool
+Fonti is a static font generator website. Visitors type text, the tool
 renders it in many Unicode styles, and they copy a style to paste into
 Instagram, TikTok, Discord or WhatsApp. Every page carries a long article
 below the tool. The tool is the hero and sits above the fold on every page.
@@ -139,12 +139,12 @@ perfect lab score.
 ## SEO
 
 - One h1 per page, taken from frontmatter.
-- Canonical URL on every real page. Site is https://fontly.cool. Trailing
+- Canonical URL on every real page. Site is https://fonti.cool. Trailing
   slashes consistent everywhere.
 - The 404 page carries no canonical and does carry a noindex robots directive.
   An error document is served at every broken URL a visitor types; a canonical
   on it would claim those URLs are one indexable page, and
-  https://fontly.cool/404/ is not a real route this site generates.
+  https://fonti.cool/404/ is not a real route this site generates.
 - Add BreadcrumbList structured data on sub-pages. Omit it on the homepage,
   where a single self-pointing crumb describes no real position. It is the only
   structured data on this site that still changes what a searcher sees.
@@ -216,7 +216,7 @@ they live here. Changing them without an explicit owner decision is a bug.
   but deferred until articles are converted, because there is no real tip
   content to put in it yet. When built, tips render as callout boxes.
 - Site header: `Header.astro` in normal document flow (not sticky), rendered
-  immediately above `<main>`. Entire content is the single word Fontly as a
+  immediately above `<main>`. Entire content is the single word Fonti as a
   link to `/`. No navigation links of any kind until more than one page is
   live — links to pages that do not exist are banned. Semantic `<header>`.
   Full-width background with a bottom border is fine; the inner content must
@@ -224,8 +224,8 @@ they live here. Changing them without an explicit owner decision is a bug.
   related tools) so those elements share one left edge. The tool at 72rem is
   the only element wider than that spine.
 - Site footer: `Footer.astro` in normal document flow, immediately below
-  `<main>`. Entire content is three things only: the word Fontly, the address
-  contact@fontly.cool as a mailto: link, and the line © 2026 Fontly. No
+  `<main>`. Entire content is three things only: the word Fonti, the address
+  contact@fonti.cool as a mailto: link, and the line © 2026 Fonti. No
   tagline, nav list, social links, or legal page. Same 43.75rem inner measure
   as the article spine, semantic `<footer>`.
 - No count may appear in visible prose until `styles.length` actually reaches

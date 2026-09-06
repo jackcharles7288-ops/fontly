@@ -1,5 +1,5 @@
 ---
-import { styles } from '../data/styles';
+import { styles, DIGITS_NOTE } from '../data/styles';
 import { categories } from '../data/categories';
 import { decorations, applyDecoration } from '../data/decorations';
 import { effects, applyEffect } from '../data/effects';
@@ -455,7 +455,7 @@ const filterChips = categories
         <span data-counter-utf16>0</span> units
       </p>
       <p class="tool-card__digits-note is-quiet" data-digits-note hidden>
-        Numbers stay plain.
+        {DIGITS_NOTE}
       </p>
       <p class="tool-card__case-note" hidden></p>
       <p class="tool-card__caveat-note" hidden></p>
@@ -485,7 +485,16 @@ const filterChips = categories
                 <div class="tool__combo-notes" data-combo-notes>
                   <span class="tool-card__risk" data-combo-caveat hidden></span>
                   <p class="tool-card__case-note" data-combo-case-note hidden></p>
-                  <p class="tool-card__digits-note" data-combo-digits-note hidden></p>
+                  <p
+                    class="tool-card__digits-note is-quiet"
+                    data-combo-digits-note
+                    hidden
+                  ></p>
+                  <p
+                    class="tool-card__caveat-note"
+                    data-combo-caveat-note
+                    hidden
+                  ></p>
                 </div>
               </div>
               <div class="tool__combo-panel">
@@ -582,7 +591,7 @@ const filterChips = categories
                         </p>
                         {card.digitsPassThrough ? (
                           <p class="tool-card__digits-note is-quiet" data-digits-note hidden>
-                            Numbers stay plain.
+                            {DIGITS_NOTE}
                           </p>
                         ) : null}
                         {card.caseNote ? <p class="tool-card__case-note">{card.caseNote}</p> : null}

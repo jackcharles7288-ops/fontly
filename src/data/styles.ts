@@ -52,6 +52,9 @@ const CIRCLED_DIGITS: string[] = [
   ...Array.from({ length: 9 }, (_, i) => String.fromCodePoint(0x2460 + i)),
 ];
 
+/** Visitor-facing note shown when a style leaves digits unchanged. */
+export const DIGITS_NOTE = 'Numbers stay plain.';
+
 export const styles: Style[] = [
   // --- cursive ---
   {

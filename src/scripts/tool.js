@@ -1,6 +1,6 @@
 // Browser wiring only. Mapping lives in generator.js — do not duplicate it.
 import { applyStyle, applyCombination, applyCombo, countCharacters } from './generator.js';
-import { styles } from '../data/styles.ts';
+import { styles, DIGITS_NOTE } from '../data/styles.ts';
 import { decorations, applyDecoration } from '../data/decorations.ts';
 import { effects, applyEffect } from '../data/effects.ts';
 import { combinations } from '../data/combinations.ts';
@@ -422,6 +422,7 @@ function initTool() {
   const comboCaveatEl = root.querySelector('[data-combo-caveat]');
   const comboCaseNoteEl = root.querySelector('[data-combo-case-note]');
   const comboDigitsNoteEl = root.querySelector('[data-combo-digits-note]');
+  const comboCaveatNoteEl = root.querySelector('[data-combo-caveat-note]');
 
   /**
    * @param {string} id
@@ -533,11 +534,20 @@ function initTool() {
     }
     if (comboDigitsNoteEl instanceof HTMLElement) {
       if (style && style.digits === null) {
-        comboDigitsNoteEl.textContent = 'Numbers stay plain.';
+        comboDigitsNoteEl.textContent = DIGITS_NOTE;
         comboDigitsNoteEl.hidden = false;
       } else {
         comboDigitsNoteEl.textContent = '';
         comboDigitsNoteEl.hidden = true;
+      }
+    }
+    if (comboCaveatNoteEl instanceof HTMLElement) {
+      if (style && style.caveatNote) {
+        comboCaveatNoteEl.textContent = style.caveatNote;
+        comboCaveatNoteEl.hidden = false;
+      } else {
+        comboCaveatNoteEl.textContent = '';
+        comboCaveatNoteEl.hidden = true;
       }
     }
   }

@@ -419,14 +419,14 @@ main {
   min-width: 0;
 }
 
-.tool__combo-notes:empty,
 .tool__combo-notes > [hidden] {
   display: none;
 }
 
 .tool__combo-notes .tool-card__risk,
 .tool__combo-notes .tool-card__case-note,
-.tool__combo-notes .tool-card__digits-note {
+.tool__combo-notes .tool-card__digits-note,
+.tool__combo-notes .tool-card__caveat-note {
   margin: 0;
 }
 

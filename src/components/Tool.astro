@@ -486,6 +486,29 @@ const filterChips = categories
         {
           section.builder ? (
             <div class="tool__combo">
+              <div class="tool__combo-preview">
+                <div class="tool__combo-preview-header">
+                  <p class="tool__combo-preview-label">Live preview</p>
+                  <button
+                    type="button"
+                    class="tool-card__icon tool-card__copy"
+                    data-copy="combo"
+                    aria-label="Copy combo result"
+                  >
+                    <svg
+                      class="tool-card__svg"
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      aria-hidden="true"
+                    >
+                      <use href="#icon-copy"></use>
+                    </svg>
+                  </button>
+                </div>
+                <p class="tool__combo-output" data-combo-output></p>
+                <p class="tool__combo-count"><span data-combo-count>0</span> units</p>
+              </div>
               <div class="tool__combo-panel">
                 <h3 class="tool__combo-heading">1. Base font</h3>
                 <div
@@ -526,29 +549,6 @@ const filterChips = categories
                   aria-label="Wrapper"
                   id="tool-combo-wrapper"
                 ></div>
-              </div>
-              <div class="tool__combo-preview">
-                <div class="tool__combo-preview-header">
-                  <p class="tool__combo-preview-label">Live preview</p>
-                  <button
-                    type="button"
-                    class="tool-card__icon tool-card__copy"
-                    data-copy="combo"
-                    aria-label="Copy combo result"
-                  >
-                    <svg
-                      class="tool-card__svg"
-                      viewBox="0 0 24 24"
-                      width="18"
-                      height="18"
-                      aria-hidden="true"
-                    >
-                      <use href="#icon-copy"></use>
-                    </svg>
-                  </button>
-                </div>
-                <p class="tool__combo-output" data-combo-output></p>
-                <p class="tool__combo-count"><span data-combo-count>0</span> units</p>
               </div>
             </div>
           ) : (

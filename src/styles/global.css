@@ -464,6 +464,9 @@ main {
 .tool__combo-preview {
   justify-items: stretch;
   text-align: center;
+  position: sticky;
+  top: 0.75rem;
+  z-index: 1;
 }
 
 .tool__combo-preview-header {
@@ -503,6 +506,19 @@ main {
   margin: 0;
   font-size: 0.85rem;
   color: #555;
+}
+
+/* Wrapper decorations only — scroll inside the existing group container. */
+#tool-combo-wrapper {
+  max-height: 12rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (min-width: 40rem) {
+  #tool-combo-wrapper {
+    max-height: 18rem;
+  }
 }
 
 /* One column by default; two from 40rem; three from 60rem.

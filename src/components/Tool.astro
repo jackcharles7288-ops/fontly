@@ -230,6 +230,12 @@ const sections: Section[] = toolCategories.map((id) => {
 });
 
 const sectionById = new Map(sections.map((section) => [section.id, section]));
+// Builder sections first so the Font Combiner sits above the card sections on
+// All. First card section stays the SSR-mounted one (was toolCategories[0]).
+const builderSections = sections.filter((section) => section.builder);
+const cardSections = sections.filter((section) => !section.builder);
+const displaySections = [...builderSections, ...cardSections];
+const firstCardSectionId = cardSections[0]?.id;
 // Chip order follows categories.ts. cool-fonts, cute and decorated are chips
 // with no section. Entries with chip: false are sections only.
 const filterChips = categories
@@ -463,11 +469,11 @@ const filterChips = categories
   </template>
 
   {
-    sections.map((section, sectionIndex) => (
+    displaySections.map((section) => (
       <section
         class:list={['tool__category', { tool__decorated: section.decorated }]}
         data-category={section.id}
-        data-mounted={sectionIndex === 0 ? 'true' : 'false'}
+        data-mounted={section.id === firstCardSectionId ? 'true' : 'false'}
       >
         <h2 class="tool__category-heading">{section.heading}</h2>
         {section.note ? <p class="tool__section-note">{section.note}</p> : null}
@@ -542,7 +548,7 @@ const filterChips = categories
           ) : (
             <ul class="tool__cards">
               {
-                sectionIndex === 0
+                section.id === firstCardSectionId
                   ? section.cards.map((card) => (
                       <li
                         class="tool-card"

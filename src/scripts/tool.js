@@ -540,6 +540,11 @@ function initTool() {
         comboDigitsNoteEl.textContent = '';
         comboDigitsNoteEl.hidden = true;
       }
+      // Same quiet test as updateCard's card digit note (tool.js:279-282).
+      comboDigitsNoteEl.classList.toggle(
+        'is-quiet',
+        !(style != null && style.digits === null && textHasDigit(input.value)),
+      );
     }
     if (comboCaveatNoteEl instanceof HTMLElement) {
       if (style && style.caveatNote) {

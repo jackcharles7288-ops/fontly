@@ -1,3 +1,5 @@
+import { BUILDER_LABEL } from './styles';
+
 export interface Category {
   id: string;
   name: string;
@@ -47,8 +49,8 @@ export const categories: Category[] = [
   { id: 'decorated', name: 'Decorated' },
   // an alphabet wrapped in a decoration
   { id: 'combined', name: 'Combined', heading: 'Combined Fonts' },
-  // interactive alphabet + separator + decoration builder
-  { id: 'combo', name: 'Combo', heading: 'Font Combiner' },
+  // interactive alphabet + separator + decoration builder (entrance is not a chip)
+  { id: 'combo', name: BUILDER_LABEL, heading: BUILDER_LABEL },
   { id: 'favourites', name: 'Favourites' },
   { id: 'recent', name: 'Recent' },
   // star and sparkle characters

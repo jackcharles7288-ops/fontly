@@ -379,6 +379,9 @@ function initTool() {
   const sections = root.querySelectorAll('.tool__category');
   /** @type {NodeListOf<HTMLButtonElement>} */
   const chips = root.querySelectorAll('.tool__chip');
+  const builderEntrance = root.querySelector(
+    '.tool__case-btn[data-filter="combo"]',
+  );
 
   /** @type {ReturnType<typeof setTimeout> | undefined} */
   let debounceTimer;
@@ -800,7 +803,7 @@ function initTool() {
       if (!catId) continue;
       if (catId === 'combo') {
         section.hidden =
-          query !== '' || (activeFilter !== 'all' && activeFilter !== 'combo');
+          query !== '' || activeFilter !== 'combo';
         continue;
       }
       const catalog = catalogByCategory.get(catId) ?? [];
@@ -894,6 +897,25 @@ function initTool() {
       return;
     }
 
+    const filterBtn = target.closest('[data-filter]');
+    if (filterBtn instanceof HTMLButtonElement && root.contains(filterBtn)) {
+      const filter = filterBtn.getAttribute('data-filter');
+      if (!filter) return;
+      activeFilter = filter;
+      for (const c of chips) {
+        const on = c.getAttribute('data-filter') === filter;
+        c.classList.toggle('is-active', on);
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      if (builderEntrance instanceof HTMLButtonElement) {
+        const on = filter === 'combo';
+        builderEntrance.classList.toggle('is-active', on);
+        builderEntrance.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      applyFilter();
+      return;
+    }
+
     const caseBtn = target.closest('[data-case]');
     if (caseBtn instanceof HTMLButtonElement && root.contains(caseBtn)) {
       const mode = caseBtn.getAttribute('data-case');
@@ -903,20 +925,6 @@ function initTool() {
       else return;
       // Same refresh path as debounced typing — no second update mechanism.
       refreshVisible(input.value);
-      return;
-    }
-
-    const chip = target.closest('.tool__chip');
-    if (chip instanceof HTMLButtonElement && root.contains(chip)) {
-      const filter = chip.getAttribute('data-filter');
-      if (!filter) return;
-      activeFilter = filter;
-      for (const c of chips) {
-        const on = c === chip;
-        c.classList.toggle('is-active', on);
-        c.setAttribute('aria-pressed', on ? 'true' : 'false');
-      }
-      applyFilter();
       return;
     }
 

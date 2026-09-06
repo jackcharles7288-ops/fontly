@@ -1,5 +1,5 @@
 ---
-import { styles, DIGITS_NOTE } from '../data/styles';
+import { styles, DIGITS_NOTE, BUILDER_LABEL } from '../data/styles';
 import { categories } from '../data/categories';
 import { decorations, applyDecoration } from '../data/decorations';
 import { effects, applyEffect } from '../data/effects';
@@ -230,8 +230,8 @@ const sections: Section[] = toolCategories.map((id) => {
 });
 
 const sectionById = new Map(sections.map((section) => [section.id, section]));
-// Builder sections first so the Font Combiner sits above the card sections on
-// All. First card section stays the SSR-mounted one (was toolCategories[0]).
+// Builder sections first so the builder sits above the card sections when shown.
+// First card section stays the SSR-mounted one (was toolCategories[0]).
 const builderSections = sections.filter((section) => section.builder);
 const cardSections = sections.filter((section) => !section.builder);
 const displaySections = [...builderSections, ...cardSections];
@@ -247,8 +247,7 @@ const filterChips = categories
     if (
       category.id === 'cool-fonts' ||
       category.id === 'cute' ||
-      category.id === 'decorated' ||
-      category.id === 'combo'
+      category.id === 'decorated'
     ) {
       return true;
     }
@@ -355,6 +354,12 @@ const filterChips = categories
         <button type="button" class="tool__case-btn" data-case="upper">UPPERCASE</button>
         <button type="button" class="tool__case-btn" data-case="lower">lowercase</button>
         <button type="button" class="tool__case-btn" data-case="title">Title Case</button>
+        <button
+          type="button"
+          class="tool__case-btn"
+          data-filter="combo"
+          aria-pressed="false"
+        >{BUILDER_LABEL}</button>
       </div>
       <div class="tool__end">
         <div class="tool__preview">
@@ -474,6 +479,7 @@ const filterChips = categories
         class:list={['tool__category', { tool__decorated: section.decorated }]}
         data-category={section.id}
         data-mounted={section.id === firstCardSectionId ? 'true' : 'false'}
+        hidden={section.builder ? true : undefined}
       >
         <h2 class="tool__category-heading">{section.heading}</h2>
         {section.note ? <p class="tool__section-note">{section.note}</p> : null}

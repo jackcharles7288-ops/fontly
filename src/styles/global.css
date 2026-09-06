@@ -348,7 +348,8 @@ main {
   opacity: 1;
 }
 
-.tool__chip.is-active {
+.tool__chip.is-active,
+.tool__case-btn.is-active {
   color: #fff;
   background: var(--accent);
   border-color: var(--accent);

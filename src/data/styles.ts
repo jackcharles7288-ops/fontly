@@ -55,6 +55,9 @@ const CIRCLED_DIGITS: string[] = [
 /** Visitor-facing note shown when a style leaves digits unchanged. */
 export const DIGITS_NOTE = 'Numbers stay plain.';
 
+/** Label for the interactive builder entrance and its section heading. */
+export const BUILDER_LABEL = 'Make your own';
+
 export const styles: Style[] = [
   // --- cursive ---
   {

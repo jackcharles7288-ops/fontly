@@ -1,9 +1,10 @@
 // Browser wiring only. Mapping lives in generator.js — do not duplicate it.
-import { applyStyle, applyCombination, countCharacters } from './generator.js';
+import { applyStyle, applyCombination, applyCombo, countCharacters } from './generator.js';
 import { styles } from '../data/styles.ts';
 import { decorations, applyDecoration } from '../data/decorations.ts';
 import { effects, applyEffect } from '../data/effects.ts';
 import { combinations } from '../data/combinations.ts';
+import { separators } from '../data/separators.ts';
 
 const DEBOUNCE_MS = 120;
 const COPY_LABEL_MS = 2000;
@@ -28,6 +29,9 @@ const effectById = new Map(effects.map((e) => [e.id, e]));
 /** Alphabet + decoration pairs. Ids never collide with a style id. */
 /** @type {Map<string, import('../data/combinations.ts').Combination>} */
 const combinationById = new Map(combinations.map((c) => [c.id, c]));
+
+/** @type {Map<string, import('../data/separators.ts').Separator>} */
+const separatorById = new Map(separators.map((s) => [s.id, s]));
 
 const groupSectionsRaw =
   document.querySelector('[data-tool]')?.getAttribute('data-group-sections') ?? '';
@@ -410,6 +414,104 @@ function initTool() {
     catalogByCategory.set(catId, catalogForCategory(catId));
   }
 
+  const comboStyleGroup = root.querySelector('#tool-combo-style');
+  const comboSeparatorGroup = root.querySelector('#tool-combo-separator');
+  const comboWrapperGroup = root.querySelector('#tool-combo-wrapper');
+  const comboOutputEl = root.querySelector('[data-combo-output]');
+  const comboCountEl = root.querySelector('[data-combo-count]');
+
+  /**
+   * @param {string} id
+   * @param {string} label
+   * @param {boolean} pressed
+   * @param {{ title?: string, ariaLabel?: string }} [opts]
+   * @returns {HTMLButtonElement}
+   */
+  function createComboButton(id, label, pressed, opts) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'tool__combo-btn';
+    btn.setAttribute('data-combo-id', id);
+    btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+    btn.textContent = label;
+    if (opts?.title) btn.title = opts.title;
+    if (opts?.ariaLabel) btn.setAttribute('aria-label', opts.ariaLabel);
+    return btn;
+  }
+
+  if (comboStyleGroup instanceof HTMLElement) {
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(createComboButton('', 'Plain', true));
+    for (const style of styles) {
+      fragment.appendChild(createComboButton(style.id, style.name, false));
+    }
+    comboStyleGroup.appendChild(fragment);
+  }
+
+  if (comboSeparatorGroup instanceof HTMLElement) {
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(createComboButton('', 'None', true));
+    for (const separator of separators) {
+      const isSpace = separator.id === 'space';
+      const label = isSpace ? 'space' : separator.char;
+      fragment.appendChild(
+        createComboButton(separator.id, label, false, {
+          title: separator.name,
+          ariaLabel: separator.name,
+        }),
+      );
+    }
+    comboSeparatorGroup.appendChild(fragment);
+  }
+
+  if (comboWrapperGroup instanceof HTMLElement) {
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(createComboButton('', 'None', true));
+    for (const groupId of DECORATION_GROUP_IDS) {
+      for (const decoration of decorations) {
+        if (decoration.group !== groupId) continue;
+        fragment.appendChild(
+          createComboButton(
+            decoration.id,
+            `${decoration.prefix} ${decoration.suffix}`,
+            false,
+            { title: decoration.name, ariaLabel: decoration.name },
+          ),
+        );
+      }
+    }
+    comboWrapperGroup.appendChild(fragment);
+  }
+
+  /**
+   * @param {Element | null} group
+   * @returns {string}
+   */
+  function pressedComboId(group) {
+    if (!(group instanceof HTMLElement)) return '';
+    const pressed = group.querySelector('.tool__combo-btn[aria-pressed="true"]');
+    return pressed instanceof HTMLElement
+      ? (pressed.getAttribute('data-combo-id') ?? '')
+      : '';
+  }
+
+  function refreshCombo() {
+    if (!(comboOutputEl instanceof HTMLElement)) return;
+    const styleId = pressedComboId(comboStyleGroup);
+    const separatorId = pressedComboId(comboSeparatorGroup);
+    const decorationId = pressedComboId(comboWrapperGroup);
+    const style = styleId ? styleById.get(styleId) : undefined;
+    const separator = separatorId ? separatorById.get(separatorId) : undefined;
+    const decoration = decorationId ? decorationById.get(decorationId) : undefined;
+    const result = applyCombo(input.value, style, separator, decoration);
+    comboOutputEl.textContent = result;
+    if (comboCountEl instanceof HTMLElement) {
+      comboCountEl.textContent = String(countCharacters(result).utf16Length);
+    }
+  }
+
+  refreshCombo();
+
   const cardObserver = new IntersectionObserver(
     (entries) => {
       const text = input.value;
@@ -608,6 +710,7 @@ function initTool() {
     for (const card of visibleCards) {
       updateCard(card, text);
     }
+    refreshCombo();
   }
 
   /**
@@ -648,6 +751,11 @@ function initTool() {
     for (const section of sections) {
       const catId = section.getAttribute('data-category');
       if (!catId) continue;
+      if (catId === 'combo') {
+        section.hidden =
+          query !== '' || (activeFilter !== 'all' && activeFilter !== 'combo');
+        continue;
+      }
       const catalog = catalogByCategory.get(catId) ?? [];
       /** @type {CardData[]} */
       const matching = [];
@@ -726,6 +834,19 @@ function initTool() {
     const target = event.target;
     if (!(target instanceof Element)) return;
 
+    const comboBtn = target.closest('.tool__combo-btn');
+    if (comboBtn instanceof HTMLButtonElement && root.contains(comboBtn)) {
+      const group = comboBtn.closest('.tool__combo-group');
+      if (!(group instanceof HTMLElement)) return;
+      for (const btn of group.querySelectorAll('.tool__combo-btn')) {
+        if (btn instanceof HTMLButtonElement) {
+          btn.setAttribute('aria-pressed', btn === comboBtn ? 'true' : 'false');
+        }
+      }
+      refreshCombo();
+      return;
+    }
+
     const caseBtn = target.closest('[data-case]');
     if (caseBtn instanceof HTMLButtonElement && root.contains(caseBtn)) {
       const mode = caseBtn.getAttribute('data-case');
@@ -781,6 +902,34 @@ function initTool() {
 
     const button = target.closest('[data-copy]');
     if (!(button instanceof HTMLButtonElement)) return;
+
+    if (button.getAttribute('data-copy') === 'combo') {
+      const output = root.querySelector('[data-combo-output]');
+      if (!(output instanceof HTMLElement)) return;
+      refreshCombo();
+      const text = output.textContent ?? '';
+      const ok = await copyText(text);
+      if (ok) {
+        announce('Copied combo');
+        const prev = copyTimers.get(button);
+        if (prev !== undefined) clearTimeout(prev);
+        const useEl = button.querySelector('use');
+        if (useEl instanceof SVGUseElement) {
+          useEl.setAttribute('href', '#icon-done');
+          copyTimers.set(
+            button,
+            setTimeout(() => {
+              useEl.setAttribute('href', '#icon-copy');
+              copyTimers.delete(button);
+            }, COPY_LABEL_MS),
+          );
+        }
+      } else {
+        announce('Copy failed');
+      }
+      return;
+    }
+
     const card = button.closest('.tool-card');
     if (!(card instanceof HTMLElement)) return;
     ensureCardFresh(card, input.value);

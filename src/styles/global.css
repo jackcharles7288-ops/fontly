@@ -388,6 +388,103 @@ main {
   color: #555;
 }
 
+.tool__combo {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.tool__combo-panel,
+.tool__combo-preview {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+.tool__combo-heading {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.tool__combo-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.tool__combo-btn {
+  flex: 0 0 auto;
+  padding: 0.35rem 0.75rem;
+  font: inherit;
+  font-size: 0.85rem;
+  color: #111;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.tool__combo-btn[aria-pressed='true'] {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.tool__combo-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tool__combo-preview {
+  justify-items: stretch;
+  text-align: center;
+}
+
+.tool__combo-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 1.75rem;
+}
+
+.tool__combo-preview-label {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.tool__combo-preview-header .tool-card__copy {
+  margin-left: auto;
+}
+
+.tool__combo-output {
+  margin: 0;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.75rem;
+  font-size: var(--preview-size, 1.5rem);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+}
+
+.tool__combo-count {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
 /* One column by default; two from 40rem; three from 60rem.
    minmax(0, 1fr) so a column is never sized by its own content. */
 .tool__cards {

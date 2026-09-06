@@ -2,6 +2,8 @@
 // Iterates by code point (for...of) so astral-plane characters are never
 // split. Never uses charCodeAt or string indexing with [i].
 
+import { applyDecoration } from '../data/decorations.ts';
+
 const UPPER_A = 0x41;
 const UPPER_Z = 0x5a;
 const LOWER_A = 0x61;
@@ -124,6 +126,37 @@ export function applyStyle(text, style) {
  */
 export function applyCombination(text, style, decoration) {
   return decoration.prefix + applyStyle(text, style) + decoration.suffix;
+}
+
+/**
+ * Interactive Combo builder: optional alphabet, optional per-letter separator,
+ * optional decoration wrap. Style first, then join letters, then wrap.
+ * @param {string} text
+ * @param {import('../data/styles.js').Style | null | undefined} style
+ * @param {{ char: string } | null | undefined} separator
+ * @param {import('../data/decorations.ts').Decoration | null | undefined} decoration
+ * @returns {string}
+ */
+export function applyCombo(text, style, separator, decoration) {
+  const styled = style == null ? text : applyStyle(text, style);
+  let joined = styled;
+  if (separator != null) {
+    const words = styled.split(' ');
+    joined = words
+      .map((word) => {
+        let out = '';
+        let first = true;
+        for (const ch of word) {
+          if (!first) out += separator.char;
+          out += ch;
+          first = false;
+        }
+        return out;
+      })
+      .join(' ');
+  }
+  if (decoration == null) return joined;
+  return applyDecoration(joined, decoration);
 }
 
 /**

@@ -17,6 +17,7 @@ toolCategories:
   - upside-down
   - effects
   - combined
+  - combo
   - stars
   - hearts
   - brackets

@@ -6,6 +6,7 @@ import { styles, type Style } from '../src/data/styles.ts';
 import { decorations, applyDecoration } from '../src/data/decorations.ts';
 import { effects, applyEffect } from '../src/data/effects.ts';
 import { combinations } from '../src/data/combinations.ts';
+import { separators } from '../src/data/separators.ts';
 import { applyStyle, applyCombination, countCharacters } from '../src/scripts/generator.js';
 
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -312,6 +313,32 @@ for (const finding of emojiPropertyFindings) {
   console.log(`  ${finding.codePointHex}  ${finding.ch}  ${finding.subject}`);
 }
 console.log(`Total: ${emojiPropertyFindings.length}`);
+console.log('='.repeat(70));
+
+// Separators are single code points inserted between letters in the Combo builder.
+console.log('='.repeat(70));
+console.log('SEPARATORS');
+console.log('='.repeat(70));
+for (const separator of separators) {
+  const cps = [...separator.char];
+  if (cps.length !== 1) {
+    failures.push({
+      subject: separator.id,
+      cause: `separator char must be exactly one code point, found ${cps.length}`,
+    });
+  }
+  for (const ch of cps) {
+    reportEmojiProperty(ch, separator.id);
+    if (EMOJI_PRESENTATION.test(ch) || EMOJI.test(ch)) {
+      failures.push({
+        subject: separator.id,
+        cause: `separator char ${codePointHex(ch)} carries emoji or emoji presentation`,
+      });
+    }
+    console.log(`  ${separator.id}  ${separator.name}  ${codePointHex(ch)}`);
+  }
+}
+console.log(`SEPARATORS: ${separators.length}`);
 console.log('='.repeat(70));
 
 // Combinations are alphabet + decoration pairs built as a cross product of two

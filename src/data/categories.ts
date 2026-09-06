@@ -47,6 +47,8 @@ export const categories: Category[] = [
   { id: 'decorated', name: 'Decorated' },
   // an alphabet wrapped in a decoration
   { id: 'combined', name: 'Combined', heading: 'Combined Fonts' },
+  // interactive alphabet + separator + decoration builder
+  { id: 'combo', name: 'Combo', heading: 'Font Combiner' },
   { id: 'favourites', name: 'Favourites' },
   { id: 'recent', name: 'Recent' },
   // star and sparkle characters

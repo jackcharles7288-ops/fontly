@@ -419,6 +419,9 @@ function initTool() {
   const comboWrapperGroup = root.querySelector('#tool-combo-wrapper');
   const comboOutputEl = root.querySelector('[data-combo-output]');
   const comboCountEl = root.querySelector('[data-combo-count]');
+  const comboCaveatEl = root.querySelector('[data-combo-caveat]');
+  const comboCaseNoteEl = root.querySelector('[data-combo-case-note]');
+  const comboDigitsNoteEl = root.querySelector('[data-combo-digits-note]');
 
   /**
    * @param {string} id
@@ -507,6 +510,35 @@ function initTool() {
     comboOutputEl.textContent = result;
     if (comboCountEl instanceof HTMLElement) {
       comboCountEl.textContent = String(countCharacters(result).utf16Length);
+    }
+
+    // Base font notes: caveat badge, case note, digit note. Absent field = hidden.
+    if (comboCaveatEl instanceof HTMLElement) {
+      if (style && style.caveat) {
+        comboCaveatEl.textContent = style.caveat;
+        comboCaveatEl.hidden = false;
+      } else {
+        comboCaveatEl.textContent = '';
+        comboCaveatEl.hidden = true;
+      }
+    }
+    if (comboCaseNoteEl instanceof HTMLElement) {
+      if (style && style.caseNote) {
+        comboCaseNoteEl.textContent = style.caseNote;
+        comboCaseNoteEl.hidden = false;
+      } else {
+        comboCaseNoteEl.textContent = '';
+        comboCaseNoteEl.hidden = true;
+      }
+    }
+    if (comboDigitsNoteEl instanceof HTMLElement) {
+      if (style && style.digits === null) {
+        comboDigitsNoteEl.textContent = 'Numbers stay plain.';
+        comboDigitsNoteEl.hidden = false;
+      } else {
+        comboDigitsNoteEl.textContent = '';
+        comboDigitsNoteEl.hidden = true;
+      }
     }
   }
 

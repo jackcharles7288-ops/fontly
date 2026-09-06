@@ -411,6 +411,25 @@ main {
   font-weight: 600;
 }
 
+.tool__combo-notes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+  min-width: 0;
+}
+
+.tool__combo-notes:empty,
+.tool__combo-notes > [hidden] {
+  display: none;
+}
+
+.tool__combo-notes .tool-card__risk,
+.tool__combo-notes .tool-card__case-note,
+.tool__combo-notes .tool-card__digits-note {
+  margin: 0;
+}
+
 .tool__combo-group {
   display: flex;
   flex-wrap: wrap;

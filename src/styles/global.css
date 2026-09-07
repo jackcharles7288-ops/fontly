@@ -89,7 +89,7 @@ main {
 }
 
 .article {
-  max-width: 43.75rem;
+  max-width: 72rem;
   margin-top: 2rem;
   margin-inline: auto;
   /* Long unbroken tokens (e.g. sentinel strings) must wrap, not widen the page. */
@@ -128,6 +128,43 @@ main {
   .hero-intro {
     font-size: 0.9375rem; /* 15px at a 16px root — floor for this round */
     line-height: 1.45;
+  }
+}
+
+/* Article tables — site-wide. Tokens only; no new hex literals. */
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.article th,
+.article td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.article th {
+  font-weight: 700;
+  background: var(--surface);
+}
+
+.article th:first-child,
+.article td:first-child {
+  /* Override .article overflow-wrap: anywhere so labels do not split mid-word. */
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+@media (max-width: 39.99rem) {
+  .article table {
+    font-size: 0.875rem;
+  }
+
+  .article th,
+  .article td {
+    padding: 0.35rem 0.5rem;
   }
 }
 

@@ -7,10 +7,6 @@ testPhrase: Cursive
 toolCategories:
   - cursive
   - combo
-heroIntro: >-
-  This cursive font generator turns your text into six cursive styles you can
-  copy and paste straight into an Instagram bio, a TikTok display name, a
-  Discord nickname, or a WhatsApp About line.
 faq:
   - q: What is a cursive font generator?
     a: >-

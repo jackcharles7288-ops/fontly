@@ -143,18 +143,14 @@ main {
   padding: 0.5rem 0.75rem;
   text-align: left;
   border-bottom: 1px solid var(--border);
+  /* Override .article overflow-wrap: anywhere so cells do not split mid-word. */
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .article th {
   font-weight: 700;
   background: var(--surface);
-}
-
-.article th:first-child,
-.article td:first-child {
-  /* Override .article overflow-wrap: anywhere so labels do not split mid-word. */
-  overflow-wrap: normal;
-  word-break: normal;
 }
 
 @media (max-width: 39.99rem) {

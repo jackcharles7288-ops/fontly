@@ -273,7 +273,7 @@ export const styles: Style[] = [
   {
     id: 'double-struck',
     name: 'Double-struck',
-    categories: ['cool-fonts', 'fancy', 'number'],
+    categories: ['cool-fonts', 'fancy', 'number', 'aesthetic'],
     uppercaseBase: 0x1d538,
     lowercaseBase: 0x1d552,
     substitutions: {
@@ -465,7 +465,7 @@ export const styles: Style[] = [
   {
     id: 'squared',
     name: 'Squared',
-    categories: ['cool-fonts', 'bubble'],
+    categories: ['cool-fonts', 'bubble', 'aesthetic'],
     uppercaseBase: 0x1f130,
     lowercaseBase: null,
     substitutions: {},

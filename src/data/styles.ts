@@ -125,7 +125,7 @@ export const styles: Style[] = [
   {
     id: 'sans-italic',
     name: 'Handwriting',
-    categories: ['cool-fonts', 'italic'],
+    categories: ['cool-fonts', 'italic', 'cursive'],
     uppercaseBase: 0x1d608,
     lowercaseBase: 0x1d622,
     substitutions: {},
@@ -137,7 +137,7 @@ export const styles: Style[] = [
   {
     id: 'sans-bold-italic',
     name: 'Slanted',
-    categories: ['cool-fonts', 'italic', 'bold'],
+    categories: ['cool-fonts', 'italic', 'bold', 'cursive'],
     uppercaseBase: 0x1d63c,
     lowercaseBase: 0x1d656,
     substitutions: {},

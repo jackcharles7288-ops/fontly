@@ -12,6 +12,8 @@ export interface Category {
   heading?: string;
   /** false = this category is a section but does not appear in the chip row. */
   chip?: boolean;
+  /** true = decoration shape group (stars, hearts, brackets, shapes, lines, symbols). */
+  decoration?: boolean;
 }
 
 export const categories: Category[] = [
@@ -38,6 +40,8 @@ export const categories: Category[] = [
   // Chip with no section of its own. Do not add it back to toolCategories.
   // hearts, flowers, snowflakes, stars and sparkles
   { id: 'cute', name: 'Cute' },
+  // bold and italic alphabets shared by the bold text generator page
+  { id: 'bold-italic', name: 'Bold & Italic', chip: false },
   // converts the digits 0 to 9
   { id: 'number', name: 'Number', heading: 'Number Fonts' },
   // turned letters with reversed order
@@ -54,15 +58,15 @@ export const categories: Category[] = [
   { id: 'favourites', name: 'Favourites' },
   { id: 'recent', name: 'Recent' },
   // star and sparkle characters
-  { id: 'stars', name: 'Stars & Sparkles', chip: false },
+  { id: 'stars', name: 'Stars & Sparkles', chip: false, decoration: true },
   // heart, flower and snowflake characters
-  { id: 'hearts', name: 'Hearts & Flowers', chip: false },
+  { id: 'hearts', name: 'Hearts & Flowers', chip: false, decoration: true },
   // paired bracket characters
-  { id: 'brackets', name: 'Brackets', chip: false },
+  { id: 'brackets', name: 'Brackets', chip: false, decoration: true },
   // geometric shape characters
-  { id: 'shapes', name: 'Shapes', chip: false },
+  { id: 'shapes', name: 'Shapes', chip: false, decoration: true },
   // line, wave and dot-run characters
-  { id: 'lines', name: 'Lines & Waves', chip: false },
+  { id: 'lines', name: 'Lines & Waves', chip: false, decoration: true },
   // everything else, by character
-  { id: 'symbols', name: 'Marks & Symbols', chip: false },
+  { id: 'symbols', name: 'Marks & Symbols', chip: false, decoration: true },
 ];

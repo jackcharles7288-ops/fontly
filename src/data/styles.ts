@@ -99,7 +99,7 @@ export const styles: Style[] = [
   {
     id: 'bold-italic',
     name: 'Bold Italic',
-    categories: ['cool-fonts', 'cursive', 'italic', 'bold', 'fancy'],
+    categories: ['cool-fonts', 'cursive', 'italic', 'bold', 'fancy', 'bold-italic'],
     uppercaseBase: 0x1d468,
     lowercaseBase: 0x1d482,
     substitutions: {},
@@ -111,7 +111,7 @@ export const styles: Style[] = [
   {
     id: 'italic',
     name: 'Italic Script',
-    categories: ['cool-fonts', 'cursive', 'italic', 'fancy'],
+    categories: ['cool-fonts', 'cursive', 'italic', 'fancy', 'bold-italic'],
     uppercaseBase: 0x1d434,
     lowercaseBase: 0x1d44e,
     substitutions: {
@@ -125,7 +125,7 @@ export const styles: Style[] = [
   {
     id: 'sans-italic',
     name: 'Handwriting',
-    categories: ['cool-fonts', 'italic', 'cursive'],
+    categories: ['cool-fonts', 'italic', 'cursive', 'bold-italic'],
     uppercaseBase: 0x1d608,
     lowercaseBase: 0x1d622,
     substitutions: {},
@@ -137,7 +137,7 @@ export const styles: Style[] = [
   {
     id: 'sans-bold-italic',
     name: 'Slanted',
-    categories: ['cool-fonts', 'italic', 'bold', 'cursive'],
+    categories: ['cool-fonts', 'italic', 'bold', 'cursive', 'bold-italic'],
     uppercaseBase: 0x1d63c,
     lowercaseBase: 0x1d656,
     substitutions: {},
@@ -151,7 +151,7 @@ export const styles: Style[] = [
   {
     id: 'bold-serif',
     name: 'Bold',
-    categories: ['cool-fonts', 'bold', 'number'],
+    categories: ['cool-fonts', 'bold', 'number', 'bold-italic'],
     uppercaseBase: 0x1d400,
     lowercaseBase: 0x1d41a,
     substitutions: {},
@@ -163,7 +163,7 @@ export const styles: Style[] = [
   {
     id: 'bold-sans',
     name: 'Bold Sans',
-    categories: ['cool-fonts', 'bold', 'number'],
+    categories: ['cool-fonts', 'bold', 'number', 'bold-italic'],
     uppercaseBase: 0x1d5d4,
     lowercaseBase: 0x1d5ee,
     substitutions: {},

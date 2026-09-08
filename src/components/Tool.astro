@@ -40,23 +40,23 @@ const inputCount = countCharacters(prefill);
 const categoryLookup = new Map(categories.map((c) => [c.id, c]));
 
 const DECORATION_GROUP_IDS = new Set(
-  categories.filter((c) => c.chip === false).map((c) => c.id),
+  categories.filter((c) => c.decoration === true).map((c) => c.id),
 );
 
 const groupSectionsAttr = categories
-  .filter((c) => c.chip === false)
+  .filter((c) => c.decoration === true)
   .map((c) => c.id)
   .join(' ');
 if (!groupSectionsAttr) {
   throw new Error(
-    `[fonti] data-group-sections would be empty — no chip:false categories in src/data/categories.ts.`,
+    `[fonti] data-group-sections would be empty — no decoration:true categories in src/data/categories.ts.`,
   );
 }
 
 for (const decoration of decorations) {
   if (!DECORATION_GROUP_IDS.has(decoration.group)) {
     throw new Error(
-      `[fonti] Unknown decoration group "${decoration.group}" on id "${decoration.id}" — every group must be one of the six chip:false ids in src/data/categories.ts.`,
+      `[fonti] Unknown decoration group "${decoration.group}" on id "${decoration.id}" — every group must be one of the six decoration:true ids in src/data/categories.ts.`,
     );
   }
 }

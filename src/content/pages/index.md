@@ -1,6 +1,7 @@
 ---
 title: "Cool Font Generator – Copy and Paste 300+ Cool Fonts"
 h1: "Cool Font Generator: Copy and Paste Cool Fonts"
+h1Html: 'Cool Font Generator: <span class="h1-accent">Copy and Paste</span> Cool Fonts'
 description: "Free cool font generator with 300+ styles. Type once, then copy and paste cool fonts into Instagram, TikTok, Discord, Steam and gaming names."
 primaryKeyword: cool fonts
 testPhrase: Fonti

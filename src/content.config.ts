@@ -12,6 +12,7 @@ const faqItem = z.object({
 const pageFields = {
   title: z.string().max(60),
   h1: z.string(),
+  h1Html: z.string().optional(),
   description: z.string().max(155),
   primaryKeyword: z.string(),
   faq: z.array(faqItem).default([]),

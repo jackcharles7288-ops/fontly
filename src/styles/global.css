@@ -32,7 +32,7 @@ body {
   /* Generous line-height: body sits next to dense Unicode examples. */
   line-height: 1.65;
   color: #111;
-  background: #fff;
+  background: linear-gradient(to bottom, hsl(327 73% 94%), #fff 26rem) no-repeat #fff;
 }
 
 a {
@@ -110,6 +110,7 @@ main {
 .article--title {
   margin-top: 0;
   margin-bottom: 0.75rem;
+  text-align: center;
 }
 
 .article--title h1 {
@@ -132,6 +133,7 @@ main {
   max-width: 43.75rem;
   font-size: 1.125rem;
   margin: 0 auto 1.5rem;
+  text-align: center;
 }
 
 .hero-intro--below {
@@ -917,5 +919,9 @@ main {
 }
 
 .faq__question:hover {
+  color: var(--accent);
+}
+
+.h1-accent {
   color: var(--accent);
 }

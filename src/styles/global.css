@@ -52,14 +52,18 @@ a {
 
 .site-header__inner,
 .site-footer__inner {
-  max-width: 43.75rem;
+  max-width: 72rem;
   margin: 0 auto;
   padding: 0.75rem 1rem;
 }
 
 .site-header__brand {
+  color: var(--accent);
+  font-size: 1.25rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
   text-decoration: none;
+  display: inline-block;
 }
 
 .site-header__brand:hover {
@@ -96,6 +100,10 @@ main {
   overflow-wrap: anywhere;
 }
 
+.article :is(p, ul, ol, h2, h3, h4) {
+  max-width: 43.75rem;
+}
+
 /* Title block: same measure as prose. Bottom gap is explicit so it does not
    depend on whether the next sibling is prose, the tool, or nothing. */
 .article--title {
@@ -117,7 +125,7 @@ main {
 /* Hero intro — article measure, under the h1. Omitted when frontmatter lacks it. */
 .hero-intro {
   max-width: 43.75rem;
-  margin: 0 auto 1rem;
+  margin: 0 0 1rem;
 }
 
 .hero-intro--below {

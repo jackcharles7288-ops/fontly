@@ -82,11 +82,14 @@ faq:
       copyright on the characters themselves, so you can use styled text in
       business bios, marketing posts, product listings, or logos-as-text without
       paying anyone. Just check the specific platform's own rules.
-  # TODO — owner to write this answer. The old article said favourites were
-  # "on our roadmap", but the tool now ships Favourites and Recent chips.
-  # - q: Can I save my favourite styles?
-  #   a: >-
-  #     (owner writes this)
+  - q: Can I save my favourite styles?
+    a: >-
+      Yes. Tap the star on any card and that style moves into the Favourites
+      chip at the top of the tool, and anything you copy turns up under Recent,
+      so the styles you actually use stay one tap away. Both lists live in your
+      own browser rather than in an account, which means they survive a reload
+      but they don't follow you to another phone, another browser, or a private
+      window.
   - q: Is this a font changer, a font generator, or a font maker?
     a: >-
       People call it all of those, plus text converter, font creator, and font

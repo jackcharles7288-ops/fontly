@@ -12,9 +12,15 @@ interface Props {
   noindex?: boolean;
   /** Short intro under the h1. Omit the element when absent. */
   heroIntro?: string;
+  /** Overrides og:title. Falls back to title. */
+  ogTitle?: string;
+  /** Overrides og:description. Falls back to description. */
+  ogDescription?: string;
 }
 
-const { title, description, h1, canonical, noindex = false, heroIntro } = Astro.props;
+const { title, description, h1, canonical, noindex = false, heroIntro, ogTitle, ogDescription } = Astro.props;
+const socialTitle = ogTitle ?? title;
+const socialDescription = ogDescription ?? description;
 ---
 
 <!doctype html>
@@ -26,6 +32,12 @@ const { title, description, h1, canonical, noindex = false, heroIntro } = Astro.
     <meta name="description" content={description} />
     {canonical ? <link rel="canonical" href={canonical} /> : null}
     {noindex ? <meta name="robots" content="noindex" /> : null}
+    <meta property="og:site_name" content="Fonti" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={socialTitle} />
+    <meta property="og:description" content={socialDescription} />
+    {canonical ? <meta property="og:url" content={canonical} /> : null}
+    <meta name="twitter:card" content="summary" />
     <slot name="head" />
   </head>
   <body>

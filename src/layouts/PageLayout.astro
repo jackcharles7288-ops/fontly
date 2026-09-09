@@ -7,8 +7,6 @@ interface Props {
   title: string;
   description: string;
   h1: string;
-  /** Display-only h1 with inline markup. Metadata still uses `h1`. */
-  h1Html?: string;
   /** Omit on the 404 document — an error page must not claim a single indexable URL. */
   canonical?: string;
   noindex?: boolean;
@@ -20,7 +18,7 @@ interface Props {
   ogDescription?: string;
 }
 
-const { title, description, h1, h1Html, canonical, noindex = false, heroIntro, ogTitle, ogDescription } = Astro.props;
+const { title, description, h1, canonical, noindex = false, heroIntro, ogTitle, ogDescription } = Astro.props;
 const socialTitle = ogTitle ?? title;
 const socialDescription = ogDescription ?? description;
 ---
@@ -47,7 +45,7 @@ const socialDescription = ogDescription ?? description;
     <main>
       {/* h1 sits in the article measure so it shares one left edge with prose. */}
       <div class="article article--title">
-        {h1Html ? <h1 set:html={h1Html} /> : <h1>{h1}</h1>}
+        <h1>{h1}</h1>
       </div>
       {
         heroIntro ? (

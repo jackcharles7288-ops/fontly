@@ -100,8 +100,9 @@ main {
   overflow-wrap: anywhere;
 }
 
-.article :is(p, ul, ol, h2, h3, h4) {
-  max-width: 43.75rem;
+.article :is(p, ul, ol, h2, h3, h4, table) {
+  max-width: 72rem;
+  margin-inline: auto;
 }
 
 /* Title block: same measure as prose. Bottom gap is explicit so it does not
@@ -113,11 +114,15 @@ main {
 
 .article--title h1 {
   margin: 0;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 39.99rem) {
   .article--title h1 {
-    font-size: 1.5rem; /* 24px at a 16px root — two lines on a 360px phone */
+    font-size: 1.75rem; /* 24px at a 16px root — two lines on a 360px phone */
     line-height: 1.25;
   }
 }
@@ -125,7 +130,8 @@ main {
 /* Hero intro — article measure, under the h1. Omitted when frontmatter lacks it. */
 .hero-intro {
   max-width: 43.75rem;
-  margin: 0 0 1rem;
+  font-size: 1.125rem;
+  margin: 0 auto 1.5rem;
 }
 
 .hero-intro--below {
@@ -735,7 +741,7 @@ main {
 
 /* FAQ — independent <details>, answers stay in the HTML source when collapsed. */
 .faq {
-  max-width: 43.75rem;
+  max-width: 72rem;
   margin: 2rem auto 0;
 }
 
@@ -749,18 +755,6 @@ main {
 .faq__list {
   margin: 0;
   padding: 0;
-}
-
-.faq__item {
-  border: 1px solid var(--border);
-  border-radius: 0.25rem;
-  padding: 0.65rem 0.75rem;
-  margin: 0 0 0.5rem;
-}
-
-.faq__question {
-  cursor: pointer;
-  font-weight: 600;
 }
 
 .faq__answer {
@@ -819,3 +813,109 @@ main {
   padding-left: 1.25rem;
 }
 
+
+/* Article reading design - tokens only, no new colours. */
+.article > p:first-of-type {
+  font-size: 1.125rem;
+}
+
+.article h2 {
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  border-bottom: 1px solid var(--border);
+}
+
+.article h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  background: var(--surface);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+}
+
+.article ul {
+  padding-left: 1.25rem;
+}
+
+.article li {
+  margin-bottom: 0.4rem;
+}
+
+.article li::marker {
+  color: var(--accent);
+}
+
+.article table {
+  width: 100%;
+  margin-block: 1.5rem;
+  margin-inline: auto;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.article th,
+.article td {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.article thead th {
+  background: var(--surface);
+  font-weight: 600;
+}
+
+.article tbody tr:nth-child(even) {
+  background: var(--surface);
+}
+
+/* FAQ accordion - tokens only, no new colours. */
+.faq__item {
+  margin-bottom: 0.5rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.faq__item[open] {
+  background: var(--surface);
+}
+
+.faq__question {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq__question::after {
+  content: '+';
+  color: var(--accent);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  flex: none;
+}
+
+.faq__item[open] > .faq__question::after {
+  content: '\2212';
+}
+
+.faq__question:hover {
+  color: var(--accent);
+}

@@ -704,13 +704,6 @@ main {
   word-break: break-word;
 }
 
-.tool-card__units {
-  margin: 0.35rem 0 0;
-  font-size: 0.8rem;
-  line-height: 1.3;
-  color: #333;
-}
-
 .tool-card__digits-note,
 .tool-card__case-note,
 .tool-card__caveat-note {
@@ -722,8 +715,7 @@ main {
 }
 
 /* Quiet note stays in flow so its line is reserved; visibility only. */
-.tool-card__digits-note.is-quiet,
-.tool-card__units.is-quiet {
+.tool-card__digits-note.is-quiet {
   visibility: hidden;
 }
 

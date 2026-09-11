@@ -77,7 +77,6 @@ interface Card {
   name: string;
   searchName: string;
   output: string;
-  utf16Length: number;
   caveat: string | null;
   caveatNote: string | null;
   caseNote: string | null;
@@ -104,7 +103,6 @@ function styleCard(style: (typeof styles)[number]): Card {
     name: style.name,
     searchName: style.name.toLowerCase(),
     output,
-    utf16Length: countCharacters(output).utf16Length,
     caveat: style.caveat,
     caveatNote: style.caveatNote ?? null,
     caseNote: style.caseNote,
@@ -125,7 +123,6 @@ function decorationCards(groupId: string): Card[] {
         name: decoration.name,
         searchName: decoration.name.toLowerCase(),
         output,
-        utf16Length: countCharacters(output).utf16Length,
         caveat: decoration.caveat,
         caveatNote: null,
         caseNote: null,
@@ -143,7 +140,6 @@ function effectCards(): Card[] {
       name: effect.name,
       searchName: effect.name.toLowerCase(),
       output,
-      utf16Length: countCharacters(output).utf16Length,
       caveat: effect.caveat,
       caveatNote: effect.caveatNote,
       caseNote: null,
@@ -166,7 +162,6 @@ function combinationCards(): Card[] {
       name: combination.name,
       searchName: combination.name.toLowerCase(),
       output,
-      utf16Length: countCharacters(output).utf16Length,
       caveat: style.caveat,
       caveatNote: style.caveatNote ?? null,
       caseNote: style.caseNote,
@@ -462,9 +457,6 @@ const filterChips = categories
         </div>
       </div>
       <p class="tool-card__output" data-output></p>
-      <p class="tool-card__units" hidden>
-        <span data-counter-utf16>0</span> units
-      </p>
       <p class="tool-card__digits-note is-quiet" data-digits-note hidden>
         {DIGITS_NOTE}
       </p>
@@ -598,9 +590,6 @@ const filterChips = categories
                           </div>
                         </div>
                         <p class="tool-card__output" data-output>{card.output}</p>
-                        <p class="tool-card__units" hidden>
-                          <span data-counter-utf16>{card.utf16Length}</span> units
-                        </p>
                         {card.digitsPassThrough ? (
                           <p class="tool-card__digits-note is-quiet" data-digits-note hidden>
                             {DIGITS_NOTE}

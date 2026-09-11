@@ -261,15 +261,6 @@ function updateCard(card, text) {
           )
         : applyEffect(source, /** @type {NonNullable<typeof effect>} */ (effect));
   outputEl.textContent = styled;
-  const { utf16Length } = countCharacters(styled);
-  const utfEl = card.querySelector('[data-counter-utf16]');
-  if (utfEl) utfEl.textContent = String(utf16Length);
-  const unitsEl = card.querySelector('.tool-card__units');
-  if (unitsEl instanceof HTMLElement) {
-    // Empty input: no box. Typing is an interaction; DEBOUNCE_MS is 120, so
-    // the later reserved-height growth is excluded from CLS.
-    unitsEl.hidden = empty;
-  }
 
   if ((style ?? combination) && card.getAttribute('data-has-digit-note') === 'true') {
     const note = card.querySelector('[data-digits-note]');

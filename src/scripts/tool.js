@@ -436,6 +436,7 @@ function initTool() {
   );
   const livePanel = root.querySelector('#tool-live-preview');
   const liveStyleEl = root.querySelector('[data-live-style]');
+  const liveIgName = root.querySelector('[data-live-ig-name]');
   const liveIgBio = root.querySelector('[data-live-ig-bio]');
   const liveIgMeta = root.querySelector('[data-live-ig-meta]');
   const liveTtName = root.querySelector('[data-live-tt-name]');
@@ -838,6 +839,7 @@ function initTool() {
     if (!rendered) return;
     const n = countCharacters(rendered.styled).utf16Length;
     if (liveStyleEl) liveStyleEl.textContent = `Style: ${rendered.name}`;
+    if (liveIgName) liveIgName.textContent = rendered.styled;
     if (liveIgBio) liveIgBio.textContent = rendered.styled;
     if (liveTtName) liveTtName.textContent = rendered.styled;
     if (liveTtBio) liveTtBio.textContent = rendered.styled;

@@ -5,8 +5,6 @@
   --accent: #4338ca;
   --surface: #f6f6f7;
   --border: #ddd;
-  --ig-from: #f77737;
-  --ig-to: #c13584;
   --tt-from: #25f4ee;
   --tt-to: #fe2c55;
   --tt-follow: #b91c3c;
@@ -461,7 +459,6 @@ main {
   width: fit-content;
   padding: 0.15rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--ig-from), var(--ig-to));
 }
 
 .mockup--tt .mockup__ring {
@@ -484,7 +481,7 @@ main {
 }
 
 .mockup__avatar--ig {
-  background: linear-gradient(135deg, var(--ig-from), var(--ig-to));
+  background: var(--border);
 }
 
 .mockup__avatar--tt {
@@ -504,6 +501,7 @@ main {
 
 .mockup--ig .mockup__name {
   margin-top: 0;
+  text-align: center;
 }
 
 .mockup__brand {
@@ -530,7 +528,7 @@ main {
   min-width: 0;
 }
 
-.mockup__ig-header .mockup__ring {
+.mockup__ig-header .mockup__avatar {
   flex-shrink: 0;
 }
 
@@ -546,11 +544,15 @@ main {
 }
 
 .mockup--ig .mockup__pill--accent {
-  flex: 3;
+  flex: 50;
 }
 
 .mockup--ig .mockup__pill--quiet {
-  flex: 2;
+  flex: 35;
+}
+
+.mockup--ig .mockup__pill--plus {
+  flex: 15;
 }
 
 .mockup__name {
@@ -609,6 +611,36 @@ main {
   gap: 0.4rem;
   margin-top: 0.65rem;
   min-width: 0;
+}
+
+.mockup__highlights {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.65rem;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.mockup__hl {
+  flex: 0 0 3rem;
+  width: 3rem;
+  text-align: center;
+}
+
+.mockup__hl-dot {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.mockup__hl-l {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.65rem;
+  line-height: 1.2;
+  color: #767676;
 }
 
 .mockup__pill {

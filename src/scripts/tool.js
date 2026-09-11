@@ -14,6 +14,8 @@ const RECENTS_MAX = 8;
 const PREVIEW_SIZES = ['1.125rem', '1.5rem', '1.875rem'];
 const SECTION_ROOT_MARGIN = '800px';
 const CARD_ROOT_MARGIN = '200px';
+const IG_BIO_LIMIT = 150;
+const TT_BIO_LIMIT = 80;
 
 /** @type {Map<string, import('../data/styles.ts').Style>} */
 const styleById = new Map(styles.map((s) => [s.id, s]));
@@ -278,6 +280,43 @@ function updateCard(card, text) {
 }
 
 /**
+ * Styled sample for a catalogue id. Empty input uses the record's name,
+ * matching updateCard — never a blank string.
+ * @param {string} id
+ * @param {string} text
+ * @returns {{ name: string, styled: string } | null}
+ */
+function renderById(id, text) {
+  const style = styleById.get(id);
+  const decoration = style === undefined ? decorationById.get(id) : undefined;
+  const effect = style === undefined && decoration === undefined ? effectById.get(id) : undefined;
+  const combination =
+    style === undefined && decoration === undefined && effect === undefined
+      ? combinationById.get(id)
+      : undefined;
+  const record = style ?? decoration ?? effect ?? combination;
+  if (record === undefined) return null;
+  const parentStyle = combination
+    ? /** @type {NonNullable<import('../data/styles.ts').Style>} */ (styleById.get(combination.style))
+    : style;
+  const source = text.length === 0 ? record.name : text;
+  const styled = style
+    ? applyStyle(source, style)
+    : decoration
+      ? applyDecoration(source, decoration)
+      : combination
+        ? applyCombination(
+            source,
+            parentStyle,
+            /** @type {NonNullable<import('../data/decorations.ts').Decoration>} */ (
+              decorationById.get(combination.decoration)
+            ),
+          )
+        : applyEffect(source, /** @type {NonNullable<typeof effect>} */ (effect));
+  return { name: record.name, styled };
+}
+
+/**
  * Recompute a card when its output may be read but typing skipped it.
  * @param {HTMLElement} card
  * @param {string} text
@@ -336,6 +375,28 @@ function announce(message) {
 }
 
 /**
+ * @param {Element | null} el
+ * @param {number} n
+ * @param {number} limit
+ * @param {string} app
+ * @returns {void}
+ */
+function syncLiveMeta(el, n, limit, app) {
+  if (!(el instanceof HTMLElement)) return;
+  el.textContent = `${n} / ${limit}`;
+  const over = n > limit;
+  el.classList.toggle('is-over', over);
+  if (over) {
+    el.setAttribute(
+      'aria-label',
+      `${n} of ${limit} units, exceeds ${app}'s ${limit}-unit limit`,
+    );
+  } else {
+    el.removeAttribute('aria-label');
+  }
+}
+
+/**
  * @param {HTMLButtonElement} favBtn
  * @param {string} cardName
  * @param {boolean} isFav
@@ -373,6 +434,13 @@ function initTool() {
   const builderEntrance = root.querySelector(
     '.tool__case-btn[data-filter="combo"]',
   );
+  const livePanel = root.querySelector('#tool-live-preview');
+  const liveStyleEl = root.querySelector('[data-live-style]');
+  const liveIgBio = root.querySelector('[data-live-ig-bio]');
+  const liveIgMeta = root.querySelector('[data-live-ig-meta]');
+  const liveTtName = root.querySelector('[data-live-tt-name]');
+  const liveTtBio = root.querySelector('[data-live-tt-bio]');
+  const liveTtMeta = root.querySelector('[data-live-tt-meta]');
 
   /** @type {ReturnType<typeof setTimeout> | undefined} */
   let debounceTimer;
@@ -752,6 +820,29 @@ function initTool() {
       updateCard(card, text);
     }
     refreshCombo();
+    refreshLivePreview(text);
+  }
+
+  /**
+   * Hidden panel: skip all work. Early-return is the first statement.
+   * @param {string} text
+   * @returns {void}
+   */
+  function refreshLivePreview(text) {
+    if (!(livePanel instanceof HTMLElement) || livePanel.hasAttribute('hidden')) return;
+    const fromRecent = recents[0];
+    const fallbackId = root.querySelector('.tool-card')?.getAttribute('data-card-id');
+    const id = fromRecent || fallbackId;
+    if (!id) return;
+    const rendered = renderById(id, text) ?? (fallbackId && fallbackId !== id ? renderById(fallbackId, text) : null);
+    if (!rendered) return;
+    const n = countCharacters(rendered.styled).utf16Length;
+    if (liveStyleEl) liveStyleEl.textContent = `Style: ${rendered.name}`;
+    if (liveIgBio) liveIgBio.textContent = rendered.styled;
+    if (liveTtName) liveTtName.textContent = rendered.styled;
+    if (liveTtBio) liveTtBio.textContent = rendered.styled;
+    syncLiveMeta(liveIgMeta, n, IG_BIO_LIMIT, 'Instagram');
+    syncLiveMeta(liveTtMeta, n, TT_BIO_LIMIT, 'TikTok');
   }
 
   /**
@@ -946,6 +1037,20 @@ function initTool() {
       return;
     }
 
+    const liveBtn = target.closest('[aria-controls="tool-live-preview"]');
+    if (liveBtn instanceof HTMLButtonElement && livePanel instanceof HTMLElement) {
+      const open = livePanel.hasAttribute('hidden');
+      if (open) {
+        livePanel.removeAttribute('hidden');
+        liveBtn.setAttribute('aria-expanded', 'true');
+        refreshLivePreview(input.value);
+      } else {
+        livePanel.setAttribute('hidden', '');
+        liveBtn.setAttribute('aria-expanded', 'false');
+      }
+      return;
+    }
+
     const button = target.closest('[data-copy]');
     if (!(button instanceof HTMLButtonElement)) return;
 
@@ -994,6 +1099,7 @@ function initTool() {
         );
         writeRecents(recents);
         if (activeFilter === 'recent') applyFilter();
+        refreshLivePreview(input.value);
       }
       announce(`Copied ${cardName}`);
       const prev = copyTimers.get(button);

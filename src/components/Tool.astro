@@ -355,6 +355,12 @@ const filterChips = categories
           data-filter="combo"
           aria-pressed="false"
         >{BUILDER_LABEL}</button>
+        <button
+          type="button"
+          class="tool__case-btn"
+          aria-expanded="false"
+          aria-controls="tool-live-preview"
+        >Live preview</button>
       </div>
       <div class="tool__end">
         <div class="tool__preview">
@@ -403,6 +409,40 @@ const filterChips = categories
           />
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="tool__live-panel" id="tool-live-preview" hidden>
+    <p class="tool__live-panel-style" data-live-style>Style: Bold Script</p>
+    <div class="tool__live-mockups">
+      <article class="mockup mockup--ig" aria-label="Instagram bio">
+        <div class="mockup__row">
+          <div class="mockup__ring" aria-hidden="true">
+            <div class="mockup__avatar mockup__avatar--ig"></div>
+          </div>
+          <div class="mockup__body">
+            <p class="mockup__name">your_username</p>
+            <p class="mockup__edit">Edit profile</p>
+          </div>
+        </div>
+        <p class="mockup__bio" data-live-ig-bio>Hello World</p>
+        <p class="mockup__meta" data-live-ig-meta>11 / 150</p>
+        <p class="mockup__caption" aria-hidden="true">Instagram bio preview</p>
+      </article>
+      <article class="mockup mockup--tt" aria-label="TikTok profile">
+        <div class="mockup__row">
+          <div class="mockup__avatar mockup__avatar--tt" aria-hidden="true"></div>
+          <div class="mockup__body">
+            <p class="mockup__name" data-live-tt-name>Hello World</p>
+            <p class="mockup__handle">@your_handle</p>
+            <p class="mockup__stats">1.2M followers</p>
+          </div>
+          <span class="mockup__follow">Follow</span>
+        </div>
+        <p class="mockup__bio" data-live-tt-bio>Hello World</p>
+        <p class="mockup__meta" data-live-tt-meta>11 / 80</p>
+        <p class="mockup__caption" aria-hidden="true">TikTok profile preview</p>
+      </article>
     </div>
   </div>
 

@@ -421,6 +421,11 @@ main {
   min-width: 0;
 }
 
+.tool__live-panel > .tool__case {
+  margin: 0 0 0.65rem;
+  flex-wrap: nowrap;
+}
+
 .tool__live-panel-style {
   margin: 0 0 0.65rem;
   font-size: 0.8rem;

@@ -16,6 +16,9 @@ const SECTION_ROOT_MARGIN = '800px';
 const CARD_ROOT_MARGIN = '200px';
 const IG_BIO_LIMIT = 150;
 const TT_BIO_LIMIT = 80;
+const LIVE_STATIC_IG_NAME = 'Your Brand Name';
+const LIVE_STATIC_TT_NAME = 'Your Display Name';
+const LIVE_STATIC_BIO = 'A short bio to describe your brand';
 
 /** @type {Map<string, import('../data/styles.ts').Style>} */
 const styleById = new Map(styles.map((s) => [s.id, s]));
@@ -442,6 +445,9 @@ function initTool() {
   const liveTtName = root.querySelector('[data-live-tt-name]');
   const liveTtBio = root.querySelector('[data-live-tt-bio]');
   const liveTtMeta = root.querySelector('[data-live-tt-meta]');
+  const liveTargetRow = root.querySelector('[data-live-target-row]');
+  /** @type {'name' | 'bio' | 'both'} */
+  let liveTarget = 'bio';
 
   /** @type {ReturnType<typeof setTimeout> | undefined} */
   let debounceTimer;
@@ -837,14 +843,38 @@ function initTool() {
     if (!id) return;
     const rendered = renderById(id, text) ?? (fallbackId && fallbackId !== id ? renderById(fallbackId, text) : null);
     if (!rendered) return;
-    const n = countCharacters(rendered.styled).utf16Length;
+    const styled = rendered.styled;
+    const liveName = liveTarget !== 'bio';
+    const liveBio = liveTarget !== 'name';
+    const igNameText = liveName ? styled : LIVE_STATIC_IG_NAME;
+    const ttNameText = liveName ? styled : LIVE_STATIC_TT_NAME;
+    const bioText = liveBio ? styled : LIVE_STATIC_BIO;
+    const n = countCharacters(bioText).utf16Length;
     if (liveStyleEl) liveStyleEl.textContent = `Style: ${rendered.name}`;
-    if (liveIgName) liveIgName.textContent = rendered.styled;
-    if (liveIgBio) liveIgBio.textContent = rendered.styled;
-    if (liveTtName) liveTtName.textContent = rendered.styled;
-    if (liveTtBio) liveTtBio.textContent = rendered.styled;
+    if (liveIgName) liveIgName.textContent = igNameText;
+    if (liveIgBio) liveIgBio.textContent = bioText;
+    if (liveTtName) liveTtName.textContent = ttNameText;
+    if (liveTtBio) liveTtBio.textContent = bioText;
     syncLiveMeta(liveIgMeta, n, IG_BIO_LIMIT, 'Instagram');
     syncLiveMeta(liveTtMeta, n, TT_BIO_LIMIT, 'TikTok');
+  }
+
+  if (liveTargetRow instanceof HTMLElement) {
+    liveTargetRow.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const btn = target.closest('[data-live-target]');
+      if (!(btn instanceof HTMLButtonElement) || !liveTargetRow.contains(btn)) return;
+      const next = btn.getAttribute('data-live-target');
+      if (next !== 'name' && next !== 'bio' && next !== 'both') return;
+      liveTarget = next;
+      for (const b of liveTargetRow.querySelectorAll('[data-live-target]')) {
+        const on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      refreshLivePreview(input.value);
+    });
   }
 
   /**

@@ -413,6 +413,31 @@ const filterChips = categories
   </div>
 
   <div class="tool__live-panel" id="tool-live-preview" hidden>
+    <div
+      class="tool__case"
+      role="group"
+      aria-label="Preview target"
+      data-live-target-row
+    >
+      <button
+        type="button"
+        class="tool__case-btn"
+        data-live-target="name"
+        aria-pressed="false"
+      >Name</button>
+      <button
+        type="button"
+        class="tool__case-btn is-active"
+        data-live-target="bio"
+        aria-pressed="true"
+      >Bio</button>
+      <button
+        type="button"
+        class="tool__case-btn"
+        data-live-target="both"
+        aria-pressed="false"
+      >Both</button>
+    </div>
     <p class="tool__live-panel-style" data-live-style>Style: Bold Script</p>
     <div class="tool__live-mockups">
       <article class="mockup mockup--ig" aria-label="Instagram bio">

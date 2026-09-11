@@ -181,6 +181,15 @@ main {
   min-width: 0;
 }
 
+/* Input bar stays usable while scrolling cards. Sticky, in flow: no CLS. */
+.tool__controls {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0.5rem 0;
+  background: #fff;
+}
+
 .tool__input {
   display: block;
   width: 100%;

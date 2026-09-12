@@ -278,6 +278,8 @@ const filterChips = categories
       <path d="M20 6 9 17l-5-5"></path>
     </symbol>
   </svg>
+  <span class="tool__char-count"
+    ><span data-input-codepoints>{inputCount.codePoints}</span>{inputCount.codePoints === 1 ? ' character' : ' characters'}</span>
   <div class="tool__controls">
     <input
       class="tool__input"
@@ -724,9 +726,6 @@ const filterChips = categories
 
   <div class="tool__below">
     <p class="tool__input-meta">
-      <span class="tool__char-count"
-        ><span data-input-codepoints>{inputCount.codePoints}</span> characters</span
-      >
       <span class="tool__style-count"
         >{styles.length + decorations.length + effects.length + combinations.length} styles</span
       >

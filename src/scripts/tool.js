@@ -833,6 +833,10 @@ function initTool() {
     const typedChars = countCharacters(text).codePoints;
     if (inputCpEl) {
       inputCpEl.textContent = String(typedChars);
+      const word = inputCpEl.nextSibling;
+      if (word && word.nodeType === Node.TEXT_NODE) {
+        word.textContent = typedChars === 1 ? ' character' : ' characters';
+      }
     }
     // Live registry — every mounted copy of every card.
     for (const copies of cardById.values()) {

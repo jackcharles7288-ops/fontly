@@ -185,6 +185,15 @@ main {
   min-width: 0;
 }
 
+.tool__char-count {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: #767676;
+}
+
 /* Input bar stays usable while scrolling cards. Sticky, in flow: no CLS. */
 .tool__controls {
   position: sticky;

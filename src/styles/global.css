@@ -8,7 +8,7 @@
   --tt-from: #25f4ee;
   --tt-to: #fe2c55;
   --tt-follow: #b91c3c;
-  --over-limit: var(--accent);
+  --over-limit: var(--tt-follow);
 }
 
 *,

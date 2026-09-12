@@ -440,6 +440,8 @@ function initTool() {
     '.tool__case-btn[data-filter="combo"]',
   );
   const livePanel = root.querySelector('#tool-live-preview');
+  const liveToggle = root.querySelector('[aria-controls="tool-live-preview"]');
+  let livePreviewOpen = false;
   const liveStyleEl = root.querySelector('[data-live-style]');
   const liveIgName = root.querySelector('[data-live-ig-name]');
   const liveIgBio = root.querySelector('[data-live-ig-bio]');
@@ -875,6 +877,34 @@ function initTool() {
     }
   }
 
+  /**
+   * Open or close the live preview. Toggle click and Escape share this.
+   * @param {boolean} open
+   * @returns {void}
+   */
+  function setLivePreviewOpen(open) {
+    if (!(livePanel instanceof HTMLElement) || !(liveToggle instanceof HTMLButtonElement)) return;
+    if (open) {
+      livePanel.removeAttribute('hidden');
+      liveToggle.setAttribute('aria-expanded', 'true');
+      livePreviewOpen = true;
+      refreshLivePreview(input.value);
+    } else {
+      livePanel.setAttribute('hidden', '');
+      liveToggle.setAttribute('aria-expanded', 'false');
+      livePreviewOpen = false;
+    }
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (!livePreviewOpen) return;
+    const focusInside =
+      livePanel instanceof HTMLElement && livePanel.contains(document.activeElement);
+    setLivePreviewOpen(false);
+    if (focusInside && liveToggle instanceof HTMLButtonElement) liveToggle.focus();
+  });
+
   if (liveTargetRow instanceof HTMLElement) {
     liveTargetRow.addEventListener('click', (event) => {
       const target = event.target;
@@ -1087,15 +1117,7 @@ function initTool() {
 
     const liveBtn = target.closest('[aria-controls="tool-live-preview"]');
     if (liveBtn instanceof HTMLButtonElement && livePanel instanceof HTMLElement) {
-      const open = livePanel.hasAttribute('hidden');
-      if (open) {
-        livePanel.removeAttribute('hidden');
-        liveBtn.setAttribute('aria-expanded', 'true');
-        refreshLivePreview(input.value);
-      } else {
-        livePanel.setAttribute('hidden', '');
-        liveBtn.setAttribute('aria-expanded', 'false');
-      }
+      setLivePreviewOpen(!livePreviewOpen);
       return;
     }
 

@@ -380,30 +380,31 @@ function announce(message) {
 /**
  * @param {Element | null} el
  * @param {number} units UTF-16 length compared against the platform limit
- * @param {number} chars code-point count of the visible slot
+ * @param {number} chars code-point count of the typed input
  * @param {number} limit
  * @param {string} app
  * @returns {void}
  */
 function syncLiveMeta(el, units, chars, limit, app) {
   if (!(el instanceof HTMLElement)) return;
+  const word = chars === 1 ? 'character' : 'characters';
   el.textContent =
     units === chars
       ? `${units} / ${limit}`
-      : `${units} / ${limit} units (${chars} characters)`;
+      : `${units} / ${limit} units (${chars} ${word})`;
   const over = units > limit;
   el.classList.toggle('is-over', over);
   if (over) {
     el.setAttribute(
       'aria-label',
       app === 'TikTok'
-        ? `${units} of 80 units, ${chars} characters typed. TikTok bios are usually limited to 80 characters, though some accounts allow more.`
-        : `${units} of 150 units, ${chars} characters typed. Exceeds Instagram's limit.`,
+        ? `${units} of 80 units, ${chars} ${word} typed. TikTok bios are usually limited to 80 characters, though some accounts allow more.`
+        : `${units} of 150 units, ${chars} ${word} typed. Exceeds Instagram's limit.`,
     );
   } else {
     el.setAttribute(
       'aria-label',
-      `${units} of ${limit} units, ${chars} characters typed`,
+      `${units} of ${limit} units, ${chars} ${word} typed`,
     );
   }
 }
@@ -829,8 +830,9 @@ function initTool() {
    * @returns {void}
    */
   function refreshVisible(text) {
+    const typedChars = countCharacters(text).codePoints;
     if (inputCpEl) {
-      inputCpEl.textContent = String(countCharacters(text).codePoints);
+      inputCpEl.textContent = String(typedChars);
     }
     // Live registry — every mounted copy of every card.
     for (const copies of cardById.values()) {
@@ -842,15 +844,16 @@ function initTool() {
       updateCard(card, text);
     }
     refreshCombo();
-    refreshLivePreview(text);
+    refreshLivePreview(text, typedChars);
   }
 
   /**
    * Hidden panel: skip all work. Early-return is the first statement.
    * @param {string} text
+   * @param {number} [typedChars] code points of the typed input, already counted
    * @returns {void}
    */
-  function refreshLivePreview(text) {
+  function refreshLivePreview(text, typedChars) {
     if (!(livePanel instanceof HTMLElement) || livePanel.hasAttribute('hidden')) return;
     const fromRecent = recents[0];
     const fallbackId = root.querySelector('.tool-card')?.getAttribute('data-card-id');
@@ -864,9 +867,7 @@ function initTool() {
     const igNameText = liveName ? styled : LIVE_STATIC_IG_NAME;
     const ttNameText = liveName ? styled : LIVE_STATIC_TT_NAME;
     const bioText = liveBio ? styled : LIVE_STATIC_BIO;
-    const counted = countCharacters(bioText);
-    const n = counted.utf16Length;
-    const chars = counted.codePoints;
+    const n = countCharacters(bioText).utf16Length;
     if (liveStyleEl) liveStyleEl.textContent = `Style: ${rendered.name}`;
     if (liveIgName) liveIgName.textContent = igNameText;
     if (liveIgBio) liveIgBio.textContent = bioText;
@@ -895,6 +896,9 @@ function initTool() {
       }
     }
     if (!hideMeta) {
+      const chars =
+        typedChars ??
+        Number(inputCpEl instanceof HTMLElement ? inputCpEl.textContent : '0');
       syncLiveMeta(liveIgMeta, n, chars, IG_BIO_LIMIT, 'Instagram');
       syncLiveMeta(liveTtMeta, n, chars, TT_BIO_LIMIT, 'TikTok');
     }

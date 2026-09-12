@@ -71,6 +71,11 @@ faq:
       styled characters count as two characters against platform limits (on X,
       "𝗛𝗲𝗹𝗹𝗼" costs 10 of your 280). Instagram bios allow 150 characters, X
       posts 280, so budget accordingly.
+  - q: What is the character limit for a TikTok bio?
+    a: >-
+      Eighty characters is the reliable limit for a TikTok bio. Some accounts
+      have been seen with a longer field. The tool counts UTF-16 units because
+      that is what the platforms measure.
   - q: Can I use these fonts in gaming usernames?
     a: >-
       Depends on the game. Steam and PUBG Mobile are permissive; Fortnite allows

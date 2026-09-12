@@ -392,7 +392,9 @@ function syncLiveMeta(el, n, limit, app) {
   if (over) {
     el.setAttribute(
       'aria-label',
-      `${n} of ${limit} units, exceeds ${app}'s ${limit}-unit limit`,
+      app === 'TikTok'
+        ? `${n} of 80 units. TikTok bios are usually limited to 80 characters, though some accounts allow more.`
+        : `${n} of ${limit} units, exceeds ${app}'s ${limit}-unit limit`,
     );
   } else {
     el.removeAttribute('aria-label');
@@ -855,8 +857,22 @@ function initTool() {
     if (liveIgBio) liveIgBio.textContent = bioText;
     if (liveTtName) liveTtName.textContent = ttNameText;
     if (liveTtBio) liveTtBio.textContent = bioText;
-    syncLiveMeta(liveIgMeta, n, IG_BIO_LIMIT, 'Instagram');
-    syncLiveMeta(liveTtMeta, n, TT_BIO_LIMIT, 'TikTok');
+    const hideMeta = liveTarget === 'name';
+    for (const el of [liveIgMeta, liveTtMeta]) {
+      if (!(el instanceof HTMLElement)) continue;
+      if (hideMeta) {
+        el.textContent = '';
+        el.removeAttribute('aria-label');
+        el.classList.remove('is-over');
+        el.setAttribute('hidden', '');
+      } else {
+        el.removeAttribute('hidden');
+      }
+    }
+    if (!hideMeta) {
+      syncLiveMeta(liveIgMeta, n, IG_BIO_LIMIT, 'Instagram');
+      syncLiveMeta(liveTtMeta, n, TT_BIO_LIMIT, 'TikTok');
+    }
   }
 
   if (liveTargetRow instanceof HTMLElement) {

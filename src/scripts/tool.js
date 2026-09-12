@@ -379,25 +379,32 @@ function announce(message) {
 
 /**
  * @param {Element | null} el
- * @param {number} n
+ * @param {number} units UTF-16 length compared against the platform limit
+ * @param {number} chars code-point count of the visible slot
  * @param {number} limit
  * @param {string} app
  * @returns {void}
  */
-function syncLiveMeta(el, n, limit, app) {
+function syncLiveMeta(el, units, chars, limit, app) {
   if (!(el instanceof HTMLElement)) return;
-  el.textContent = `${n} / ${limit}`;
-  const over = n > limit;
+  el.textContent =
+    units === chars
+      ? `${units} / ${limit}`
+      : `${units} / ${limit} units (${chars} characters)`;
+  const over = units > limit;
   el.classList.toggle('is-over', over);
   if (over) {
     el.setAttribute(
       'aria-label',
       app === 'TikTok'
-        ? `${n} of 80 units. TikTok bios are usually limited to 80 characters, though some accounts allow more.`
-        : `${n} of ${limit} units, exceeds ${app}'s ${limit}-unit limit`,
+        ? `${units} of 80 units, ${chars} characters typed. TikTok bios are usually limited to 80 characters, though some accounts allow more.`
+        : `${units} of 150 units, ${chars} characters typed. Exceeds Instagram's limit.`,
     );
   } else {
-    el.removeAttribute('aria-label');
+    el.setAttribute(
+      'aria-label',
+      `${units} of ${limit} units, ${chars} characters typed`,
+    );
   }
 }
 
@@ -857,7 +864,9 @@ function initTool() {
     const igNameText = liveName ? styled : LIVE_STATIC_IG_NAME;
     const ttNameText = liveName ? styled : LIVE_STATIC_TT_NAME;
     const bioText = liveBio ? styled : LIVE_STATIC_BIO;
-    const n = countCharacters(bioText).utf16Length;
+    const counted = countCharacters(bioText);
+    const n = counted.utf16Length;
+    const chars = counted.codePoints;
     if (liveStyleEl) liveStyleEl.textContent = `Style: ${rendered.name}`;
     if (liveIgName) liveIgName.textContent = igNameText;
     if (liveIgBio) liveIgBio.textContent = bioText;
@@ -886,8 +895,8 @@ function initTool() {
       }
     }
     if (!hideMeta) {
-      syncLiveMeta(liveIgMeta, n, IG_BIO_LIMIT, 'Instagram');
-      syncLiveMeta(liveTtMeta, n, TT_BIO_LIMIT, 'TikTok');
+      syncLiveMeta(liveIgMeta, n, chars, IG_BIO_LIMIT, 'Instagram');
+      syncLiveMeta(liveTtMeta, n, chars, TT_BIO_LIMIT, 'TikTok');
     }
   }
 

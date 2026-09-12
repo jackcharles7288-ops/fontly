@@ -1007,6 +1007,9 @@ main {
   /* Usernames and tags have no spaces — wrap mid-token instead of overflowing. */
   overflow-wrap: anywhere;
   word-break: break-word;
+  /* 1.35em is this element's line-height; 4 lines. em follows --preview-size. */
+  overflow: clip;
+  max-height: calc(1.35em * 4);
 }
 
 .tool-card__digits-note,

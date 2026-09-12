@@ -446,9 +446,13 @@ function initTool() {
   const liveIgName = root.querySelector('[data-live-ig-name]');
   const liveIgBio = root.querySelector('[data-live-ig-bio]');
   const liveIgMeta = root.querySelector('[data-live-ig-meta]');
+  const liveIgCaption = root.querySelector('[data-live-ig-caption]');
   const liveTtName = root.querySelector('[data-live-tt-name]');
   const liveTtBio = root.querySelector('[data-live-tt-bio]');
   const liveTtMeta = root.querySelector('[data-live-tt-meta]');
+  const liveTtCaption = root.querySelector('[data-live-tt-caption]');
+  const liveIgArticle = liveIgName instanceof Element ? liveIgName.closest('article') : null;
+  const liveTtArticle = liveTtName instanceof Element ? liveTtName.closest('article') : null;
   const liveTargetRow = root.querySelector('[data-live-target-row]');
   /** @type {'name' | 'bio' | 'both'} */
   let liveTarget = 'bio';
@@ -859,7 +863,17 @@ function initTool() {
     if (liveIgBio) liveIgBio.textContent = bioText;
     if (liveTtName) liveTtName.textContent = ttNameText;
     if (liveTtBio) liveTtBio.textContent = bioText;
-    const hideMeta = liveTarget === 'name';
+    const kind =
+      liveTarget === 'name' ? 'display name' : liveTarget === 'both' ? 'profile' : 'bio';
+    if (liveIgCaption) liveIgCaption.textContent = `Instagram ${kind} preview`;
+    if (liveTtCaption) liveTtCaption.textContent = `TikTok ${kind} preview`;
+    if (liveIgArticle instanceof HTMLElement) {
+      liveIgArticle.setAttribute('aria-label', `Instagram ${kind}`);
+    }
+    if (liveTtArticle instanceof HTMLElement) {
+      liveTtArticle.setAttribute('aria-label', `TikTok ${kind}`);
+    }
+    const hideMeta = liveTarget === 'name' || text.trim() === '';
     for (const el of [liveIgMeta, liveTtMeta]) {
       if (!(el instanceof HTMLElement)) continue;
       if (hideMeta) {

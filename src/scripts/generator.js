@@ -99,8 +99,40 @@ function reverseByCluster(text) {
 }
 
 /**
+ * Inserts U+0020 before each non-space cluster except the first. A cluster is
+ * one non-mark code point plus any combining marks after it, matching
+ * reverseByCluster, so a surrogate pair (one code point) is never split and a
+ * mark stays on its base. A U+0020 cluster is kept as-is with no extra join
+ * space in front of it, so an existing word gap becomes two spaces (the
+ * original plus the join after the previous letter). One cluster, or none,
+ * returns the text unchanged — no leading or trailing space from the join.
+ * @param {string} text
+ * @returns {string}
+ */
+function spaceBetweenClusters(text) {
+  const clusters = [];
+  for (const ch of text) {
+    if (COMBINING_MARK.test(ch) && clusters.length > 0) {
+      clusters[clusters.length - 1] += ch;
+    } else {
+      clusters.push(ch);
+    }
+  }
+  let out = '';
+  for (let i = 0; i < clusters.length; i++) {
+    const cluster = clusters[i];
+    if (i > 0 && cluster !== '\u0020') {
+      out += '\u0020';
+    }
+    out += cluster;
+  }
+  return out;
+}
+
+/**
  * Converts a whole string into the given style. Characters are mapped first;
- * a style with reverse: true then has its mapped output reversed by cluster.
+ * a style with reverse: true then has its mapped output reversed by cluster;
+ * a style with spaced: true then gets U+0020 between those clusters.
  * @param {string} text
  * @param {import('../data/styles.js').Style} style
  * @returns {string}
@@ -111,7 +143,10 @@ export function applyStyle(text, style) {
     result += convertChar(ch, style);
   }
   if (style.reverse) {
-    return reverseByCluster(result);
+    result = reverseByCluster(result);
+  }
+  if (style.spaced) {
+    result = spaceBetweenClusters(result);
   }
   return result;
 }

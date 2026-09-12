@@ -39,6 +39,12 @@ export interface Style {
    * Used by styles like upside-down that only read correctly backwards.
    */
   reverse?: boolean;
+  /**
+   * When true, applyStyle inserts U+0020 between adjacent mapped clusters
+   * (base character plus its combining marks). Unset means no extra spaces.
+   * Used by styles like spaced-out where the spacing is the style.
+   */
+  spaced?: boolean;
 }
 
 /** Ten digit characters from a contiguous Mathematical Alphanumeric block. */
@@ -321,6 +327,71 @@ export const styles: Style[] = [
     risk: null,
     caveat: null,
     caseNote: null,
+  },
+  // Halfwidth and Fullwidth Forms block (U+FF00–U+FFEF), same bases as
+  // fullwidth: uppercase U+FF21, lowercase U+FF41, digit U+FF10. Two
+  // uppercase substitutions from Greek and Coptic (U+0370–U+03FF), sourced
+  // from the Unicode 17.0 Greek and Coptic chart
+  // (https://www.unicode.org/charts/PDF/U0370.pdf): A → U+039B GREEK CAPITAL
+  // LETTER LAMDA, E → U+039E GREEK CAPITAL LETTER XI. Lowercase a/e stay
+  // fullwidth; they have no substitution keys.
+  {
+    id: 'vaporwave-greek',
+    name: 'Vaporwave Greek',
+    categories: ['cool-fonts', 'aesthetic'],
+    uppercaseBase: 0xff21,
+    lowercaseBase: 0xff41,
+    substitutions: {
+      A: 0x039b,
+      E: 0x039e,
+    },
+    digits: digitRange(0xff10),
+    risk: null,
+    caveat: null,
+    caseNote: null,
+  },
+  // Halfwidth and Fullwidth Forms block (U+FF00–U+FFEF), same bases as
+  // fullwidth. Two uppercase substitutions from Geometric Shapes
+  // (U+25A0–U+25FF), sourced from the Unicode Geometric Shapes names list
+  // (https://www.unicode.org/charts/nameslist/n_25A0.html): A → U+25B2 BLACK
+  // UP-POINTING TRIANGLE, E → U+25BC BLACK DOWN-POINTING TRIANGLE. These are
+  // the filled variants, not WHITE UP/DOWN-POINTING TRIANGLE (U+25B3/U+25BD).
+  // A and E exist in the fullwidth block; the triangles are the style, not a
+  // reserved-slot fill, so there is no gap to declare. Silence is the honest
+  // default (generator.mdc badge rule).
+  {
+    id: 'vaporwave-triangle',
+    name: 'Vaporwave Triangle',
+    categories: ['cool-fonts', 'aesthetic'],
+    uppercaseBase: 0xff21,
+    lowercaseBase: 0xff41,
+    substitutions: {
+      A: 0x25b2,
+      E: 0x25bc,
+    },
+    digits: digitRange(0xff10),
+    risk: null,
+    caveat: null,
+    caseNote: null,
+  },
+  // No alphabet mapping. Letters, digits and punctuation pass through
+  // unchanged (uppercaseBase, lowercaseBase and substitutions empty, digits
+  // null). applyStyle inserts U+0020 SPACE between adjacent clusters when
+  // spaced is true. caveatNote declares the passthrough so it is not silent
+  // (generator.mdc: a letter that stays plain must be recorded).
+  {
+    id: 'spaced-out',
+    name: 'Spaced Out',
+    categories: ['cool-fonts', 'aesthetic'],
+    uppercaseBase: null,
+    lowercaseBase: null,
+    substitutions: {},
+    digits: null,
+    risk: null,
+    caveat: null,
+    caveatNote: 'Letters stay plain. The style is a space between each character.',
+    caseNote: null,
+    spaced: true,
   },
 
   // --- small ---

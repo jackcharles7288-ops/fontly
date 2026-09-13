@@ -182,6 +182,14 @@ main {
   display: block;
 }
 
+@media (max-width: 39.99rem) {
+  .article img {
+    max-height: 25rem;
+    object-fit: cover;
+    object-position: top;
+  }
+}
+
 /* Tool — wider than the article spine; sits on the page background. */
 .tool {
   --preview-size: 1.5rem;

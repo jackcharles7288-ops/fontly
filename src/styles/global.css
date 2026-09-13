@@ -104,8 +104,16 @@ main {
   overflow-wrap: anywhere;
 }
 
+.article .sample {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 .article :is(p, ul, ol, h2, h3, h4) {
-  max-width: 43.75rem;
+  max-width: 72rem;
+  line-height: 1.75;
 }
 
 /* Title block: same measure as prose. Bottom gap is explicit so it does not
@@ -113,6 +121,7 @@ main {
 .article--title {
   margin-top: 0;
   margin-bottom: 0.75rem;
+  text-align: center;
 }
 
 .article--title h1 {
@@ -130,6 +139,11 @@ main {
 .hero-intro {
   max-width: 43.75rem;
   margin: 0 0 1rem;
+}
+
+.hero-intro:not(.hero-intro--below) {
+  text-align: center;
+  margin-inline: auto;
 }
 
 .hero-intro--below {

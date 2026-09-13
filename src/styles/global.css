@@ -109,6 +109,7 @@ main {
   max-width: 100%;
   overflow-x: auto;
   white-space: nowrap;
+  vertical-align: bottom;
 }
 
 .article :is(p, ul, ol, h2, h3, h4) {

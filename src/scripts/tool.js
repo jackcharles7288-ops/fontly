@@ -14,6 +14,8 @@ const RECENTS_MAX = 8;
 const PREVIEW_SIZES = ['1.125rem', '1.5rem', '1.875rem'];
 const SECTION_ROOT_MARGIN = '800px';
 const CARD_ROOT_MARGIN = '200px';
+const CARD_BUDGET = 180;
+const CARD_BUDGET_STEP = 180;
 const IG_BIO_LIMIT = 150;
 const TT_BIO_LIMIT = 80;
 const LIVE_STATIC_IG_NAME = 'Your Brand Name';
@@ -439,6 +441,7 @@ function initTool() {
   const previewInput = root.querySelector('#tool-preview-size');
   const cardTemplate = root.querySelector('#tool-card-template');
   if (!(cardTemplate instanceof HTMLTemplateElement)) return;
+  const moreBtn = root.querySelector('[data-load-more]');
 
   /** @type {NodeListOf<HTMLElement>} */
   const sections = root.querySelectorAll('.tool__category');
@@ -485,6 +488,8 @@ function initTool() {
   const visibleCards = new Set();
 
   let activeFilter = 'all';
+  let cardBudget = CARD_BUDGET;
+  let mountedCardCount = 0;
   const favourites = readFavourites();
   let recents = readRecents();
 
@@ -769,36 +774,108 @@ function initTool() {
   }
 
   /**
-   * @param {HTMLElement} section
+   * @returns {boolean}
+   */
+  function isFilterActive() {
+    const query =
+      searchInput instanceof HTMLInputElement
+        ? searchInput.value.trim()
+        : '';
+    return query !== '' || activeFilter !== 'all';
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  function hasUnmountedCards() {
+    for (const section of sections) {
+      const catId = section.getAttribute('data-category');
+      if (!catId || catId === 'combo') continue;
+      if (section.getAttribute('data-mounted') === 'true') continue;
+      const catalog = catalogByCategory.get(catId) ?? [];
+      if (catalog.length > 0) return true;
+    }
+    return false;
+  }
+
+  /**
    * @returns {void}
    */
-  function mountSection(section) {
+  function syncLoadMore() {
+    const spent = mountedCardCount >= cardBudget && hasUnmountedCards();
+    if (spent) root.setAttribute('data-budget-spent', '');
+    else root.removeAttribute('data-budget-spent');
+    if (!(moreBtn instanceof HTMLButtonElement)) return;
+    moreBtn.hidden = isFilterActive() || !spent;
+  }
+
+  /**
+   * @param {HTMLElement} section
+   * @param {boolean} [ignoreBudget]
+   * @returns {void}
+   */
+  function mountSection(section, ignoreBudget) {
     if (section.getAttribute('data-mounted') === 'true') return;
     const catId = section.getAttribute('data-category');
     if (!catId) return;
     const list = section.querySelector('.tool__cards');
     if (!(list instanceof HTMLElement)) return;
     const catalog = catalogByCategory.get(catId) ?? [];
+    const already = list.querySelectorAll('.tool-card').length;
+    const leftover = catalog.slice(already);
+    if (leftover.length === 0) {
+      section.setAttribute('data-mounted', 'true');
+      section.removeAttribute('data-partial');
+      sectionObserver.unobserve(section);
+      return;
+    }
+    const room = ignoreBudget
+      ? leftover.length
+      : Math.max(0, cardBudget - mountedCardCount);
+    if (room === 0) return;
+    const take = leftover.slice(0, room);
     const fragment = document.createDocumentFragment();
-    for (const data of catalog) {
+    /** @type {HTMLElement[]} */
+    const added = [];
+    for (const data of take) {
       const card = createCardFromTemplate(data);
       fragment.appendChild(card);
+      added.push(card);
     }
     list.appendChild(fragment);
-    section.setAttribute('data-mounted', 'true');
-    for (const card of list.querySelectorAll('.tool-card')) {
-      if (card instanceof HTMLElement) {
-        registerCard(card);
-        // Apply current input if the visitor has already typed.
-        if (input.value.length > 0) {
-          updateCard(card, input.value);
-        }
-      }
+    mountedCardCount += added.length;
+    if (already + added.length >= catalog.length) {
+      section.setAttribute('data-mounted', 'true');
+      section.removeAttribute('data-partial');
+      sectionObserver.unobserve(section);
+    } else {
+      section.setAttribute('data-partial', 'true');
     }
+    const typed = input.value;
+    for (const card of added) {
+      registerCard(card);
+      if (typed.length > 0) updateCard(card, typed);
+    }
+  }
+
+  /**
+   * @returns {void}
+   */
+  function fillBudget() {
+    for (const section of sections) {
+      if (mountedCardCount >= cardBudget) break;
+      const catId = section.getAttribute('data-category');
+      if (!catId || catId === 'combo') continue;
+      if (section.getAttribute('data-mounted') === 'true') continue;
+      mountSection(section);
+    }
+    syncLoadMore();
   }
 
   const sectionObserver = new IntersectionObserver(
     (entries) => {
+      if (isFilterActive()) return;
+      const intersecting = new Set();
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         const section = entry.target;
@@ -807,9 +884,14 @@ function initTool() {
           sectionObserver.unobserve(section);
           continue;
         }
-        mountSection(section);
-        sectionObserver.unobserve(section);
+        intersecting.add(section);
       }
+      for (const section of sections) {
+        if (mountedCardCount >= cardBudget) break;
+        if (!intersecting.has(section)) continue;
+        mountSection(section);
+      }
+      syncLoadMore();
     },
     { root: null, rootMargin: SECTION_ROOT_MARGIN, threshold: 0 },
   );
@@ -818,12 +900,16 @@ function initTool() {
   for (const section of sections) {
     if (section.getAttribute('data-mounted') === 'true') {
       for (const card of section.querySelectorAll('.tool-card')) {
-        if (card instanceof HTMLElement) registerCard(card);
+        if (card instanceof HTMLElement) {
+          registerCard(card);
+          mountedCardCount += 1;
+        }
       }
-    } else {
+    } else if (section.getAttribute('data-category') !== 'combo') {
       sectionObserver.observe(section);
     }
   }
+  syncLoadMore();
 
   /**
    * @param {string} text
@@ -988,6 +1074,7 @@ function initTool() {
     let anyFavMatch = false;
     let anyRecentMatch = false;
     let anyShown = false;
+    const filtering = query !== '' || activeFilter !== 'all';
 
     for (const section of sections) {
       const catId = section.getAttribute('data-category');
@@ -1008,8 +1095,9 @@ function initTool() {
         anyShown = true;
       }
 
+      // Filtering ignores the budget so a match is never stuck behind Load more.
       if (matching.length > 0 && section.getAttribute('data-mounted') !== 'true') {
-        mountSection(section);
+        mountSection(section, filtering);
       }
 
       const visibleInSection = matching.length;
@@ -1056,6 +1144,7 @@ function initTool() {
     if (emptySearchEl instanceof HTMLElement) {
       emptySearchEl.hidden = !(query !== '' && !anyShown);
     }
+    syncLoadMore();
   }
 
   input.addEventListener('input', () => {
@@ -1149,6 +1238,26 @@ function initTool() {
     const liveBtn = target.closest('[aria-controls="tool-live-preview"]');
     if (liveBtn instanceof HTMLButtonElement && livePanel instanceof HTMLElement) {
       setLivePreviewOpen(!livePreviewOpen);
+      return;
+    }
+
+    const loadMoreBtn = target.closest('[data-load-more]');
+    if (loadMoreBtn instanceof HTMLButtonElement && root.contains(loadMoreBtn)) {
+      const keepFocus = document.activeElement === loadMoreBtn;
+      const y = window.scrollY;
+      cardBudget += CARD_BUDGET_STEP;
+      fillBudget();
+      window.scrollTo(0, y);
+      if (keepFocus && loadMoreBtn.hidden) {
+        const copyBtns = root.querySelectorAll('.tool-card [data-copy]');
+        const lastCopy = copyBtns[copyBtns.length - 1];
+        if (lastCopy instanceof HTMLButtonElement) {
+          lastCopy.focus({ preventScroll: true });
+        } else {
+          input.focus({ preventScroll: true });
+        }
+        window.scrollTo(0, y);
+      }
       return;
     }
 

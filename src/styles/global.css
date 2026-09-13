@@ -212,6 +212,7 @@ main {
   max-width: 72rem;
   margin-inline: auto;
   min-width: 0;
+  overflow-anchor: none;
 }
 
 .tool__char-count {
@@ -252,6 +253,24 @@ main {
 
 .tool__below {
   margin-top: 1.5rem;
+}
+
+.tool__more {
+  text-align: center;
+  min-height: 3.6rem;
+}
+
+.tool__more .tool__case-btn {
+  margin-top: 1.5rem;
+}
+
+/* Empty card sections stay in layout until the budget is spent so the
+   800px observer can still find them. After that they collapse, so the
+   Load more button sits under the last section that actually has cards.
+   Combo is excluded: it never gets .tool-card children. */
+.tool[data-budget-spent]
+  .tool__category[data-mounted='false']:not([data-partial]):not([data-category='combo']) {
+  display: none;
 }
 
 .tool__input-meta {

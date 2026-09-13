@@ -176,6 +176,12 @@ main {
   }
 }
 
+.article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* Tool — wider than the article spine; sits on the page background. */
 .tool {
   --preview-size: 1.5rem;

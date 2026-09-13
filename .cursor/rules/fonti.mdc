@@ -56,20 +56,46 @@ Non-negotiable. Report the real measured number after each phase,
 including the ones that fail. Every phase report must state the measured
 CLS and INP numbers, or state plainly that they were not measured and why.
 
-- JavaScript: under 15 KB gzipped for the whole tool
-- CSS: under 15 KB gzipped, critical CSS inlined (`build.inlineStylesheets:
-  'always'` in astro.config.mjs since d64d81b; no .css file is emitted;
-  PageSpeed's Render-blocking requests insight disappeared as a result — do
-  not reverse without a measured regression)
-- HTML: under 25 KB gzipped per page, and raw HTML under 200 KB. Currently
-  10 KB gzipped and 87 KB raw at 77 cards. Raw size matters as much as
-  gzipped because parse work is done on uncompressed bytes.
+- JavaScript: under 15360 bytes gzipped for the whole page (JS_GZIP_TOTAL).
+  Measured 12343 (headroom 3017) at tag `tool-load-more-ok`. Breakdown:
+  page.CMFgH77u.js 1118 + Tool...js 11225. `scripts/measure-assets.cjs`
+  sums ALL `type="module"` scripts and prints JS_GZIP_TOTAL plus a
+  per-file breakdown. An older 10824 figure counted only the first module
+  and is stale — do not quote it.
+- CSS: under 3400 bytes gzipped, currently 3309 (headroom 91). Critical CSS
+  inlined (`build.inlineStylesheets: 'always'` in astro.config.mjs since
+  d64d81b; no .css file is emitted; PageSpeed's Render-blocking requests
+  insight disappeared as a result — do not reverse without a measured
+  regression). Headroom of 91 will not fit the pending design work (h2/h3
+  sizing, paragraph margins, table styling, enlarged Unicode samples,
+  warning box — roughly 500-550 bytes). Raise the 3400 limit (suggested
+  4000) before that work starts.
+- HTML: under 25600 bytes gzipped per page, and raw HTML under 200 KB.
+  Currently HTML_GZIP homepage 23648 (headroom 1952), bold 18659, cursive
+  21102. Raw size matters as much as gzipped because parse work is done
+  on uncompressed bytes.
 - Zero web font requests
 - Zero third-party requests on first load
 - LCP element is server-rendered text or cards, never an image
 - CLS exactly 0
 - INP under 200 ms while typing, measured at 4x CPU throttling
-- Roughly 1,500 DOM nodes per page or fewer
+- Distinct hex colour literals: 13. Do not add a 14th.
+- Styles: 305 unique (styles + decorations + effects + combinations). Up
+  to 330 `.tool-card` nodes on the homepage, because a style can appear
+  in more than one section.
+- Last good tag: `tool-load-more-ok`
+- DOM. The 1500-node budget was only ever checked at 360x640 with NO
+  scrolling, so it silently passed. Any future DOM gate must state WHICH
+  state it measures. Recorded both:
+  - mobile no-scroll (the gate that reflects load speed): 936 / 20 / 18
+    at 360x640, first `.tool-card` viewport-Y 608. Was 934; +2 is the
+    Load more wrapper and its hidden button.
+  - fully expanded after all Load more clicks: 4451
+  4451 exceeds the written 1500 budget. The 1500 figure was set without
+  measurement. Lighthouse still reports Performance 100 / CLS 0 / TBT 0
+  in that expanded state on both the homepage and /cursive-font-generator/.
+  The 1500 number is UNRESOLVED — re-decide with evidence, do not quietly
+  ignore it.
 
 ### Measurement rules
 
@@ -80,7 +106,8 @@ CLS and INP numbers, or state plainly that they were not measured and why.
 - All gzipped sizes come from `scripts/measure-assets.cjs` and no other
   tool. Two compressors produced 9,991 and 10,238 bytes for the same file,
   so figures from different tools cannot be compared. Record raw bytes
-  alongside gzipped, because raw is tool-independent.
+  alongside gzipped, because raw is tool-independent. JS is JS_GZIP_TOTAL
+  (sum of every `type="module"` script), never a single-file leftover.
 - Never count a bare class name in built HTML. The stylesheet is inlined, so
   a bare class name also matches its own CSS selector. Count
   `class="the-name"` instead. Attribute counts such as `data-card-id` are
@@ -97,6 +124,13 @@ perfect lab score.
 - Vanilla JavaScript for the generator, one module, loaded deferred
 - Plain hand-written CSS
 - System font stack only
+- Hover prefetch is live via `astro.config.mjs`:
+  `prefetch: { prefetchAll: true, defaultStrategy: 'hover' }`. No
+  ClientRouter, no `data-astro-prefetch` attributes. Verified: five
+  Lighthouse runs with and five without showed identical medians, so an
+  earlier 99 was noise. Do not add view transitions. That work was merged
+  and then deliberately reverted (tag `no-view-transitions-ok`) because it
+  felt sluggish on the live site. Hover prefetch was kept.
 - @astrojs/sitemap
 - Cloudflare Web Analytics as the single script tag, at the very end,
   deferred
@@ -113,9 +147,10 @@ perfect lab score.
 - Never invent a number, date, percentage or capability. If a fact belongs
   in the interface and it was not given to you, ask or leave a TODO.
 - Never hardcode a style count anywhere. Render it from
-  `styles.length + decorations.length + effects.length`. The old rule to
-  render from `styles.length` alone drifted when decorations and effects
-  were added.
+  `styles.length + decorations.length + effects.length + combinations.length`.
+  The old rule to render from `styles.length` alone drifted when
+  decorations and effects were added. Combinations are part of the same
+  sum. Current unique total is 305.
 - These exact claims are banned because an earlier prototype shipped them
   and they are false: "Works Everywhere", any device-compatibility
   percentage such as "99%", and any hardcoded count such as "130+ styles".
@@ -270,6 +305,15 @@ they live here. Changing them without an explicit owner decision is a bug.
 - Content-dependent behaviour belongs in frontmatter, never as a string
   literal in a route or component.
 - `[hidden]` stays unbeatable via the reset rule `display: none !important`.
+- Presentation belongs in CSS, not JS. Empty card sections are hidden by a
+  CSS rule keyed off `data-budget-spent`, not by JS toggling `hidden`,
+  because CSS applies automatically in every state (initial, after mount,
+  after filter, after each search keystroke) with nothing to forget.
+- Load more: `CARD_BUDGET = 180`, `CARD_BUDGET_STEP = 180` in
+  `src/scripts/tool.js` — these two constants are the only tuning knobs.
+  Scroll position is preserved across clicks (scrollY identical
+  before/after). Search and active chips bypass the budget so no style is
+  undiscoverable.
 - Reserved heights exist for first paint, not for typing, because shifts
   within 500 ms of an interaction are excluded from CLS.
 - A scroll affordance is CSS-only; no handler may read scroll or box geometry.

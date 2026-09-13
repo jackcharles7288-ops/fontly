@@ -1,3 +1,11 @@
+@view-transition { navigation: auto; }
+
+::view-transition-group(root),
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.15s;
+}
+
 /* System font stack only. No web fonts. */
 :root {
   color-scheme: light;
@@ -1081,6 +1089,8 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+
   .tool-card__copy {
     transition: none;
   }

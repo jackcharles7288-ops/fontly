@@ -183,7 +183,7 @@ export const styles: Style[] = [
   {
     id: 'circled',
     name: 'Circled',
-    categories: ['cool-fonts', 'bubble', 'number'],
+    categories: ['cool-fonts', 'bubble', 'number', 'aesthetic'],
     uppercaseBase: 0x24b6,
     lowercaseBase: 0x24d0,
     substitutions: {},

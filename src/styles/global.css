@@ -205,6 +205,22 @@ main {
   }
 }
 
+/* Article media beside prose; one column below 40rem. Images keep intrinsic width. */
+.article .split {
+  display: grid;
+  gap: 1rem;
+}
+
+.article .split img {
+  justify-self: start;
+}
+
+@media (min-width: 40rem) {
+  .article .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
 /* Tool — wider than the article spine; sits on the page background. */
 .tool {
   --preview-size: 1.5rem;

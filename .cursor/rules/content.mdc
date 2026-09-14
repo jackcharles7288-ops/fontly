@@ -7,7 +7,9 @@ globs: src/content/**
 
 ## Two collections, from the start
 
-- src/content/pages/ for the seventeen tool pages and the homepage
+- src/content/pages/ for the homepage and each live tool page (today: bold,
+  cursive, aesthetic). One Markdown file per page; the filename is the URL.
+  Do not keep a planned page count here.
 - src/content/blog/ for blog posts
 
 Both are declared in `src/content.config.ts`, not in `src/content/config.ts`.
@@ -30,7 +32,9 @@ Define it with Zod so a bad page fails the build instead of shipping broken.
 - toolCategories, ordered array of category ids. Each id must exist in
   src/data/categories.ts. This is the list of tool sections that page
   renders, in order — not a yes/no switch that turns the tool on.
-- testPhrase, optional string, the input prefill for that page's tool
+- testPhrase, optional string. Not an input prefill: Tool.astro sets the
+  input to an empty string. The field only drives the missing-phrase
+  warning when it is omitted.
 - heroIntro, optional string, short copy under the h1 and above the tool.
   Comes from the owner's Notion article and is never written by an agent.
   Omit the field (and the element) when absent.
@@ -60,15 +64,19 @@ pastes the real article.
 - The faq array feeds two things from one source: the visible accordion and
   the FAQPage JSON-LD. A FAQ is never written twice.
 - relatedTools holds slugs. RelatedTools reads the content collection and
-  takes each link's text from that page's own frontmatter title. A slug with
+  takes each link's text from that page's own frontmatter h1. A slug with
   no entry in the collection is omitted, never rendered as a dead link. A
   hand-written copy of page titles is banned. An earlier prototype shipped
   eleven related-tool links where nine were 404s; that must now be
   structurally impossible.
 - Use plain independent <details> elements for the FAQ, not a
   one-at-a-time accordion. Answers stay in the HTML source when collapsed.
-- In-body internal links are absolute URLs, so they return 404 until every
-  page exists. Add a build-time link checker that fails the build.
+- In-body internal links are root-relative hrefs with a trailing slash
+  (`/`, `/bold-text-generator/`, `/cursive-font-generator/`,
+  `/aesthetic-font-generator/`). Do not put absolute fonti.cool URLs in
+  body copy. An absolute link would point at production from the
+  fontly.pages.dev preview, which breaks both hover prefetch verification
+  and the check that every internal link resolves to a built page.
 
 ## Converting an article from Notion into Markdown
 

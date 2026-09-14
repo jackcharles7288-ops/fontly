@@ -139,6 +139,8 @@ Competitors will not print this number. Unicode holds two blackletter alphabets.
 | Fraktur | 𝔊𝔬𝔱𝔥𝔦𝔠 | True blackletter | Band names, fantasy titles, tattoo wording | Five capitals come from Letterlike Symbols, a second Unicode block |
 | Bold Fraktur | 𝕲𝖔𝖙𝖍𝖎𝖈 | True blackletter, complete alphabet | Display names, clan tags, anything small | Single complete block with no substitutions |
 
+The table lists the two alphabets, and decorated versions of each appear on the Combined cards.
+
 Fraktur is the alphabet people mean when they say gothic, and five of its capitals are borrowed from elsewhere in Unicode, which gets its own section below. Bold Fraktur is the complete set. It holds its shape better once text shrinks, which makes it the safer default for a display name. Combined cards wrap either alphabet in a decoration. The Make your own builder offers every wrapper in the catalogue, plus None. Those wrapper characters, not the letters, are the part that can fail to render.
 
 ⚠ Styles sold as gothic that are not gothic. Several generators list a "Gothic Serif" (𝐆𝐨𝐭𝐡𝐢𝐜) and a "Minimal Gothic" (𝘎𝘰𝘵𝘩𝘪𝘤). Those are plain bold serif and sans italic characters. They are perfectly good characters and they have nothing to do with blackletter. If that heavier plain look or that slant is what you came for, no gothic style on this page will give it to you, because neither one is blackletter.

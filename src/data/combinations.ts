@@ -1,5 +1,5 @@
-// Combinations are a grid: thirteen alphabet ids cross twelve decoration ids,
-// expressed as two id lists rather than 156 hand-written records. Every cell
+// Combinations are a grid: thirteen alphabet ids cross fifteen decoration ids,
+// expressed as two id lists rather than 195 hand-written records. Every cell
 // ships. No character data lives here — only ids; glyphs come from the parent
 // style and decoration records.
 
@@ -43,6 +43,9 @@ const DECORATION_IDS = [
   'wave-dash',
   'dagger',
   'gaming-wings',
+  'crown',
+  'moon',
+  'cross',
 ] as const;
 
 const styleById = new Map(styles.map((s) => [s.id, s]));

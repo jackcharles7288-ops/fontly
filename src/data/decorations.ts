@@ -962,6 +962,36 @@ export const decorations: Decoration[] = [
     suffix: '∞',
     caveat: null,
   },
+  // Miscellaneous Symbols block (U+2600-U+26FF).
+  // Prefix U+265B BLACK CHESS QUEEN, suffix U+265B.
+  {
+    id: 'crown',
+    group: 'symbols',
+    name: 'Crown',
+    prefix: '\u265b',
+    suffix: '\u265b',
+    caveat: null,
+  },
+  // Miscellaneous Symbols block (U+2600-U+26FF).
+  // Prefix U+263D FIRST QUARTER MOON, suffix U+263E LAST QUARTER MOON.
+  {
+    id: 'moon',
+    group: 'symbols',
+    name: 'Crescent Moon',
+    prefix: '\u263d',
+    suffix: '\u263e',
+    caveat: null,
+  },
+  // Dingbats block (U+2700-U+27BF).
+  // Prefix U+2720 MALTESE CROSS, suffix U+2720.
+  {
+    id: 'cross',
+    group: 'symbols',
+    name: 'Maltese Cross',
+    prefix: '\u2720',
+    suffix: '\u2720',
+    caveat: null,
+  },
 ];
 
 /**

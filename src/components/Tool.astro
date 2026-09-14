@@ -152,22 +152,43 @@ function effectCards(): Card[] {
 const styleById = new Map(styles.map((s) => [s.id, s]));
 const decorationById = new Map(decorations.map((d) => [d.id, d]));
 
+// Decoration groups are flagged `decoration: true` in categories.ts.
+// combo / combined / all / favourites / recent have no such flag, so those
+// five ids are listed here. Combined cards stay only when the parent
+// alphabet's categories intersect the remaining page ids.
+const COMBINED_NON_ALPHABET_IDS = new Set([
+  'all',
+  'favourites',
+  'recent',
+  'combo',
+  'combined',
+  ...DECORATION_GROUP_IDS,
+]);
+const pageAlphabetIds = new Set(
+  toolCategories.filter((id) => !COMBINED_NON_ALPHABET_IDS.has(id)),
+);
+
 function combinationCards(): Card[] {
-  return combinations.map((combination) => {
-    const style = styleById.get(combination.style)!;
+  return combinations.flatMap((combination) => {
+    const style = styleById.get(combination.style);
+    if (!style || !style.categories.some((id) => pageAlphabetIds.has(id))) {
+      return [];
+    }
     const decoration = decorationById.get(combination.decoration)!;
     const output = applyCombination(testPhrase ?? '', style, decoration);
-    return {
-      id: combination.id,
-      name: combination.name,
-      searchName: combination.name.toLowerCase(),
-      output,
-      caveat: style.caveat,
-      caveatNote: style.caveatNote ?? null,
-      caseNote: style.caseNote,
-      digitsPassThrough: style.digits === null,
-      membership: combination.categories.join(' '),
-    };
+    return [
+      {
+        id: combination.id,
+        name: combination.name,
+        searchName: combination.name.toLowerCase(),
+        output,
+        caveat: style.caveat,
+        caveatNote: style.caveatNote ?? null,
+        caseNote: style.caseNote,
+        digitsPassThrough: style.digits === null,
+        membership: combination.categories.join(' '),
+      },
+    ];
   });
 }
 

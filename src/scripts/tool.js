@@ -49,6 +49,24 @@ const DECORATION_GROUP_IDS = new Set(
   groupSectionsRaw.trim() ? groupSectionsRaw.trim().split(/\s+/) : [],
 );
 
+// Same exclusion as Tool.astro: decoration groups from data-group-sections
+// (built from categories.ts `decoration: true`). The five names have no
+// such flag, so they are listed here. Page alphabet ids are the remaining
+// tool category sections.
+const COMBINED_NON_ALPHABET_IDS = new Set([
+  'all',
+  'favourites',
+  'recent',
+  'combo',
+  'combined',
+  ...DECORATION_GROUP_IDS,
+]);
+const pageAlphabetIds = new Set(
+  [...document.querySelectorAll('[data-tool] .tool__category')]
+    .map((el) => el.getAttribute('data-category'))
+    .filter((id) => id && !COMBINED_NON_ALPHABET_IDS.has(id)),
+);
+
 /**
  * Membership string for a decoration card. cute is derived from stars/hearts.
  * @param {string} group
@@ -198,19 +216,24 @@ function catalogForCategory(categoryId) {
     }));
   }
   if (categoryId === 'combined') {
-    return combinations.map((combination) => {
+    return combinations.flatMap((combination) => {
       const style = styleById.get(combination.style);
-      return {
-        id: combination.id,
-        name: combination.name,
-        searchName: combination.name.toLowerCase(),
-        category: 'combined',
-        membership: combination.categories.join(' '),
-        caveat: style ? style.caveat : null,
-        caveatNote: style && style.caveatNote ? style.caveatNote : null,
-        caseNote: style ? style.caseNote : null,
-        digitsPassThrough: style ? style.digits === null : false,
-      };
+      if (!style || !style.categories.some((id) => pageAlphabetIds.has(id))) {
+        return [];
+      }
+      return [
+        {
+          id: combination.id,
+          name: combination.name,
+          searchName: combination.name.toLowerCase(),
+          category: 'combined',
+          membership: combination.categories.join(' '),
+          caveat: style.caveat,
+          caveatNote: style.caveatNote ? style.caveatNote : null,
+          caseNote: style.caseNote,
+          digitsPassThrough: style.digits === null,
+        },
+      ];
     });
   }
   return styles

@@ -183,6 +183,8 @@ main {
 @media (max-width: 39.99rem) {
   .article table {
     font-size: 0.875rem;
+    display: block;
+    overflow-x: auto;
   }
 
   .article th,

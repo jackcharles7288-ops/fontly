@@ -169,7 +169,7 @@ The workhorses. These mathematical bold and italic alphabets let you emphasize w
 
 ### Aesthetic Fonts — ｖａｐｏｒｗａｖｅ
 
-Fullwidth characters were designed so Latin letters would align neatly inside Chinese and Japanese text, and then the vaporwave scene adopted the <span class="sample">ｓｐａｃｅｄ－ｏｕｔ</span> look and made it iconic. Best for moods, playlists, and retro posts. The wide spacing is built into the characters themselves, so it survives anywhere the letters do. Stretch it out with the aesthetic font generator.
+Fullwidth characters were designed so Latin letters would align neatly inside Chinese and Japanese text, and then the vaporwave scene adopted the <span class="sample">ｓｐａｃｅｄ－ｏｕｔ</span> look and made it iconic. Best for moods, playlists, and retro posts. The wide spacing is built into the characters themselves, so it survives anywhere the letters do. Stretch it out with the [aesthetic font generator](/aesthetic-font-generator/).
 
 ### Cute Fonts — ᶜᵘᵗᵉ ˚₊·ʚɞ
 

@@ -220,7 +220,7 @@ Blackletter sits so close to genre convention in metal that plain text can read 
 
 ### Gaming names and clan tags
 
-Steam, Xbox and Discord all accept Unicode in display names, and gaming is still the most restrictive category on the internet because every title enforces its own filter. Bold Fraktur is the pick here. A clan tag or profile badge renders tiny, and plain Fraktur loses its strokes at that size. Good to know: if a game rejects your styled name outright, that is the game's username rule rather than a fault in the text. The platform-by-platform detail lives in our Discord Fonts guide.
+Steam, Xbox and Discord all accept Unicode in display names, and gaming is still the most restrictive category on the internet because every title enforces its own filter. Bold Fraktur is the pick here. A clan tag or profile badge renders tiny, and plain Fraktur loses its strokes at that size. Good to know: if a game rejects your styled name outright, that is the game's username rule rather than a fault in the text. The platform-by-platform detail lives in our [Discord Fonts guide](/discord-fonts/).
 
 ### Instagram bio and name
 

@@ -228,6 +228,14 @@ This is the single most common complaint about the feature, and the answer is a 
 
 So if you bought Nitro expecting a styled @name, no amount of settings will produce one. Nothing will, from Discord or from any generator. The handle is the one field on the platform that no styling method reaches.
 
+<div class="split">
+
+The profile editor shows the same boundary: the display name carries the styled characters, and the handle row underneath stays plain text.
+
+<img src="/images/discord-name-vs-handle.webp" width="700" height="228" loading="lazy" decoding="async" alt="a Discord profile with a styled display name above a plain @handle" />
+
+</div>
+
 ### Anyone can switch your font off
 
 Here is the part that decides the whole comparison. It is rarely covered anywhere.
@@ -277,6 +285,14 @@ Two things break here. Long names can be cut short in the sidebar, and styled ch
 Role names accept full Unicode up to 100 characters, which makes them a low-stakes place to try a style. A role can be renamed without disrupting anything.
 
 Small Caps works particularly well for role hierarchies, because it stays legible at the small size the member list uses.
+
+<div class="split">
+
+The same display name set in Fraktur and again in Bold Fraktur, at the size the member list uses: the regular cut keeps thin strokes, the bold cut draws the same letters much heavier.
+
+<img src="/images/discord-name-fraktur-vs-bold.webp" width="215" height="83" loading="lazy" decoding="async" alt="a Discord display name shown in Fraktur and in bold Fraktur at member-list size" />
+
+</div>
 
 Channel names carry a cost the limits table above does not show. A styled channel name cannot be typed from memory. Nobody can reach it through the quick switcher. Style the category and leave the channel itself searchable, or you trade navigation for decoration.
 

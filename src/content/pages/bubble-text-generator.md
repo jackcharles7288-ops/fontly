@@ -187,7 +187,7 @@ Most styled alphabets give you letters and then quietly stop. Bubble text is the
 | Bracketed, one to twenty | ⑴ ⑵ ⑶ ⑷ ⑸ ⑹ ⑺ ⑻ ⑼ ⑽ ⑾ ⑿ ⒀ ⒁ ⒂ ⒃ ⒄ ⒅ ⒆ ⒇ |
 | Filled circled, zero to ten | ⓿ ❶ ❷ ❸ ❹ ❺ ❻ ❼ ❽ ❾ ❿ |
 
-The basic set covers zero through nine, and then it keeps going. Circled numbers continue through the teens and into the twenties and thirties, held in a separate block originally built for Chinese and Japanese typesetting. Small print: the higher numbers came from a different tradition than the letters did, so a font that draws a circled ⑤ beautifully may have nothing at all for a circled thirty. Stick to single digits for anything permanent.
+The basic set covers zero through nine, and then it keeps going. Circled numbers continue through the teens and into the twenties and thirties, held in a separate block originally built for Chinese and Japanese typesetting. On one current Android, 10, 15 and 20 rendered as circled numbers. Small print: the higher numbers came from a different tradition than the letters did, so a font that draws a circled ⑤ beautifully may have nothing at all for a circled thirty. Stick to single digits for anything permanent.
 
 Bracketed digits exist too, running from one upward, and there is one odd gap in the standard. There is no bracketed zero anywhere in Unicode. A (0) has to stay plain, which is a strange thing to discover halfway through styling a date. Filled circled digits are also available, though they were catalogued as decorative dingbats rather than as part of the alphabet, along with a rarely used double-circled set.
 
@@ -253,7 +253,13 @@ Generic compatibility promises are useless, because the answer changes field by 
 
 ### Social profiles
 
+<div class="split">
+
 Instagram is the most common destination and it has one hard rule people learn too late. Usernames accept only letters, numbers, periods and underscores, so bubble characters are rejected outright there. The display name is a different field with no such restriction, which is where styled text belongs, and the bio allows 150 characters. If your bio is already close to that limit, remember that every bubble letter counts as its own character just like a plain one.
+
+<img src="/images/bubble-bio-counter.webp" width="700" height="406" loading="lazy" decoding="async" alt="ten filled circled capitals A to J in an Instagram bio with the counter reading 10/150" />
+
+</div>
 
 TikTok behaves similarly, with the styling going in the display name rather than the handle. An Android TikTok bio field showed 0/160. Watch the edges here: styled text in a bio is generally not searchable, so a name written entirely in circles can stop people finding you.
 
@@ -285,7 +291,13 @@ Safest. Outlined circles and bracketed lowercase. Both date from 1993, both sit 
 
 Mostly safe. Circled digits up to twenty, and the same characters in messaging apps on current phones. These are dependable in practice, with occasional gaps in older or stripped-down fonts.
 
+<div class="split">
+
 Riskiest. Filled circles, bracketed capitals, and both square sets. All arrived in 2010 or later and all live in the newer part of Unicode that many fonts never bothered to add. On one current Android, filled circles and bracketed capitals rendered as letters, none as empty boxes.
+
+<img src="/images/bubble-four-styles-rendered.webp" width="700" height="366" loading="lazy" decoding="async" alt="four bubble alphabets pasted into a WhatsApp chat, all rendering as flat monochrome letters with no empty boxes" />
+
+</div>
 
 ### What to do when you see boxes
 

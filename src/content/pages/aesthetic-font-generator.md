@@ -66,6 +66,7 @@ relatedTools:
   - number-font-generator
   - discord-fonts
   - instagram-fonts
+  - bubble-text-generator
 ---
 
 Aesthetic fonts are two different searches sharing one name. Half the people typing it want soft, rounded, decorated text with hearts and curls tucked around the edges, and the cute font generator sorts that out. The other half want the stretched look, <span class="sample">ｌｉｋｅ ｔｈｉｓ</span>, where every letter sits in its own wide box with air on both sides. That second one is what this page is for, and it carries a real history plus a set of rules almost nobody writes down. Eight styles, all free to copy and paste, with nothing to install.

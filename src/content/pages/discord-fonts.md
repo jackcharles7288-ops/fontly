@@ -71,6 +71,7 @@ relatedTools:
   - aesthetic-font-generator
   - cursive-font-generator
   - bold-text-generator
+  - bubble-text-generator
 ---
 
 Discord fonts are not fonts you install. They are Unicode characters that already sit on every phone and computer, shaped to look like bold, script, gothic or bubble letters. Type your name into the generator above, pick a style, then paste it into your display name, your server nickname, your bio or a message.

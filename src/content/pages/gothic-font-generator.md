@@ -86,6 +86,7 @@ relatedTools:
   - cute-font-generator
   - number-font-generator
   - discord-fonts
+  - bubble-text-generator
 ---
 
 Type a word into the box above and this tool rewrites it in blackletter you can copy into a bio, a chat, a caption or a profile name. It is free, there is no signup, nothing installs, and it behaves the same on a phone as on a desktop. What comes back is not a font but a set of Unicode characters shaped like medieval blackletter, which is why the style survives a paste into fields that have no font settings at all. Unicode contains exactly two blackletter alphabets, so this page names both instead of advertising a hundred. Fair warning before you scroll: gothic is the least readable style on this site, and the sections below tell you where that matters and where it does not.

@@ -102,6 +102,7 @@ relatedTools:
   - freaky-font-generator
   - bold-text-generator
   - aesthetic-font-generator
+  - bubble-text-generator
 ---
 
 This cursive font generator turns your text into six cursive styles you can copy and paste straight into an Instagram bio, a TikTok display name, a Discord nickname, or a WhatsApp About line. Type once and every style updates together, then tap any card to copy and paste cursive text wherever you need it. Cursive fonts here are free. There is no signup, and nothing gets installed on your phone or computer.

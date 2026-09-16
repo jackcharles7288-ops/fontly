@@ -58,6 +58,12 @@ const CIRCLED_DIGITS: string[] = [
   ...Array.from({ length: 9 }, (_, i) => String.fromCodePoint(0x2460 + i)),
 ];
 
+/** Negative circled digits: 1–9 at U+2776…U+277E, zero at U+24FF. */
+const NEGATIVE_CIRCLED_DIGITS: string[] = [
+  String.fromCodePoint(0x24ff),
+  ...Array.from({ length: 9 }, (_, i) => String.fromCodePoint(0x2776 + i)),
+];
+
 /** Visitor-facing note shown when a style leaves digits unchanged. */
 export const DIGITS_NOTE = 'Numbers stay plain.';
 
@@ -207,6 +213,22 @@ export const styles: Style[] = [
     caveat: 'Lowercase only',
     caseNote: 'Capitals fold to lowercase',
   },
+  // Enclosed Alphanumeric Supplement (U+1F100-U+1F1FF), parenthesized Latin
+  // capital letters A-Z at U+1F110-U+1F129. Capitals only; lowercase folds onto
+  // these. Distinct from parenthesized small letters at U+249C. Code points
+  // verified assigned, sequential, no gaps.
+  {
+    id: 'parenthesized-caps',
+    name: 'Parenthesized Caps',
+    categories: ['cool-fonts', 'bubble'],
+    uppercaseBase: 0x1f110,
+    lowercaseBase: null,
+    substitutions: {},
+    digits: null,
+    risk: null,
+    caveat: 'Caps only',
+    caseNote: 'Lowercase folds to capitals',
+  },
   {
     id: 'negative-circled',
     name: 'Filled Circled',
@@ -214,7 +236,7 @@ export const styles: Style[] = [
     uppercaseBase: 0x1f150,
     lowercaseBase: null,
     substitutions: {},
-    digits: null,
+    digits: NEGATIVE_CIRCLED_DIGITS,
     risk: null,
     caveat: 'Caps only',
     caseNote: 'Lowercase folds to capitals',
@@ -546,6 +568,24 @@ export const styles: Style[] = [
     caveatNote:
       "Unicode's squared letters are capitals only, so lowercase letters appear as squared capitals.",
     caseNote: null,
+  },
+  // Enclosed Alphanumeric Supplement (U+1F100-U+1F1FF), negative squared Latin
+  // capital letters A-Z at U+1F170-U+1F189. Capitals only; lowercase folds onto
+  // these. U+1F170, U+1F171, U+1F17E and U+1F17F are listed as emoji characters.
+  // Code points verified assigned, sequential, no gaps.
+  {
+    id: 'negative-squared',
+    name: 'Filled Squared',
+    categories: ['cool-fonts', 'bubble'],
+    uppercaseBase: 0x1f170,
+    lowercaseBase: null,
+    substitutions: {},
+    digits: null,
+    risk: null,
+    caveat: 'Emoji',
+    caveatNote:
+      'Unicode lists U+1F170, U+1F171, U+1F17E and U+1F17F as emoji characters. A hand test on 16 Sep 2026 showed those four rendering as coloured buttons.',
+    caseNote: 'Lowercase folds to capitals',
   },
 
   // --- other ---

@@ -121,6 +121,7 @@ faq:
 relatedTools:
   - cursive-font-generator
   - bold-text-generator
+  - bubble-text-generator
 ---
 
 TOOL PLACEHOLDER

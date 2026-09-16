@@ -38,6 +38,7 @@ relatedTools:
   - number-font-generator
   - cute-font-generator
   - aesthetic-font-generator
+  - bubble-text-generator
 ---
 
 You might already have a bold button. WhatsApp, Reddit, Discord, Telegram, Slack and Word all build one in, and most people never find it. This generator is for everywhere else: Instagram bios, LinkedIn headlines, TikTok profiles, and any field that gives you no formatting at all. It makes six styles, which is every bold and italic alphabet Unicode contains, and the characters hold their shape wherever you paste them. Free, no sign-up, works on a phone.

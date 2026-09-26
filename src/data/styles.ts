@@ -198,7 +198,7 @@ export const styles: Style[] = [
     // U+24C2 capital M has emoji presentation (metro sign).
     caveat: 'Emoji',
     caveatNote:
-      'Unicode records the circled capital M at U+24C2 as an emoji character, so some apps draw it as a coloured symbol instead of a letter.',
+      'Unicode records the circled capital M at U+24C2 as an emoji character.',
     caseNote: null,
   },
   {
@@ -582,9 +582,9 @@ export const styles: Style[] = [
     substitutions: {},
     digits: null,
     risk: null,
-    caveat: 'Emoji',
+    caveat: 'Caps only',
     caveatNote:
-      'Unicode lists U+1F170, U+1F171, U+1F17E and U+1F17F as emoji characters. A hand test on 16 Sep 2026 showed those four rendering as coloured buttons.',
+      'Unicode lists U+1F170, U+1F171, U+1F17E and U+1F17F as emoji characters.',
     caseNote: 'Lowercase folds to capitals',
   },
 

@@ -73,9 +73,8 @@ faq:
       posts 280, so budget accordingly.
   - q: What is the character limit for a TikTok bio?
     a: >-
-      Eighty characters is the reliable limit for a TikTok bio. Some accounts
-      have been seen with a longer field. The tool counts UTF-16 units because
-      that is what the platforms measure.
+      An Android TikTok bio field showed one hundred and sixty characters. Some accounts
+      have been seen with a longer field. The tool counts Unicode code points.
   - q: Can I use these fonts in gaming usernames?
     a: >-
       Depends on the game. Steam and PUBG Mobile are permissive; Fortnite allows
@@ -230,7 +229,7 @@ Short version: styled text works in far more places than most people expect, but
 
 Fancy fonts work in your display name, bio, captions, and comments on all the big platforms, which is exactly where most people use them. The one consistent exception is your @handle: Instagram usernames only allow letters, numbers, periods, and underscores (max 30 characters), and TikTok, X, and Threads have similar rules. That's a platform restriction no font generator can bypass, so style your display name and keep your handle plain. You get the best of both: a striking profile that's still searchable.
 
-We keep dedicated guides for the three platforms people ask about most: Instagram Fonts, TikTok Fonts and Facebook Fonts. Facebook is the odd one out here, because it is the only major platform with real bold and italic buttons hiding in one corner of it. TikTok is the strictest of the three about what it keeps, and that guide works out what each style costs against an eighty character bio before you paste it.
+We keep dedicated guides for the three platforms people ask about most: Instagram Fonts, TikTok Fonts and Facebook Fonts. Facebook is the odd one out here, because it is the only major platform with real bold and italic buttons hiding in one corner of it. TikTok is the strictest of the three about what it keeps, and that guide works out what each style costs against the one hundred and sixty characters an Android TikTok bio field showed before you paste it.
 
 ### Chat Apps & Communities: WhatsApp, Discord, Telegram
 

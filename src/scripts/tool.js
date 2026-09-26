@@ -404,34 +404,16 @@ function announce(message) {
 
 /**
  * @param {Element | null} el
- * @param {number} units UTF-16 length compared against the platform limit
- * @param {number} chars code-point count of the typed input
+ * @param {number} count Unicode code-point count compared against the platform limit
  * @param {number} limit
- * @param {string} app
  * @returns {void}
  */
-function syncLiveMeta(el, units, chars, limit, app) {
+function syncLiveMeta(el, count, limit) {
   if (!(el instanceof HTMLElement)) return;
-  const word = chars === 1 ? 'character' : 'characters';
-  el.textContent =
-    units === chars
-      ? `${units} / ${limit}`
-      : `${units} / ${limit} units (${chars} ${word})`;
-  const over = units > limit;
+  el.textContent = `${count} / ${limit}`;
+  const over = count > limit;
   el.classList.toggle('is-over', over);
-  if (over) {
-    el.setAttribute(
-      'aria-label',
-      app === 'TikTok'
-        ? `${units} of 80 units, ${chars} ${word} typed. TikTok bios are usually limited to 80 characters, though some accounts allow more.`
-        : `${units} of 150 units, ${chars} ${word} typed. Exceeds Instagram's limit.`,
-    );
-  } else {
-    el.setAttribute(
-      'aria-label',
-      `${units} of ${limit} units, ${chars} ${word} typed`,
-    );
-  }
+  el.setAttribute('aria-label', `${count} of ${limit}`);
 }
 
 /**
@@ -974,13 +956,13 @@ function initTool() {
     if (!id) return;
     const rendered = renderById(id, text) ?? (fallbackId && fallbackId !== id ? renderById(fallbackId, text) : null);
     if (!rendered) return;
-    const styled = rendered.styled;
+    const styled = text.length === 0 ? '' : rendered.styled;
     const liveName = liveTarget !== 'bio';
     const liveBio = liveTarget !== 'name';
     const igNameText = liveName ? styled : LIVE_STATIC_IG_NAME;
     const ttNameText = liveName ? styled : LIVE_STATIC_TT_NAME;
     const bioText = liveBio ? styled : LIVE_STATIC_BIO;
-    const n = countCharacters(bioText).utf16Length;
+    const n = countCharacters(bioText).codePoints;
     if (liveStyleEl) liveStyleEl.textContent = `Style: ${rendered.name}`;
     if (liveIgName) liveIgName.textContent = igNameText;
     if (liveIgBio) liveIgBio.textContent = bioText;
@@ -996,7 +978,7 @@ function initTool() {
     if (liveTtArticle instanceof HTMLElement) {
       liveTtArticle.setAttribute('aria-label', `TikTok ${kind}`);
     }
-    const hideMeta = liveTarget === 'name' || text.trim() === '';
+    const hideMeta = liveTarget === 'name';
     for (const el of [liveIgMeta, liveTtMeta]) {
       if (!(el instanceof HTMLElement)) continue;
       if (hideMeta) {
@@ -1009,11 +991,8 @@ function initTool() {
       }
     }
     if (!hideMeta) {
-      const chars =
-        typedChars ??
-        Number(inputCpEl instanceof HTMLElement ? inputCpEl.textContent : '0');
-      syncLiveMeta(liveIgMeta, n, chars, IG_BIO_LIMIT, 'Instagram');
-      syncLiveMeta(liveTtMeta, n, chars, TT_BIO_LIMIT, 'TikTok');
+      syncLiveMeta(liveIgMeta, n, IG_BIO_LIMIT);
+      syncLiveMeta(liveTtMeta, n, TT_BIO_LIMIT);
     }
   }
 

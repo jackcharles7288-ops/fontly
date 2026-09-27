@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # local gzip measurement extracts (see scripts/measure-assets.cjs)
 scripts/.measure/
+_raw-screens/

@@ -72,6 +72,7 @@ relatedTools:
   - cursive-font-generator
   - bold-text-generator
   - bubble-text-generator
+  - number-font-generator
 ---
 
 Discord fonts are not fonts you install. They are Unicode characters that already sit on every phone and computer, shaped to look like bold, script, gothic or bubble letters. Type your name into the generator above, pick a style, then paste it into your display name, your server nickname, your bio or a message.
@@ -175,6 +176,14 @@ This changes your name everywhere at once, in every server and every DM.
 
 A server nickname overrides your display name in that server only, which makes it the safer place to experiment.
 
+<div class="split">
+
+Saved, and visible to everyone else in the member list. Discord draws member names in a heavy weight anyway, so the shape proves nothing on its own; what it shows is that the field kept the pasted characters.
+
+<img src="/images/discord-nickname-memberlist.webp" width="480" height="600" loading="lazy" decoding="async" alt="a Discord member list showing a saved styled server nickname" />
+
+</div>
+
 ### Change your font on mobile
 
 1. Copy the styled text from the generator in your mobile browser.
@@ -203,7 +212,23 @@ The username row is the one that catches everyone. Since Discord retired the fou
 
 The display name is where the styling belongs, and at 32 characters it is tighter than it looks. Fullwidth and Squared styles eat that budget fast. On 15 September 2026 the 32-letter string WumpusWumpusWumpusWumpusWumpusWu was pasted into Discord's Android app: as plain letters it saved in full in the Display Name field, and in Bold Sans it saved only the first sixteen. Server Nickname behaved the same, while Channel Name and Server Name kept all thirty-two styled characters. src/data/styles.ts sets bold-sans uppercaseBase at 0x1D5D4 and lowercaseBase at 0x1D5EE, both above U+FFFF, so each styled letter costs two UTF-16 units. The same question sits over TikTok.
 
-Channel names have their own quirk. Discord forces them to lowercase and replaces spaces with hyphens, but styled Unicode characters have no lowercase form, so they pass through untouched. That is why 𝖙𝖆𝖛𝖊𝖗𝖓 survives as a channel name while Tavern becomes tavern.
+Channel names have their own quirk. Discord forces them to lowercase and replaces spaces with hyphens, but the lowercasing only reaches letters that have a lowercase mapping. Discord's own API documentation puts it as: if there is a lowercase variant of any letters used, you must use those, and characters with no lowercase variants are still allowed. Styled capitals do have styled lowercase counterparts as characters — src/data/styles.ts sets bold-sans uppercaseBase at 0x1D5D4 and lowercaseBase at 0x1D5EE — but Unicode defines no case relationship between those two runs, so Discord has nothing to apply and the capitals stay. That is why 𝖙𝖆𝖛𝖊𝖗𝖓 survives as a channel name while Tavern becomes tavern.
+
+<div class="split">
+
+Plain letters do not survive the paste. TestChannel became testchannel in the Create Channel dialog itself, before the channel existed.
+
+<img src="/images/discord-channel-plain-lowercased.webp" width="480" height="580" loading="lazy" decoding="async" alt="Discord's Create Channel dialog showing a pasted plain name already reduced to testchannel" />
+
+</div>
+
+<div class="split">
+
+The same dialog and the same paste action with a Bold Sans name, which is the style this was tested with rather than the Fraktur above. The capitals came through untouched.
+
+<img src="/images/discord-channel-styled-preserved.webp" width="480" height="580" loading="lazy" decoding="async" alt="Discord's Create Channel dialog keeping capital letters in a styled channel name" />
+
+</div>
 
 If the account is unverified, Discord's New Usernames and Display Names help page says a random five digits are appended to the username seven days after creation. That has nothing to do with fonts. It is the second most common reason a handle suddenly looks wrong.
 
@@ -296,6 +321,14 @@ The same display name set in Fraktur and again in Bold Fraktur, at the size the 
 </div>
 
 Channel names carry a cost the limits table above does not show. A styled channel name cannot be typed from memory. Nobody can reach it through the quick switcher. Style the category and leave the channel itself searchable, or you trade navigation for decoration.
+
+<div class="split">
+
+Both channels in the sidebar afterwards. The plain name sits in lowercase, the styled one keeps its capitals, and neither was edited after creation.
+
+<img src="/images/discord-channel-list-both.webp" width="480" height="825" loading="lazy" decoding="async" alt="a Discord channel sidebar showing a lowercased plain channel beside a styled channel that kept its capitals" />
+
+</div>
 
 ## Discord Symbols and Name Decorations
 

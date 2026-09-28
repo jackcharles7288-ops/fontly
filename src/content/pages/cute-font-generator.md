@@ -64,15 +64,13 @@ Everything on this page runs in your browser. There is no account, no download, 
 
 Three steps get you from plain text to cute letters.
 
-Type your name, your bio line or your caption into the box at the top. Every style below updates as you type, so there is no generate button to press.
-
-Scroll the styles and find the one that matches what you are making. Names here describe what the style actually is, so the styles built on other writing systems carry the name of that writing system rather than an invented one.
-
-Tap the style to copy it. Paste it wherever you were going.
+1. Type your name, your bio line or your caption into the box at the top. Every style below updates as you type, so there is no generate button to press.
+2. Scroll the styles and find the one that matches what you are making. Names here describe what the style actually is, so the styles built on other writing systems carry the name of that writing system rather than an invented one.
+3. Tap the style to copy it. Paste it wherever you were going.
 
 Because the styling lives in the characters, your text keeps its look after you paste it. The person reading your bio needs nothing installed on their end. That is also the reason a styled line behaves differently from bold text in a document: you cannot un-bold it later, and a search for your plain name will not find it.
 
-Small catch before you commit to a look: a few of the styles further down are built from characters that older phones do not carry. The compatibility table near the bottom says which ones to trust.
+**Small catch** before you commit to a look: a few of the styles further down are built from characters that older phones do not carry. The compatibility table near the bottom says which ones to trust.
 
 ## Every Cute Font Is One of Three Things
 
@@ -207,9 +205,10 @@ Decorations do more work than the letters do. A plain script line reads as elega
 
 The pattern is always the same: something on the left, your styled text, the mirror of it on the right.
 
-♡ plus your text plus ♡ gives ♡ 𝒮𝓉𝓇𝒶𝓌𝒷ℯ𝓇𝓇𝓎 ♡
-
-✿ works for anything soft or floral. ★ and ✦ add energy without much clutter. ⭐ and other emoji versions render in colour, which is louder than the outline symbols.
+- ♡ plus your text plus ♡ gives ♡ 𝒮𝓉𝓇𝒶𝓌𝒷ℯ𝓇𝓇𝓎 ♡
+- ✿ works for anything soft or floral
+- ★ and ✦ add energy without much clutter
+- ⭐ and other emoji versions render in colour, which is louder than the outline symbols.
 
 Two costs come with decorations, and neither is a reason to skip them. The first is length: every decoration and every space around it counts against a bio character limit exactly like a letter does, so a heavily decorated line eats a bio fast. The second is that a screen reader reads decorations out. Six stars around your name becomes six spoken words before anyone reaches the name.
 
@@ -312,15 +311,15 @@ One more term worth naming: hacked or glitched text is the effect where letters 
 
 Five things separate a bio that looks intentional from one that looks cluttered.
 
-Styling the entire caption. Styled characters are harder to read than plain ones, and a full paragraph of script asks too much. Style the first line or the name, leave the rest alone.
+**Styling the entire caption.** Styled characters are harder to read than plain ones, and a full paragraph of script asks too much. Style the first line or the name, leave the rest alone.
 
-Mixing three styles in one line. Two at most, and ideally one alphabet plus one decoration. More than that reads as indecision.
+**Mixing three styles in one line.** Two at most, and ideally one alphabet plus one decoration. More than that reads as indecision.
 
-All caps for a long name. The borrowed styles carry a single set of shapes rather than two, so they read as capitals whatever you type, which is why they look great on a four-letter name and poor on a full sentence.
+**All caps for a long name.** The borrowed styles carry a single set of shapes rather than two, so they read as capitals whatever you type, which is why they look great on a four-letter name and poor on a full sentence.
 
-Decoration overload. Symbols eat your character limit and get read aloud. Two per line is usually plenty.
+**Decoration overload.** Symbols eat your character limit and get read aloud. Two per line is usually plenty.
 
-Assuming it looks the same for everyone. It does not, and the compatibility table above is the short version of why. If a look is not working, try a neighbouring one instead, or darken the mood with [gothic fonts](/gothic-font-generator/) if soft is not the register you wanted after all.
+**Assuming it looks the same for everyone.** It does not, and the compatibility table above is the short version of why. If a look is not working, try a neighbouring one instead, or darken the mood with [gothic fonts](/gothic-font-generator/) if soft is not the register you wanted after all.
 
 ## Why Fonti
 

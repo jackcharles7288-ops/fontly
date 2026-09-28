@@ -122,6 +122,7 @@ relatedTools:
   - bold-text-generator
   - bubble-text-generator
   - number-font-generator
+  - cute-font-generator
 ---
 
 TOOL PLACEHOLDER

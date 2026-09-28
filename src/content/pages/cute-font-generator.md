@@ -65,7 +65,9 @@ Everything on this page runs in your browser. There is no account, no download, 
 Three steps get you from plain text to cute letters.
 
 1. Type your name, your bio line or your caption into the box at the top. Every style below updates as you type, so there is no generate button to press.
+
 2. Scroll the styles and find the one that matches what you are making. Names here describe what the style actually is, so the styles built on other writing systems carry the name of that writing system rather than an invented one.
+
 3. Tap the style to copy it. Paste it wherever you were going.
 
 Because the styling lives in the characters, your text keeps its look after you paste it. The person reading your bio needs nothing installed on their end. That is also the reason a styled line behaves differently from bold text in a document: you cannot un-bold it later, and a search for your plain name will not find it.
@@ -163,15 +165,15 @@ The current meaning arrived through TikTok in the 2020s: bright colours, bows, s
 
 Four things people search for alongside it are worth separating.
 
-Preppy letters and copy and paste are the same request as the rest of this page. Pick a rounded or script style and add a bow.
+- **Preppy letters and copy and paste** are the same request as the rest of this page. Pick a rounded or script style and add a bow.
 
-A preppy name generator invents names rather than styling them. This tool styles the name you already have.
+- **A preppy name generator** invents names rather than styling them. This tool styles the name you already have.
 
-A preppy keyboard is a different product entirely. That means an app you install on your phone which changes the keyboard itself. Nothing here needs installing, and nothing here changes your keyboard.
+- **A preppy keyboard** is a different product entirely. That means an app you install on your phone which changes the keyboard itself. Nothing here needs installing, and nothing here changes your keyboard.
 
-Roblox and Adopt Me come up constantly, because that is where a large part of this audience actually is. Roblox display names and chat run through a filter, and which styles survive it is not something to guess at.
+- **Roblox and Adopt Me** come up constantly, because that is where a large part of this audience actually is. Roblox display names and chat run through a filter, and which styles survive it is not something to guess at.
 
-One thing first if you are styling a Roblox or gaming name: test it on a throwaway before you commit, because a rejected name can lock you out of a rename for a while.
+**One thing first** if you are styling a Roblox or gaming name: test it on a throwaway before you commit, because a rejected name can lock you out of a rename for a while.
 
 ## Cute Text Examples Side by Side
 
@@ -206,8 +208,11 @@ Decorations do more work than the letters do. A plain script line reads as elega
 The pattern is always the same: something on the left, your styled text, the mirror of it on the right.
 
 - ♡ plus your text plus ♡ gives ♡ 𝒮𝓉𝓇𝒶𝓌𝒷ℯ𝓇𝓇𝓎 ♡
+
 - ✿ works for anything soft or floral
+
 - ★ and ✦ add energy without much clutter
+
 - ⭐ and other emoji versions render in colour, which is louder than the outline symbols.
 
 Two costs come with decorations, and neither is a reason to skip them. The first is length: every decoration and every space around it counts against a bio character limit exactly like a letter does, so a heavily decorated line eats a bio fast. The second is that a screen reader reads decorations out. Six stars around your name becomes six spoken words before anyone reaches the name.

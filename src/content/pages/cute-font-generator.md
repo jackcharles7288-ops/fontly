@@ -240,6 +240,14 @@ There are two name fields on almost every platform. They behave completely diffe
 
 The handle is the one with the at sign, the one people type to find you. It accepts letters, numbers and a small set of punctuation, and nothing else. You cannot style it. Any tool suggesting otherwise is wrong about how the platform works.
 
+<img src="/images/instagram-username-styled-clipboard.webp" width="720" height="1600" loading="lazy" decoding="async" alt="Instagram username field with the styled text waiting on the clipboard chip above the keyboard" />
+
+*The styled username sits ready on the clipboard. Nothing has gone wrong yet.*
+
+<img src="/images/instagram-username-styled-rejected.webp" width="720" height="887" loading="lazy" decoding="async" alt="Instagram username field rejecting styled characters with a notice about letters, numbers, underscores and periods" />
+
+*Pasted into the username field, the same text is refused. Instagram accepts letters, numbers, underscores and periods there and nothing else.*
+
 The display name is the one shown above your bio or beside your comment. That field usually accepts styled characters, and it is where every cute name you have admired actually lives.
 
 Once you know which field you are filling, a few things follow.
@@ -253,6 +261,10 @@ Straight answer on the numbers other pages quote: claims that a styled name lift
 <h2 id="compatibility">Where Cute Fonts Work and Where They Break</h2>
 
 Styled text is accepted in far fewer places than most cute font pages admit. The pattern is consistent once you see it: display fields accept it, identity fields reject it, and anything running a name filter is unpredictable.
+
+<img src="/images/instagram-bio-script-counter.webp" width="720" height="929" loading="lazy" decoding="async" alt="Instagram bio field holding script style text with the counter showing 16 of 150" />
+
+*Script text pasted into the Instagram bio field. Sixteen characters of the 150 available, counted the same as plain letters.*
 
 | Where | Works | Notes |
 |---|---|---|

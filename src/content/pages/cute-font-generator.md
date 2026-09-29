@@ -242,13 +242,21 @@ The practical answer for a birthday post or a price is to pick a style from the 
 
 There are two name fields on almost every platform. They behave completely differently. Missing this is the single most common reason a styled name does not work.
 
+<div class="split">
+
 The handle is the one with the at sign, the one people type to find you. It accepts letters, numbers and a small set of punctuation, and nothing else. You cannot style it. Any tool suggesting otherwise is wrong about how the platform works.
 
-<img src="/images/instagram-username-styled-clipboard.webp" width="720" height="1600" loading="lazy" decoding="async" alt="Instagram username field with the styled text waiting on the clipboard chip above the keyboard" />
+<img src="/images/instagram-username-styled-clipboard.webp" width="360" height="800" loading="lazy" decoding="async" alt="Instagram username field with the styled text waiting on the clipboard chip above the keyboard" />
+
+</div>
+
+<div class="split">
 
 *The styled username sits ready on the clipboard. Nothing has gone wrong yet.*
 
-<img src="/images/instagram-username-styled-rejected.webp" width="720" height="887" loading="lazy" decoding="async" alt="Instagram username field rejecting styled characters with a notice about letters, numbers, underscores and periods" />
+<img src="/images/instagram-username-styled-rejected.webp" width="360" height="444" loading="lazy" decoding="async" alt="Instagram username field rejecting styled characters with a notice about letters, numbers, underscores and periods" />
+
+</div>
 
 *Pasted into the username field, the same text is refused. Instagram accepts letters, numbers, underscores and periods there and nothing else.*
 
@@ -264,9 +272,13 @@ Straight answer on the numbers other pages quote: claims that a styled name lift
 
 <h2 id="compatibility">Where Cute Fonts Work and Where They Break</h2>
 
+<div class="split">
+
 Styled text is accepted in far fewer places than most cute font pages admit. The pattern is consistent once you see it: display fields accept it, identity fields reject it, and anything running a name filter is unpredictable.
 
-<img src="/images/instagram-bio-script-counter.webp" width="720" height="929" loading="lazy" decoding="async" alt="Instagram bio field holding script style text with the counter showing 16 of 150" />
+<img src="/images/instagram-bio-script-counter.webp" width="360" height="465" loading="lazy" decoding="async" alt="Instagram bio field holding script style text with the counter showing 16 of 150" />
+
+</div>
 
 *Script text pasted into the Instagram bio field. Sixteen characters of the 150 available, counted the same as plain letters.*
 

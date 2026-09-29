@@ -70,6 +70,36 @@ export const DIGITS_NOTE = 'Numbers stay plain.';
 /** Label for the interactive builder entrance and its section heading. */
 export const BUILDER_LABEL = 'Make your own';
 
+// Shared by Flipped and Upside Down. Unchanged letters are listed so the two
+// cards cannot drift apart. Digits 1 and 5 have no approved substitute.
+// U+218C and U+218D are unassigned and are not used.
+const turnedSubstitutions: Record<string, number> = {
+  A: 0x2200, B: 0x10412, C: 0x2183, D: 0x25d6, E: 0x018e, F: 0x2132, G: 0x2141,
+  H: 0x0048, I: 0x0049, J: 0x017f, K: 0x22ca, L: 0x2142, M: 0x0057, N: 0x1d0e,
+  O: 0x004f, P: 0x0500, Q: 0x038c, R: 0x1d1a, S: 0x0053, T: 0x22a5, U: 0x2229,
+  V: 0x1d27, W: 0x004d, X: 0x0058, Y: 0x2144, Z: 0x005a,
+  a: 0x0250, b: 0x0071, c: 0x0254, d: 0x0070, e: 0x01dd, f: 0x025f, g: 0x0183,
+  h: 0x0265, i: 0x0131, j: 0x027e, k: 0x029e, l: 0x0283, m: 0x026f, n: 0x0075,
+  o: 0x006f, p: 0x0064, q: 0x0062, r: 0x0279, s: 0x0073, t: 0x0287, u: 0x006e,
+  v: 0x028c, w: 0x028d, x: 0x0078, y: 0x028e, z: 0x007a,
+  '?': 0x00bf,
+  '!': 0x00a1,
+};
+const turnedDigits: string[] = [
+  '0',
+  '1',
+  String.fromCodePoint(0x218a),
+  String.fromCodePoint(0x218b),
+  String.fromCodePoint(0x152d),
+  '5',
+  '9',
+  String.fromCodePoint(0x2c62),
+  '8',
+  '6',
+];
+const turnedCaveatNote =
+  'Some capitals and digits 2, 3, 4 and 7 are borrowed from other writing systems, so older phones may show empty boxes. Digits 1 and 5 stay plain.';
+
 export const styles: Style[] = [
   // --- cursive ---
   {
@@ -589,72 +619,36 @@ export const styles: Style[] = [
   },
 
   // --- other ---
-  // Upside-down: turned Latin letters (IPA/Phonetic Extensions), turned
-  // capitals from Letterlike Symbols (U+2132, U+2141, U+2142), FOR ALL U+2200
-  // (a turned A by design), UP TACK U+22A5 and INTERSECTION U+2229 (the
-  // standard flipped T and U), reversed E U+018E, open letters U+0186/U+0254,
-  // open E U+0190 as flipped 3, turned capital V U+0245, turned sans-serif
-  // capital Y U+2144, and the 6/9 swap. Every target is a real code point
-  // used for exactly this shape; nothing is borrowed from an unrelated
-  // script (no Deseret, no Greek, no Canadian syllabics).
-  // This site ships no flipped form for capitals B, D, J, K, Q, R or digits
-  // 2, 4, 5, 7 — those pass through unchanged and the card says so. (Turned
-  // capital K U+A7B0 and turned capital T U+A7B1 exist since Unicode 7.0 but
-  // are held back on font coverage; T currently uses UP TACK.)
-  // H, I, N, O, S, X, Z, l, o, s, x, z, 0, 1, 8 are rotationally symmetric.
-  // Punctuation: only ? -> U+00BF and ! -> U+00A1 are mapped, the genuine
-  // inverted marks encoded in Latin-1 for this purpose. The period, quote
-  // and comma are left unchanged: U+02D9 is a spacing accent, not a period,
-  // and swapping comma/apostrophe corrupts real words such as "don't".
+  // Flipped and Upside Down share turnedSubstitutions and turnedDigits.
+  // Letters come from IPA, letterlike symbols, maths operators, Deseret,
+  // Greek, Cyrillic and Canadian Aboriginal Syllabics. Punctuation other than
+  // ? and ! passes through. Upside Down then reverses the line.
+  {
+    id: 'flipped',
+    name: 'Flipped',
+    categories: ['cool-fonts', 'upside-down', 'number'],
+    uppercaseBase: null,
+    lowercaseBase: null,
+    substitutions: turnedSubstitutions,
+    digits: turnedDigits,
+    risk: 'check-old-devices',
+    caveat: 'Partial',
+    caveatNote: turnedCaveatNote + ' This card does not reverse the line.',
+    caseNote: null,
+  },
   {
     id: 'upside-down',
     name: 'Upside Down',
     categories: ['cool-fonts', 'upside-down', 'number'],
     uppercaseBase: null,
     lowercaseBase: null,
-    substitutions: {
-      A: 0x2200,
-      C: 0x0186,
-      E: 0x018e,
-      F: 0x2132,
-      G: 0x2141,
-      L: 0x2142,
-      M: 0x0057,
-      P: 0x0064,
-      T: 0x22a5,
-      U: 0x2229,
-      V: 0x0245,
-      W: 0x004d,
-      Y: 0x2144,
-      a: 0x0250,
-      b: 0x0071,
-      c: 0x0254,
-      d: 0x0070,
-      e: 0x01dd,
-      f: 0x025f,
-      g: 0x0183,
-      h: 0x0265,
-      i: 0x1d09,
-      j: 0x027e,
-      k: 0x029e,
-      m: 0x026f,
-      n: 0x0075,
-      p: 0x0064,
-      q: 0x0062,
-      r: 0x0279,
-      t: 0x0287,
-      u: 0x006e,
-      v: 0x028c,
-      w: 0x028d,
-      y: 0x028e,
-      '?': 0x00bf,
-      '!': 0x00a1,
-    },
-    digits: ['0', '1', '2', 'Ɛ', '4', '5', '9', '7', '8', '6'],
-    risk: null,
+    substitutions: turnedSubstitutions,
+    digits: turnedDigits,
+    risk: 'check-old-devices',
     caveat: 'Partial',
-      caveatNote:
-        'This site ships no flipped form for capitals B, D, J, K, Q and R or for digits 2, 4, 5 and 7, so those stay plain. The text is reversed so it reads when the page is turned upside down.',
+    caveatNote:
+      turnedCaveatNote +
+      ' The text is reversed so it reads when the page is turned upside down.',
     caseNote: null,
     reverse: true,
   },

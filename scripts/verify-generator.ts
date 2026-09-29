@@ -165,50 +165,93 @@ for (const style of styles as Style[]) {
   console.log('');
 }
 
-// Reversal styles: the mapped output must be reversed by code-point cluster,
-// and reversal must be a pure permutation — the code point count can never
-// change. The fixed expected strings below pin the whole mapping table, not
-// just the direction: they were re-derived by hand from the Unicode charts
-// and are built from code points so this file stays ASCII.
+// Flipped and Upside Down share one map. Flipped does not reverse.
+// Upside Down reverses after substitution. Expected strings are code points
+// so this file stays ASCII. U+218C and U+218D must never appear.
+const flippedStyle = styles.find((s) => s.id === 'flipped');
 const upsideDown = styles.find((s) => s.id === 'upside-down');
-if (upsideDown) {
-  const fixedCases: [string, number[]][] = [
-    ['Ab', [0x0071, 0x2200]],
+if (!flippedStyle || !upsideDown) {
+  failures.push({
+    subject: 'upside-down',
+    cause: `missing card: flipped=${Boolean(flippedStyle)} upside-down=${Boolean(upsideDown)}`,
+  });
+} else {
+  if (flippedStyle.substitutions !== upsideDown.substitutions || flippedStyle.digits !== upsideDown.digits) {
+    failures.push({
+      subject: 'upside-down',
+      cause: 'Flipped and Upside Down do not share the same substitutions and digits objects',
+    });
+  }
+  if (flippedStyle.reverse) {
+    failures.push({ subject: 'flipped', cause: 'Flipped must not reverse' });
+  }
+  if (!upsideDown.reverse) {
+    failures.push({ subject: 'upside-down', cause: 'Upside Down must reverse after substitution' });
+  }
+  const banned = new Set([0x218c, 0x218d]);
+  for (const value of Object.values(flippedStyle.substitutions)) {
+    if (banned.has(value)) {
+      failures.push({
+        subject: 'flipped',
+        cause: `banned code point U+${value.toString(16).toUpperCase()} is in the shared map`,
+      });
+    }
+  }
+  const flippedCases: [string, number[]][] = [
+    ['Jam Doughnut', [0x017f, 0x0250, 0x026f, 0x0020, 0x25d6, 0x006f, 0x006e, 0x0183, 0x0265, 0x0075, 0x006e, 0x0287]],
     [
-      'Hello World',
-      [0x0070, 0x006c, 0x0279, 0x006f, 0x004d, 0x0020, 0x006f, 0x006c, 0x006c, 0x01dd, 0x0048],
+      'Jam Doughnut 45',
+      [0x017f, 0x0250, 0x026f, 0x0020, 0x25d6, 0x006f, 0x006e, 0x0183, 0x0265, 0x0075, 0x006e, 0x0287, 0x0020, 0x152d, 0x0035],
     ],
     [
       UPPERCASE,
       [
-        0x005a, 0x2144, 0x0058, 0x004d, 0x0245, 0x2229, 0x22a5, 0x0053, 0x0052, 0x0051, 0x0064,
-        0x004f, 0x004e, 0x0057, 0x2142, 0x004b, 0x004a, 0x0049, 0x0048, 0x2141, 0x2132, 0x018e,
-        0x0044, 0x0186, 0x0042, 0x2200,
+        0x2200, 0x10412, 0x2183, 0x25d6, 0x018e, 0x2132, 0x2141, 0x0048, 0x0049, 0x017f, 0x22ca,
+        0x2142, 0x0057, 0x1d0e, 0x004f, 0x0500, 0x038c, 0x1d1a, 0x0053, 0x22a5, 0x2229, 0x1d27,
+        0x004d, 0x0058, 0x2144, 0x005a,
       ],
     ],
     [
-      LOWERCASE + DIGITS,
+      LOWERCASE,
       [
-        0x0036, 0x0038, 0x0037, 0x0039, 0x0035, 0x0034, 0x0190, 0x0032, 0x0031, 0x0030, 0x007a,
-        0x028e, 0x0078, 0x028d, 0x028c, 0x006e, 0x0287, 0x0073, 0x0279, 0x0062, 0x0064, 0x006f,
-        0x0075, 0x026f, 0x006c, 0x029e, 0x027e, 0x1d09, 0x0265, 0x0183, 0x025f, 0x01dd, 0x0070,
-        0x0254, 0x0071, 0x0250,
+        0x0250, 0x0071, 0x0254, 0x0070, 0x01dd, 0x025f, 0x0183, 0x0265, 0x0131, 0x027e, 0x029e,
+        0x0283, 0x026f, 0x0075, 0x006f, 0x0064, 0x0062, 0x0279, 0x0073, 0x0287, 0x006e, 0x028c,
+        0x028d, 0x0078, 0x028e, 0x007a,
       ],
     ],
+    ['0123456789', [0x0030, 0x0031, 0x218a, 0x218b, 0x152d, 0x0035, 0x0039, 0x2c62, 0x0038, 0x0036]],
   ];
-  for (const [input, expectedCps] of fixedCases) {
+  for (const [input, expectedCps] of flippedCases) {
     const expected = String.fromCodePoint(...expectedCps);
-    const actual = applyStyle(input, upsideDown);
-    const label = input.length > 12 ? input.slice(0, 12) + '...' : input;
-    console.log(
-      `Reversal fixed check: applyStyle("${label}", upside-down) -> "${actual}" (expected "${expected}")`,
-    );
+    const actual = applyStyle(input, flippedStyle);
     if (actual !== expected) {
       failures.push({
-        subject: 'upside-down',
-        cause: `applyStyle("${input}") produced "${actual}", expected "${expected}"`,
+        subject: 'flipped',
+        cause: `applyStyle("${input.slice(0, 16)}") produced "${actual}", expected "${expected}"`,
       });
     }
+    const reversed = applyStyle(input, upsideDown);
+    const reversedExpected = [...expected].reverse().join('');
+    if (reversed !== reversedExpected) {
+      failures.push({
+        subject: 'upside-down',
+        cause: `reversed "${input.slice(0, 16)}" produced "${reversed}", expected "${reversedExpected}"`,
+      });
+    }
+  }
+  const deseret = applyStyle('B', flippedStyle);
+  if ([...deseret].length !== 1 || deseret.codePointAt(0) !== 0x10412 || deseret.length !== 2) {
+    failures.push({
+      subject: 'flipped',
+      cause: `Deseret B must be one supplementary-plane code point, got ${[...deseret].length} code points and ${deseret.length} UTF-16 units`,
+    });
+  }
+  const reversedPair = applyStyle('AB', upsideDown);
+  if ([...reversedPair].length !== 2 || reversedPair.codePointAt(0) !== 0x10412) {
+    failures.push({
+      subject: 'upside-down',
+      cause: 'reversal split or reordered the Deseret B in "AB"',
+    });
   }
 }
 
@@ -349,10 +392,12 @@ console.log('='.repeat(70));
 console.log('COMBINATIONS');
 console.log('='.repeat(70));
 
-if (combinations.length !== 156) {
+// combinations.ts builds every pair of its 13 style ids and 15 decoration ids.
+// Nothing filters that cross product, so the total is 13 × 15 = 195.
+if (combinations.length !== 195) {
   failures.push({
     subject: 'combinations',
-    cause: `expected exactly 156 combinations, found ${combinations.length}`,
+    cause: `expected exactly 195 combinations, found ${combinations.length}`,
   });
 }
 

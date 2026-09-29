@@ -139,23 +139,23 @@ Aesthetic and pretty sit right next to cute rather than opposite it, so if the r
 
 Four separate things get lumped together under kawaii, and telling them apart makes it much easier to build the look you actually pictured.
 
-Kawaii is simply the Japanese word for cute. In practice it points at a specific register borrowed from Japanese pop culture: rounded, pastel, soft, the visual language of Sanrio and Harajuku. A kawaii text generator is a cute font generator with that register emphasised. There is no separate kawaii character block. Cutecore works the same way: a subculture name describing a whole aesthetic rather than any set of characters.
+**Kawaii** is simply the Japanese word for cute. In practice it points at a specific register borrowed from Japanese pop culture: rounded, pastel, soft, the visual language of Sanrio and Harajuku. A kawaii text generator is a cute font generator with that register emphasised. There is no separate kawaii character block. Cutecore works the same way: a subculture name describing a whole aesthetic rather than any set of characters.
 
-Kaomoji are faces built out of characters, like ʕ•ᴥ•ʔ or (｡♥‿♥｡). The word means face characters. They are assembled from punctuation and letters pulled from several different scripts rather than drawn from a single set, which is why some kaomoji survive a paste and others fall apart. They are older than most cute font tools, dating from Japanese text messaging.
+**Kaomoji** are faces built out of characters, like ʕ•ᴥ•ʔ or (｡♥‿♥｡). The word means face characters. They are assembled from punctuation and letters pulled from several different scripts rather than drawn from a single set, which is why some kaomoji survive a paste and others fall apart. They are older than most cute font tools, dating from Japanese text messaging.
 
-Emoji are single characters with their own code points. 🍓 is one character, not a picture you attached. That is why an emoji counts against a bio limit the same way a letter does.
+**Emoji** are single characters with their own code points. 🍓 is one character, not a picture you attached. That is why an emoji counts against a bio limit the same way a letter does.
 
-Decorations are ordinary characters placed around your text, such as ♡, ✿ and ★. Nothing about your letters changes when you add them. A tool that ships two hundred styles is usually shipping a smaller number of alphabets multiplied by a list of decorations, which is worth knowing before you go looking for the two hundredth alphabet.
+**Decorations** are ordinary characters placed around your text, such as ♡, ✿ and ★. Nothing about your letters changes when you add them. A tool that ships two hundred styles is usually shipping a smaller number of alphabets multiplied by a list of decorations, which is worth knowing before you go looking for the two hundredth alphabet.
 
 ## Cute Handwriting, Girly Script and Bubble Letters
 
 These three come up constantly, and each one has a specific answer.
 
-Handwriting is the most searched of the three, and it is also the one where expectations and reality diverge. Real handwriting varies from letter to letter. Unicode script characters do not, because each letter is a fixed character that looks identical every time it appears. Type a double letter and you see it: the two r characters in 𝒮𝓉𝓇𝒶𝓌𝒷ℯ𝓇𝓇𝓎 are exactly the same shape, which no human hand produces. It reads as handwriting at a glance and as a typeface on a second look.
+**Handwriting** is the most searched of the three, and it is also the one where expectations and reality diverge. Real handwriting varies from letter to letter. Unicode script characters do not, because each letter is a fixed character that looks identical every time it appears. Type a double letter and you see it: the two r characters in 𝒮𝓉𝓇𝒶𝓌𝒷ℯ𝓇𝓇𝓎 are exactly the same shape, which no human hand produces. It reads as handwriting at a glance and as a typeface on a second look.
 
-Girly script, also searched as girly handwriting, usually means the bolder of the two script sets. Plain script 𝒮𝓉𝓇𝒶𝓌𝒷ℯ𝓇𝓇𝓎 is thin and holds up in small sizes. Bold script 𝓢𝓽𝓻𝓪𝔀𝓫𝓮𝓻𝓻𝔂 is heavier and survives a phone screen better, which is why it dominates bios. If a full flowing look is what you want rather than a cute one, soften the whole line with [cursive fonts](/cursive-font-generator/), where the whole page is built around it.
+**Girly script**, also searched as girly handwriting, usually means the bolder of the two script sets. Plain script 𝒮𝓉𝓇𝒶𝓌𝒷ℯ𝓇𝓇𝓎 is thin and holds up in small sizes. Bold script 𝓢𝓽𝓻𝓪𝔀𝓫𝓮𝓻𝓻𝔂 is heavier and survives a phone screen better, which is why it dominates bios. If a full flowing look is what you want rather than a cute one, soften the whole line with [cursive fonts](/cursive-font-generator/), where the whole page is built around it.
 
-Bubble letters come in two versions and people are often surprised by the difference. Outline bubbles Ⓢⓣⓡⓐⓦⓑⓔⓡⓡⓨ stay as text and behave predictably. Filled bubbles render as coloured circles on some phones and as flat black-and-white ones on others, because the phone treats them as emoji. Careful here if you are building something that has to look identical for everybody: pick the outline set.
+**Bubble letters** come in two versions and people are often surprised by the difference. Outline bubbles Ⓢⓣⓡⓐⓦⓑⓔⓡⓡⓨ stay as text and behave predictably. Filled bubbles render as coloured circles on some phones and as flat black-and-white ones on others, because the phone treats them as emoji. Careful here if you are building something that has to look identical for everybody: pick the outline set.
 
 ## Preppy Fonts
 
@@ -213,7 +213,7 @@ The pattern is always the same: something on the left, your styled text, the mir
 
 - ★ and ✦ add energy without much clutter
 
-- ⭐ and other emoji versions render in colour, which is louder than the outline symbols.
+- ⭐ and other emoji versions render in colour, which is louder than the outline symbols
 
 Two costs come with decorations, and neither is a reason to skip them. The first is length: every decoration and every space around it counts against a bio character limit exactly like a letter does, so a heavily decorated line eats a bio fast. The second is that a screen reader reads decorations out. Six stars around your name becomes six spoken words before anyone reaches the name.
 

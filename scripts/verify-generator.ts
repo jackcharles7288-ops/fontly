@@ -188,12 +188,16 @@ if (!flippedStyle || !upsideDown) {
   if (!upsideDown.reverse) {
     failures.push({ subject: 'upside-down', cause: 'Upside Down must reverse after substitution' });
   }
-  const banned = new Set([0x218c, 0x218d]);
-  for (const value of Object.values(flippedStyle.substitutions)) {
-    if (banned.has(value)) {
+  const banned = new Set([0x10412, 0x218a, 0x218b, 0x218c, 0x218d]);
+  const sharedValues = [
+    ...Object.values(flippedStyle.substitutions),
+    ...(flippedStyle.digits ?? []).map((digit) => digit.codePointAt(0)),
+  ];
+  for (const value of sharedValues) {
+    if (value !== undefined && banned.has(value)) {
       failures.push({
         subject: 'flipped',
-        cause: `banned code point U+${value.toString(16).toUpperCase()} is in the shared map`,
+        cause: `retired or banned code point U+${value.toString(16).toUpperCase()} is in the shared map`,
       });
     }
   }
@@ -204,9 +208,13 @@ if (!flippedStyle || !upsideDown) {
       [0x017f, 0x0250, 0x026f, 0x0020, 0x25d6, 0x006f, 0x006e, 0x0183, 0x0265, 0x0075, 0x006e, 0x0287, 0x0020, 0x152d, 0x0035],
     ],
     [
+      'ABDKTUR 2347',
+      [0x2200, 0x15fa, 0x25d6, 0x22ca, 0x22a5, 0x2229, 0x1d1a, 0x0020, 0x1614, 0x0190, 0x152d, 0x2c62],
+    ],
+    [
       UPPERCASE,
       [
-        0x2200, 0x10412, 0x2183, 0x25d6, 0x018e, 0x2132, 0x2141, 0x0048, 0x0049, 0x017f, 0x22ca,
+        0x2200, 0x15fa, 0x2183, 0x25d6, 0x018e, 0x2132, 0x2141, 0x0048, 0x0049, 0x017f, 0x22ca,
         0x2142, 0x0057, 0x1d0e, 0x004f, 0x0500, 0x038c, 0x1d1a, 0x0053, 0x22a5, 0x2229, 0x1d27,
         0x004d, 0x0058, 0x2144, 0x005a,
       ],
@@ -219,7 +227,15 @@ if (!flippedStyle || !upsideDown) {
         0x028d, 0x0078, 0x028e, 0x007a,
       ],
     ],
-    ['0123456789', [0x0030, 0x0031, 0x218a, 0x218b, 0x152d, 0x0035, 0x0039, 0x2c62, 0x0038, 0x0036]],
+    ['0123456789', [0x0030, 0x0031, 0x1614, 0x0190, 0x152d, 0x0035, 0x0039, 0x2c62, 0x0038, 0x0036]],
+    [
+      '! ? . , " & ; _ ( ) [ ] { } < >',
+      [
+        0x00a1, 0x0020, 0x00bf, 0x0020, 0x002e, 0x0020, 0x002c, 0x0020, 0x0022, 0x0020, 0x0026,
+        0x0020, 0x003b, 0x0020, 0x005f, 0x0020, 0x0028, 0x0020, 0x0029, 0x0020, 0x005b, 0x0020,
+        0x005d, 0x0020, 0x007b, 0x0020, 0x007d, 0x0020, 0x003c, 0x0020, 0x003e,
+      ],
+    ],
   ];
   for (const [input, expectedCps] of flippedCases) {
     const expected = String.fromCodePoint(...expectedCps);
@@ -239,19 +255,30 @@ if (!flippedStyle || !upsideDown) {
       });
     }
   }
-  const deseret = applyStyle('B', flippedStyle);
-  if ([...deseret].length !== 1 || deseret.codePointAt(0) !== 0x10412 || deseret.length !== 2) {
+  const upperFlipped = applyStyle(UPPERCASE, flippedStyle);
+  const upperDown = applyStyle(UPPERCASE, upsideDown);
+  const digitFlipped = applyStyle(DIGITS, flippedStyle);
+  const digitDown = applyStyle(DIGITS, upsideDown);
+  if ([...upperFlipped].length !== 26 || upperFlipped.length !== 26) {
     failures.push({
       subject: 'flipped',
-      cause: `Deseret B must be one supplementary-plane code point, got ${[...deseret].length} code points and ${deseret.length} UTF-16 units`,
+      cause: `A-Z must be 26 code points and 26 UTF-16 units, got ${[...upperFlipped].length} and ${upperFlipped.length}`,
     });
   }
-  const reversedPair = applyStyle('AB', upsideDown);
-  if ([...reversedPair].length !== 2 || reversedPair.codePointAt(0) !== 0x10412) {
+  if ([...upperDown].length !== 26 || upperDown.length !== 26) {
     failures.push({
       subject: 'upside-down',
-      cause: 'reversal split or reordered the Deseret B in "AB"',
+      cause: `reversed A-Z must be 26 code points and 26 UTF-16 units, got ${[...upperDown].length} and ${upperDown.length}`,
     });
+  }
+  for (const ch of upperFlipped + upperDown + digitFlipped + digitDown) {
+    const cp = ch.codePointAt(0);
+    if (cp === 0xfffd || (cp !== undefined && banned.has(cp))) {
+      failures.push({
+        subject: 'flipped',
+        cause: `generated output contains U+${(cp ?? 0).toString(16).toUpperCase()}`,
+      });
+    }
   }
 }
 

@@ -74,7 +74,7 @@ export const BUILDER_LABEL = 'Make your own';
 // cards cannot drift apart. Digits 1 and 5 have no approved substitute.
 // U+218C and U+218D are unassigned and are not used.
 const turnedSubstitutions: Record<string, number> = {
-  A: 0x2200, B: 0x10412, C: 0x2183, D: 0x25d6, E: 0x018e, F: 0x2132, G: 0x2141,
+  A: 0x2200, B: 0x15fa, C: 0x2183, D: 0x25d6, E: 0x018e, F: 0x2132, G: 0x2141, // B is ᗺ
   H: 0x0048, I: 0x0049, J: 0x017f, K: 0x22ca, L: 0x2142, M: 0x0057, N: 0x1d0e,
   O: 0x004f, P: 0x0500, Q: 0x038c, R: 0x1d1a, S: 0x0053, T: 0x22a5, U: 0x2229,
   V: 0x1d27, W: 0x004d, X: 0x0058, Y: 0x2144, Z: 0x005a,
@@ -88,8 +88,8 @@ const turnedSubstitutions: Record<string, number> = {
 const turnedDigits: string[] = [
   '0',
   '1',
-  String.fromCodePoint(0x218a),
-  String.fromCodePoint(0x218b),
+  'ᘔ',
+  'Ɛ',
   String.fromCodePoint(0x152d),
   '5',
   '9',
@@ -98,7 +98,7 @@ const turnedDigits: string[] = [
   '6',
 ];
 const turnedCaveatNote =
-  'Some capitals and digits 2, 3, 4 and 7 are borrowed from other writing systems, so older phones may show empty boxes. Digits 1 and 5 stay plain.';
+  'Some capitals and digits 2, 3, 4 and 7 use borrowed characters, so their appearance can vary by device. Digits 1 and 5 stay plain.';
 
 export const styles: Style[] = [
   // --- cursive ---
@@ -620,8 +620,8 @@ export const styles: Style[] = [
 
   // --- other ---
   // Flipped and Upside Down share turnedSubstitutions and turnedDigits.
-  // Letters come from IPA, letterlike symbols, maths operators, Deseret,
-  // Greek, Cyrillic and Canadian Aboriginal Syllabics. Punctuation other than
+  // Letters come from IPA, letterlike symbols, maths operators, Greek,
+  // Cyrillic and Canadian Aboriginal Syllabics. Punctuation other than
   // ? and ! passes through. Upside Down then reverses the line.
   {
     id: 'flipped',

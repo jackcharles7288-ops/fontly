@@ -228,6 +228,8 @@ Instagram Bio was one of the fields tested on a Redmi A2+ running Android 13. Th
 
 </div>
 
+*Both flipped modes pasted into the Instagram bio field on a Redmi A2+. The 25 characters counted against the 150-character limit, and no empty boxes appeared.*
+
 ### Instagram name field
 
 Your name field is the one under your username, and it holds 64 characters rather than the 30 that most of the internet still reports. The limit was raised in June 2022. Before you flip it, know that this field is searched. Instagram matches your name against what people type into the search bar, so replacing it with turned characters removes you from those results. Head to our [Instagram fonts](/instagram-fonts/) page for the fields where styling is safe.
@@ -254,6 +256,8 @@ Display names accept full Unicode, so an upside down name works fine there. User
 
 </div>
 
+*Both flipped modes sent in a Discord message on a Redmi A2+. The replacement characters remained visible after sending.*
+
 ### Facebook
 
 <div class="split">
@@ -263,6 +267,8 @@ Technically possible in posts and comments, awkward everywhere else. Name change
 <img src="/images/upside-down-facebook-post.webp" width="360" height="233" loading="lazy" decoding="async" alt="A private Facebook post showing both flipped text modes without empty boxes" />
 
 </div>
+
+*Both flipped modes posted privately on Facebook from a Redmi A2+. The replacement characters rendered without empty boxes.*
 
 <h2 id="compatibility">Why Some Flipped Letters Show as Boxes, and Which Ones Never Do</h2>
 
@@ -285,9 +291,21 @@ The live <code>ᗺ</code>, <code>ᘔ</code> and <code>Ɛ</code> then rendered on
 
 <div class="split">
 
+<div>
+
 <img src="/images/upside-down-old-mapping-boxes.webp" width="324" height="398" loading="lazy" decoding="async" alt="Fonti’s previous flipped mapping showing empty boxes for digits 2 and 3 on a Redmi A2+" />
 
+*The previous mapping on the Redmi A2+. Capital B rendered, while digits 2 and 3 appeared as empty boxes.*
+
+</div>
+
+<div>
+
 <img src="/images/upside-down-live-chrome.webp" width="324" height="394" loading="lazy" decoding="async" alt="Fonti’s live flipped mapping showing the replacement characters without empty boxes on a Redmi A2+" />
+
+*The live mapping on the same Redmi A2+. The replacement characters for B, 2 and 3 all rendered.*
+
+</div>
 
 </div>
 

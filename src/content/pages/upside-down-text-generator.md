@@ -50,9 +50,9 @@ faq:
       SOS stays SOS on both cards. SWIMS stays SWIMS only on the Upside Down card; Flipped produces SMIWS. NOON becomes ᴎOOᴎ, so it does not remain unchanged in this tool.
 ---
 
-TOOL PLACEHOLDER
+Type Jam Doughnut into the box below. The Flipped card returns <code>ſɐɯ ◖onƃɥunʇ</code>, while the Upside Down card returns <code>ʇnuɥƃno◖ ɯɐſ</code>. Copy either result, paste it into an Instagram bio or a Discord message, and it stays flipped. No screenshot, no image, no app.
 
-Type Jam Doughnut into the box above. The Flipped card returns <code>ſɐɯ ◖onƃɥunʇ</code>, while the Upside Down card returns <code>ʇnuɥƃno◖ ɯɐſ</code>. Copy either result, paste it into an Instagram bio or a Discord message, and it stays flipped. No screenshot, no image, no app.
+TOOL PLACEHOLDER
 
 Now look at the spot where the capital D should be. That half-filled circle is not a letter. It is a shape from a completely different corner of Unicode, standing in because nobody ever created an upside-down D.
 
@@ -220,7 +220,13 @@ Whether flipped text survives depends less on the app and more on the specific b
 
 ### Instagram bio
 
+<div class="split">
+
 Instagram Bio was one of the fields tested on a Redmi A2+ running Android 13. The live substitutes rendered there without empty boxes. iPhone remains untested. Keep the flipped portion short, because a whole bio of turned letters is genuinely hard to read.
+
+<img src="/images/upside-down-instagram-bio.webp" width="360" height="402" loading="lazy" decoding="async" alt="Instagram Bio editor showing both flipped text modes without empty boxes and a 25 of 150 character count" />
+
+</div>
 
 ### Instagram name field
 
@@ -240,11 +246,23 @@ Works well, and this is where the prank use actually lives. A flipped status loo
 
 ### Discord
 
+<div class="split">
+
 Display names accept full Unicode, so an upside down name works fine there. Usernames changed in 2023 and now allow only lowercase letters, numbers, underscores and periods, so those are closed to you. Messages, channel topics and server nicknames all accept it. Try our [Discord fonts](/discord-fonts/) page for the fuller picture of what survives inside a server.
+
+<img src="/images/upside-down-discord-message.webp" width="360" height="222" loading="lazy" decoding="async" alt="A sent Discord message showing both flipped text modes without empty boxes" />
+
+</div>
 
 ### Facebook
 
+<div class="split">
+
 Technically possible in posts and comments, awkward everywhere else. Name changes lock for 60 days once made, which is a long time to live with a mistake, and page names are reviewed. Fair warning if you run ads: Meta's advertising policy explicitly prohibits using Unicode characters or symbols in ad text to obfuscate words or phrases. In an ad, flipped text becomes a policy problem.
+
+<img src="/images/upside-down-facebook-post.webp" width="360" height="233" loading="lazy" decoding="async" alt="A private Facebook post showing both flipped text modes without empty boxes" />
+
+</div>
 
 <h2 id="compatibility">Why Some Flipped Letters Show as Boxes, and Which Ones Never Do</h2>
 
@@ -261,9 +279,17 @@ Which characters break follows directly from the source column in the chart abov
 | <b>Usually fine, worth a check</b> | <code>∀</code> <code>⊥</code> <code>∩</code> <code>⋊</code> | Maths operators live in maths fonts, and not every app loads one |
 | <b>Tested replacements</b> | <code>ᗺ</code> <code>ᘔ</code> <code>Ɛ</code> | Rendered without empty boxes in Chrome, WhatsApp, Instagram, Discord and Facebook on a Redmi A2+ running Android 13 |
 
-We tested the previous mapping and the live one, rather than guessing. On an Infinix Note 7, the previous <code>𐐒</code> and four tested mathematical operators rendered in WhatsApp, Chrome and the Instagram bio, while the previous <code>↊</code> and <code>↋</code> appeared as boxes. On a Redmi A2+ running Android 13, that same previous <code>𐐒</code>, <code>↊</code> and <code>↋</code> appeared as boxes in Chrome, WhatsApp and Instagram.
+We tested the previous mapping and the live one, rather than guessing. On an Infinix Note 7, the previous <code>𐐒</code> and four tested mathematical operators rendered in WhatsApp, Chrome and the Instagram bio, while the previous <code>↊</code> and <code>↋</code> appeared as boxes. On a Redmi A2+ running Android 13, that same previous <code>𐐒</code> rendered, while <code>↊</code> and <code>↋</code> appeared as boxes in Chrome, WhatsApp and Instagram.
 
 The live <code>ᗺ</code>, <code>ᘔ</code> and <code>Ɛ</code> then rendered on that Redmi in production Chrome, WhatsApp, the Instagram bio, a sent Discord message and a private Facebook post. That is one handset and those apps only. iPhone remains untested, and none of this is a promise that every phone will draw the same characters.
+
+<div class="split">
+
+<img src="/images/upside-down-old-mapping-boxes.webp" width="324" height="398" loading="lazy" decoding="async" alt="Fonti’s previous flipped mapping showing empty boxes for digits 2 and 3 on a Redmi A2+" />
+
+<img src="/images/upside-down-live-chrome.webp" width="324" height="394" loading="lazy" decoding="async" alt="Fonti’s live flipped mapping showing the replacement characters without empty boxes on a Redmi A2+" />
+
+</div>
 
 ## What Machines Do With Your Flipped Text
 

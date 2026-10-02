@@ -263,7 +263,8 @@ const filterChips = categories
     if (
       category.id === 'cool-fonts' ||
       category.id === 'cute' ||
-      category.id === 'decorated'
+      (category.id === 'decorated' &&
+        toolCategories.some((id) => DECORATION_GROUP_IDS.has(id) || id === 'combined'))
     ) {
       return true;
     }

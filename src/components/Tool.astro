@@ -246,6 +246,9 @@ const sections: Section[] = toolCategories.map((id) => {
 });
 
 const sectionById = new Map(sections.map((section) => [section.id, section]));
+const pageStyleCount = new Set(
+  sections.flatMap((section) => section.cards.map((card) => card.id)),
+).size;
 // Builder sections first so the builder sits above the card sections when shown.
 // First card section stays the SSR-mounted one (was toolCategories[0]).
 const builderSections = sections.filter((section) => section.builder);
@@ -752,9 +755,7 @@ const filterChips = categories
 
   <div class="tool__below">
     <p class="tool__input-meta">
-      <span class="tool__style-count"
-        >{styles.length + decorations.length + effects.length + combinations.length} styles</span
-      >
+      <span class="tool__style-count">{pageStyleCount} styles</span>
     </p>
   </div>
 </section>

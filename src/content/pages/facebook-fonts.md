@@ -104,7 +104,7 @@ The styles below are grouped by how reliably they display, not by how they look.
 | Fullwidth | Ｓｕｎｄａｙ Ｒｏａｓｔ | Gaps on older phones |
 | Circled | Ⓢⓤⓝⓓⓐⓨ Ⓡⓞⓐⓢⓣ | Gaps on older phones |
 
-The first four styles come from a block of Unicode that has been supported for decades and is included in essentially every font shipped on a modern phone. Classic Script and double-struck are nearly as safe, though a few of their capitals come from a separate part of Unicode and can look slightly off-weight next to the rest. The bottom three are where problems start. Small caps borrow from a phonetics block, full-width from an old East Asian typing standard, and bubble letters from an enclosed-symbols block, and none of those three is guaranteed to be complete in the font on someone else's phone.
+The first four styles come from a block of Unicode that has been supported for decades and is included in essentially every font shipped on a modern phone. Classic Script and double-struck are nearly as safe, though a few of their capitals come from a separate part of Unicode and can look slightly off-weight next to the rest. The bottom three are where problems start. Small Caps borrows from a phonetics block, Fullwidth from an old East Asian typing standard, and Circled from an enclosed-symbols block, and none of those three is guaranteed to be complete in the font on someone else's phone.
 
 <h2 id="fields">4. Where Styled Text Works on Facebook, Field by Field</h2>
 

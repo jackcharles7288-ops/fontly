@@ -90,6 +90,22 @@ Most sites sort their styles by how pretty they look. That ordering is no help t
 
 The top four rows all come from one complete block of Unicode that was built for mathematics, which is why they hold up on every current device. The three middle rows are complete as well, but a handful of their capitals are borrowed from a different part of the standard, so those letters sometimes render a shade heavier or lighter than the ones around them. The bottom three deserve a second thought before you commit to them. Small Caps was never finished, Fullwidth comes from an old East Asian typesetting system, and Circled run out at certain characters.
 
+<div class="split">
+
+<img src="/images/instagram-tool-script-styles.webp" width="720" height="1530" loading="lazy" decoding="async" alt="The Fonti Instagram font generator on a Redmi A2+ showing Bold Script, Classic Script, Bold Italic, Italic Script and Handwriting rendered in Coffee and Chaos without empty boxes" />
+
+</div>
+
+*Coffee and Chaos in the five script-family styles, all rendering cleanly on a Redmi A2+ running Android 13.*
+
+<div class="split">
+
+<img src="/images/instagram-tool-bold-styles.webp" width="720" height="1530" loading="lazy" decoding="async" alt="The Fonti Instagram font generator on a Redmi A2+ showing Slanted, Bold, Bold Sans, Circled and Parenthesized rendered in Coffee and Chaos without empty boxes" />
+
+</div>
+
+*The bold family and the two enclosure styles, with no empty boxes. The Circled card carries the app's own Emoji note.*
+
 That last group is not broken so much as incomplete, and the gaps follow a pattern you can learn. Every one of them traces back to why the characters were added to Unicode in the first place. There is a section further down that names the missing letters and explains what happened to them.
 
 <h2 id="fields">Where Styled Text Works on Instagram, Field by Field</h2>

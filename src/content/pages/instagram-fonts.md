@@ -230,7 +230,7 @@ Classic Script and Bold Script are also complete, with one quirk. A few of their
 
 ### Tier three, breaks on older devices
 
-Small Caps, Fullwidth and Circled are the risky ones, and each fails for its own reason. Small Caps was borrowed from the phonetic alphabet, which only ever needed some of the letters, so the set was assembled from whatever existed and still has no proper X or Q. Fullwidth comes from legacy East Asian typesetting and carries a built-in wide space that looks odd in a short bio. Circled cover the alphabet but thin out once you leave the basics, which is the same limitation you will find on our cute font generator.
+Small Caps, Fullwidth and Circled are the risky ones, and each fails for its own reason. Small Caps was borrowed from the phonetic alphabet, which only ever needed some of the letters, so the set was assembled from whatever existed and still has no proper X or Q. Fullwidth comes from legacy East Asian typesetting and carries a built-in wide space that looks odd in a short bio. Bubble letters cover the alphabet but thin out once you leave the basics, which is the same limitation you will find on our cute font generator.
 
 Blackletter sits in this tier too, and its weak spot is the borrowed capitals described above. Five of its capital letters come from Letterlike Symbols and render at a visibly different weight from the letters around them. There is more detail on which letters behave oddly in our gothic font generator guide.
 

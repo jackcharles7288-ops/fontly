@@ -86,9 +86,25 @@ The nickname is the field you actually want. TikTok calls it your nickname rathe
 
 That reach is what makes the nickname worth styling. It sits beside every comment you leave, at the top of every message thread, and under your video in the feed, so one change is doing work in several places at once. Your bio only appears when somebody opens your profile. If you are going to style one field and leave the rest plain, the nickname gives you more for the same effort.
 
+<div class="split">
+
 Your bio holds up to 160 characters, and this is where the counting starts to matter. Some accounts still show the older limit of 80, so check your own field before you plan around it.
 
+<img src="/images/tiktok-bio-counter.webp" width="720" height="730" loading="lazy" decoding="async" alt="The TikTok bio field on a Redmi A2+ holding a 12-character line in Bold Sans, with the counter reading 24 of 160" />
+
+</div>
+
+*Twelve plain characters in Bold Sans counted as 24 in the bio field.*
+
+<div class="split">
+
 Captions and comments both take styled text without complaint. The caption limit is 4,000 characters. Comments stop at around one hundred and fifty. The comment figure does not come from TikTok directly, so leave yourself a margin.
+
+<img src="/images/tiktok-caption-limit.webp" width="720" height="384" loading="lazy" decoding="async" alt="The TikTok caption composer on a Redmi A2+ showing the notice that reads Maximum of 4000 characters" />
+
+</div>
+
+*The caption composer states its own limit: 4,000 characters.*
 
 Comments deserve a second thought. A ceiling of roughly one hundred and fifty characters is far tighter than your bio, so the cost difference between the style groups bites harder there than anywhere else. A styled reply in one of the expensive alphabets can run out of room halfway through a sentence. If you comment in a styled font regularly, the cheap group is the practical choice.
 
@@ -104,7 +120,15 @@ Small Caps letters give you ᴄʜɪʟʟ ʜᴏᴜʀꜱ, which reads cleanly at sm
 
 Fullwidth spreads your letters out as Ｃｈｉｌｌ Ｈｏｕｒｓ, with a wide gap built into every character. It costs the same as plain text but looks twice as long, which is a useful trade in a short bio. Our aesthetic font generator lines up the wide and boxy sets side by side.
 
+<div class="split">
+
 Circled letters turn the line into Ⓒⓗⓘⓛⓛ Ⓗⓞⓤⓡⓢ, the softest of the four. Our cute font generator leans into the round, soft look. On one account, a circled bio was saved, the app was closed and reopened, and the letters were still there. That check covers the bio field on that account only.
+
+<img src="/images/tiktok-profile-circled.webp" width="712" height="496" loading="lazy" decoding="async" alt="A TikTok profile on a Redmi A2+ showing a circled display name that survived a save, with the username and follower count plain beneath it" />
+
+</div>
+
+*Saved, closed, reopened. The circled display name was still there.*
 
 ### Mid-cost: Around One Hundred Characters
 
@@ -163,7 +187,15 @@ A handful of letters in those alphabets were never given a new home. Characters 
 
 The practical version of all this is short. If your text is long and your field is tight, pick from the cheap group. If your text is short, like a thirty-character nickname, the expensive styles will fit comfortably and you can choose on looks alone.
 
+<div class="split">
+
 Reality check: on one account, a 12-character Bold Sans line of Sunday Roast moved the bio counter to 24, and a 5-character Circled line of Fonti stayed at 5. The styled characters used by the two-cost styles count as two, and Circled characters count as one, as measured on that account.
+
+<img src="/images/tiktok-bio-circled.webp" width="720" height="715" loading="lazy" decoding="async" alt="The TikTok bio field on a Redmi A2+ holding the circled word Fonti, with the counter reading 5 of 160" />
+
+</div>
+
+*The same field counted a circled word as one character each. Five for Fonti.*
 
 <h2 id="stripped">What TikTok Deletes the Moment You Hit Save</h2>
 

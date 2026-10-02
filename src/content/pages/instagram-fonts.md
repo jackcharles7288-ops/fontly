@@ -112,6 +112,14 @@ That last group is not broken so much as incomplete, and the gaps follow a patte
 
 Instagram is not one text box. It is nine or ten of them, each with its own limit and its own rules, and styled text behaves differently depending on which one you are standing in. Nobody seems to publish this in one place, so here it is.
 
+<div class="split">
+
+<img src="/images/instagram-bio-styled-text.webp" width="720" height="950" loading="lazy" decoding="async" alt="The Instagram Bio field on a Redmi A2+ showing the 16 of 150 character counter with styled text pasted in" />
+
+</div>
+
+*The bio takes it, and the counter counts plain characters. Sixteen of 150 here.*
+
 | Field | Limit | Takes styled text? |
 | --- | --- | --- |
 | Bio | 150 characters | Yes |
@@ -130,6 +138,14 @@ Story text works, but only by pasting. The Story text tool has its own built-in 
 
 Good to know: the first 125 characters or so of a caption are what people see before the More link appears. Styled text in that opening line costs you more than styled text buried at the bottom of a post. The opening line is doing the work of getting someone to tap, so it needs to be readable at a glance.
 
+<div class="split">
+
+<img src="/images/instagram-caption-styled-text.webp" width="720" height="600" loading="lazy" decoding="async" alt="The Instagram caption box on a new post showing styled text pasted and rendering correctly" />
+
+</div>
+
+*The same paste, in a caption box on a new post.*
+
 <h2 id="name">Your Name and Your Username Are Two Different Things</h2>
 
 This is the part most people get wrong, and it is the reason a lot of styled profiles quietly stop showing up in search. The two fields sit inches apart on your profile and look like they belong together. They do not, and they behave nothing alike.
@@ -137,6 +153,14 @@ This is the part most people get wrong, and it is the reason a lot of styled pro
 Your username is the @handle. It sits under your photo, it is how people tag you, and it is locked to plain characters: letters, numbers, periods, underscores, thirty characters maximum. Nothing you paste will change it. TikTok divides its profile the same way, and our TikTok fonts guide names which of its two fields will actually keep what you paste.
 
 Your Name is the bold line that appears above your bio. It is a completely separate field, it has nothing to do with your handle, and it accepts any character you can paste into it. It also holds more than most people think. Instagram raised the limit from thirty to 64 characters in 2022, and a surprising amount of the internet still prints the old number.
+
+<div class="split">
+
+<img src="/images/instagram-name-field-styled-text.webp" width="720" height="1530" loading="lazy" decoding="async" alt="The Instagram Name field on a Redmi A2+ holding styled text in the Circled style, with Instagram's own note that a name can only be changed twice in 14 days" />
+
+</div>
+
+*Styled text in the Name field, with Instagram's own warning: a name can only be changed twice in 14 days.*
 
 Here is why that field matters more than the rest of your profile put together. The Name field is searchable. When somebody types photographer or bakery or Manchester into Instagram search, the app reads Name fields. It is the one part of your profile that actively brings strangers in.
 
@@ -181,6 +205,14 @@ The interface uses whatever your phone uses. On an iPhone that is SF Pro, Apple'
 Instagram does have a typeface of its own, called Instagram Sans. It was built for the brand and it turns up in the logo, in marketing, and now inside the Stories text tool. Almost no font-generator site mentions it exists.
 
 Inside Stories you get a small set of named text styles: Classic, Modern, Neon, Typewriter and Strong, with Instagram Sans available to most accounts as well. These are the closest thing Instagram has to a font picker anywhere in the app. Instagram adds and removes them without announcing anything, so treat any list you read as a snapshot.
+
+<div class="split">
+
+<img src="/images/instagram-story-text-tool.webp" width="720" height="1530" loading="lazy" decoding="async" alt="The Instagram Story text tool on a Redmi A2+ showing the named font chips beside styled text" />
+
+</div>
+
+*Stories keep their own font chips, so styled text arrives by pasting.*
 
 Reality check: none of these fonts can be typed into a bio, a caption or a comment. They live inside the app and stay there. That gap is the entire reason Unicode styling exists, and it is why a copy-and-paste generator is the only way to get styled text into a text field that has no styling controls.
 

@@ -4,6 +4,7 @@ h1: "Instagram Font Generator"
 description: "Copy and paste Instagram fonts for your bio, Name and captions. Every style labelled with where it breaks, plus the one field to never style."
 primaryKeyword: "instagram font generator"
 toolCategories:
+  - cool-fonts
   - all
   - combo
 faq:

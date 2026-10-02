@@ -221,6 +221,11 @@ main {
   .article .split {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
+
+  .article img[src^="/images/facebook-tool-"] {
+    max-height: 32rem;
+    object-fit: contain;
+  }
 }
 
 /* Tool — wider than the article spine; sits on the page background. */

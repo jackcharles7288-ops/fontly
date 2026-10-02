@@ -90,7 +90,7 @@ Most sites sort their styles by how pretty they look. That ordering is no help t
 
 <div class="split">
 
-The top four rows all come from one complete block of Unicode that was built for mathematics, which is why they hold up on every current device. The three middle rows are complete as well, but a handful of their capitals are borrowed from a different part of the standard, so those letters sometimes render a shade heavier or lighter than the ones around them. The bottom three deserve a second thought before you commit to them. Small Caps was never finished, Fullwidth comes from an old East Asian typesetting system, and Circled run out at certain characters.
+The top four rows all come from one complete block of Unicode that was built for mathematics, which is why they hold up on every current device. The three middle rows are complete as well, but a handful of their capitals are borrowed from a different part of the standard, so those letters sometimes render a shade heavier or lighter than the ones around them. The bottom three deserve a second thought before you commit to them. Small Caps was never finished, Fullwidth comes from an old East Asian typesetting system, and bubble letters run out at certain characters.
 
 <img src="/images/instagram-tool-script-styles.webp" width="720" height="1530" loading="lazy" decoding="async" alt="The Fonti Instagram font generator on a Redmi A2+ showing Bold Script, Classic Script, Bold Italic, Italic Script and Handwriting rendered in Coffee and Chaos without empty boxes" />
 

@@ -76,18 +76,18 @@ Most sites sort their styles by how pretty they look. That ordering is no help t
 
 | Style | Coffee and Chaos | Where it holds up |
 | --- | --- | --- |
-| Serif bold | 𝐂𝐨𝐟𝐟𝐞𝐞 𝐚𝐧𝐝 𝐂𝐡𝐚𝐨𝐬 | Everywhere |
-| Sans bold | 𝗖𝗼𝗳𝗳𝗲𝗲 𝗮𝗻𝗱 𝗖𝗵𝗮𝗼𝘀 | Everywhere |
-| Italic | 𝘊𝘰𝘧𝘧𝘦𝘦 𝘢𝘯𝘥 𝘊𝘩𝘢𝘰𝘴 | Everywhere |
+| Bold | 𝐂𝐨𝐟𝐟𝐞𝐞 𝐚𝐧𝐝 𝐂𝐡𝐚𝐨𝐬 | Everywhere |
+| Bold Sans | 𝗖𝗼𝗳𝗳𝗲𝗲 𝗮𝗻𝗱 𝗖𝗵𝗮𝗼𝘀 | Everywhere |
+| Italic Script | 𝘊𝘰𝘧𝘧𝘦𝘦 𝘢𝘯𝘥 𝘊𝘩𝘢𝘰𝘴 | Everywhere |
 | Monospace | 𝙲𝚘𝚏𝚏𝚎𝚎 𝚊𝚗𝚍 𝙲𝚑𝚊𝚘𝚜 | Everywhere |
-| Script | 𝒞ℴ𝒻𝒻ℯℯ 𝒶𝓃𝒹 𝒞𝒽𝒶ℴ𝓈 | Almost everywhere |
-| Bold script | 𝓒𝓸𝓯𝓯𝓮𝓮 𝓪𝓷𝓭 𝓒𝓱𝓪𝓸𝓼 | Almost everywhere |
+| Classic Script | 𝒞ℴ𝒻𝒻ℯℯ 𝒶𝓃𝒹 𝒞𝒽𝒶ℴ𝓈 | Almost everywhere |
+| Bold Script | 𝓒𝓸𝓯𝓯𝓮𝓮 𝓪𝓷𝓭 𝓒𝓱𝓪𝓸𝓼 | Almost everywhere |
 | Double-struck | ℂ𝕠𝕗𝕗𝕖𝕖 𝕒𝕟𝕕 ℂ𝕙𝕒𝕠𝕤 | Almost everywhere |
-| Small caps | ᴄᴏꜰꜰᴇᴇ ᴀɴᴅ ᴄʜᴀᴏꜱ | Gaps on older phones |
-| Full-width | Ｃｏｆｆｅｅ ａｎｄ Ｃｈａｏｓ | Gaps on older phones |
-| Bubble | Ⓒⓞⓕⓕⓔⓔ ⓐⓝⓓ Ⓒⓗⓐⓞⓢ | Gaps on older phones |
+| Small Caps | ᴄᴏꜰꜰᴇᴇ ᴀɴᴅ ᴄʜᴀᴏꜱ | Gaps on older phones |
+| Fullwidth | Ｃｏｆｆｅｅ ａｎｄ Ｃｈａｏｓ | Gaps on older phones |
+| Circled | Ⓒⓞⓕⓕⓔⓔ ⓐⓝⓓ Ⓒⓗⓐⓞⓢ | Gaps on older phones |
 
-The top four rows all come from one complete block of Unicode that was built for mathematics, which is why they hold up on every current device. The three middle rows are complete as well, but a handful of their capitals are borrowed from a different part of the standard, so those letters sometimes render a shade heavier or lighter than the ones around them. The bottom three deserve a second thought before you commit to them. Small caps was never finished, full-width comes from an old East Asian typesetting system, and bubble letters run out at certain characters.
+The top four rows all come from one complete block of Unicode that was built for mathematics, which is why they hold up on every current device. The three middle rows are complete as well, but a handful of their capitals are borrowed from a different part of the standard, so those letters sometimes render a shade heavier or lighter than the ones around them. The bottom three deserve a second thought before you commit to them. Small Caps was never finished, Fullwidth comes from an old East Asian typesetting system, and Circled run out at certain characters.
 
 That last group is not broken so much as incomplete, and the gaps follow a pattern you can learn. Every one of them traces back to why the characters were added to Unicode in the first place. There is a section further down that names the missing letters and explains what happened to them.
 
@@ -173,15 +173,15 @@ A box, sometimes called tofu, means one thing: the device trying to display your
 
 ### Tier one, never breaks
 
-Serif bold, sans bold, italic, monospace and double-struck all come from the Mathematical Alphanumeric Symbols block. Mathematics needed a complete alphabet, so the block contains every uppercase and lowercase letter with no holes, and it ships in the system fonts of every current phone and computer. If you want a style you never have to think about again, pick from this group.
+Bold, Bold Sans, Italic Script, monospace and double-struck all come from the Mathematical Alphanumeric Symbols block. Mathematics needed a complete alphabet, so the block contains every uppercase and lowercase letter with no holes, and it ships in the system fonts of every current phone and computer. If you want a style you never have to think about again, pick from this group.
 
 ### Tier two, rarely breaks
 
-Script and bold script are also complete, with one quirk. A few of their capitals were already in Unicode before the maths block arrived, so those letters live somewhere else and were never duplicated. Your script capital B, E, F, H, I, L, M and R come from a block called Letterlike Symbols. They display fine almost everywhere, but they occasionally render at a slightly different weight from the letters beside them.
+Classic Script and Bold Script are also complete, with one quirk. A few of their capitals were already in Unicode before the maths block arrived, so those letters live somewhere else and were never duplicated. Your script capital B, E, F, H, I, L, M and R come from a block called Letterlike Symbols. They display fine almost everywhere, but they occasionally render at a slightly different weight from the letters beside them.
 
 ### Tier three, breaks on older devices
 
-Small caps, full-width and bubble letters are the risky ones, and each fails for its own reason. Small caps was borrowed from the phonetic alphabet, which only ever needed some of the letters, so the set was assembled from whatever existed and still has no proper X or Q. Full-width comes from legacy East Asian typesetting and carries a built-in wide space that looks odd in a short bio. Bubble letters cover the alphabet but thin out once you leave the basics, which is the same limitation you will find on our cute font generator.
+Small Caps, Fullwidth and Circled are the risky ones, and each fails for its own reason. Small Caps was borrowed from the phonetic alphabet, which only ever needed some of the letters, so the set was assembled from whatever existed and still has no proper X or Q. Fullwidth comes from legacy East Asian typesetting and carries a built-in wide space that looks odd in a short bio. Circled cover the alphabet but thin out once you leave the basics, which is the same limitation you will find on our cute font generator.
 
 Blackletter sits in this tier too, and its weak spot is the borrowed capitals described above. Five of its capital letters come from Letterlike Symbols and render at a visibly different weight from the letters around them. There is more detail on which letters behave oddly in our gothic font generator guide.
 
@@ -221,7 +221,7 @@ Quick note: that leaves the personality line as the natural place for styling, b
 
 As for whether any of this grows an account, the honest answer is that nobody knows. Competing sites claim forty percent more profile visits, twenty-five percent more sales, and twenty-five to forty percent more followers, none of it sourced. A styled bio changes how your profile looks. Whether it changes what your profile earns has not been measured by anyone publishing on this topic, including us.
 
-<h2>Why Use Fontly's Instagram Font Generator</h2>
+<h2>Why Use Fonti's Instagram Font Generator</h2>
 
 Every style is labelled with where it breaks, so you know the risk while you are still choosing.
 

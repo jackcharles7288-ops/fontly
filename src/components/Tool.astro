@@ -18,6 +18,8 @@ interface Props {
   showCombined?: boolean;
   /** Renders the Glitch stacked-mark section. */
   showGlitch?: boolean;
+  /** When set, the input counter reads as a budget `{n} / {limit}`. */
+  charLimit?: number;
   /** Content entry id (filename without extension), used in the missing-phrase warning. */
   pageFile: string;
 }
@@ -29,6 +31,7 @@ const {
   showEffects = false,
   showCombined = false,
   showGlitch = false,
+  charLimit,
   pageFile,
 } = Astro.props;
 
@@ -346,8 +349,15 @@ const filterChips = categories
       <path d="M20 6 9 17l-5-5"></path>
     </symbol>
   </svg>
-  <span class="tool__char-count"
-    ><span data-input-codepoints>{inputCount.codePoints}</span>{inputCount.codePoints === 1 ? ' character' : ' characters'}</span>
+  {
+    charLimit == null ? (
+      <span class="tool__char-count"
+        ><span data-input-codepoints>{inputCount.codePoints}</span>{inputCount.codePoints === 1 ? ' character' : ' characters'}</span>
+    ) : (
+      <span class="tool__char-count" data-char-limit={charLimit}
+        ><span data-input-codepoints>{inputCount.codePoints}</span>{` / ${charLimit}`}</span>
+    )
+  }
   <div class="tool__controls">
     <input
       class="tool__input"

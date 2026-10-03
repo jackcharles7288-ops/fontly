@@ -47,6 +47,9 @@ const pages = defineCollection({
     // Renders the Glitch stacked-mark section. Optional with a false default,
     // so pages that omit it still validate.
     showGlitch: z.boolean().default(false),
+    // Optional per-page character budget for the input counter. Absent = the
+    // existing "{n} characters" label. No default, so omitting it changes nothing.
+    charLimit: z.number().optional(),
   }),
 });
 

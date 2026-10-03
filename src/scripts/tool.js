@@ -562,6 +562,11 @@ function initTool() {
 
   const searchInput = root.querySelector('#tool-search');
   const inputCpEl = root.querySelector('[data-input-codepoints]');
+  const charLimitRaw =
+    inputCpEl instanceof Element ? inputCpEl.parentElement?.getAttribute('data-char-limit') : null;
+  const charLimit = charLimitRaw == null ? NaN : Number(charLimitRaw);
+  const hasCharLimit = Number.isFinite(charLimit);
+  let wasOverLimit = false;
   const emptyFavEl = root.querySelector('[data-favourites-empty]');
   const emptyRecentsEl = root.querySelector('[data-recents-empty]');
   const emptySearchEl = root.querySelector('[data-search-empty]');
@@ -1058,9 +1063,21 @@ function initTool() {
     const typedChars = countCharacters(text).codePoints;
     if (inputCpEl) {
       inputCpEl.textContent = String(typedChars);
-      const word = inputCpEl.nextSibling;
-      if (word && word.nodeType === Node.TEXT_NODE) {
-        word.textContent = typedChars === 1 ? ' character' : ' characters';
+      if (hasCharLimit) {
+        const over = typedChars > charLimit;
+        if (over !== wasOverLimit) {
+          wasOverLimit = over;
+          const host = inputCpEl.parentElement;
+          if (host) {
+            if (over) host.setAttribute('data-over-limit', 'true');
+            else host.removeAttribute('data-over-limit');
+          }
+        }
+      } else {
+        const word = inputCpEl.nextSibling;
+        if (word && word.nodeType === Node.TEXT_NODE) {
+          word.textContent = typedChars === 1 ? ' character' : ' characters';
+        }
       }
     }
     // Live registry — every mounted copy of every card.

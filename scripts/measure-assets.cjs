@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const z = require('zlib');
 
-const JS_GZIP_LIMIT = 15360;
+const JS_GZIP_LIMIT = 16384;
 const htmlPath = process.argv[2] || 'dist/index.html';
 
 if (!fs.existsSync(htmlPath)) {

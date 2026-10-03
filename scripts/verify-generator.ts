@@ -7,6 +7,15 @@ import { decorations, applyDecoration } from '../src/data/decorations.ts';
 import { effects, applyEffect } from '../src/data/effects.ts';
 import { combinations } from '../src/data/combinations.ts';
 import { separators } from '../src/data/separators.ts';
+import {
+  glitchSettings,
+  applyGlitch,
+  stripCombiningMarks,
+  ABOVE_MARKS,
+  BELOW_MARKS,
+  THROUGH_MARKS,
+  MAX_MARKS_PER_LETTER,
+} from '../src/data/glitch.ts';
 import { applyStyle, applyCombination, countCharacters } from '../src/scripts/generator.js';
 
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -474,10 +483,154 @@ for (const combination of combinations) {
 }
 console.log(`Checked ${combinations.length} combinations: count, unique ids across the catalogue, resolved references, distinct outputs.`);
 
+// Glitch settings stack many marks on one letter, drawn from three pools of
+// existing effect marks. Checked here: every pooled mark is a real combining
+// mark, every setting respects its own maxMarks and the 30-mark Stream-Safe
+// ceiling, every deterministic setting survives a strip round trip, and the
+// randomised setting can never emit a code point from outside the pools.
+const GLITCH_SAMPLE = 'Glitchy';
+const MIXED_SEED_RUNS = 200;
+
+/** Marks carried by each base character, in order. */
+function marksPerBase(text: string): number[] {
+  const counts: number[] = [];
+  for (const ch of text) {
+    if (COMBINING_MARK.test(ch) && counts.length > 0) {
+      counts[counts.length - 1] += 1;
+    } else {
+      counts.push(0);
+    }
+  }
+  return counts;
+}
+
+console.log('='.repeat(70));
+console.log('GLITCH MARK POOLS');
+console.log('='.repeat(70));
+
+const glitchPoolCodePoints = new Set<number>();
+for (const [poolName, pool] of [
+  ['above', ABOVE_MARKS],
+  ['below', BELOW_MARKS],
+  ['through', THROUGH_MARKS],
+] as [string, string[]][]) {
+  const hexes: string[] = [];
+  for (const mark of pool) {
+    for (const ch of mark) {
+      const cp = ch.codePointAt(0);
+      if (cp !== undefined) glitchPoolCodePoints.add(cp);
+      hexes.push(codePointHex(ch));
+      if (cp === REPLACEMENT_CHARACTER_CODE_POINT) {
+        failures.push({ subject: `glitch:${poolName}`, cause: 'pool mark is U+FFFD (replacement character)' });
+      }
+      if (!COMBINING_MARK.test(ch)) {
+        failures.push({
+          subject: `glitch:${poolName}`,
+          cause: `pool mark ${codePointHex(ch)} is not a combining mark (Unicode general category Mn or Me)`,
+        });
+      }
+    }
+  }
+  console.log(`  ${poolName} (${pool.length}): ${hexes.join(' ')}`);
+}
+console.log(`  pooled marks total: ${ABOVE_MARKS.length + BELOW_MARKS.length + THROUGH_MARKS.length}`);
+
+console.log('='.repeat(70));
+console.log('GLITCH SETTINGS');
+console.log('='.repeat(70));
+
+for (const setting of glitchSettings) {
+  const output = applyGlitch(GLITCH_SAMPLE, setting, setting.randomised ? 1 : undefined);
+  const count = countCharacters(output);
+  console.log(`Setting: ${setting.id}  (${setting.name})`);
+  console.log(`  direction=${setting.direction} min=${setting.minMarks} max=${setting.maxMarks} randomised=${setting.randomised}`);
+  console.log(`  "${GLITCH_SAMPLE}" -> "${output}"`);
+  console.log(`  ${count.codePoints} characters, ${count.utf16Length} UTF-16 units`);
+
+  const perBase = marksPerBase(output);
+  const worst = perBase.length === 0 ? 0 : Math.max(...perBase);
+  console.log(`  marks per character: ${perBase.join(', ')}  (max ${worst})`);
+  if (worst > MAX_MARKS_PER_LETTER) {
+    failures.push({
+      subject: `glitch:${setting.id}`,
+      cause: `a character carries ${worst} marks, above the ${MAX_MARKS_PER_LETTER} ceiling`,
+    });
+  }
+  if (worst > setting.maxMarks) {
+    failures.push({
+      subject: `glitch:${setting.id}`,
+      cause: `a character carries ${worst} marks, above the setting's own maxMarks of ${setting.maxMarks}`,
+    });
+  }
+
+  if (!setting.randomised) {
+    const stripped = stripCombiningMarks(output);
+    const roundTripped = stripped === GLITCH_SAMPLE;
+    console.log(`  round trip through stripCombiningMarks: "${stripped}" ${roundTripped ? 'OK' : 'MISMATCH'}`);
+    if (!roundTripped) {
+      failures.push({
+        subject: `glitch:${setting.id}`,
+        cause: `stripCombiningMarks returned "${stripped}", expected "${GLITCH_SAMPLE}"`,
+      });
+    }
+    if (applyGlitch(GLITCH_SAMPLE, setting) !== output) {
+      failures.push({
+        subject: `glitch:${setting.id}`,
+        cause: 'a non-randomised setting produced a different output on a second call',
+      });
+    }
+  }
+  console.log('');
+}
+
+// A randomised setting has no golden string, so it is checked by property:
+// across many seeds every mark it emits must come from the three pools, the
+// base letters must be untouched, and the ceiling must still hold.
+const mixedSetting = glitchSettings.find((setting) => setting.randomised);
+if (!mixedSetting) {
+  failures.push({ subject: 'glitch:mixed', cause: 'no randomised setting found in glitchSettings' });
+} else {
+  let widestSeen = 0;
+  for (let seed = 0; seed < MIXED_SEED_RUNS; seed += 1) {
+    const output = applyGlitch(GLITCH_SAMPLE, mixedSetting, seed);
+    for (const ch of output) {
+      const cp = ch.codePointAt(0);
+      if (cp === undefined) continue;
+      if (COMBINING_MARK.test(ch)) {
+        if (!glitchPoolCodePoints.has(cp)) {
+          failures.push({
+            subject: 'glitch:mixed',
+            cause: `seed ${seed} emitted ${codePointHex(ch)}, which is in none of the three pools`,
+          });
+        }
+      } else if (!GLITCH_SAMPLE.includes(ch)) {
+        failures.push({
+          subject: 'glitch:mixed',
+          cause: `seed ${seed} emitted base character ${codePointHex(ch)}, which is not in "${GLITCH_SAMPLE}"`,
+        });
+      }
+    }
+    const worst = Math.max(...marksPerBase(output));
+    widestSeen = Math.max(widestSeen, worst);
+    if (worst > MAX_MARKS_PER_LETTER || worst > mixedSetting.maxMarks) {
+      failures.push({
+        subject: 'glitch:mixed',
+        cause: `seed ${seed} produced a character carrying ${worst} marks`,
+      });
+    }
+    if (applyGlitch(GLITCH_SAMPLE, mixedSetting, seed) !== output) {
+      failures.push({ subject: 'glitch:mixed', cause: `seed ${seed} was not repeatable` });
+    }
+  }
+  console.log(
+    `Mixed: ${MIXED_SEED_RUNS} seeds, every emitted mark inside the three pools, widest stack ${widestSeen} of ${mixedSetting.maxMarks} allowed, each seed repeatable.`,
+  );
+}
+
 console.log('='.repeat(70));
 if (failures.length === 0) {
   console.log(
-    `RESULT: PASS. ${styles.length} styles, all uppercase/lowercase/digit characters verified. ${decorations.length} decorations, every prefix and suffix character verified. ${effects.length} effects, every mark a combining mark. ${combinations.length} combinations, structure verified.`,
+    `RESULT: PASS. ${styles.length} styles, all uppercase/lowercase/digit characters verified. ${decorations.length} decorations, every prefix and suffix character verified. ${effects.length} effects, every mark a combining mark. ${combinations.length} combinations, structure verified. ${glitchSettings.length} glitch settings, every pooled mark a combining mark, every stack inside the ${MAX_MARKS_PER_LETTER}-mark ceiling.`,
   );
 } else {
   console.log(`RESULT: FAIL. ${failures.length} failure(s):`);

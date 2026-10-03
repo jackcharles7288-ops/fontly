@@ -152,7 +152,7 @@ G̸̶̶̵̵̵̴̤̥̰̳̳̊̌̉̈̀̌̍l̶̸̸̥̤͓̏̀͛̍i̽̽͛̇̈̌̑̆̌�
 
 Here is the same word at every setting, with the character count beside it. The count is the number worth watching, because it's what every platform limit measures and it's the reason heavy settings fail in short fields. Copy any row straight from the table.
 
-<img src="/images/glitch-cards-mobile.webp" width="720" height="1380" loading="lazy" decoding="async" alt="Glitchy in the Light, Medium, Heavy and Maximum settings on a phone, with the character count under each card" />
+<img src="/images/glitch-cards-mobile.webp" srcset="/images/glitch-cards-mobile-400.webp 400w, /images/glitch-cards-mobile.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1380" loading="lazy" decoding="async" alt="Glitchy in the Light, Medium, Heavy and Maximum settings on a phone, with the character count under each card" />
 
 </div>
 
@@ -203,7 +203,7 @@ The section symbol is typed with Alt and 21 on a Windows number pad. Java sign i
 
 Both fields refuse styled characters. The username takes letters, numbers and a single underscore. The display name returned "Display name contains unsupported characters" when a styled name was entered on the app. One Roblox-focused reference says unrecognised characters get replaced with hash symbols in some fields; that is a report from elsewhere, not what this test showed.
 
-<img src="/images/glitch-roblox-display-name.webp" width="720" height="932" loading="lazy" decoding="async" alt="Roblox rejecting a styled display name on a Redmi A2+ with the message Display name contains unsupported characters" />
+<img src="/images/glitch-roblox-display-name.webp" srcset="/images/glitch-roblox-display-name-400.webp 400w, /images/glitch-roblox-display-name.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="932" loading="lazy" decoding="async" alt="Roblox rejecting a styled display name on a Redmi A2+ with the message Display name contains unsupported characters" />
 
 </div>
 
@@ -293,7 +293,7 @@ The middle one is worth understanding, because it's the most common and the leas
 
 The marks sit on top of your letters, so the original text is still there and comes back exactly. Every remover works the same way, stripping out the combining marks and leaving everything else alone. This tool does it too, so you can paste glitched text in and get clean words out.
 
-<img src="/images/glitch-remover.webp" width="707" height="1380" loading="lazy" decoding="async" alt="Glitch text remover turning stacked zalgo marks back into plain readable words" />
+<img src="/images/glitch-remover.webp" srcset="/images/glitch-remover-400.webp 400w, /images/glitch-remover.webp 707w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="707" height="1380" loading="lazy" decoding="async" alt="Glitch text remover turning stacked zalgo marks back into plain readable words" />
 
 </div>
 

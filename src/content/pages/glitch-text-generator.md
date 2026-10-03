@@ -75,7 +75,15 @@ Paste it into the real field and look at it before anyone else does. Composer pr
 
 <h2 id="styles">Glitch Text Styles, From Barely Broken to Unreadable</h2>
 
+<div class="split">
+
 Ten settings, and the names matter. What people call zalgo, cursed text, creepy text and corrupted text are the same trick at different densities, so they appear below as intensity levels. Every sample uses the same word, so you can see exactly what each setting adds. Look at the samples before you go by the labels.
+
+<img src="/images/glitch-tool-settings.webp" width="720" height="499" loading="lazy" decoding="async" alt="Glitch text generator converting one word through the light, medium and maximum zalgo settings" />
+
+</div>
+
+*Glitchy at every setting, from barely broken to cursed, with the character cost beside each.*
 
 ### Light glitch
 
@@ -139,7 +147,15 @@ G̸̶̶̵̵̵̴̤̥̰̳̳̊̌̉̈̀̌̍l̶̸̸̥̤͓̏̀͛̍i̽̽͛̇̈̌̑̆̌�
 
 <h2 id="examples">Glitch Text Examples You Can Copy Right Now</h2>
 
+<div class="split">
+
 Here is the same word at every setting, with the character count beside it. The count is the number worth watching, because it's what every platform limit measures and it's the reason heavy settings fail in short fields. Copy any row straight from the table.
+
+<img src="/images/glitch-cards-mobile.webp" width="720" height="1380" loading="lazy" decoding="async" alt="Glitchy in the Light, Medium, Heavy and Maximum settings on a phone, with the character count under each card" />
+
+</div>
+
+*The count climbs with the setting. Seven letters cost 196 characters at Maximum.*
 
 | Setting | Glitchy | Characters |
 | --- | --- | --- |
@@ -264,7 +280,15 @@ The middle one is worth understanding, because it's the most common and the leas
 
 <h2 id="remove">How to Remove Glitch Text and Get Plain Words Back</h2>
 
+<div class="split">
+
 The marks sit on top of your letters, so the original text is still there and comes back exactly. Every remover works the same way, stripping out the combining marks and leaving everything else alone. This tool does it too, so you can paste glitched text in and get clean words out.
+
+<img src="/images/glitch-remover.webp" width="707" height="1380" loading="lazy" decoding="async" alt="Glitch text remover turning stacked zalgo marks back into plain readable words" />
+
+</div>
+
+*The same string after Remove marks: the letters come back plain.*
 
 ### Which marks have to go
 

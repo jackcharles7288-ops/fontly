@@ -19,7 +19,7 @@ faq:
       Depends on the server. Discord renders it fine, but AutoMod can be configured to delete it and a lot of servers do exactly that, with plenty banning it in their written rules too. Usernames also get forced to lowercase.
   - q: Can I use glitch text in a Roblox username?
     a: >-
-      No. Roblox usernames take letters, numbers and a single underscore. Display names are disputed, with one Roblox-focused source saying they follow the same rule and generator sites claiming otherwise, so test the field yourself before relying on it.
+      No. Roblox rejects it in both fields. The username takes letters, numbers and a single underscore, and the display name returned "Display name contains unsupported characters" when a styled name was entered on the app.
   - q: Why does my glitch text look plain after I paste it?
     a: >-
       Depends on where you pasted it. Some fields strip combining marks when you submit, and some apps clip them out of the visible line while keeping them in the data. Try a lighter setting first, since low mark counts survive far more often.
@@ -199,7 +199,15 @@ The section symbol is typed with Alt and 21 on a Windows number pad. Java sign i
 
 ### Roblox
 
+<div class="split">
+
 Sources disagree here, so this section lays out both claims and leaves them open. One Roblox-focused reference says usernames accept letters, numbers and a single underscore, that display names follow the same rule despite what generator sites claim, and that unrecognised characters get replaced with hash symbols. Two generator sites say display names accept these characters without trouble. Nobody here has tested it, so treat it as unresolved.
+
+<img src="/images/glitch-roblox-display-name.webp" width="720" height="932" loading="lazy" decoding="async" alt="Roblox rejecting a styled display name on a Redmi A2+ with the message Display name contains unsupported characters" />
+
+</div>
+
+*Roblox refuses both fields. The display name returns its own error rather than rendering the marks.*
 
 One thing isn't in dispute. Deliberately using characters to get past a text filter breaches Roblox's terms, whatever the field happens to accept. That applies to every platform on this page.
 

@@ -5,7 +5,6 @@ description: "Turn any words into freaky text and copy it in one tap. What the f
 primaryKeyword: "freaky font"
 toolCategories:
   - cursive
-  - all
   - effects
   - combo
 showEffects: true

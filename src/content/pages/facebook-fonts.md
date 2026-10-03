@@ -5,7 +5,6 @@ description: "Change your Facebook font in seconds. Copy and paste bold, italic 
 primaryKeyword: "facebook fonts"
 toolCategories:
   - cool-fonts
-  - all
   - combo
 faq:
   - q: Can I bold text in a normal Facebook post?

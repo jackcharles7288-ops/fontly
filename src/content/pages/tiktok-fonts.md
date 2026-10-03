@@ -5,7 +5,6 @@ description: "Free TikTok font generator. See which styles fit a 160-character b
 primaryKeyword: "tiktok fonts"
 toolCategories:
   - cool-fonts
-  - all
   - combo
 faq:
   - q: How do I change the font on TikTok?

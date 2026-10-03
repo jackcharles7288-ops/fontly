@@ -5,7 +5,6 @@ description: "Copy and paste Instagram fonts for your bio, Name and captions. Ev
 primaryKeyword: "instagram font generator"
 toolCategories:
   - cool-fonts
-  - all
   - combo
 faq:
   - q: Can I use a fancy font in my Instagram username?

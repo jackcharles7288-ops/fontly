@@ -201,7 +201,7 @@ The section symbol is typed with Alt and 21 on a Windows number pad. Java sign i
 
 <div class="split">
 
-Sources disagree here, so this section lays out both claims and leaves them open. One Roblox-focused reference says usernames accept letters, numbers and a single underscore, that display names follow the same rule despite what generator sites claim, and that unrecognised characters get replaced with hash symbols. Two generator sites say display names accept these characters without trouble. Nobody here has tested it, so treat it as unresolved.
+Both fields refuse styled characters. The username takes letters, numbers and a single underscore. The display name returned "Display name contains unsupported characters" when a styled name was entered on the app. One Roblox-focused reference says unrecognised characters get replaced with hash symbols in some fields; that is a report from elsewhere, not what this test showed.
 
 <img src="/images/glitch-roblox-display-name.webp" width="720" height="932" loading="lazy" decoding="async" alt="Roblox rejecting a styled display name on a Redmi A2+ with the message Display name contains unsupported characters" />
 

@@ -230,7 +230,7 @@ Steam, Xbox and Discord all accept Unicode in display names, and gaming is still
 
 Your @handle allows only letters, numbers, periods and underscores, capped at 30 characters, so blackletter goes in the display name or one line of the bio. One line is the honest limit, because gothic is dense and a fully styled bio stops being read. Reality check: your name still has to be recognisable to people who already follow you.
 
-<img src="/images/gothic-profile-name-handle.webp" width="700" height="455" loading="lazy" decoding="async" alt="an Instagram profile with a blackletter display name above a plain username" />
+<img src="/images/gothic-profile-name-handle.webp" srcset="/images/gothic-profile-name-handle-400.webp 400w, /images/gothic-profile-name-handle.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="455" loading="lazy" decoding="async" alt="an Instagram profile with a blackletter display name above a plain username" />
 
 </div>
 
@@ -268,7 +268,7 @@ One pattern predicts every case that is not in this table. Where text is only di
 
 On X, the six letters of 𝔊𝔬𝔱𝔥𝔦𝔠 cost twelve characters of your post limit rather than six. These characters are counted twice. Most other platforms count them once, so a 150-character Instagram bio behaves normally.
 
-<img src="/images/gothic-bio-counter.webp" width="700" height="418" loading="lazy" decoding="async" alt="the word Gothic in blackletter in an Instagram bio with the counter reading 6 of 150" />
+<img src="/images/gothic-bio-counter.webp" srcset="/images/gothic-bio-counter-400.webp 400w, /images/gothic-bio-counter.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="418" loading="lazy" decoding="async" alt="the word Gothic in blackletter in an Instagram bio with the counter reading 6 of 150" />
 
 </div>
 

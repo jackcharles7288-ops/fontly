@@ -206,7 +206,7 @@ Whether small text survives depends on the field, not on the app. The same platf
 
 <div class="split">
 
-<img src="/images/small-text-instagram-bio.webp" width="720" height="795" loading="lazy" decoding="async" alt="Instagram Bio editor showing Small Caps, Superscript and Subscript from Fonti without empty boxes on a Redmi A2+" />
+<img src="/images/small-text-instagram-bio.webp" srcset="/images/small-text-instagram-bio-400.webp 400w, /images/small-text-instagram-bio.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="795" loading="lazy" decoding="async" alt="Instagram Bio editor showing Small Caps, Superscript and Subscript from Fonti without empty boxes on a Redmi A2+" />
 
 </div>
 
@@ -214,7 +214,7 @@ Whether small text survives depends on the field, not on the app. The same platf
 
 <div class="split">
 
-<img src="/images/small-text-discord-message.webp" width="720" height="315" loading="lazy" decoding="async" alt="A sent Discord message showing Fonti’s three small text styles without empty boxes on a Redmi A2+" />
+<img src="/images/small-text-discord-message.webp" srcset="/images/small-text-discord-message-400.webp 400w, /images/small-text-discord-message.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="315" loading="lazy" decoding="async" alt="A sent Discord message showing Fonti’s three small text styles without empty boxes on a Redmi A2+" />
 
 </div>
 
@@ -222,7 +222,7 @@ Whether small text survives depends on the field, not on the app. The same platf
 
 <div class="split">
 
-<img src="/images/small-text-whatsapp-status.webp" width="720" height="783" loading="lazy" decoding="async" alt="WhatsApp Status composer showing Fonti’s three small text styles without empty boxes on a Redmi A2+" />
+<img src="/images/small-text-whatsapp-status.webp" srcset="/images/small-text-whatsapp-status-400.webp 400w, /images/small-text-whatsapp-status.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="783" loading="lazy" decoding="async" alt="WhatsApp Status composer showing Fonti’s three small text styles without empty boxes on a Redmi A2+" />
 
 </div>
 

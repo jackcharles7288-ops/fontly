@@ -257,7 +257,7 @@ Generic compatibility promises are useless, because the answer changes field by 
 
 Instagram is the most common destination and it has one hard rule people learn too late. Usernames accept only letters, numbers, periods and underscores, so bubble characters are rejected outright there. The display name is a different field with no such restriction, which is where styled text belongs, and the bio allows 150 characters. If your bio is already close to that limit, remember that every bubble letter counts as its own character just like a plain one.
 
-<img src="/images/bubble-bio-counter.webp" width="700" height="406" loading="lazy" decoding="async" alt="ten filled circled capitals A to J in an Instagram bio with the counter reading 10/150" />
+<img src="/images/bubble-bio-counter.webp" srcset="/images/bubble-bio-counter-400.webp 400w, /images/bubble-bio-counter.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="406" loading="lazy" decoding="async" alt="ten filled circled capitals A to J in an Instagram bio with the counter reading 10/150" />
 
 </div>
 
@@ -295,7 +295,7 @@ Mostly safe. Circled digits up to twenty, and the same characters in messaging a
 
 Riskiest. Filled circles, bracketed capitals, and both square sets. All arrived in 2010 or later and all live in the newer part of Unicode that many fonts never bothered to add. On one current Android, filled circles and bracketed capitals rendered as letters, none as empty boxes.
 
-<img src="/images/bubble-four-styles-rendered.webp" width="700" height="366" loading="lazy" decoding="async" alt="four bubble alphabets pasted into a WhatsApp chat, all rendering as flat monochrome letters with no empty boxes" />
+<img src="/images/bubble-four-styles-rendered.webp" srcset="/images/bubble-four-styles-rendered-400.webp 400w, /images/bubble-four-styles-rendered.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="366" loading="lazy" decoding="async" alt="four bubble alphabets pasted into a WhatsApp chat, all rendering as flat monochrome letters with no empty boxes" />
 
 </div>
 

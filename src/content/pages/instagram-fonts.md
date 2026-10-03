@@ -91,7 +91,7 @@ Most sites sort their styles by how pretty they look. That ordering is no help t
 
 The top four rows all come from one complete block of Unicode that was built for mathematics, which is why they hold up on every current device. The three middle rows are complete as well, but a handful of their capitals are borrowed from a different part of the standard, so those letters sometimes render a shade heavier or lighter than the ones around them. The bottom three deserve a second thought before you commit to them. Small Caps was never finished, Fullwidth comes from an old East Asian typesetting system, and bubble letters run out at certain characters.
 
-<img src="/images/instagram-tool-script-styles.webp" width="720" height="1530" loading="lazy" decoding="async" alt="The Fonti Instagram font generator on a Redmi A2+ showing Bold Script, Classic Script, Bold Italic, Italic Script and Handwriting rendered in Coffee and Chaos without empty boxes" />
+<img src="/images/instagram-tool-script-styles.webp" srcset="/images/instagram-tool-script-styles-400.webp 400w, /images/instagram-tool-script-styles.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1530" loading="lazy" decoding="async" alt="The Fonti Instagram font generator on a Redmi A2+ showing Bold Script, Classic Script, Bold Italic, Italic Script and Handwriting rendered in Coffee and Chaos without empty boxes" />
 
 </div>
 
@@ -101,7 +101,7 @@ The top four rows all come from one complete block of Unicode that was built for
 
 That last group is not broken so much as incomplete, and the gaps follow a pattern you can learn. Every one of them traces back to why the characters were added to Unicode in the first place. There is a section further down that names the missing letters and explains what happened to them.
 
-<img src="/images/instagram-tool-bold-styles.webp" width="720" height="1530" loading="lazy" decoding="async" alt="The Fonti Instagram font generator on a Redmi A2+ showing Slanted, Bold, Bold Sans, Circled and Parenthesized rendered in Coffee and Chaos without empty boxes" />
+<img src="/images/instagram-tool-bold-styles.webp" srcset="/images/instagram-tool-bold-styles-400.webp 400w, /images/instagram-tool-bold-styles.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1530" loading="lazy" decoding="async" alt="The Fonti Instagram font generator on a Redmi A2+ showing Slanted, Bold, Bold Sans, Circled and Parenthesized rendered in Coffee and Chaos without empty boxes" />
 
 </div>
 
@@ -113,7 +113,7 @@ That last group is not broken so much as incomplete, and the gaps follow a patte
 
 Instagram is not one text box. It is nine or ten of them, each with its own limit and its own rules, and styled text behaves differently depending on which one you are standing in. Nobody seems to publish this in one place, so here it is.
 
-<img src="/images/instagram-bio-styled-text.webp" width="720" height="950" loading="lazy" decoding="async" alt="The Instagram Bio field on a Redmi A2+ showing the 16 of 150 character counter with styled text pasted in" />
+<img src="/images/instagram-bio-styled-text.webp" srcset="/images/instagram-bio-styled-text-400.webp 400w, /images/instagram-bio-styled-text.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="950" loading="lazy" decoding="async" alt="The Instagram Bio field on a Redmi A2+ showing the 16 of 150 character counter with styled text pasted in" />
 
 </div>
 
@@ -139,7 +139,7 @@ Story text works, but only by pasting. The Story text tool has its own built-in 
 
 Good to know: the first 125 characters or so of a caption are what people see before the More link appears. Styled text in that opening line costs you more than styled text buried at the bottom of a post. The opening line is doing the work of getting someone to tap, so it needs to be readable at a glance.
 
-<img src="/images/instagram-caption-styled-text.webp" width="720" height="600" loading="lazy" decoding="async" alt="The Instagram caption box on a new post showing styled text pasted and rendering correctly" />
+<img src="/images/instagram-caption-styled-text.webp" srcset="/images/instagram-caption-styled-text-400.webp 400w, /images/instagram-caption-styled-text.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="600" loading="lazy" decoding="async" alt="The Instagram caption box on a new post showing styled text pasted and rendering correctly" />
 
 </div>
 
@@ -155,7 +155,7 @@ Your username is the @handle. It sits under your photo, it is how people tag you
 
 Your Name is the bold line that appears above your bio. It is a completely separate field, it has nothing to do with your handle, and it accepts any character you can paste into it. It also holds more than most people think. Instagram raised the limit from thirty to 64 characters in 2022, and a surprising amount of the internet still prints the old number.
 
-<img src="/images/instagram-name-field-styled-text.webp" width="720" height="460" loading="lazy" decoding="async" alt="The Instagram Name field on a Redmi A2+ holding styled text in the Circled style, with Instagram's own note that a name can only be changed twice in 14 days" />
+<img src="/images/instagram-name-field-styled-text.webp" srcset="/images/instagram-name-field-styled-text-400.webp 400w, /images/instagram-name-field-styled-text.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="460" loading="lazy" decoding="async" alt="The Instagram Name field on a Redmi A2+ holding styled text in the Circled style, with Instagram's own note that a name can only be changed twice in 14 days" />
 
 </div>
 
@@ -207,7 +207,7 @@ Instagram does have a typeface of its own, called Instagram Sans. It was built f
 
 Inside Stories you get a small set of named text styles: Classic, Modern, Neon, Typewriter and Strong, with Instagram Sans available to most accounts as well. These are the closest thing Instagram has to a font picker anywhere in the app. Instagram adds and removes them without announcing anything, so treat any list you read as a snapshot.
 
-<img src="/images/instagram-story-text-tool.webp" width="720" height="728" loading="lazy" decoding="async" alt="The Instagram Story text tool on a Redmi A2+ showing the named font chips beside styled text" />
+<img src="/images/instagram-story-text-tool.webp" srcset="/images/instagram-story-text-tool-400.webp 400w, /images/instagram-story-text-tool.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="728" loading="lazy" decoding="async" alt="The Instagram Story text tool on a Redmi A2+ showing the named font chips beside styled text" />
 
 </div>
 

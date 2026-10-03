@@ -205,7 +205,7 @@ Every app treats pasted characters slightly differently, and the differences are
 
 Bios and captions both keep fullwidth without complaint, and it is one of the most common places you will see it. The bio gives you 150 characters and a caption gives you 2,200, with only the first 125 showing before the more link. Your display name field, which is separate from your username, takes 30 characters and accepts wide letters. The username itself does not, because that field only allows letters, numbers, full stops and underscores. The Instagram fonts page runs through every field on the app in detail.
 
-<img src="/images/instagram-profile-fullwidth-bio.webp" width="478" height="364" loading="lazy" decoding="async" alt="Instagram profile showing a fullwidth bio line on a live account" />
+<img src="/images/instagram-profile-fullwidth-bio.webp" srcset="/images/instagram-profile-fullwidth-bio-400.webp 400w, /images/instagram-profile-fullwidth-bio.webp 478w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="478" height="364" loading="lazy" decoding="async" alt="Instagram profile showing a fullwidth bio line on a live account" />
 
 </div>
 
@@ -239,7 +239,7 @@ X does not count characters the way you count them. Its published rule gives mos
 
 Instagram counts fullwidth as a single character. We pasted ten wide capitals into the bio field on a live account and the counter read 10 of 150, not 20. Some guides claim wide text doubles there too; it does not. Your 150 characters are 150 wide letters.
 
-<img src="/images/instagram-bio-fullwidth-counter.webp" width="476" height="280" loading="lazy" decoding="async" alt="Ten fullwidth capitals in an Instagram bio with the counter reading 10 of 150" />
+<img src="/images/instagram-bio-fullwidth-counter.webp" srcset="/images/instagram-bio-fullwidth-counter-400.webp 400w, /images/instagram-bio-fullwidth-counter.webp 476w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="476" height="280" loading="lazy" decoding="async" alt="Ten fullwidth capitals in an Instagram bio with the counter reading 10 of 150" />
 
 </div>
 

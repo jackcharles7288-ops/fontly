@@ -89,7 +89,7 @@ That reach is what makes the nickname worth styling. It sits beside every commen
 
 Your bio holds up to 160 characters, and this is where the counting starts to matter. Some accounts still show the older limit of 80, so check your own field before you plan around it.
 
-<img src="/images/tiktok-bio-counter.webp" width="720" height="730" loading="lazy" decoding="async" alt="The TikTok bio field on a Redmi A2+ holding a 12-character line in Bold Sans, with the counter reading 24 of 160" />
+<img src="/images/tiktok-bio-counter.webp" srcset="/images/tiktok-bio-counter-400.webp 400w, /images/tiktok-bio-counter.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="730" loading="lazy" decoding="async" alt="The TikTok bio field on a Redmi A2+ holding a 12-character line in Bold Sans, with the counter reading 24 of 160" />
 
 </div>
 
@@ -99,7 +99,7 @@ Your bio holds up to 160 characters, and this is where the counting starts to ma
 
 Captions and comments both take styled text without complaint. The caption limit is 4,000 characters. Comments stop at around one hundred and fifty. The comment figure does not come from TikTok directly, so leave yourself a margin.
 
-<img src="/images/tiktok-caption-limit.webp" width="720" height="384" loading="lazy" decoding="async" alt="The TikTok caption composer on a Redmi A2+ showing the notice that reads Maximum of 4000 characters" />
+<img src="/images/tiktok-caption-limit.webp" srcset="/images/tiktok-caption-limit-400.webp 400w, /images/tiktok-caption-limit.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="384" loading="lazy" decoding="async" alt="The TikTok caption composer on a Redmi A2+ showing the notice that reads Maximum of 4000 characters" />
 
 </div>
 
@@ -123,7 +123,7 @@ Fullwidth spreads your letters out as Ｃｈｉｌｌ Ｈｏｕｒｓ, with a wi
 
 Circled letters turn the line into Ⓒⓗⓘⓛⓛ Ⓗⓞⓤⓡⓢ, the softest of the four. Our cute font generator leans into the round, soft look. On one account, a circled bio was saved, the app was closed and reopened, and the letters were still there. That check covers the bio field on that account only.
 
-<img src="/images/tiktok-profile-circled.webp" width="712" height="496" loading="lazy" decoding="async" alt="A TikTok profile on a Redmi A2+ showing a circled display name that survived a save, with the username and follower count plain beneath it" />
+<img src="/images/tiktok-profile-circled.webp" srcset="/images/tiktok-profile-circled-400.webp 400w, /images/tiktok-profile-circled.webp 712w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="712" height="496" loading="lazy" decoding="async" alt="A TikTok profile on a Redmi A2+ showing a circled display name that survived a save, with the username and follower count plain beneath it" />
 
 </div>
 
@@ -190,7 +190,7 @@ The practical version of all this is short. If your text is long and your field 
 
 Reality check: on one account, a 12-character Bold Sans line of Sunday Roast moved the bio counter to 24, and a 5-character Circled line of Fonti stayed at 5. The styled characters used by the two-cost styles count as two, and Circled characters count as one, as measured on that account.
 
-<img src="/images/tiktok-bio-circled.webp" width="720" height="715" loading="lazy" decoding="async" alt="The TikTok bio field on a Redmi A2+ holding the circled word Fonti, with the counter reading 5 of 160" />
+<img src="/images/tiktok-bio-circled.webp" srcset="/images/tiktok-bio-circled-400.webp 400w, /images/tiktok-bio-circled.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="715" loading="lazy" decoding="async" alt="The TikTok bio field on a Redmi A2+ holding the circled word Fonti, with the counter reading 5 of 160" />
 
 </div>
 

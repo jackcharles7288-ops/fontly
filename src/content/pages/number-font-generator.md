@@ -130,13 +130,13 @@ One rendering quirk to know about: superscript one, two and three were inherited
 
 **The spreadsheet workaround.** Google Sheets has no built-in superscript or subscript at all, so pasting the Unicode character is how people actually do it there. We checked: the Format then Text menu in Sheets offers Bold, Italic, Underline and Strikethrough, and nothing else.
 
-<img src="/images/sheets-format-text-menu.webp" width="700" height="436" loading="lazy" decoding="async" alt="Google Sheets Format then Text submenu showing only Bold, Italic, Underline and Strikethrough" />
+<img src="/images/sheets-format-text-menu.webp" srcset="/images/sheets-format-text-menu-400.webp 400w, /images/sheets-format-text-menu.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="436" loading="lazy" decoding="async" alt="Google Sheets Format then Text submenu showing only Bold, Italic, Underline and Strikethrough" />
 
 *Google Sheets, Format then Text. No superscript or subscript option exists.*
 
 Word and Google Docs both have real superscript formatting, and in those you should use the real thing, because proper formatting stays searchable and a pasted character does not. The same menu in Docs has both options, with keyboard shortcuts.
 
-<img src="/images/docs-format-text-menu.webp" width="700" height="359" loading="lazy" decoding="async" alt="Google Docs Format then Text submenu showing Superscript and Subscript with keyboard shortcuts" />
+<img src="/images/docs-format-text-menu.webp" srcset="/images/docs-format-text-menu-400.webp 400w, /images/docs-format-text-menu.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="359" loading="lazy" decoding="async" alt="Google Docs Format then Text submenu showing Superscript and Subscript with keyboard shortcuts" />
 
 *Google Docs, same menu path. Superscript and Subscript are both there.*
 
@@ -146,7 +146,7 @@ Fair warning: a pasted ² is a character, so a spreadsheet treats the whole cell
 
 Reddit is the case worth spelling out, because it is usually described wrongly. Reddit does support a caret for superscript, but only as Markdown. Reddit's own formatting guide explains that comments and posts default to the Rich Text editor, and that Markdown is what you get if you switch to the Markdown editor. We typed `x^2` into the default comment box on r/test and posted it, and the caret stayed visible as typed. The pasted Unicode `x²` in the next comment rendered as an exponent, because it is simply a character.
 
-<img src="/images/reddit-unicode-vs-caret.webp" width="660" height="280" loading="lazy" decoding="async" alt="Two Reddit comments on r slash test, one showing x squared as a Unicode character and one showing x caret 2 left literal" />
+<img src="/images/reddit-unicode-vs-caret.webp" srcset="/images/reddit-unicode-vs-caret-400.webp 400w, /images/reddit-unicode-vs-caret.webp 660w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="660" height="280" loading="lazy" decoding="async" alt="Two Reddit comments on r slash test, one showing x squared as a Unicode character and one showing x caret 2 left literal" />
 
 *Same thread, same box. Pasted `x²` holds its shape; `x^2` typed into the default Rich Text editor stays as `x^2`.*
 
@@ -170,11 +170,11 @@ Support is decided by the device reading your text, not by the tool that made it
 
 An Instagram bio gives you 150 characters, and Instagram counts styled digits one for one. We pasted four bold digits and four circled digits into the bio field and the counter read 4 of 150 both times, so a styled year costs exactly what a plain year costs.
 
-<img src="/images/instagram-bio-bold-digits-counter.webp" width="480" height="280" loading="lazy" decoding="async" alt="Instagram bio field containing bold digits with the character counter reading 4 of 150" />
+<img src="/images/instagram-bio-bold-digits-counter.webp" srcset="/images/instagram-bio-bold-digits-counter-400.webp 400w, /images/instagram-bio-bold-digits-counter.webp 480w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="480" height="280" loading="lazy" decoding="async" alt="Instagram bio field containing bold digits with the character counter reading 4 of 150" />
 
 *Bold digits pasted into the Instagram bio field. The counter reads 4/150, one per digit. Note that Instagram's own bio font is fairly heavy, so the styling is hard to see; the counter is the evidence, not the shape.*
 
-<img src="/images/instagram-bio-circled-digits-counter.webp" width="480" height="282" loading="lazy" decoding="async" alt="Instagram bio field containing circled digits with the character counter reading 4 of 150" />
+<img src="/images/instagram-bio-circled-digits-counter.webp" srcset="/images/instagram-bio-circled-digits-counter-400.webp 400w, /images/instagram-bio-circled-digits-counter.webp 480w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="480" height="282" loading="lazy" decoding="async" alt="Instagram bio field containing circled digits with the character counter reading 4 of 150" />
 
 *Circled digits in the same field. Same count.*
 
@@ -182,11 +182,11 @@ Handles are stricter still, because Instagram allows letters, numbers, periods a
 
 X behaves differently, and this is the one that catches people. We watched the post counter drop from 10 remaining to 2 remaining after typing four bold digits, eight units for four characters, two each. The maths-block digits sit outside the Basic Multilingual Plane, and X's counter charges double for them.
 
-<img src="/images/x-post-counter-before.webp" width="480" height="355" loading="lazy" decoding="async" alt="X post box with the remaining character counter reading 10" />
+<img src="/images/x-post-counter-before.webp" srcset="/images/x-post-counter-before-400.webp 400w, /images/x-post-counter-before.webp 480w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="480" height="355" loading="lazy" decoding="async" alt="X post box with the remaining character counter reading 10" />
 
 *Before: 10 characters remaining.*
 
-<img src="/images/x-post-counter-after.webp" width="480" height="355" loading="lazy" decoding="async" alt="X post box after four bold digits are typed, counter reading 2" />
+<img src="/images/x-post-counter-after.webp" srcset="/images/x-post-counter-after-400.webp 400w, /images/x-post-counter-after.webp 480w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="480" height="355" loading="lazy" decoding="async" alt="X post box after four bold digits are typed, counter reading 2" />
 
 *After four bold digits: 2 remaining. Four characters cost eight.*
 
@@ -196,7 +196,7 @@ So the same four digits cost four on Instagram and eight on X. If you want somet
 
 Discord gives you 32 characters for a server nickname, applied per server, so a styled number that fits in one place may not fit in another. Styled digits are accepted there without complaint. We saved a nickname of bold digits and it stuck.
 
-<img src="/images/discord-nickname-bold-digits.webp" width="480" height="787" loading="lazy" decoding="async" alt="Discord server nickname field containing bold digits" />
+<img src="/images/discord-nickname-bold-digits.webp" srcset="/images/discord-nickname-bold-digits-400.webp 400w, /images/discord-nickname-bold-digits.webp 480w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="480" height="787" loading="lazy" decoding="async" alt="Discord server nickname field containing bold digits" />
 
 *Bold digits pasted into Discord's Server Nickname field and saved. Discord renders member names in a heavy weight anyway, so again the shape does not prove much on its own. What it shows is that the field accepted and kept the characters.*
 
@@ -214,7 +214,7 @@ Form fields are where they fail hardest, and it is worth being precise about who
 
 *Control: plain digits in the required format, accepted and submitted.*
 
-<img src="/images/tel-field-styled-digits-rejected.webp" width="430" height="185" loading="lazy" decoding="async" alt="The same telephone input with styled digits, showing the message Please match the requested format" />
+<img src="/images/tel-field-styled-digits-rejected.webp" srcset="/images/tel-field-styled-digits-rejected-400.webp 400w, /images/tel-field-styled-digits-rejected.webp 430w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="430" height="185" loading="lazy" decoding="async" alt="The same telephone input with styled digits, showing the message Please match the requested format" />
 
 *Same field, same format, styled digits. Refused by the browser's own validation.*
 
@@ -236,7 +236,7 @@ This is the section no competitor writes, and it is the one most likely to save 
 
 Here is the plainest possible demonstration. One cell holds styled digits, one holds a plain 2, and the formula asks for the sum.
 
-<img src="/images/sheets-styled-digits-sum-error.webp" width="574" height="460" loading="lazy" decoding="async" alt="Google Sheets showing a value error and the message that the parameter expects number values but the value is a text and cannot be coerced to a number" />
+<img src="/images/sheets-styled-digits-sum-error.webp" srcset="/images/sheets-styled-digits-sum-error-400.webp 400w, /images/sheets-styled-digits-sum-error.webp 574w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="574" height="460" loading="lazy" decoding="async" alt="Google Sheets showing a value error and the message that the parameter expects number values but the value is a text and cannot be coerced to a number" />
 
 *`=A1+A2` where A1 holds styled digits. Sheets returns #VALUE! and says the parameter "expects number values. But '123' is a text and cannot be coerced to a number."*
 

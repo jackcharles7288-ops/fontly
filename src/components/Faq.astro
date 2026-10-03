@@ -13,8 +13,8 @@ const { items } = Astro.props;
 
 {
   items.length > 0 ? (
-    <section class="faq" aria-labelledby="faq-heading">
-      <h2 id="faq-heading" class="faq__heading">Frequently asked questions</h2>
+    <section class="faq" aria-labelledby="faq">
+      <h2 id="faq" class="faq__heading">Frequently asked questions</h2>
       <div class="faq__list">
         {items.map((item) => (
           <details class="faq__item">

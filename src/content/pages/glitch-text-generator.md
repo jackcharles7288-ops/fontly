@@ -2,6 +2,8 @@
 title: "Glitch Text Generator – Copy and Paste Zalgo Text | Fontly"
 h1: "Glitch Text Generator Copy and Paste"
 description: "Free glitch text generator: ten zalgo settings, copy and paste anywhere. See the character cost, where it gets deleted, and how to remove it again."
+ogTitle: "Glitch Text Generator: Copy and Paste Zalgo Text"
+ogDescription: "Ten intensity settings from barely broken to unreadable, plus a remover that gives your plain words back."
 primaryKeyword: "glitch text generator"
 toolCategories:
   - glitch

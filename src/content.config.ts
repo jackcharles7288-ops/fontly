@@ -14,6 +14,11 @@ const pageFields = {
   h1: z.string(),
   description: z.string().max(155),
   primaryKeyword: z.string(),
+  // Optional social-card overrides. When omitted, PageLayout falls back to
+  // title and description. Set only on a page whose source document specifies
+  // an og:title or og:description that differs from the title tag.
+  ogTitle: z.string().optional(),
+  ogDescription: z.string().optional(),
   faq: z.array(faqItem).default([]),
   relatedTools: z.array(z.string()).default([]),
   publishedDate: z.coerce.date().optional(),

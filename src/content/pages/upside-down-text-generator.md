@@ -14,6 +14,7 @@ relatedTools:
   - cursive-font-generator
   - gothic-font-generator
   - cute-font-generator
+  - glitch-text-generator
 faq:
   - q: Why do some letters stay the same when I flip them?
     a: >-

@@ -285,7 +285,15 @@ Three problems come up over and over, and each has a different answer. Two you c
 - The effect looks sliced off at the top or bottom. The app is clipping the line height, and there's nothing to change from your side.
 - The message box freezes and won't clear. Select all, then press backspace.
 
+<div class="split">
+
 The middle one is worth understanding, because it's the most common and the least fixable. Line height belongs to the app, so a bio field with a fixed row height will cut the top off your marks no matter what you generate. Our [small text generator](/small-text-generator/) meets the same counting problem from the other direction, where people expect smaller letters to cost less space and they cost more.
+
+<img src="/images/glitch-clipping.webp" srcset="/images/glitch-clipping-400.webp 400w, /images/glitch-clipping.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="705" loading="lazy" decoding="async" alt="Heavy glitch text clipped by a fixed line height inside a mobile bio field" />
+
+</div>
+
+*Instagram draws a bio at a fixed line height, so a heavy stack is cut off rather than shown.*
 
 <h2 id="remove">How to Remove Glitch Text and Get Plain Words Back</h2>
 

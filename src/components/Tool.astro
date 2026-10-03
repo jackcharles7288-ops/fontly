@@ -4,6 +4,7 @@ import { categories } from '../data/categories';
 import { decorations, applyDecoration } from '../data/decorations';
 import { effects, applyEffect } from '../data/effects';
 import { combinations } from '../data/combinations';
+import { glitchSettings, applyGlitch } from '../data/glitch';
 import { applyStyle, applyCombination, countCharacters } from '../scripts/generator.js';
 
 interface Props {
@@ -15,6 +16,8 @@ interface Props {
   showEffects?: boolean;
   /** Renders the Combined alphabet+decoration section. */
   showCombined?: boolean;
+  /** Renders the Glitch stacked-mark section. */
+  showGlitch?: boolean;
   /** Content entry id (filename without extension), used in the missing-phrase warning. */
   pageFile: string;
 }
@@ -25,6 +28,7 @@ const {
   showDecorations = false,
   showEffects = false,
   showCombined = false,
+  showGlitch = false,
   pageFile,
 } = Astro.props;
 
@@ -149,6 +153,36 @@ function effectCards(): Card[] {
   });
 }
 
+// Glitch stacks many combining marks on each letter, plus one remover card.
+// The empty-input sample is the card's own name, like every other card. The
+// real per-keystroke work happens in tool.js, which re-runs applyGlitch on
+// the typed input; the SSR output below is only the name sample.
+function glitchCards(): Card[] {
+  const settingCards: Card[] = glitchSettings.map((setting) => ({
+    id: setting.id,
+    name: setting.name,
+    searchName: setting.name.toLowerCase(),
+    output: applyGlitch(setting.name, setting),
+    caveat: null,
+    caveatNote: null,
+    caseNote: null,
+    digitsPassThrough: false,
+    membership: 'glitch',
+  }));
+  const remover: Card = {
+    id: 'glitch-remove',
+    name: 'Remove marks',
+    searchName: 'remove marks',
+    output: 'Remove marks',
+    caveat: null,
+    caveatNote: null,
+    caseNote: null,
+    digitsPassThrough: false,
+    membership: 'glitch',
+  };
+  return [...settingCards, remover];
+}
+
 const styleById = new Map(styles.map((s) => [s.id, s]));
 const decorationById = new Map(decorations.map((d) => [d.id, d]));
 
@@ -224,6 +258,15 @@ const sections: Section[] = toolCategories.map((id) => {
       note: 'An alphabet wrapped in a decoration.',
       decorated: true,
       cards: showCombined ? combinationCards() : [],
+    };
+  }
+  if (id === 'glitch') {
+    return {
+      id: category.id,
+      heading: category.heading ?? category.name,
+      note: 'Combining marks stacked on each letter. The last card removes them.',
+      decorated: true,
+      cards: showGlitch ? glitchCards() : [],
     };
   }
   if (id === 'combo') {
@@ -596,11 +639,15 @@ const filterChips = categories
         </div>
       </div>
       <p class="tool-card__output" data-output></p>
+      <p class="tool-card__caveat-note" data-glitch-note hidden></p>
       <p class="tool-card__digits-note is-quiet" data-digits-note hidden>
         {DIGITS_NOTE}
       </p>
       <p class="tool-card__case-note" hidden></p>
       <p class="tool-card__caveat-note" hidden></p>
+      <p class="tool-card__case-note" data-glitch-count-wrap hidden>
+        <span data-glitch-count></span> characters
+      </p>
     </li>
   </template>
 
@@ -729,6 +776,9 @@ const filterChips = categories
                           </div>
                         </div>
                         <p class="tool-card__output" data-output>{card.output}</p>
+                        {card.membership === 'glitch' ? (
+                          <p class="tool-card__caveat-note" data-glitch-note hidden></p>
+                        ) : null}
                         {card.digitsPassThrough ? (
                           <p class="tool-card__digits-note is-quiet" data-digits-note hidden>
                             {DIGITS_NOTE}
@@ -737,6 +787,11 @@ const filterChips = categories
                         {card.caseNote ? <p class="tool-card__case-note">{card.caseNote}</p> : null}
                         {card.caveatNote ? (
                           <p class="tool-card__caveat-note">{card.caveatNote}</p>
+                        ) : null}
+                        {card.membership === 'glitch' ? (
+                          <p class="tool-card__case-note">
+                            <span data-glitch-count>{countCharacters(card.output).codePoints}</span> characters
+                          </p>
                         ) : null}
                       </li>
                     ))

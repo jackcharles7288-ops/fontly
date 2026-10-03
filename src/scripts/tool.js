@@ -5,8 +5,13 @@ import { decorations, applyDecoration } from '../data/decorations.ts';
 import { effects, applyEffect } from '../data/effects.ts';
 import { combinations } from '../data/combinations.ts';
 import { separators } from '../data/separators.ts';
+import { glitchSettings, applyGlitch, stripCombiningMarks } from '../data/glitch.ts';
 
 const DEBOUNCE_MS = 120;
+const GLITCH_DEBOUNCE_MS = 200;
+const GLITCH_PREVIEW_MAX = 40;
+const GLITCH_SOFT_CAP = 80;
+const GLITCH_SOFT_CAP_NOTE = 'Long input: showing the heavy depth. Copy uses the full text.';
 const COPY_LABEL_MS = 2000;
 const FAV_STORAGE_KEY = 'fonti-favourites';
 const RECENTS_STORAGE_KEY = 'fonti-recents';
@@ -39,6 +44,52 @@ const combinationById = new Map(combinations.map((c) => [c.id, c]));
 
 /** @type {Map<string, import('../data/separators.ts').Separator>} */
 const separatorById = new Map(separators.map((s) => [s.id, s]));
+
+/** Stacked-mark settings. Ids never collide with a style id. */
+/** @type {Map<string, import('../data/glitch.ts').GlitchSetting>} */
+const glitchSettingById = new Map(glitchSettings.map((g) => [g.id, g]));
+
+// The maximum setting renders at heavy depth once the input passes the soft
+// cap, so a long string never pays for a 30-mark stack on every keystroke.
+const glitchHeavy = glitchSettingById.get('heavy');
+if (!glitchHeavy) {
+  throw new Error('[fonti] glitch.ts: the "heavy" setting is required as the soft-cap fallback');
+}
+
+/**
+ * Full glitch output for a card id. The remover strips marks; a setting stacks
+ * them. The soft cap swaps maximum for heavy on long input.
+ * @param {string} id
+ * @param {string} text
+ * @returns {string | null} null when the id is not a glitch card
+ */
+function glitchFullOutput(id, text) {
+  if (id === 'glitch-remove') return stripCombiningMarks(text);
+  const setting = glitchSettingById.get(id);
+  if (setting === undefined) return null;
+  const effective =
+    setting.id === 'maximum' && countCharacters(text).codePoints > GLITCH_SOFT_CAP
+      ? glitchHeavy
+      : setting;
+  return applyGlitch(text, effective);
+}
+
+/**
+ * First n code points of a string, never splitting a surrogate pair.
+ * @param {string} text
+ * @param {number} n
+ * @returns {string}
+ */
+function takeCodePoints(text, n) {
+  let out = '';
+  let i = 0;
+  for (const ch of text) {
+    if (i >= n) break;
+    out += ch;
+    i += 1;
+  }
+  return out;
+}
 
 const groupSectionsRaw =
   document.querySelector('[data-tool]')?.getAttribute('data-group-sections') ?? '';
@@ -236,6 +287,33 @@ function catalogForCategory(categoryId) {
       ];
     });
   }
+  if (categoryId === 'glitch') {
+    // Ten settings plus the remover, matching the SSR cards in Tool.astro.
+    return [
+      ...glitchSettings.map((setting) => ({
+        id: setting.id,
+        name: setting.name,
+        searchName: setting.name.toLowerCase(),
+        category: 'glitch',
+        membership: 'glitch',
+        caveat: null,
+        caveatNote: null,
+        caseNote: null,
+        digitsPassThrough: false,
+      })),
+      {
+        id: 'glitch-remove',
+        name: 'Remove marks',
+        searchName: 'remove marks',
+        category: 'glitch',
+        membership: 'glitch',
+        caveat: null,
+        caveatNote: null,
+        caseNote: null,
+        digitsPassThrough: false,
+      },
+    ];
+  }
   return styles
     .filter((style) => style.categories.includes(categoryId))
     .map((style) => ({
@@ -266,7 +344,15 @@ function updateCard(card, text) {
     style === undefined && decoration === undefined && effect === undefined
       ? combinationById.get(id)
       : undefined;
-  if (style === undefined && decoration === undefined && effect === undefined && combination === undefined)
+  const glitchSetting =
+    style === undefined && decoration === undefined && effect === undefined && combination === undefined
+      ? glitchSettingById.get(id)
+      : undefined;
+  const isGlitch = glitchSetting !== undefined || id === 'glitch-remove';
+  if (
+    style === undefined && decoration === undefined && effect === undefined && combination === undefined &&
+    !isGlitch
+  )
     return;
   // Combination cards look up by pair id; digit notes and applyCombination need the parent alphabet.
   const parentStyle = combination
@@ -276,7 +362,33 @@ function updateCard(card, text) {
   if (!(outputEl instanceof HTMLElement)) return;
   const empty = text.length === 0;
   // Empty input: the sample is the card's own name, styles, decorations and effects alike.
-  const source = empty ? (style ?? decoration ?? effect ?? combination).name : text;
+  const source = empty ? (style ?? decoration ?? effect ?? combination ?? glitchSetting ?? { name: 'Remove marks' }).name : text;
+
+  if (isGlitch) {
+    const full = glitchFullOutput(id, source);
+    if (full === null) return;
+    // Preview cap: only the first GLITCH_PREVIEW_MAX code points are painted.
+    // The full string is recomputed on copy, never stored on the node.
+    const preview = takeCodePoints(full, GLITCH_PREVIEW_MAX);
+    const capped = countCharacters(full).codePoints > GLITCH_PREVIEW_MAX;
+    outputEl.textContent = capped ? preview + '…' : preview;
+    // Per-card count of the full output, not the input and not the preview.
+    const countEl = card.querySelector('[data-glitch-count]');
+    if (countEl instanceof HTMLElement) {
+      countEl.textContent = String(countCharacters(full).codePoints);
+    }
+    // Soft-cap note: only the maximum card, only when the cap actually fired.
+    const noteEl = card.querySelector('[data-glitch-note]');
+    if (noteEl instanceof HTMLElement) {
+      const cappedBySoftCap =
+        id === 'maximum' && !empty && countCharacters(source).codePoints > GLITCH_SOFT_CAP;
+      noteEl.textContent = cappedBySoftCap ? GLITCH_SOFT_CAP_NOTE : '';
+      noteEl.hidden = !cappedBySoftCap;
+    }
+    card.setAttribute('data-needs-update', 'false');
+    return;
+  }
+
   const styled = style
     ? applyStyle(source, style)
     : decoration
@@ -322,12 +434,22 @@ function renderById(id, text) {
     style === undefined && decoration === undefined && effect === undefined
       ? combinationById.get(id)
       : undefined;
-  const record = style ?? decoration ?? effect ?? combination;
+  const glitchSetting =
+    style === undefined && decoration === undefined && effect === undefined && combination === undefined
+      ? glitchSettingById.get(id)
+      : undefined;
+  const isGlitch = glitchSetting !== undefined || id === 'glitch-remove';
+  const record = style ?? decoration ?? effect ?? combination ?? glitchSetting ?? (id === 'glitch-remove' ? { name: 'Remove marks' } : undefined);
   if (record === undefined) return null;
   const parentStyle = combination
     ? /** @type {NonNullable<import('../data/styles.ts').Style>} */ (styleById.get(combination.style))
     : style;
   const source = text.length === 0 ? record.name : text;
+  if (isGlitch) {
+    const full = glitchFullOutput(id, source);
+    if (full === null) return null;
+    return { name: record.name, styled: full };
+  }
   const styled = style
     ? applyStyle(source, style)
     : decoration
@@ -773,6 +895,18 @@ function initTool() {
       }
     }
 
+    // Glitch-only nodes: the soft-cap note and the per-card output count.
+    // Both are removed from every non-glitch card.
+    const glitchNote = card.querySelector('[data-glitch-note]');
+    const glitchCountWrap = card.querySelector('[data-glitch-count-wrap]');
+    if (data.category === 'glitch') {
+      if (glitchNote instanceof HTMLElement) glitchNote.hidden = true;
+      if (glitchCountWrap instanceof HTMLElement) glitchCountWrap.hidden = false;
+    } else {
+      if (glitchNote instanceof HTMLElement) glitchNote.remove();
+      if (glitchCountWrap instanceof HTMLElement) glitchCountWrap.remove();
+    }
+
     // Empty-input sample: the card's own name, converted.
     updateCard(card, '');
     return card;
@@ -1151,9 +1285,15 @@ function initTool() {
 
   input.addEventListener('input', () => {
     if (debounceTimer !== undefined) clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      refreshVisible(input.value);
-    }, DEBOUNCE_MS);
+    // Glitch cards stack up to 30 marks per letter, so they get a longer
+    // debounce than the rest. Pages without a glitch section keep DEBOUNCE_MS.
+    const hasGlitch = catalogByCategory.has('glitch');
+    debounceTimer = setTimeout(
+      () => {
+        refreshVisible(input.value);
+      },
+      hasGlitch ? GLITCH_DEBOUNCE_MS : DEBOUNCE_MS,
+    );
   });
 
   if (searchInput instanceof HTMLInputElement) {
@@ -1300,7 +1440,13 @@ function initTool() {
     if (!(output instanceof HTMLElement)) return;
     const nameEl = card.querySelector('.tool-card__name');
     const cardName = nameEl?.textContent?.trim() || 'card';
-    const text = output.textContent ?? '';
+    // Glitch cards paint only a capped preview; the copy recomputes the full
+    // output from the live input so the clipboard never gets the ellipsis.
+    const copyId = card.getAttribute('data-card-id') ?? '';
+    const isGlitchCard = glitchSettingById.has(copyId) || copyId === 'glitch-remove';
+    const text = isGlitchCard
+      ? (glitchFullOutput(copyId, input.value) ?? output.textContent ?? '')
+      : (output.textContent ?? '');
     const ok = await copyText(text);
     if (ok) {
       const copiedId = card.getAttribute('data-card-id');

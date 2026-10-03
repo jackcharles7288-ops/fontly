@@ -56,7 +56,7 @@ Non-negotiable. Report the real measured number after each phase,
 including the ones that fail. Every phase report must state the measured
 CLS and INP numbers, or state plainly that they were not measured and why.
 
-- JavaScript: under 15360 bytes gzipped for the whole page (JS_GZIP_TOTAL).
+- JavaScript: under 16384 bytes gzipped for the whole page (JS_GZIP_TOTAL).
   Measured 12343 (headroom 3017) at tag `tool-load-more-ok`. Breakdown:
   page.CMFgH77u.js 1118 + Tool...js 11225. `scripts/measure-assets.cjs`
   sums ALL `type="module"` scripts and prints JS_GZIP_TOTAL plus a

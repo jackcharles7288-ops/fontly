@@ -48,6 +48,8 @@ export const categories: Category[] = [
   { id: 'upside-down', name: 'Upside Down', heading: 'Upside Down Text' },
   // a combining mark added over unchanged letters
   { id: 'effects', name: 'Effects', heading: 'Text Effects' },
+  // many combining marks stacked on each letter, plus a remover
+  { id: 'glitch', name: 'Glitch', heading: 'Glitch Text' },
   // Chip with no section of its own. Do not add it back to toolCategories.
   // characters wrapped around unchanged letters
   { id: 'decorated', name: 'Decorated' },

@@ -37,6 +37,9 @@ const pages = defineCollection({
     // Renders the Combined alphabet+decoration section. Optional with a false
     // default, so pages that omit it still validate.
     showCombined: z.boolean().default(false),
+    // Renders the Glitch stacked-mark section. Optional with a false default,
+    // so pages that omit it still validate.
+    showGlitch: z.boolean().default(false),
   }),
 });
 

@@ -80,7 +80,7 @@ Paste it into the real field and look at it before anyone else does. Composer pr
 
 Ten settings, and the names matter. What people call zalgo, cursed text, creepy text and corrupted text are the same trick at different densities, so they appear below as intensity levels. Every sample uses the same word, so you can see exactly what each setting adds. Look at the samples before you go by the labels.
 
-<img src="/images/glitch-tool-settings.webp" width="720" height="499" loading="lazy" decoding="async" alt="Glitch text generator converting one word through the light, medium and maximum zalgo settings" />
+<img src="/images/glitch-tool-settings.webp" srcset="/images/glitch-tool-settings-400.webp 400w, /images/glitch-tool-settings.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="499" loading="lazy" decoding="async" alt="Glitch text generator converting one word through the light, medium and maximum zalgo settings" />
 
 </div>
 

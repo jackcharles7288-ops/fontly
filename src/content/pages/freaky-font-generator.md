@@ -92,7 +92,7 @@ The characters are called Mathematical Bold Script. They sit in a Unicode block 
 
 None of that had anything to do with social media. The Unicode consortium prints a note at the top of that block, and it is worth reading before you paste this into anything that matters. It is one sentence long, and it says the opposite of what almost every generator on the internet implies:
 
-> To be used for mathematical variables where style variations are important semantically. For general text, use standard Latin and Greek letters with markup.
+*"To be used for mathematical variables where style variations are important semantically. For general text, use standard Latin and Greek letters with markup."*
 
 The people who created these characters are telling you not to use them for ordinary writing. That does not make it forbidden, and millions of people ignore it every day. It does explain most of the odd behaviour further down this page.
 
@@ -254,14 +254,9 @@ For a website the situation is different and much simpler. Any font file you hav
 
 ## Why Use Fonti's Freaky Font Generator
 
-Everything runs in your browser, so nothing you type leaves your device
-
-No sign-up, no download, no watermark, no limit on how much you convert
-
-Copy and paste output built from real characters, so it keeps working after you paste it
-
-Honest labels, with one alphabet presented as one alphabet instead of five invented style names
-
-The compatibility notes on this page come from a real phone test, not from guesswork
-
-Every other styled alphabet we make is on the [main font generator](/)
+- Everything runs in your browser, so nothing you type leaves your device
+- No sign-up, no download, no watermark, no limit on how much you convert
+- Copy and paste output built from real characters, so it keeps working after you paste it
+- Honest labels, with one alphabet presented as one alphabet instead of five invented style names
+- The compatibility notes on this page come from a real phone test, not from guesswork
+- Every other styled alphabet we make is on the [main font generator](/)

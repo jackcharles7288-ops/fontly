@@ -6,7 +6,9 @@ primaryKeyword: "freaky font"
 toolCategories:
   - cursive
   - all
+  - effects
   - combo
+showEffects: true
 faq:
   - q: What is the freaky font actually called?
     a: >-

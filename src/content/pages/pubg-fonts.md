@@ -180,11 +180,11 @@ Type or paste your new name into the box that appears.
 
 Confirm, and the name updates straight away.
 
-A card costs 180 UC in the shop. UC does not sell in a 180 unit block, so reaching it means buying the package above, which is 325 UC and leaves you holding change you did not ask for. New accounts already carry a free card in inventory, which catches out players who buy one without checking first. A free card after time away from the game cannot be confirmed.
+A card costs 180 UC in the shop. UC does not sell in a 180 unit block, so reaching it means buying the package above, which is 325 UC and leaves you holding change you did not ask for. New accounts already carry a free card in inventory, which catches out players who buy one without checking first. Some players also report a free card turning up after a stretch of days away from the game, though that comes from a single account and we cannot confirm it.
 
 ## Clan Names Follow Different Rules to Yours
 
-Your own name and your clan's name run on separate rule sets, and most players assume they are the same. Only the clan master can change a clan name or a clan tag, so members and administrators cannot touch either one. Once a name has been changed it locks for a period before it can change again, and the old name is held in reserve for seven days so no rival clan can take it. The published figure for that lock is thirty days, from the rules for the PC and console versions. This page has not checked whether Mobile uses the same figure.
+Your own name and your clan's name run on separate rule sets, and most players assume they are the same. Only the clan master can change a clan name or a clan tag, so members and administrators cannot touch either one. Once a name has been changed it locks for a period before it can change again, and the old name is held in reserve for seven days so no rival clan can take it. The published figure for that lock is thirty days, though it comes from the rules for the PC and console versions rather than Mobile.
 
 No way around this next one, and it saves a lot of wasted effort. A clan tag cannot hold symbols at all. The rules allow two to four characters, drawn only from English letters, numbers, hyphen and underscore, with no spaces and a letter or number in first position. Every ꧁ and ⼺ you see beside a clan name is sitting inside the clan name itself, never in the tag.
 

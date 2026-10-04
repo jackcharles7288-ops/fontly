@@ -3,6 +3,7 @@ const path = require('path');
 const z = require('zlib');
 
 const JS_GZIP_LIMIT = 16384;
+const CSS_GZIP_LIMIT = 4500;
 const htmlPath = process.argv[2] || 'dist/index.html';
 
 if (!fs.existsSync(htmlPath)) {
@@ -53,11 +54,17 @@ for (const row of jsFiles) {
 }
 console.log('JS_GZIP_TOTAL', jsGzipTotal);
 console.log('JS_GZIP_HEADROOM', JS_GZIP_LIMIT - jsGzipTotal);
-console.log('CSS_GZIP', z.gzipSync(cssBytes).length);
+const cssGzip = z.gzipSync(cssBytes).length;
+console.log('CSS_GZIP', cssGzip);
+console.log('CSS_GZIP_HEADROOM', CSS_GZIP_LIMIT - cssGzip);
 console.log('HTML_GZIP', z.gzipSync(htmlBytes).length);
 console.log('HTML_RAW', htmlBytes.length);
 
 if (jsGzipTotal > JS_GZIP_LIMIT) {
   console.error(`measure-assets: JS_GZIP_TOTAL ${jsGzipTotal} exceeds ${JS_GZIP_LIMIT}`);
+  process.exit(1);
+}
+if (cssGzip > CSS_GZIP_LIMIT) {
+  console.error(`measure-assets: CSS_GZIP ${cssGzip} exceeds ${CSS_GZIP_LIMIT}`);
   process.exit(1);
 }

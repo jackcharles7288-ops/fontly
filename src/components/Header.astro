@@ -1,8 +1,89 @@
 ---
+import { getCollection } from 'astro:content';
+import { hrefForPageId } from '../data/pages';
+
+const groups = [
+  {
+    id: 'styles',
+    label: 'Font Styles',
+    slugs: [
+      'bold-text-generator',
+      'cursive-font-generator',
+      'aesthetic-font-generator',
+      'gothic-font-generator',
+      'bubble-text-generator',
+      'number-font-generator',
+      'cute-font-generator',
+      'small-text-generator',
+      'upside-down-text-generator',
+    ],
+  },
+  {
+    id: 'social',
+    label: 'Social Media',
+    slugs: [
+      'instagram-fonts',
+      'facebook-fonts',
+      'tiktok-fonts',
+      'discord-fonts',
+      'pubg-fonts',
+    ],
+  },
+  {
+    id: 'effects',
+    label: 'Text Effects',
+    slugs: ['glitch-text-generator', 'freaky-font-generator'],
+  },
+] as const;
+
+const collection = await getCollection('pages');
+const byId = new Map(collection.map((page) => [page.id, page]));
+
+const nav = groups.map((group) => ({
+  id: group.id,
+  label: group.label,
+  links: group.slugs.flatMap((slug) => {
+    const page = byId.get(slug);
+    if (!page) return [];
+    return [
+      {
+        href: hrefForPageId(page.id),
+        label: page.data.h1,
+      },
+    ];
+  }),
+}));
 ---
 
 <header class="site-header">
   <div class="site-header__inner">
     <a class="site-header__brand" href="/">Fonti</a>
+    <nav class="site-nav" aria-label="Tools">
+      {
+        nav.map((group) => (
+          <div class="site-nav__drop">
+            <button
+              type="button"
+              class="site-nav__btn"
+              aria-haspopup="true"
+              aria-controls={`site-nav-${group.id}`}
+            >
+              {group.label}
+            </button>
+            <ul class="site-nav__list" id={`site-nav-${group.id}`}>
+              {
+                group.links.map((link) => (
+                  <li>
+                    <a class="site-nav__link" href={link.href}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        ))
+      }
+    </nav>
   </div>
 </header>

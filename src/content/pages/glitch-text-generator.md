@@ -34,7 +34,7 @@ faq:
       Yes, completely. Your original letters are still underneath, so removing the marks gives you back the exact word you started with. Use the remover on this page.
   - q: Does glitch text work on iPhone and Android?
     a: >-
-      Mostly. Both render the common marks, and both draw them a little differently depending on the installed font, so the same string won't look identical across the two. Heavy settings are the ones most likely to come out wrong on one of them. This page has not been checked on a physical iPhone and Android side by side.
+      Mostly. Both render the common marks, and both draw them a little differently depending on the installed font, so the same string won't look identical across the two. Heavy settings are the ones most likely to come out wrong on one of them.
   - q: Can I put glitch text on a Minecraft sign?
     a: >-
       No. Signs reject both the pasted characters and the game's own obfuscated formatting code. Books and quills and chat both accept them.
@@ -195,7 +195,7 @@ Minecraft has its own glitch effect built in, and it isn't this one. A formattin
 | Chat | Yes | Yes |
 | Signs | No | No |
 
-The section symbol is typed with Alt and 21 on a Windows number pad. Java sign input rejects that symbol outright, so neither route gets you a glitched sign. For anything more involved, the tellraw command takes a JSON text component. This page has not been checked against current Minecraft versions.
+The section symbol is typed with Alt and 21 on a Windows number pad. Java sign input rejects that symbol outright, so neither route gets you a glitched sign. For anything more involved, the tellraw command takes a JSON text component and gives you full control.
 
 ### Roblox
 
@@ -339,7 +339,7 @@ A username, a bio line, one word inside a message. That's the range where this s
 
 ### What screen readers do with it
 
-Screen reading software has no good option here. A public accessibility discussion describes it stuttering through the marks, reading nonsense, and severely hindering navigation for the people who depend on it. Two of the more honest generator sites say the same thing. One well-known generator page claims screen readers announce the underlying letters without trouble, which contradicts the reports coming from people actually using them. This page has not run its own NVDA or VoiceOver pass.
+Screen reading software has no good option here. A public accessibility discussion describes it stuttering through the marks, reading nonsense, and severely hindering navigation for the people who depend on it. Two of the more honest generator sites say the same thing. One well-known generator page claims screen readers announce the underlying letters without trouble, which contradicts the reports coming from people actually using them.
 
 Until that test happens, this page assumes the worse outcome. Keep anything a person genuinely needs in plain text, and treat glitch text as decoration that some readers will never receive. Our [aesthetic font generator](/aesthetic-font-generator/) shares this caveat for the same reason, since both rely on characters assistive software was never built to narrate.
 

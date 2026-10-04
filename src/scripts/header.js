@@ -5,6 +5,7 @@ if (!nav) {
 } else {
   const burger = nav.querySelector('.site-nav__burger');
   const drops = nav.querySelectorAll('.site-nav__drop');
+  const mq = matchMedia('(max-width: 39.99rem)');
 
   const expand = (el, on) => {
     if (el) el.setAttribute('aria-expanded', on ? 'true' : 'false');
@@ -55,18 +56,20 @@ if (!nav) {
 
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
+    if (mq.matches) {
+      if (nav.classList.contains('is-open')) {
+        closeAll();
+        if (burger) burger.focus();
+      }
+      return;
+    }
     const openDrop = nav.querySelector('.site-nav__drop.is-open');
     if (openDrop) {
       closeDrops();
       const trigger = openDrop.querySelector('.site-nav__btn');
       if (trigger) trigger.focus();
-      return;
-    }
-    if (nav.classList.contains('is-open')) {
-      closeMenu();
-      if (burger) burger.focus();
     }
   });
 
-  matchMedia('(max-width: 39.99rem)').addEventListener('change', closeAll);
+  mq.addEventListener('change', closeAll);
 }

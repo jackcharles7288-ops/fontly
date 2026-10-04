@@ -1,57 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
 import { hrefForPageId } from '../data/pages';
+import { NAV_GROUPS } from '../data/nav';
 
-const groups = [
-  {
-    id: 'styles',
-    label: 'Font Styles',
-    slugs: [
-      'bold-text-generator',
-      'cursive-font-generator',
-      'aesthetic-font-generator',
-      'gothic-font-generator',
-      'bubble-text-generator',
-      'number-font-generator',
-      'cute-font-generator',
-      'small-text-generator',
-      'upside-down-text-generator',
-    ],
-  },
-  {
-    id: 'social',
-    label: 'Social Media',
-    slugs: [
-      'instagram-fonts',
-      'facebook-fonts',
-      'tiktok-fonts',
-      'discord-fonts',
-      'pubg-fonts',
-    ],
-  },
-  {
-    id: 'effects',
-    label: 'Text Effects',
-    slugs: ['glitch-text-generator', 'freaky-font-generator'],
-  },
-] as const;
-
-const collection = await getCollection('pages');
-const byId = new Map(collection.map((page) => [page.id, page]));
-
-const nav = groups.map((group) => ({
+const nav = NAV_GROUPS.map((group) => ({
   id: group.id,
   label: group.label,
-  links: group.slugs.flatMap((slug) => {
-    const page = byId.get(slug);
-    if (!page) return [];
-    return [
-      {
-        href: hrefForPageId(page.id),
-        label: page.data.h1,
-      },
-    ];
-  }),
+  links: group.links.map((link) => ({
+    href: hrefForPageId(link.id),
+    label: link.label,
+  })),
 }));
 ---
 
@@ -81,7 +38,6 @@ const nav = groups.map((group) => ({
               >
                 {group.label}
               </button>
-              <p class="site-nav__label">{group.label}</p>
               <ul class="site-nav__list" id={`site-nav-${group.id}`}>
                 {
                   group.links.map((link) => (

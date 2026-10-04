@@ -147,6 +147,8 @@ a {
 
 .site-nav__btn,
 .site-nav__blog {
+  display: inline-flex;
+  align-items: center;
   font: inherit;
   font-size: 0.875rem;
   font-weight: 600;
@@ -158,26 +160,30 @@ a {
   cursor: pointer;
 }
 
+/* CSS triangle; rotates when the drop is open. */
 .site-nav__btn::after {
-  content: '▾';
-  margin-left: 0.25em;
-  font-size: 0.7em;
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.4em;
+  border: 0.28em solid transparent;
+  border-top-color: currentColor;
+  border-bottom-width: 0;
+  vertical-align: 0.12em;
+}
+
+.site-nav__drop.is-open .site-nav__btn::after {
+  transform: rotate(180deg);
 }
 
 .site-nav__blog {
-  display: flex;
-  align-items: center;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .site-nav__btn:hover,
 .site-nav__blog:hover {
   color: var(--accent);
-}
-
-.site-nav__label {
-  display: none;
 }
 
 .site-nav__list {
@@ -202,13 +208,11 @@ a {
   display: block;
 }
 
-.site-nav__list li + li {
-  border-top: 1px solid var(--border);
-}
-
 .site-nav__link {
-  display: block;
-  padding: 0.6rem 0.9rem;
+  display: flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.9rem;
   color: #111;
   text-decoration: none;
   line-height: 1.25;
@@ -252,23 +256,23 @@ a {
     display: block;
   }
 
-  .site-nav__btn {
-    display: none;
+  .site-nav__drop + .site-nav__drop {
+    border-top: 1px solid var(--border);
   }
 
-  .site-nav__label {
-    display: block;
-    margin: 0;
-    padding: 0.7rem 1rem 0.3rem;
-    font-size: 0.75rem;
+  .site-nav__btn {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: #555;
+    padding: 0.7rem 1rem;
   }
 
   .site-nav__list {
-    display: block;
     position: static;
     width: auto;
     max-width: none;
@@ -280,7 +284,7 @@ a {
 
   .site-nav__blog {
     display: block;
-    margin: 0.35rem 0 0;
+    margin: 0;
     padding: 0.7rem 1rem 0.9rem;
     border-top: 1px solid var(--border);
   }

@@ -52,6 +52,19 @@ console.log('PAGE', htmlPath);
 for (const row of jsFiles) {
   console.log('JS_FILE', row.file, row.gzip);
 }
+
+const scriptTags = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
+for (const tag of scriptTags) {
+  const attrs = tag[1];
+  if (!/\btype\s*=\s*["']module["']/i.test(attrs)) continue;
+  if (/\bsrc\s*=/i.test(attrs)) continue;
+  const body = tag[2];
+  if (!body) continue;
+  const gzip = z.gzipSync(Buffer.from(body, 'utf8')).length;
+  jsGzipTotal += gzip;
+  console.log('JS_FILE (inline module)', gzip);
+}
+
 console.log('JS_GZIP_TOTAL', jsGzipTotal);
 console.log('JS_GZIP_HEADROOM', JS_GZIP_LIMIT - jsGzipTotal);
 const cssGzip = z.gzipSync(cssBytes).length;

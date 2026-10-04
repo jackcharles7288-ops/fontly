@@ -71,7 +71,15 @@ The character counter matters more here than on any other page. PUBG allows four
 
 <h2 id="which-work">Which Styles Survive the PUBG Name Field and Which Vanish</h2>
 
+<div class="split">
+
 Someone ran this test on a live account and published the results. Ten style types went into the rename field one at a time, and the outcome split three ways. Some pasted intact, some lost characters with no warning at all, and some produced nothing.
+
+<img src="/images/pubg-name-brackets.webp" srcset="/images/pubg-name-brackets-400.webp 400w, /images/pubg-name-brackets.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="332" loading="lazy" decoding="async" alt="The PUBG Mobile name field on a Redmi A2+ accepting a name wrapped in corner brackets" />
+
+</div>
+
+*A bracket wrap went in. This is the option the article recommends.*
 
 | Style type | Sample | Result |
 | --- | --- | --- |
@@ -94,9 +102,25 @@ The two partial rows are the interesting ones. Small caps lost only some of its 
 
 ### When nothing pastes at all
 
+<div class="split">
+
 A second failure catches people out and looks nothing like the first. On some versions and some phones the paste never lands, and the field stays exactly as it was. Players reported this after one of the season updates, and iPhone users run into it regularly. Your name is fine in that case, because the clipboard never reached the game.
 
+<img src="/images/pubg-name-smallcaps.webp" srcset="/images/pubg-name-smallcaps-400.webp 400w, /images/pubg-name-smallcaps.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="332" loading="lazy" decoding="async" alt="The PUBG Mobile name field on a Redmi A2+ refusing a small caps name, with the field left empty" />
+
+</div>
+
+*Small caps would not paste at all, and the game gave no reason.*
+
+<div class="split">
+
 There is a way around it. Save your finished name as a text shortcut in your keyboard settings, using something short like gg as the trigger. Open the rename field, type the shortcut, and the keyboard writes the full name out for you. The clipboard is never involved, so nothing can strip the name on the way in.
+
+<img src="/images/pubg-name-fullwidth.webp" srcset="/images/pubg-name-fullwidth-400.webp 400w, /images/pubg-name-fullwidth.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="332" loading="lazy" decoding="async" alt="The PUBG Mobile name field on a Redmi A2+ refusing a fullwidth name, with the field left empty" />
+
+</div>
+
+*Fullwidth letters would not paste either, and again with no error.*
 
 <h2 id="why-fail">Why Bold and Gothic Fail but Brackets Work</h2>
 

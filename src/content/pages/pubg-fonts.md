@@ -6,6 +6,7 @@ primaryKeyword: "pubg fonts"
 toolCategories:
   - symbols
   - brackets
+  - cool-fonts
   - combo
 showDecorations: true
 charLimit: 14

@@ -5,6 +5,7 @@ description: "Flip your text upside down and copy it anywhere. See every flipped
 primaryKeyword: upside down text generator
 toolCategories:
   - upside-down
+  - cool-fonts
 relatedTools:
   - small-text-generator
   - number-font-generator

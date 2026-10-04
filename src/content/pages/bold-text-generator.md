@@ -4,7 +4,7 @@ h1: "Bold & Italic Text Generator"
 description: "Bold and italic text you can copy and paste. All six styles that exist, why italic has no numbers, and which apps already have real bold built in."
 primaryKeyword: "bold generator"
 testPhrase: "Bold"
-toolCategories: ["bold-italic", "combo"]
+toolCategories: ["bold-italic", "cool-fonts", "combo"]
 faq:
   - q: "Does bold text work on Instagram?"
     a: "Yes, in the bio, the name field and captions. No in the username, which accepts only letters, numbers, periods and underscores. Style the name field instead, and remember that the name field is searchable."

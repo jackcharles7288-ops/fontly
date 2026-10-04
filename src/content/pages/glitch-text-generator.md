@@ -8,6 +8,7 @@ ogImage: "/images/og-card-glitch.webp"
 primaryKeyword: "glitch text generator"
 toolCategories:
   - glitch
+  - cool-fonts
   - combo
 showGlitch: true
 faq:

@@ -119,10 +119,21 @@ faq:
       likely thing to break on somebody else's phone.
 relatedTools:
   - cursive-font-generator
-  - bold-text-generator
-  - bubble-text-generator
-  - number-font-generator
+  - gothic-font-generator
   - cute-font-generator
+  - discord-fonts
+  - number-font-generator
+  - small-text-generator
+  - instagram-fonts
+  - facebook-fonts
+  - bold-text-generator
+  - aesthetic-font-generator
+  - freaky-font-generator
+  - upside-down-text-generator
+  - pubg-fonts
+  - glitch-text-generator
+  - tiktok-fonts
+  - bubble-text-generator
 ---
 
 TOOL PLACEHOLDER

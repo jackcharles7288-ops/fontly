@@ -59,31 +59,49 @@ const nav = groups.map((group) => ({
   <div class="site-header__inner">
     <a class="site-header__brand" href="/">Fonti</a>
     <nav class="site-nav" aria-label="Tools">
-      {
-        nav.map((group) => (
-          <div class="site-nav__drop">
-            <button
-              type="button"
-              class="site-nav__btn"
-              aria-haspopup="true"
-              aria-controls={`site-nav-${group.id}`}
-            >
-              {group.label}
-            </button>
-            <ul class="site-nav__list" id={`site-nav-${group.id}`}>
-              {
-                group.links.map((link) => (
-                  <li>
-                    <a class="site-nav__link" href={link.href}>
-                      {link.label}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        ))
-      }
+      <button
+        type="button"
+        class="site-nav__burger"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="site-nav-drawer"
+      >
+        <span class="site-nav__burger-icon" aria-hidden="true"></span>
+      </button>
+      <div class="site-nav__drawer" id="site-nav-drawer">
+        {
+          nav.map((group) => (
+            <div class="site-nav__drop">
+              <button
+                type="button"
+                class="site-nav__btn"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls={`site-nav-${group.id}`}
+              >
+                {group.label}
+              </button>
+              <p class="site-nav__label">{group.label}</p>
+              <ul class="site-nav__list" id={`site-nav-${group.id}`}>
+                {
+                  group.links.map((link) => (
+                    <li>
+                      <a class="site-nav__link" href={link.href}>
+                        {link.label}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          ))
+        }
+        <a class="site-nav__blog" href="/blog/">Blog</a>
+      </div>
     </nav>
   </div>
 </header>
+
+<script>
+  import '../scripts/header.js';
+</script>

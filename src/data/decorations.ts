@@ -992,6 +992,29 @@ export const decorations: Decoration[] = [
     suffix: '\u2720',
     caveat: null,
   },
+  // Arrows block (U+2190-U+21FF).
+  // Prefix U+2190 LEFTWARDS ARROW, suffix U+2192 RIGHTWARDS ARROW.
+  // Unicode 1.1. Not U+27A1 BLACK RIGHTWARDS ARROW, which carries emoji
+  // presentation.
+  {
+    id: 'arrows',
+    group: 'symbols',
+    name: 'Arrows',
+    prefix: '\u2190',
+    suffix: '\u2192',
+    caveat: null,
+  },
+  // Arrows block (U+2190-U+21FF).
+  // Prefix U+21D0 LEFTWARDS DOUBLE ARROW, suffix U+21D2 RIGHTWARDS DOUBLE
+  // ARROW. Unicode 1.1. The outline pair, not the emoji black arrows.
+  {
+    id: 'double-arrows',
+    group: 'symbols',
+    name: 'Double Arrows',
+    prefix: '\u21d0',
+    suffix: '\u21d2',
+    caveat: null,
+  },
 ];
 
 /**

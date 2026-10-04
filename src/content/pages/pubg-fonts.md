@@ -47,9 +47,9 @@ relatedTools:
   - tiktok-fonts
 ---
 
-TOOL PLACEHOLDER
-
 PUBG Mobile is where font generators quietly fall apart. You type a name, pick a style, copy it, and the rename box either strips half the characters or refuses the whole thing. The generator did nothing wrong. The game is filtering what it accepts, and on some phones your keyboard is working against you as well.
+
+TOOL PLACEHOLDER
 
 That changes what a useful page about PUBG fonts looks like. Styled alphabets are the headline everywhere else on this site, and here they are the least reliable part of the job. The characters that do survive are the bracket wraps and CJK marks you see in every lobby, and those work almost without exception. So this page puts them first.
 

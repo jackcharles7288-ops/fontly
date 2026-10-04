@@ -358,6 +358,13 @@ const filterChips = categories
         ><span data-input-codepoints>{inputCount.codePoints}</span>{` / ${charLimit}`}</span>
     )
   }
+  {
+    charLimit == null ? null : (
+      <p class="tool-card__digits-note is-quiet" data-over-limit-note>
+        PUBG will not accept a name longer than {charLimit}.
+      </p>
+    )
+  }
   <div class="tool__controls">
     <input
       class="tool__input"

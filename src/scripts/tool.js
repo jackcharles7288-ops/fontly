@@ -567,6 +567,7 @@ function initTool() {
   const charLimit = charLimitRaw == null ? NaN : Number(charLimitRaw);
   const hasCharLimit = Number.isFinite(charLimit);
   let wasOverLimit = false;
+  const overLimitNote = root.querySelector('[data-over-limit-note]');
   const emptyFavEl = root.querySelector('[data-favourites-empty]');
   const emptyRecentsEl = root.querySelector('[data-recents-empty]');
   const emptySearchEl = root.querySelector('[data-search-empty]');
@@ -1071,6 +1072,9 @@ function initTool() {
           if (host) {
             if (over) host.setAttribute('data-over-limit', 'true');
             else host.removeAttribute('data-over-limit');
+          }
+          if (overLimitNote instanceof HTMLElement) {
+            overLimitNote.classList.toggle('is-quiet', !over);
           }
         }
       } else {

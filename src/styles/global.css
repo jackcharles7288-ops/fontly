@@ -421,6 +421,12 @@ main {
     object-fit: cover;
     object-position: top;
   }
+
+  .article picture img {
+    max-height: none;
+    object-fit: unset;
+    object-position: unset;
+  }
 }
 
 /* Article media beside prose; one column below 40rem. Images keep intrinsic width. */

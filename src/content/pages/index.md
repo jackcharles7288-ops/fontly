@@ -160,6 +160,11 @@ Tap the Copy button next to any style. It's on your clipboard instantly, with no
 
 Go to your bio, caption, chat, or profile field and paste: press and hold the text field and tap Paste on mobile, or Ctrl+V (Cmd+V on Mac) on desktop. If pasting ever refuses to work in the Instagram app (a known quirk), paste your text into your Notes app first, copy it again from there, and then paste into Instagram. That re-copy fixes it almost every time.
 
+<picture>
+  <source media="(max-width: 39.99rem)" srcset="/images/workflow-steps-mobile.webp" width="900" height="3434" alt="Four Fonti steps: type or paste your text, browse the font styles, copy one, then paste it into a bio, caption or chat" />
+  <img src="/images/workflow-steps.webp" alt="Four Fonti steps: type or paste your text, browse the font styles, copy one, then paste it into a bio, caption or chat" width="1600" height="1000" loading="lazy" decoding="async" fetchpriority="low" />
+</picture>
+
 ## Popular Font Styles You Can Create
 
 Every style below is made of real Unicode characters, and each one has its own story. Most were never designed for social media. Here are the most-used families, with a note on each.

@@ -213,8 +213,6 @@ Your bio and your display name both accept cursive, and the display name is wher
 
 On both platforms the display name takes cursive and the handle does not. Discord replaced its old system in 2023, so your username is lowercase letters, numbers, underscores and periods only, while your display name accepts full Unicode. Worth checking on Discord: nicknames have a tight character ceiling, so paste your styled name in and confirm it saves before relying on it. The full walkthrough lives in our Discord Fonts guide.
 
-<img src="/images/cursive-discord-count-limit.webp" srcset="/images/cursive-discord-count-limit-400.webp 400w, /images/cursive-discord-count-limit.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="189" loading="lazy" decoding="async" alt="A Discord display name where a 26 letter cursive name was trimmed to 16 letters, showing Discord counts each cursive character twice" />
-
 ### WhatsApp and messaging
 
 Cursive works in messages, group names, and your About line, and the profile name field accepts it too. Inside a message, though, WhatsApp already has real formatting using asterisks and underscores, and that native option is more reliable and easier for screen readers. Use cursive for the profile name and the About line, and use WhatsApp's own formatting inside conversations.
@@ -250,7 +248,19 @@ The pattern is worth remembering, because it predicts every case that is not in 
 
 ## Why Cursive Text Eats Your Character Limit
 
-A cursive letter is stored differently from a regular one, and some platforms count that against you. On X, the five letters of 𝓗𝓮𝓵𝓵𝓸 cost ten characters of your post limit instead of five, because X counts each of these characters twice. Discord does the same for display names: a 26 letter cursive name was trimmed to 16 letters, which is Discord's 32 character ceiling at two units each. [VERIFY] That result is from Discord alone. Where a field is tight, paste your text in and check it fits before saving.
+<div class="split">
+
+A cursive letter is stored differently from a regular one, and some platforms count that against you. On X, the five letters of 𝓗𝓮𝓵𝓵𝓸 cost ten characters of your post limit instead of five, because X counts each of these characters twice. Discord does the same for display names: a 26 letter cursive name was trimmed to 16 letters, which is Discord's 32 character ceiling at two units each. That result is from Discord alone. Where a field is tight, paste your text in and check it fits before saving.
+
+<div class="split__media">
+
+<img src="/images/cursive-discord-count-limit.webp" srcset="/images/cursive-discord-count-limit-400.webp 400w, /images/cursive-discord-count-limit.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="803" loading="lazy" decoding="async" alt="A Discord display name where a 26 letter cursive name was trimmed to 16 letters, showing Discord counts each cursive character twice" />
+
+*Discord count, a 26 letter cursive name saved as 16*
+
+</div>
+
+</div>
 
 <div class="split">
 
@@ -270,9 +280,19 @@ One widely repeated claim on competing cursive pages says styled text never adds
 
 Empty rectangles have a name among type designers, who call them tofu. They appear when the character reaches a device intact but that device has no drawing for it, so it paints a placeholder box instead. Nothing is broken or corrupted. The same line will look perfect on a newer phone.
 
+<div class="split">
+
 With cursive specifically, the risk concentrates in three of the six styles. Handwriting and Slanted come from the sans-serif italic blocks, which tend to have thinner coverage on older devices, and Classic Script carries the eleven substituted letters that come from a separate part of the font. Bold Script, Bold Italic and Italic Script are the ones that hold up nearly everywhere. If your text turns into question marks rather than boxes, that is a different failure, and our [homepage guide](/) explains the distinction in full.
 
-<img src="/images/cursive-handwriting-slanted-android.webp" srcset="/images/cursive-handwriting-slanted-android-400.webp 400w, /images/cursive-handwriting-slanted-android.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="558" loading="lazy" decoding="async" alt="The Handwriting and Slanted cursive styles rendering correctly on a stock Android phone with no empty boxes" />
+<div class="split__media">
+
+<img src="/images/cursive-handwriting-slanted-android.webp" srcset="/images/cursive-handwriting-slanted-android-400.webp 400w, /images/cursive-handwriting-slanted-android.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1418" loading="lazy" decoding="async" alt="The Handwriting and Slanted cursive styles rendering correctly on a stock Android phone with no empty boxes" />
+
+*Handwriting and Slanted on a stock Android phone*
+
+</div>
+
+</div>
 
 Here is how the six sort by risk, so you can choose without testing every one of them.
 
@@ -293,7 +313,7 @@ Cursive characters are not the letters people type into a search box. That can m
 
 <div class="split">
 
-The first is profile search. On Instagram, one account with a cursive name in the name field was still returned when another account searched the plain words hey wassup, and a styled query returned it too. [VERIFY] That is one Instagram account and one query, not a rule for every platform. Keeping a plain name somewhere on the profile remains sensible advice if being found matters to you, because other apps may behave differently.
+The first is profile search. On Instagram, one account with a cursive name in the name field was still returned when another account searched the plain words hey wassup, and a styled query returned it too. That is one Instagram account and one query, not a rule for every platform. Keeping a plain name somewhere on the profile remains sensible advice if being found matters to you, because other apps may behave differently.
 
 <div class="split__media">
 

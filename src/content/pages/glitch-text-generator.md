@@ -81,11 +81,15 @@ Paste it into the real field and look at it before anyone else does. Composer pr
 
 Ten settings, and the names matter. What people call zalgo, cursed text, creepy text and corrupted text are the same trick at different densities, so they appear below as intensity levels. Every sample uses the same word, so you can see exactly what each setting adds. Look at the samples before you go by the labels.
 
+<div class="split__media">
+
 <img src="/images/glitch-tool-settings.webp" srcset="/images/glitch-tool-settings-400.webp 400w, /images/glitch-tool-settings.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="499" loading="lazy" decoding="async" alt="Glitch text generator converting one word through the light, medium and maximum zalgo settings" />
+
+*Glitchy at every setting, from barely broken to cursed, with the character cost beside each.*
 
 </div>
 
-*Glitchy at every setting, from barely broken to cursed, with the character cost beside each.*
+</div>
 
 ### Light glitch
 
@@ -153,11 +157,15 @@ G̸̶̶̵̵̵̴̤̥̰̳̳̊̌̉̈̀̌̍l̶̸̸̥̤͓̏̀͛̍i̽̽͛̇̈̌̑̆̌�
 
 Here is the same word at every setting, with the character count beside it. The count is the number worth watching, because it's what every platform limit measures and it's the reason heavy settings fail in short fields. Copy any row straight from the table.
 
+<div class="split__media">
+
 <img src="/images/glitch-cards-mobile.webp" srcset="/images/glitch-cards-mobile-400.webp 400w, /images/glitch-cards-mobile.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1380" loading="lazy" decoding="async" alt="Glitchy in the Light, Medium, Heavy and Maximum settings on a phone, with the character count under each card" />
+
+*The count climbs with the setting. Seven letters cost 196 characters at Maximum.*
 
 </div>
 
-*The count climbs with the setting. Seven letters cost 196 characters at Maximum.*
+</div>
 
 | Setting | Glitchy | Characters |
 | --- | --- | --- |
@@ -204,11 +212,15 @@ The section symbol is typed with Alt and 21 on a Windows number pad. Java sign i
 
 Both fields refuse styled characters. The username takes letters, numbers and a single underscore. The display name returned "Display name contains unsupported characters" when a styled name was entered on the app. One Roblox-focused reference says unrecognised characters get replaced with hash symbols in some fields; that is a report from elsewhere, not what this test showed.
 
+<div class="split__media">
+
 <img src="/images/glitch-roblox-display-name.webp" srcset="/images/glitch-roblox-display-name-400.webp 400w, /images/glitch-roblox-display-name.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="932" loading="lazy" decoding="async" alt="Roblox rejecting a styled display name on a Redmi A2+ with the message Display name contains unsupported characters" />
+
+*Roblox refuses both fields. The display name returns its own error rather than rendering the marks.*
 
 </div>
 
-*Roblox refuses both fields. The display name returns its own error rather than rendering the marks.*
+</div>
 
 One thing isn't in dispute. Deliberately using characters to get past a text filter breaches Roblox's terms, whatever the field happens to accept. That applies to every platform on this page.
 
@@ -290,11 +302,15 @@ Three problems come up over and over, and each has a different answer. Two you c
 
 The middle one is worth understanding, because it's the most common and the least fixable. Line height belongs to the app, so a bio field with a fixed row height will cut the top off your marks no matter what you generate. Our [small text generator](/small-text-generator/) meets the same counting problem from the other direction, where people expect smaller letters to cost less space and they cost more.
 
+<div class="split__media">
+
 <img src="/images/glitch-clipping.webp" srcset="/images/glitch-clipping-400.webp 400w, /images/glitch-clipping.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="705" loading="lazy" decoding="async" alt="Heavy glitch text clipped by a fixed line height inside a mobile bio field" />
+
+*Instagram draws a bio at a fixed line height, so a heavy stack is cut off rather than shown.*
 
 </div>
 
-*Instagram draws a bio at a fixed line height, so a heavy stack is cut off rather than shown.*
+</div>
 
 <h2 id="remove">How to Remove Glitch Text and Get Plain Words Back</h2>
 
@@ -302,11 +318,15 @@ The middle one is worth understanding, because it's the most common and the leas
 
 The marks sit on top of your letters, so the original text is still there and comes back exactly. Every remover works the same way, stripping out the combining marks and leaving everything else alone. This tool does it too, so you can paste glitched text in and get clean words out.
 
+<div class="split__media">
+
 <img src="/images/glitch-remover.webp" srcset="/images/glitch-remover-400.webp 400w, /images/glitch-remover.webp 707w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="707" height="1380" loading="lazy" decoding="async" alt="Glitch text remover turning stacked zalgo marks back into plain readable words" />
+
+*The same string after Remove marks: the letters come back plain.*
 
 </div>
 
-*The same string after Remove marks: the letters come back plain.*
+</div>
 
 ### Which marks have to go
 

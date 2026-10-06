@@ -82,11 +82,15 @@ Most people working out how to bold text on Facebook assume the feature does not
 
 The formatting toolbar lives inside Facebook Group posts, and only when you are writing from a computer. Start a post in a group, highlight some text, and a small bubble appears with a B and an I in it. The same bubble gives you headers, bulleted lists, numbered lists and block quotations. Facebook's own help page states the limit plainly: you can only format a group post on a computer.
 
+<div class="split__media">
+
 <img src="/images/facebook-group-formatting-menu.webp" srcset="/images/facebook-group-formatting-menu-400.webp 400w, /images/facebook-group-formatting-menu.webp 530w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="530" height="519" loading="lazy" decoding="async" alt="Facebook's own formatting menu in a group post, showing the Bold and Italic buttons beside H1, H2, quote and list controls above highlighted text" />
+
+*Facebook's Bold and Italic buttons exist, but only inside a group post.*
 
 </div>
 
-*Facebook's Bold and Italic buttons exist, but only inside a group post.*
+</div>
 
 That one sentence explains almost every confused thread on the subject. Someone tries the same trick on their timeline and nothing happens. Someone else tries it in the mobile app and finds no bubble at all. The control simply is not there outside group posts on desktop.
 
@@ -100,11 +104,15 @@ Worth knowing: the two methods are not equivalent, even when the result looks th
 
 The styles below are grouped by how reliably they display, not by how they look. Sunday Roast is used as the test phrase in every row so you can compare them fairly. Two words with an ascender, a descender and a repeated letter will expose most of the gaps you are likely to hit.
 
+<div class="split__media">
+
 <img src="/images/facebook-tool-script-styles.webp" srcset="/images/facebook-tool-script-styles-400.webp 400w, /images/facebook-tool-script-styles.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1342" loading="lazy" decoding="async" alt="The Fonti Facebook font generator on a Redmi A2+ showing Bold Script, Classic Script, Bold Italic, Italic Script and Handwriting rendered in Sunday Roast without empty boxes" />
+
+*Sunday Roast in the five script-family styles, all rendering cleanly.*
 
 </div>
 
-*Sunday Roast in the five script-family styles, all rendering cleanly.*
+</div>
 
 | Style | Sunday Roast | Where it holds up |
 | --- | --- | --- |
@@ -123,11 +131,15 @@ The styles below are grouped by how reliably they display, not by how they look.
 
 The first four styles come from a block of Unicode that has been supported for decades and is included in essentially every font shipped on a modern phone. Classic Script and double-struck are nearly as safe, though a few of their capitals come from a separate part of Unicode and can look slightly off-weight next to the rest. The bottom three are where problems start. Small Caps borrows from a phonetics block, Fullwidth from an old East Asian typing standard, and Circled from an enclosed-symbols block, and none of those three is guaranteed to be complete in the font on someone else's phone.
 
+<div class="split__media">
+
 <img src="/images/facebook-tool-bold-styles.webp" srcset="/images/facebook-tool-bold-styles-400.webp 400w, /images/facebook-tool-bold-styles.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1374" loading="lazy" decoding="async" alt="The Fonti Facebook font generator on a Redmi A2+ showing Bold Sans, Circled, Parenthesized, Parenthesized Caps and Filled Circled rendered in Sunday Roast" />
+
+*The bold family and the enclosure styles. The Circled card carries the app's own Emoji note.*
 
 </div>
 
-*The bold family and the enclosure styles. The Circled card carries the app's own Emoji note.*
+</div>
 
 <h2 id="fields">4. Where Styled Text Works on Facebook, Field by Field</h2>
 
@@ -154,21 +166,29 @@ Whether styled text survives depends on the field you paste it into, and Faceboo
 
 Quick note about that 63,206 figure. It is the true ceiling for a Facebook post, and it is by far the most generous limit on any major platform, but almost nobody sees the whole thing. Facebook cuts posts off behind a See more link at roughly 477 characters on desktop and around 125 on mobile. Styling that sits below the cut is styling nobody reads.
 
+<div class="split__media">
+
 <img src="/images/facebook-post-bold-text.webp" srcset="/images/facebook-post-bold-text-400.webp 400w, /images/facebook-post-bold-text.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="422" loading="lazy" decoding="async" alt="A Facebook post on a Redmi A2+ showing the words Sunday Roast rendered in the Bold style" />
+
+*Styled text pasted into a post, rendering as typed.*
 
 </div>
 
-*Styled text pasted into a post, rendering as typed.*
+</div>
 
 <div class="split">
 
 The pattern across the table is simple once you see it. Anywhere Facebook treats your text as content, styled characters go through. Anywhere Facebook treats your text as an identifier, whether that is a username, a Page name or a listing title, the rules tighten and styled characters either get rejected or quietly cost you something.
 
+<div class="split__media">
+
 <img src="/images/facebook-comment-circled-text.webp" srcset="/images/facebook-comment-circled-text-400.webp 400w, /images/facebook-comment-circled-text.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="401" loading="lazy" decoding="async" alt="A Facebook comment on a Redmi A2+ showing the words Sunday Roast rendered in the Filled Circled style" />
+
+*The same paste in a comment. Every character showed.*
 
 </div>
 
-*The same paste in a comment. Every character showed.*
+</div>
 
 <h2 id="names">5. Your Name, Your Username and Your Page Name Follow Three Different Rules</h2>
 

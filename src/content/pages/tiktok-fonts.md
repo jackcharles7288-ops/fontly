@@ -89,21 +89,29 @@ That reach is what makes the nickname worth styling. It sits beside every commen
 
 Your bio holds up to 160 characters, and this is where the counting starts to matter. Some accounts still show the older limit of 80, so check your own field before you plan around it.
 
+<div class="split__media">
+
 <img src="/images/tiktok-bio-counter.webp" srcset="/images/tiktok-bio-counter-400.webp 400w, /images/tiktok-bio-counter.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="730" loading="lazy" decoding="async" alt="The TikTok bio field on a Redmi A2+ holding a 12-character line in Bold Sans, with the counter reading 24 of 160" />
+
+*Twelve plain characters in Bold Sans counted as 24 in the bio field.*
 
 </div>
 
-*Twelve plain characters in Bold Sans counted as 24 in the bio field.*
+</div>
 
 <div class="split">
 
 Captions and comments both take styled text without complaint. The caption limit is 4,000 characters. Comments stop at around one hundred and fifty. The comment figure does not come from TikTok directly, so leave yourself a margin.
 
+<div class="split__media">
+
 <img src="/images/tiktok-caption-limit.webp" srcset="/images/tiktok-caption-limit-400.webp 400w, /images/tiktok-caption-limit.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="384" loading="lazy" decoding="async" alt="The TikTok caption composer on a Redmi A2+ showing the notice that reads Maximum of 4000 characters" />
+
+*The caption composer states its own limit: 4,000 characters.*
 
 </div>
 
-*The caption composer states its own limit: 4,000 characters.*
+</div>
 
 Comments deserve a second thought. A ceiling of roughly one hundred and fifty characters is far tighter than your bio, so the cost difference between the style groups bites harder there than anywhere else. A styled reply in one of the expensive alphabets can run out of room halfway through a sentence. If you comment in a styled font regularly, the cheap group is the practical choice.
 
@@ -123,11 +131,15 @@ Fullwidth spreads your letters out as Ｃｈｉｌｌ Ｈｏｕｒｓ, with a wi
 
 Circled letters turn the line into Ⓒⓗⓘⓛⓛ Ⓗⓞⓤⓡⓢ, the softest of the four. Our cute font generator leans into the round, soft look. On one account, a circled bio was saved, the app was closed and reopened, and the letters were still there. That check covers the bio field on that account only.
 
+<div class="split__media">
+
 <img src="/images/tiktok-profile-circled.webp" srcset="/images/tiktok-profile-circled-400.webp 400w, /images/tiktok-profile-circled.webp 712w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="712" height="496" loading="lazy" decoding="async" alt="A TikTok profile on a Redmi A2+ showing a circled display name that survived a save, with the username and follower count plain beneath it" />
+
+*Saved, closed, reopened. The circled display name was still there.*
 
 </div>
 
-*Saved, closed, reopened. The circled display name was still there.*
+</div>
 
 ### Mid-cost: Around One Hundred Characters
 
@@ -190,11 +202,15 @@ The practical version of all this is short. If your text is long and your field 
 
 Reality check: on one account, a 12-character Bold Sans line of Sunday Roast moved the bio counter to 24, and a 5-character Circled line of Fonti stayed at 5. The styled characters used by the two-cost styles count as two, and Circled characters count as one, as measured on that account.
 
+<div class="split__media">
+
 <img src="/images/tiktok-bio-circled.webp" srcset="/images/tiktok-bio-circled-400.webp 400w, /images/tiktok-bio-circled.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="715" loading="lazy" decoding="async" alt="The TikTok bio field on a Redmi A2+ holding the circled word Fonti, with the counter reading 5 of 160" />
+
+*The same field counted a circled word as one character each. Five for Fonti.*
 
 </div>
 
-*The same field counted a circled word as one character each. Five for Fonti.*
+</div>
 
 <h2 id="stripped">What TikTok Deletes the Moment You Hit Save</h2>
 

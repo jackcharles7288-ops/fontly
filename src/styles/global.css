@@ -432,13 +432,19 @@ main {
   }
 }
 
-/* Article media beside prose; one column below 40rem. Images keep intrinsic width. */
+/* Article media beside prose; one column below 40rem. Images keep intrinsic width.
+   Image and caption share .split__media so the grid places them in one cell. */
 .article .split {
   display: grid;
   gap: 1rem;
 }
 
-.article .split img {
+.article .split__media {
+  min-width: 0;
+  justify-self: start;
+}
+
+.article .split > img {
   justify-self: start;
 }
 

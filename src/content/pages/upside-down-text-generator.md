@@ -226,11 +226,15 @@ Whether flipped text survives depends less on the app and more on the specific b
 
 Instagram Bio was one of the fields tested on a Redmi A2+ running Android 13. The live substitutes rendered there without empty boxes. iPhone remains untested. Keep the flipped portion short, because a whole bio of turned letters is genuinely hard to read.
 
+<div class="split__media">
+
 <img src="/images/upside-down-instagram-bio.webp" srcset="/images/upside-down-instagram-bio-400.webp 400w, /images/upside-down-instagram-bio.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="360" height="402" loading="lazy" decoding="async" alt="Instagram Bio editor showing both flipped text modes without empty boxes and a 25 of 150 character count" />
+
+*Both flipped modes pasted into the Instagram bio field on a Redmi A2+. The 25 characters counted against the 150-character limit, and no empty boxes appeared.*
 
 </div>
 
-*Both flipped modes pasted into the Instagram bio field on a Redmi A2+. The 25 characters counted against the 150-character limit, and no empty boxes appeared.*
+</div>
 
 ### Instagram name field
 
@@ -254,11 +258,15 @@ Works well, and this is where the prank use actually lives. A flipped status loo
 
 Display names accept full Unicode, so an upside down name works fine there. Usernames changed in 2023 and now allow only lowercase letters, numbers, underscores and periods, so those are closed to you. Messages, channel topics and server nicknames all accept it. Try our [Discord fonts](/discord-fonts/) page for the fuller picture of what survives inside a server.
 
+<div class="split__media">
+
 <img src="/images/upside-down-discord-message.webp" srcset="/images/upside-down-discord-message-400.webp 400w, /images/upside-down-discord-message.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="360" height="222" loading="lazy" decoding="async" alt="A sent Discord message showing both flipped text modes without empty boxes" />
+
+*Both flipped modes sent in a Discord message on a Redmi A2+. The replacement characters remained visible after sending.*
 
 </div>
 
-*Both flipped modes sent in a Discord message on a Redmi A2+. The replacement characters remained visible after sending.*
+</div>
 
 ### Facebook
 
@@ -266,11 +274,15 @@ Display names accept full Unicode, so an upside down name works fine there. User
 
 Technically possible in posts and comments, awkward everywhere else. Name changes lock for 60 days once made, which is a long time to live with a mistake, and page names are reviewed. Fair warning if you run ads: Meta's advertising policy explicitly prohibits using Unicode characters or symbols in ad text to obfuscate words or phrases. In an ad, flipped text becomes a policy problem.
 
+<div class="split__media">
+
 <img src="/images/upside-down-facebook-post.webp" srcset="/images/upside-down-facebook-post-400.webp 400w, /images/upside-down-facebook-post.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="360" height="233" loading="lazy" decoding="async" alt="A private Facebook post showing both flipped text modes without empty boxes" />
+
+*Both flipped modes posted privately on Facebook from a Redmi A2+. The replacement characters rendered without empty boxes.*
 
 </div>
 
-*Both flipped modes posted privately on Facebook from a Redmi A2+. The replacement characters rendered without empty boxes.*
+</div>
 
 <h2 id="compatibility">Why Some Flipped Letters Show as Boxes, and Which Ones Never Do</h2>
 
@@ -293,7 +305,7 @@ The live <code>ᗺ</code>, <code>ᘔ</code> and <code>Ɛ</code> then rendered on
 
 <div class="split">
 
-<div>
+<div class="split__media">
 
 <img src="/images/upside-down-old-mapping-boxes.webp" srcset="/images/upside-down-old-mapping-boxes-400.webp 400w, /images/upside-down-old-mapping-boxes.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="324" height="398" loading="lazy" decoding="async" alt="Fonti’s previous flipped mapping showing empty boxes for digits 2 and 3 on a Redmi A2+" />
 
@@ -301,7 +313,7 @@ The live <code>ᗺ</code>, <code>ᘔ</code> and <code>Ɛ</code> then rendered on
 
 </div>
 
-<div>
+<div class="split__media">
 
 <img src="/images/upside-down-live-chrome.webp" srcset="/images/upside-down-live-chrome-400.webp 400w, /images/upside-down-live-chrome.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="324" height="394" loading="lazy" decoding="async" alt="Fonti’s live flipped mapping showing the replacement characters without empty boxes on a Redmi A2+" />
 

@@ -206,27 +206,39 @@ Whether small text survives depends on the field, not on the app. The same platf
 
 <div class="split">
 
-<img src="/images/small-text-instagram-bio.webp" srcset="/images/small-text-instagram-bio-400.webp 400w, /images/small-text-instagram-bio.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="795" loading="lazy" decoding="async" alt="Instagram Bio editor showing Small Caps, Superscript and Subscript from Fonti without empty boxes on a Redmi A2+" />
+<div class="split__media">
 
-</div>
+<img src="/images/small-text-instagram-bio.webp" srcset="/images/small-text-instagram-bio-400.webp 400w, /images/small-text-instagram-bio.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="795" loading="lazy" decoding="async" alt="Instagram Bio editor showing Small Caps, Superscript and Subscript from Fonti without empty boxes on a Redmi A2+" />
 
 *Small Caps, Superscript and Subscript pasted into the Instagram bio field on a Redmi A2+. The three lines counted as 29 of 150 characters, with no empty boxes.*
 
+</div>
+
+</div>
+
 <div class="split">
+
+<div class="split__media">
 
 <img src="/images/small-text-discord-message.webp" srcset="/images/small-text-discord-message-400.webp 400w, /images/small-text-discord-message.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="315" loading="lazy" decoding="async" alt="A sent Discord message showing Fonti’s three small text styles without empty boxes on a Redmi A2+" />
 
+*Small Caps, Superscript and Subscript remained visible after being sent in a Discord message on a Redmi A2+.*
+
 </div>
 
-*Small Caps, Superscript and Subscript remained visible after being sent in a Discord message on a Redmi A2+.*
+</div>
 
 <div class="split">
 
+<div class="split__media">
+
 <img src="/images/small-text-whatsapp-status.webp" srcset="/images/small-text-whatsapp-status-400.webp 400w, /images/small-text-whatsapp-status.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="783" loading="lazy" decoding="async" alt="WhatsApp Status composer showing Fonti’s three small text styles without empty boxes on a Redmi A2+" />
+
+*Small Caps, Superscript and Subscript displayed without empty boxes in the WhatsApp Status composer on a Redmi A2+. iPhone remains untested.*
 
 </div>
 
-*Small Caps, Superscript and Subscript displayed without empty boxes in the WhatsApp Status composer on a Redmi A2+. iPhone remains untested.*
+</div>
 
 Two claims from other generators are worth correcting, because both will waste your time. Small text does not work in an Instagram username, and it does not work in a Discord channel name. Several popular sites say otherwise, and one of them promises complete compatibility on the same page where its own FAQ admits to missing characters. A page that tells you small text works everywhere has not checked. The [Discord fonts](/discord-fonts/) page goes through each Discord field and its limit in detail, since that platform has more separate name fields than any other.
 

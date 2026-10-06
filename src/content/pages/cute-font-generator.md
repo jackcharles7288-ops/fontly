@@ -246,19 +246,27 @@ There are two name fields on almost every platform. They behave completely diffe
 
 The handle is the one with the at sign, the one people type to find you. It accepts letters, numbers and a small set of punctuation, and nothing else. You cannot style it. Any tool suggesting otherwise is wrong about how the platform works.
 
+<div class="split__media">
+
 <img src="/images/instagram-username-styled-clipboard.webp" srcset="/images/instagram-username-styled-clipboard-400.webp 400w, /images/instagram-username-styled-clipboard.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="360" height="800" loading="lazy" decoding="async" alt="Instagram username field with the styled text waiting on the clipboard chip above the keyboard" />
+
+*The styled username sits ready on the clipboard. Nothing has gone wrong yet.*
+
+</div>
 
 </div>
 
 <div class="split">
 
-*The styled username sits ready on the clipboard. Nothing has gone wrong yet.*
+<div class="split__media">
 
 <img src="/images/instagram-username-styled-rejected.webp" srcset="/images/instagram-username-styled-rejected-400.webp 400w, /images/instagram-username-styled-rejected.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="360" height="444" loading="lazy" decoding="async" alt="Instagram username field rejecting styled characters with a notice about letters, numbers, underscores and periods" />
 
+*Pasted into the username field, the same text is refused. Instagram accepts letters, numbers, underscores and periods there and nothing else.*
+
 </div>
 
-*Pasted into the username field, the same text is refused. Instagram accepts letters, numbers, underscores and periods there and nothing else.*
+</div>
 
 The display name is the one shown above your bio or beside your comment. That field usually accepts styled characters, and it is where every cute name you have admired actually lives.
 
@@ -276,11 +284,15 @@ Straight answer on the numbers other pages quote: claims that a styled name lift
 
 Styled text is accepted in far fewer places than most cute font pages admit. The pattern is consistent once you see it: display fields accept it, identity fields reject it, and anything running a name filter is unpredictable.
 
+<div class="split__media">
+
 <img src="/images/instagram-bio-script-counter.webp" srcset="/images/instagram-bio-script-counter-400.webp 400w, /images/instagram-bio-script-counter.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="360" height="465" loading="lazy" decoding="async" alt="Instagram bio field holding script style text with the counter showing 16 of 150" />
+
+*Script text pasted into the Instagram bio field. Sixteen characters of the 150 available, counted the same as plain letters.*
 
 </div>
 
-*Script text pasted into the Instagram bio field. Sixteen characters of the 150 available, counted the same as plain letters.*
+</div>
 
 | Where | Works | Notes |
 |---|---|---|

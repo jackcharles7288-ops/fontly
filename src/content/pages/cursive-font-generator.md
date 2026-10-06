@@ -154,6 +154,8 @@ Unicode contains two true script alphabets, plus four italic alphabets that the 
   <img src="/images/cursive-styles-desktop.webp" srcset="/images/cursive-styles-desktop-400.webp 400w, /images/cursive-styles-desktop.webp 1600w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="1600" height="600" loading="lazy" decoding="async" fetchpriority="low" alt="Cursive font generator showing the word Hey wassup in six cursive styles" />
 </picture>
 
+*Cursive styles, the six the generator actually ships*
+
 | Style | Sample | What it really is | Best for | Risk |
 |---|---|---|---|---|
 | Bold Script | 𝓒𝓾𝓻𝓼𝓲𝓿𝓮 | True script | Display names, bio headlines, anything permanent | Safe |
@@ -191,7 +193,15 @@ Cursive text belongs anywhere the words are meant to be looked at rather than pr
 
 ### Instagram bio and name
 
+<div class="split">
+
 Your bio and your display name both accept cursive, and the display name is where it looks best because it sits at the top of your profile in larger text. Style the name or one bio line. Leave the rest plain so the profile still reads quickly. Your @username will reject these characters outright, since Instagram only allows letters, numbers, periods and underscores there. Fair warning: styling the name field has a cost that has nothing to do with rendering, and the searchability section below explains it.
+
+<img src="/images/cursive-instagram-profile.webp" srcset="/images/cursive-instagram-profile-400.webp 400w, /images/cursive-instagram-profile.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="607" loading="lazy" decoding="async" alt="An Instagram profile with a cursive styled name in the name field and the bio, above a blurred username" />
+
+</div>
+
+*Instagram profile, cursive name saved in the name field and the bio*
 
 ### TikTok and Discord usernames
 
@@ -236,7 +246,15 @@ The pattern is worth remembering, because it predicts every case that is not in 
 
 A cursive letter is stored differently from a regular one, and some platforms count that against you while others do not. On X, the five letters of 𝓗𝓮𝓵𝓵𝓸 cost ten characters of your post limit instead of five, because X counts each of these characters twice. Most other platforms count them once, so the same word costs five there.
 
+<div class="split">
+
 One widely repeated claim on competing cursive pages says styled text never adds extra character count anywhere. That is wrong on at least one major platform. You discover it when a post refuses to send. Budget for double on X, and wherever a field has a tight limit, paste your text in and check it fits before saving.
+
+<img src="/images/cursive-instagram-bio-count.webp" srcset="/images/cursive-instagram-bio-count-400.webp 400w, /images/cursive-instagram-bio-count.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="712" loading="lazy" decoding="async" alt="An Instagram bio holding a cursive sentence with the character counter reading 48 of 150" />
+
+</div>
+
+*Instagram bio, cursive sentence saved at 48 of 150*
 
 ## When Cursive Text Turns Into Boxes and Question Marks
 
@@ -263,7 +281,15 @@ Fixes, ordered by how often they actually work:
 
 Cursive characters are not the letters people type into a search box. Nothing they type will match them. That single fact has three consequences, and most cursive pages skip all three.
 
+<div class="split">
+
 The first is profile search. If your Instagram or TikTok display name is fully styled, someone searching your actual name may not find you, because the platform is comparing plain letters against characters that only look like those letters. Keep your real name in plain text somewhere on the profile if being found matters to you.
+
+<img src="/images/cursive-instagram-search.webp" srcset="/images/cursive-instagram-search-400.webp 400w, /images/cursive-instagram-search.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="797" loading="lazy" decoding="async" alt="Instagram search results on the Accounts tab returning the profile with the cursive styled name, with the usernames blurred" />
+
+</div>
+
+*Instagram search, the cursive profile is still found*
 
 The second is Google. A cursive page title, heading, or image description will not rank for the words it appears to contain, so cursive belongs in decorative places and never in anything that needs to be indexed. The third is reputation: accessibility writers and spam filters both associate heavy Unicode styling with spam and scam accounts, so a fully styled message can read as less trustworthy rather than more.
 

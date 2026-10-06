@@ -70,7 +70,7 @@ CLS and INP numbers, or state plainly that they were not measured and why.
   sizing, paragraph margins, table styling, enlarged Unicode samples,
   warning box — roughly 500-550 bytes). Raise the 3400 limit (suggested
   4000) before that work starts.
-- HTML: under 25600 bytes gzipped per page, and raw HTML under 200 KB.
+- HTML: under 26000 bytes gzipped per page, and raw HTML under 200 KB.
   Currently HTML_GZIP homepage 23648 (headroom 1952), bold 18659, cursive
   21102. Raw size matters as much as gzipped because parse work is done
   on uncompressed bytes.

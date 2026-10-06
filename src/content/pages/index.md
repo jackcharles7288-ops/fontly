@@ -247,17 +247,23 @@ Short version: styled text works in far more places than most people expect, but
 
 Fancy fonts work in your display name, bio, captions, and comments on all the big platforms, which is exactly where most people use them. The one consistent exception is your @handle: Instagram usernames only allow letters, numbers, periods, and underscores (max 30 characters), and TikTok, X, and Threads have similar rules. That's a platform restriction no font generator can bypass, so style your display name and keep your handle plain. You get the best of both: a striking profile that's still searchable.
 
+<img src="/images/instagram-bio-saved-username-rejected.webp" srcset="/images/instagram-bio-saved-username-rejected-400.webp 400w, /images/instagram-bio-saved-username-rejected.webp 1600w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="1600" height="1076" loading="lazy" decoding="async" alt="Instagram Bio with three styled lines saved at 17 of 150 beside Username refusing styled characters." />
+
 We keep dedicated guides for the three platforms people ask about most: [Instagram Fonts](/instagram-fonts/), [TikTok Fonts](/tiktok-fonts/) and [Facebook Fonts](/facebook-fonts/). Facebook is the odd one out here, because it is the only major platform with real bold and italic buttons hiding in one corner of it. TikTok is the strictest of the three about what it keeps, and that guide works out what each style costs against the one hundred and sixty characters an Android TikTok bio field showed before you paste it.
 
 ### Chat Apps & Communities: WhatsApp, Discord, Telegram
 
 Messages are the easy case: paste any style into a WhatsApp, Discord, or Telegram chat and it sends fine. Names are where the rules kick in, though. Discord's newer usernames (since 2023) only allow lowercase letters, numbers, underscores, and periods, but your display name supports full Unicode up to 32 characters, so put the style there. Full walkthrough in our [Discord Fonts guide](/discord-fonts/).
 
+<img src="/images/discord-display-name-messages.webp" srcset="/images/discord-display-name-messages-400.webp 400w, /images/discord-display-name-messages.webp 1600w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="1600" height="976" loading="lazy" decoding="async" alt="A Discord profile with a styled display name above a plain username, beside a chat showing several styled messages that sent." />
+
 WhatsApp has real built-in formatting too, using asterisks for bold, underscores for italic, and tildes for strikethrough, so the native option is more reliable than styled characters inside messages. Use Fonti instead for your profile name and About line, where the built-in formatting doesn't reach.
 
 ### Gaming: Steam, Fortnite, PUBG, Roblox, Minecraft
 
 Gaming is the most restrictive category by a distance, and the rules change from title to title rather than following any standard. Steam accepts almost anything, Roblox accepts almost nothing, and everything else sits between those two. The full breakdown, including which styles clear which filters, is in the names and usernames section below. One rule carries across all of them: if a game rejects your styled name, that's the game's filter, not a bug in the text. The [PUBG fonts guide](/pubg-fonts/) singles out that game, where the PC and mobile versions follow different rules entirely.
+
+<img src="/images/steam-saved-roblox-rejected.webp" srcset="/images/steam-saved-roblox-rejected-400.webp 400w, /images/steam-saved-roblox-rejected.webp 1600w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="1600" height="796" loading="lazy" decoding="async" alt="Steam Community with a saved double-struck profile name beside Roblox rejecting a circled display name as unsupported characters." />
 
 ### Everywhere Else
 

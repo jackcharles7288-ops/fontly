@@ -149,6 +149,11 @@ That history matters for one practical reason: characters built for equations we
 
 Unicode contains two true script alphabets, plus four italic alphabets that the whole internet sells as cursive. Six in total, not two hundred. Each one is a complete cursive writing fonts alphabet covering A to Z and a to z, which is why letters copy and paste cleanly out of every card below. When a generator advertises "200+ cursive styles," it is counting these same six wrapped in different decorative symbols, so ✧𝓒𝓾𝓻𝓼𝓲𝓿𝓮✧ and ♡𝓒𝓾𝓻𝓼𝓲𝓿𝓮♡ get sold to you as two separate styles. Below are the six, labelled for what each one actually is.
 
+<picture>
+  <source media="(max-width: 39.99rem)" srcset="/images/cursive-styles-mobile-400.webp 400w, /images/cursive-styles-mobile.webp 900w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="900" height="1800" alt="Cursive font generator showing the word Hey wassup in six cursive styles" />
+  <img src="/images/cursive-styles-desktop.webp" srcset="/images/cursive-styles-desktop-400.webp 400w, /images/cursive-styles-desktop.webp 1600w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="1600" height="600" loading="lazy" decoding="async" fetchpriority="low" alt="Cursive font generator showing the word Hey wassup in six cursive styles" />
+</picture>
+
 | Style | Sample | What it really is | Best for | Risk |
 |---|---|---|---|---|
 | Bold Script | 𝓒𝓾𝓻𝓼𝓲𝓿𝓮 | True script | Display names, bio headlines, anything permanent | Safe |
@@ -191,6 +196,8 @@ Your bio and your display name both accept cursive, and the display name is wher
 ### TikTok and Discord usernames
 
 On both platforms the display name takes cursive and the handle does not. Discord replaced its old system in 2023, so your username is lowercase letters, numbers, underscores and periods only, while your display name accepts full Unicode. Worth checking on Discord: nicknames have a tight character ceiling, so paste your styled name in and confirm it saves before relying on it. The full walkthrough lives in our Discord Fonts guide.
+
+<img src="/images/cursive-discord-count-limit.webp" srcset="/images/cursive-discord-count-limit-400.webp 400w, /images/cursive-discord-count-limit.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="189" loading="lazy" decoding="async" alt="A Discord display name where a 26 letter cursive name was trimmed to 16 letters, showing Discord counts each cursive character twice" />
 
 ### WhatsApp and messaging
 
@@ -236,6 +243,8 @@ One widely repeated claim on competing cursive pages says styled text never adds
 Empty rectangles have a name among type designers, who call them tofu. They appear when the character reaches a device intact but that device has no drawing for it, so it paints a placeholder box instead. Nothing is broken or corrupted. The same line will look perfect on a newer phone.
 
 With cursive specifically, the risk concentrates in three of the six styles. Handwriting and Slanted come from the sans-serif italic blocks, which tend to have thinner coverage on older devices, and Classic Script carries the eleven substituted letters that come from a separate part of the font. Bold Script, Bold Italic and Italic Script are the ones that hold up nearly everywhere. If your text turns into question marks rather than boxes, that is a different failure, and our [homepage guide](/) explains the distinction in full.
+
+<img src="/images/cursive-handwriting-slanted-android.webp" srcset="/images/cursive-handwriting-slanted-android-400.webp 400w, /images/cursive-handwriting-slanted-android.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="558" loading="lazy" decoding="async" alt="The Handwriting and Slanted cursive styles rendering correctly on a stock Android phone with no empty boxes" />
 
 Here is how the six sort by risk, so you can choose without testing every one of them.
 

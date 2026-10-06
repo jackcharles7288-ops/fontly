@@ -1055,6 +1055,20 @@ main {
   color: #555;
 }
 
+.tool__browse {
+  display: block;
+  margin-top: 1rem;
+  text-align: right;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  text-decoration: none;
+  color: #767676;
+}
+
+.tool__browse:hover {
+  color: var(--accent);
+}
+
 .tool__combo {
   display: grid;
   gap: 0.75rem;

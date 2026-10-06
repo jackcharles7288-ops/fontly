@@ -14,6 +14,11 @@ export interface Category {
   chip?: boolean;
   /** true = decoration shape group (stars, hearts, brackets, shapes, lines, symbols). */
   decoration?: boolean;
+  /**
+   * Content id of the dedicated page for this category. Omit when none exists.
+   * Never point this at a deferred slug.
+   */
+  browsePage?: string;
 }
 
 export const categories: Category[] = [
@@ -22,34 +27,34 @@ export const categories: Category[] = [
   // every alphabet style
   { id: 'cool-fonts', name: 'Cool Fonts' },
   // script letterforms
-  { id: 'cursive', name: 'Cursive', heading: 'Cursive Fonts' },
+  { id: 'cursive', name: 'Cursive', heading: 'Cursive Fonts', browsePage: 'cursive-font-generator' },
   // bold weight
-  { id: 'bold', name: 'Bold', heading: 'Bold Fonts' },
+  { id: 'bold', name: 'Bold', heading: 'Bold Fonts', browsePage: 'bold-text-generator' },
   // slanted letterforms
-  { id: 'italic', name: 'Italic', heading: 'Italic Fonts' },
+  { id: 'italic', name: 'Italic', heading: 'Italic Fonts', browsePage: 'bold-text-generator' },
   // letter inside an enclosure
-  { id: 'bubble', name: 'Bubble', heading: 'Bubble Text' },
+  { id: 'bubble', name: 'Bubble', heading: 'Bubble Text', browsePage: 'bubble-text-generator' },
   // Fraktur letterforms
-  { id: 'gothic', name: 'Gothic', heading: 'Gothic Fonts' },
+  { id: 'gothic', name: 'Gothic', heading: 'Gothic Fonts', browsePage: 'gothic-font-generator' },
   // small or raised or lowered letterforms
-  { id: 'small', name: 'Small', heading: 'Small Text' },
+  { id: 'small', name: 'Small', heading: 'Small Text', browsePage: 'small-text-generator' },
   // ornamental letterforms, not a weight or slant change
   { id: 'fancy', name: 'Fancy', heading: 'Fancy Text' },
   // spacing is the style, not the letterform
-  { id: 'aesthetic', name: 'Aesthetic', heading: 'Aesthetic Fonts' },
+  { id: 'aesthetic', name: 'Aesthetic', heading: 'Aesthetic Fonts', browsePage: 'aesthetic-font-generator' },
   // Chip with no section of its own. Do not add it back to toolCategories.
   // hearts, flowers, snowflakes, stars and sparkles
-  { id: 'cute', name: 'Cute' },
+  { id: 'cute', name: 'Cute', browsePage: 'cute-font-generator' },
   // bold and italic alphabets shared by the bold text generator page
-  { id: 'bold-italic', name: 'Bold & Italic', chip: false },
+  { id: 'bold-italic', name: 'Bold & Italic', chip: false, browsePage: 'bold-text-generator' },
   // converts the digits 0 to 9
-  { id: 'number', name: 'Number', heading: 'Number Fonts' },
+  { id: 'number', name: 'Number', heading: 'Number Fonts', browsePage: 'number-font-generator' },
   // turned letters with reversed order
-  { id: 'upside-down', name: 'Upside Down', heading: 'Upside Down Text' },
+  { id: 'upside-down', name: 'Upside Down', heading: 'Upside Down Text', browsePage: 'upside-down-text-generator' },
   // a combining mark added over unchanged letters
   { id: 'effects', name: 'Effects', heading: 'Text Effects' },
   // many combining marks stacked on each letter, plus a remover
-  { id: 'glitch', name: 'Glitch', heading: 'Glitch Text' },
+  { id: 'glitch', name: 'Glitch', heading: 'Glitch Text', browsePage: 'glitch-text-generator' },
   // Chip with no section of its own. Do not add it back to toolCategories.
   // characters wrapped around unchanged letters
   { id: 'decorated', name: 'Decorated' },

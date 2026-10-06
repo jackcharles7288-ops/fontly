@@ -6,6 +6,7 @@ import { effects, applyEffect } from '../data/effects';
 import { combinations } from '../data/combinations';
 import { glitchSettings, applyGlitch } from '../data/glitch';
 import { applyStyle, applyCombination, countCharacters } from '../scripts/generator.js';
+import { hrefForPageId } from '../data/pages';
 
 interface Props {
   toolCategories: string[];
@@ -99,8 +100,9 @@ interface Section {
   note: string | null;
   decorated: boolean;
   cards: Card[];
-  /** Interactive Combo builder section — no cards, no tool__cards list. */
+  /** Interactive Combo builder section. No cards, no tool__cards list. */
   builder?: boolean;
+  browse: { href: string; label: string } | null;
 }
 
 function styleCard(style: (typeof styles)[number]): Card {
@@ -229,6 +231,63 @@ function combinationCards(): Card[] {
   });
 }
 
+/** Live routes that must never be linked. Not merely unbuilt. */
+const DEFERRED_PAGE_IDS = new Set([
+  'fancy-font-generator',
+  'cool-font-generator',
+  'whatsapp-fonts',
+]);
+
+function usableBrowsePage(pageId: string | undefined): pageId is string {
+  return typeof pageId === 'string' && !DEFERRED_PAGE_IDS.has(pageId) && pageId !== pageFile;
+}
+
+/**
+ * Next built category in catalogue order, then previous, skipping the
+ * current page. Used only when a section's own page is the one on screen.
+ */
+function nearestSibling(fromId: string): (typeof categories)[number] | null {
+  const list = categories.filter(
+    (c) => c.browsePage && !DEFERRED_PAGE_IDS.has(c.browsePage) && c.decoration !== true,
+  );
+  const i = list.findIndex((c) => c.id === fromId);
+  if (i < 0) return null;
+  for (let d = 1; d < list.length; d += 1) {
+    const pair = [list[i + d], list[i - d]];
+    for (const cand of pair) {
+      if (!cand) continue;
+      if (!usableBrowsePage(cand.browsePage)) continue;
+      return cand;
+    }
+  }
+  return null;
+}
+
+function browseFor(section: { id: string; builder?: boolean }): {
+  href: string;
+  label: string;
+} | null {
+  if (section.builder) return null;
+  if (DECORATION_GROUP_IDS.has(section.id)) return null;
+  const category = categoryLookup.get(section.id);
+  if (!category) return null;
+  if (usableBrowsePage(category.browsePage)) {
+    return {
+      href: hrefForPageId(category.browsePage),
+      label: `Browse all ${category.name} fonts \u2192`,
+    };
+  }
+  if (category.browsePage === pageFile) {
+    const sibling = nearestSibling(section.id);
+    if (!sibling?.browsePage) return null;
+    return {
+      href: hrefForPageId(sibling.browsePage),
+      label: `Browse all ${sibling.name} fonts \u2192`,
+    };
+  }
+  return null;
+}
+
 const sections: Section[] = toolCategories.map((id) => {
   const category = categoryLookup.get(id);
   if (!category) {
@@ -243,6 +302,7 @@ const sections: Section[] = toolCategories.map((id) => {
       note: 'Decoration wrapped around your text, letters unchanged.',
       decorated: true,
       cards: showDecorations ? decorationCards(id) : [],
+      browse: browseFor({ id: category.id }),
     };
   }
   if (id === 'effects') {
@@ -252,6 +312,7 @@ const sections: Section[] = toolCategories.map((id) => {
       note: 'Marks added over your text, letters unchanged.',
       decorated: true,
       cards: showEffects ? effectCards() : [],
+      browse: browseFor({ id: category.id }),
     };
   }
   if (id === 'combined') {
@@ -261,6 +322,7 @@ const sections: Section[] = toolCategories.map((id) => {
       note: 'An alphabet wrapped in a decoration.',
       decorated: true,
       cards: showCombined ? combinationCards() : [],
+      browse: browseFor({ id: category.id }),
     };
   }
   if (id === 'glitch') {
@@ -270,6 +332,7 @@ const sections: Section[] = toolCategories.map((id) => {
       note: 'Combining marks stacked on each letter. The last card removes them.',
       decorated: true,
       cards: showGlitch ? glitchCards() : [],
+      browse: browseFor({ id: category.id }),
     };
   }
   if (id === 'combo') {
@@ -280,6 +343,7 @@ const sections: Section[] = toolCategories.map((id) => {
       decorated: false,
       cards: [],
       builder: true,
+      browse: browseFor({ id: category.id, builder: true }),
     };
   }
   return {
@@ -288,6 +352,7 @@ const sections: Section[] = toolCategories.map((id) => {
     note: null,
     decorated: false,
     cards: styles.filter((style) => style.categories.includes(id)).map(styleCard),
+    browse: browseFor({ id: category.id }),
   };
 });
 
@@ -747,6 +812,7 @@ const filterChips = categories
               </div>
             </div>
           ) : (
+            <>
             <ul class="tool__cards">
               {
                 section.id === firstCardSectionId
@@ -815,6 +881,12 @@ const filterChips = categories
                   : null
               }
             </ul>
+            {section.browse ? (
+              <a class="tool__browse" href={section.browse.href}>
+                {section.browse.label}
+              </a>
+            ) : null}
+            </>
           )
         }
       </section>

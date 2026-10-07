@@ -131,5 +131,5 @@ const breadcrumbs =
   }
   {parts[1]?.trim() ? <div class="article" set:html={parts[1]} /> : null}
   <Faq items={page.data.faq} />
-  <RelatedTools slugs={page.data.relatedTools} />
+  <RelatedTools slugs={page.data.relatedTools} currentId={page.id} includeAllTools={hasToolCategories} />
 </PageLayout>

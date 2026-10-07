@@ -4,22 +4,48 @@ import { hrefForPageId } from '../data/pages';
 
 interface Props {
   slugs: string[];
+  currentId?: string;
+  includeAllTools?: boolean;
 }
 
-const { slugs } = Astro.props;
+const { slugs, currentId = '', includeAllTools = false } = Astro.props;
 const collection = await getCollection('pages');
 const byId = new Map(collection.map((page) => [page.id, page]));
 
-const links = slugs.flatMap((slug) => {
+const picked = slugs.flatMap((slug) => {
   const page = byId.get(slug);
   if (!page) return [];
-  return [
-    {
+  return [{ id: page.id, href: hrefForPageId(page.id), label: page.data.h1 }];
+});
+
+// Append every other tool page. Tool page means: not the homepage and at least
+// one toolCategories entry. Pages with an empty toolCategories (blog, about,
+// contact, legal pages) never appear. Order: follow the homepage relatedTools
+// order, anything missing from it goes last, sorted by id.
+let extra: typeof picked = [];
+if (includeAllTools && currentId !== 'index') {
+  const homeOrder = byId.get('index')?.data.relatedTools ?? [];
+  const rank = (id: string) => {
+    const i = homeOrder.indexOf(id);
+    return i === -1 ? Number.MAX_SAFE_INTEGER : i;
+  };
+  const have = new Set([currentId, ...picked.map((link) => link.id)]);
+  extra = collection
+    .filter(
+      (page) =>
+        page.id !== 'index' &&
+        page.data.toolCategories.length > 0 &&
+        !have.has(page.id),
+    )
+    .sort((a, b) => rank(a.id) - rank(b.id) || a.id.localeCompare(b.id))
+    .map((page) => ({
+      id: page.id,
       href: hrefForPageId(page.id),
       label: page.data.h1,
-    },
-  ];
-});
+    }));
+}
+
+const links = [...picked, ...extra];
 ---
 
 {

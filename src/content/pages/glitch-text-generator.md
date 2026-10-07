@@ -1,5 +1,5 @@
 ---
-title: "Glitch Text Generator – Copy and Paste Zalgo Text | Fontly"
+title: "Glitch Text Generator – Copy and Paste Zalgo Text | Fonti"
 h1: "Glitch Text Generator Copy and Paste"
 description: "Free glitch text generator: ten zalgo settings, copy and paste anywhere. See the character cost, where it gets deleted, and how to remove it again."
 ogTitle: "Glitch Text Generator: Copy and Paste Zalgo Text"

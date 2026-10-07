@@ -1,7 +1,7 @@
 ---
-title: "Cool Font Generator – Copy and Paste 300+ Cool Fonts"
+title: "Cool Font Generator – Copy and Paste 350+ Cool Fonts"
 h1: "Cool Font Generator: Copy and Paste Cool Fonts"
-description: "Free cool font generator with 300+ styles. Type once, then copy and paste cool fonts into Instagram, TikTok, Discord, Steam and gaming names."
+description: "Free cool font generator with 350+ styles. Type once, then copy and paste cool fonts into Instagram, TikTok, Discord, Steam and gaming names."
 primaryKeyword: cool fonts
 testPhrase: Fonti
 toolCategories:
@@ -148,7 +148,7 @@ Enter your name, bio, caption, or any text into the box at the top of this page.
 
 ### 2. Browse the font styles
 
-Scroll through the list to compare your text in every style, from cursive to gothic to glitch. The styles sit in named categories, so you can jump straight to the kind of different fonts you came for instead of scrolling past three hundred of them.
+Scroll through the list to compare your text in every style, from cursive to gothic to glitch. The styles sit in named categories, so you can jump straight to the kind of different fonts you came for instead of scrolling past three hundred and fifty of them.
 
 One tip while you browse: the simpler styles (bold, cursive, small caps) display correctly on nearly every device, while heavily decorated ones can show as squares on older phones. If you're picking something permanent like a username, lean simple.
 
@@ -213,7 +213,7 @@ Zalgo text stacks dozens of combining marks on each letter, the same mechanism t
 
 Unicode styles numbers too, so ① ② ③ and ❶ ❷ ❸ behave exactly like the styled letters above: useful for ranked lists, countdowns, and dates inside a bio. Sitting alongside them are thousands of special characters, from hearts and stars to sparkles, arrows, and border pieces, which people mix into styled text for decoration. Good to know: symbols vary between devices far more than letters do, so test any decoration you plan to keep permanently.
 
-Those are the big families. Inside the tool you'll find 300+ variations, from strikethrough and underline to decorated combinations of everything above.
+Those are the big families. Inside the tool you'll find 350+ variations, from strikethrough and underline to decorated combinations of everything above.
 
 ## Copy and Paste Font Examples
 
@@ -428,7 +428,7 @@ Thirty seconds of testing beats discovering your new username is three tofu boxe
 
 There are plenty of font generators out there. These are the things we focused on when building this one.
 
-- **It's completely free, with no catch.** No account, no signup, no locked "premium styles." Every one of the 300+ styles is available to everyone, every time.
+- **It's completely free, with no catch.** No account, no signup, no locked "premium styles." Every one of the 350+ styles is available to everyone, every time.
 - **It's instant.** The conversion happens right in your browser as you type. No "generate" button, no waiting, no page reloads. Type your text once and every style updates live.
 - **One tap to copy.** Every style has its own copy button. On a phone, that matters: no fiddly long-press-and-drag selection, no accidentally copying half a character.
 - **It's upfront about compatibility.** As you've seen throughout this page, we'd rather tell you which styles are safest for a username than promise everything works everywhere.

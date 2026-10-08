@@ -5,6 +5,8 @@ description: "Turn any words into freaky text and copy it in one tap. What the f
 primaryKeyword: "freaky font"
 toolCategories:
   - freaky
+  - glitch
+showGlitch: true
 faq:
   - q: What is the freaky font actually called?
     a: >-

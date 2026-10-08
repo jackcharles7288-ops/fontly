@@ -117,7 +117,7 @@ export const styles: Style[] = [
   {
     id: 'script',
     name: 'Classic Script',
-    categories: ['cool-fonts', 'cursive', 'fancy', 'cute'],
+    categories: ['cool-fonts', 'cursive', 'fancy', 'cute', 'freaky'],
     uppercaseBase: 0x1d49c,
     lowercaseBase: 0x1d4b6,
     substitutions: {
@@ -219,7 +219,7 @@ export const styles: Style[] = [
   {
     id: 'circled',
     name: 'Circled',
-    categories: ['cool-fonts', 'bubble', 'number', 'aesthetic', 'cute'],
+    categories: ['cool-fonts', 'bubble', 'number', 'aesthetic', 'cute', 'freaky'],
     uppercaseBase: 0x24b6,
     lowercaseBase: 0x24d0,
     substitutions: {},
@@ -294,7 +294,7 @@ export const styles: Style[] = [
   {
     id: 'bold-fraktur',
     name: 'Bold Fraktur',
-    categories: ['cool-fonts', 'gothic', 'bold', 'fancy'],
+    categories: ['cool-fonts', 'gothic', 'bold', 'fancy', 'freaky'],
     uppercaseBase: 0x1d56c,
     lowercaseBase: 0x1d586,
     substitutions: {},
@@ -312,7 +312,7 @@ export const styles: Style[] = [
   {
     id: 'monospace',
     name: 'Monospace',
-    categories: ['cool-fonts', 'aesthetic', 'number'],
+    categories: ['cool-fonts', 'aesthetic', 'number', 'freaky'],
     uppercaseBase: 0x1d670,
     lowercaseBase: 0x1d68a,
     substitutions: {},
@@ -331,7 +331,7 @@ export const styles: Style[] = [
   {
     id: 'double-struck',
     name: 'Double-struck',
-    categories: ['cool-fonts', 'fancy', 'number', 'aesthetic', 'cute'],
+    categories: ['cool-fonts', 'fancy', 'number', 'aesthetic', 'cute', 'freaky'],
     uppercaseBase: 0x1d538,
     lowercaseBase: 0x1d552,
     substitutions: {
@@ -371,7 +371,7 @@ export const styles: Style[] = [
   {
     id: 'fullwidth',
     name: 'Fullwidth',
-    categories: ['cool-fonts', 'aesthetic', 'number', 'cute'],
+    categories: ['cool-fonts', 'aesthetic', 'number', 'cute', 'freaky'],
     uppercaseBase: 0xff21,
     lowercaseBase: 0xff41,
     substitutions: {},
@@ -457,7 +457,7 @@ export const styles: Style[] = [
   {
     id: 'small-caps',
     name: 'Small Caps',
-    categories: ['cool-fonts', 'small', 'cute'],
+    categories: ['cool-fonts', 'small', 'cute', 'freaky'],
     uppercaseBase: null,
     lowercaseBase: null,
     substitutions: {
@@ -588,7 +588,7 @@ export const styles: Style[] = [
   {
     id: 'squared',
     name: 'Squared',
-    categories: ['cool-fonts', 'bubble', 'aesthetic', 'cute'],
+    categories: ['cool-fonts', 'bubble', 'aesthetic', 'cute', 'freaky'],
     uppercaseBase: 0x1f130,
     lowercaseBase: null,
     substitutions: {},
@@ -639,7 +639,7 @@ export const styles: Style[] = [
   {
     id: 'upside-down',
     name: 'Upside Down',
-    categories: ['cool-fonts', 'upside-down', 'number'],
+    categories: ['cool-fonts', 'upside-down', 'number', 'freaky'],
     uppercaseBase: null,
     lowercaseBase: null,
     substitutions: turnedSubstitutions,

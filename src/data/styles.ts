@@ -105,7 +105,7 @@ export const styles: Style[] = [
   {
     id: 'bold-script',
     name: 'Bold Script',
-    categories: ['cool-fonts', 'cursive', 'bold', 'fancy', 'cute'],
+    categories: ['cool-fonts', 'cursive', 'bold', 'fancy', 'cute', 'freaky'],
     uppercaseBase: 0x1d4d0,
     lowercaseBase: 0x1d4ea,
     substitutions: {},

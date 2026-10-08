@@ -15,7 +15,7 @@ faq:
   - q: "How many bold styles are there really?"
     a: "Six. Three slant options across two typeface families. Higher counts on other sites include separate alphabets like script and blackletter, or count alternating patterns as styles in their own right."
   - q: "Can I use bold text on LinkedIn?"
-    a: "Yes, carefully. LinkedIn has no formatting of its own, so this is the only route available. Keep every keyword plain, because LinkedIn search appears not to read these characters."
+    a: "Yes, carefully. LinkedIn has no formatting of its own, so this is the only route available. Keep every keyword plain, because LinkedIn treats styled letters as different characters, so a plain search for your job title will not match a styled headline."
   - q: "Is bold text bad for accessibility?"
     a: "Yes. Screen readers either recite the character names one by one or skip the styled text entirely. Keep anything that has to be read in plain text and style only decoration."
   - q: "Why does one letter look different in serif italic?"
@@ -155,7 +155,7 @@ One rule covers most cases. Pick a style, keep it for the whole profile or post,
 | LinkedIn headline | Yes | None | Riskiest field on this list |
 | LinkedIn post | Yes | None | Style a divider or a label, never a keyword |
 | X display name | Yes | None | Works |
-| X post | Yes | Premium long posts only | Works |
+| X post | Yes | Premium long posts (untested) | Works |
 | TikTok bio | Yes | None | Works |
 | Discord message | Yes | Markdown | Use the markdown |
 | Discord display name | Yes | None | Works |
@@ -163,29 +163,173 @@ One rule covers most cases. Pick a style, keep it for the whole profile or post,
 | Facebook group post, desktop | Yes | B and I buttons | Use the buttons |
 | Facebook timeline post and comment | Yes | None | Characters are the only option |
 | Reddit comment | Yes | Markdown | Use the markdown |
-| YouTube comment | Yes | Asterisks and underscores | Test it first |
+| YouTube comment | Yes | None | Asterisks stay plain; use these characters |
 
 The middle column is the part other pages leave out. A field can accept these characters perfectly and still be the wrong place for them, which is true of about half the rows above. Where an app has its own formatting, use the app's version every time.
 
 Handles follow different rules from display names, on every platform. Instagram usernames accept letters, numbers, periods and underscores and nothing else, so the styled version goes in the name field instead. The Instagram font guide breaks down each field separately, and our Facebook font guide walks through names, Page names and Marketplace listings, which each behave differently again.
 
-Two rows carry a question mark on purpose. X appears to allow real formatting only inside premium long posts, and YouTube comments accept an asterisk pattern that different sources describe two different ways. Both are marked for testing rather than stated as fact, because guessing at a platform rule is how the rest of the internet ended up wrong about this topic.
+YouTube comments do not turn asterisks into bold. A posted comment with *single asterisk* wrapping and **double asterisk* wrapping both stayed plain, with the asterisks visible as ordinary characters. Pasted Unicode is the only way to get bold or italic there.
+
+X appears to allow real formatting only inside Premium long posts. That could not be tested here, because the account used for these checks has no Premium. Until someone with Premium confirms it, treat the row as a hedge rather than a measured fact.
+
+<div class="split">
+
+YouTube is the clear case: the asterisk habit from chat apps does not apply in comments, so if you want bold there you paste it from a tool like this one.
+
+<div class="split__media">
+
+<img src="/images/bold-youtube-asterisk.webp" srcset="/images/bold-youtube-asterisk-400.webp 400w, /images/bold-youtube-asterisk.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1443" loading="lazy" decoding="async" alt="A YouTube comment showing single asterisk and double asterisk text with neither line rendered bold" />
+
+*YouTube comment: asterisk wrapping left both lines plain*
+
+</div>
+
+</div>
 
 ## Bold Text on LinkedIn, and Why It Is Riskier Than It Looks
 
 LinkedIn is where this technique gets used most and questioned hardest. The platform has no formatting anywhere: not in a post, not in a headline, not in the about section. So the workaround is genuine, and a large share of the bold text you see there was pasted from a page like this one.
 
-The problem is search. A company that sells a LinkedIn formatting tool publishes the warning itself, that LinkedIn search often ignores these characters, so a keyword styled in bold may not be indexed at all. Think about what that means for a headline. A recruiter searching for a job title will not find the person whose job title is bolded.
+The problem is search, and the measured behaviour is the opposite of the usual warning. LinkedIn does not ignore these characters. It treats them as distinct letters that match nothing in a plain search. A search for Watch in italic styled characters still returned People results for profiles that use the plain word, and a search for a nonsense string in styled characters returned "Your search returned no results." So a recruiter typing a plain job title will not match a headline written in bold characters, because the characters are different, not because LinkedIn skipped them.
+
+<div class="split">
+
+Plain Watch in the LinkedIn search box returned Jobs and People hits that contain the ordinary word.
+
+<div class="split__media">
+
+<img src="/images/bold-linkedin-plain.webp" srcset="/images/bold-linkedin-plain-400.webp 400w, /images/bold-linkedin-plain.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1356" loading="lazy" decoding="async" alt="LinkedIn search for plain Watch showing Jobs and People results" />
+
+*LinkedIn search for plain Watch, with Jobs and People results*
+
+</div>
+
+</div>
+
+<div class="split">
+
+The same word typed in italic styled characters still returned People results. LinkedIn is matching on the styled query as its own string of characters, not stripping the style away.
+
+<div class="split__media">
+
+<img src="/images/bold-linkedin-styled.webp" srcset="/images/bold-linkedin-styled-400.webp 400w, /images/bold-linkedin-styled.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1490" loading="lazy" decoding="async" alt="LinkedIn search for Watch in italic styled characters showing People results" />
+
+*LinkedIn search for Watch in italic styled characters*
+
+</div>
+
+</div>
+
+<div class="split">
+
+A nonsense string in styled characters returned no results at all, which is what you would expect if those characters are real search tokens rather than decoration LinkedIn ignores.
+
+<div class="split__media">
+
+<img src="/images/bold-linkedin-no-results.webp" srcset="/images/bold-linkedin-no-results-400.webp 400w, /images/bold-linkedin-no-results.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1482" loading="lazy" decoding="async" alt="LinkedIn search for a nonsense string in styled characters with a no results message" />
+
+*LinkedIn search for a nonsense styled string, no results*
+
+</div>
+
+</div>
 
 There's a second problem specific to this platform. LinkedIn carries a large concentration of accessibility professionals, and several of them write about this regularly. Comments pointing out that a formatted post is unreadable to a screen reader turn up under exactly the kind of post that uses it most.
 
-A workable compromise exists. Style a divider, a section label or your own name, and leave every keyword in plain text: your job title, your skills, your company, the thing you want to be found for. Reality check: if bolding a word could cost you the search result, that word is too important to bold.
+A workable compromise exists. Style a divider, a section label or your own name, and leave every keyword in plain text: your job title, your skills, your company, the thing you want to be found for. Reality check: if a plain search for that word would miss your styled version, that word is too important to bold.
 
 ## Why Bold Text Eats Your Character Limit
 
-Every styled character costs you two. Plain letters live in the first block of Unicode and count as one. These live thousands of positions further out, and platforms that weight characters by position count each one double.
+Every styled character costs you two. Plain letters live in the first block of Unicode and count as one. These live thousands of positions further out, and platforms that weight characters by position count each one double. On X, plain Watch left 4 slots on the counter, and styled Watch This (10 plain characters) left 14 in one draft and 1 in a fuller draft, which is the two-slot rule in measured numbers.
 
 The arithmetic is unkind. An Instagram bio holds 150 characters, so a fully styled bio holds around 75 letters. A 280 character post drops to roughly 140. Bios take the worst of it, because they're short to begin with and people tend to style the whole thing.
+
+On X the counter itself stays hidden for short posts. It only starts showing a number when roughly 20 characters remain, so a short line like Watch this shows an empty ring with no digit at all until you fill the composer close to the limit.
+
+<div class="split">
+
+With only Watch this typed, the X counter ring is empty. No number appears yet.
+
+<div class="split__media">
+
+<img src="/images/bold-x-counter-hidden.webp" srcset="/images/bold-x-counter-hidden-400.webp 400w, /images/bold-x-counter-hidden.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1600" loading="lazy" decoding="async" alt="X post composer showing Watch this with an empty character counter ring and no number" />
+
+*X composer: Watch this, counter still hidden*
+
+</div>
+
+</div>
+
+<div class="split">
+
+Once the draft is near the limit, the number appears. Here the counter reads 9.
+
+<div class="split__media">
+
+<img src="/images/bold-x-counter-9.webp" srcset="/images/bold-x-counter-9-400.webp 400w, /images/bold-x-counter-9.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1600" loading="lazy" decoding="async" alt="X post composer filled with dots and the character counter reading 9" />
+
+*X composer: counter reading 9*
+
+</div>
+
+</div>
+
+<div class="split">
+
+A little earlier in the fill, the same counter reads 20, which is about where the digit first becomes useful to watch.
+
+<div class="split__media">
+
+<img src="/images/bold-x-counter-20.webp" srcset="/images/bold-x-counter-20-400.webp 400w, /images/bold-x-counter-20.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1600" loading="lazy" decoding="async" alt="X post composer filled with dots and the character counter reading 20" />
+
+*X composer: counter reading 20*
+
+</div>
+
+</div>
+
+<div class="split">
+
+Plain Watch at the end of a near-full draft left the counter at 4.
+
+<div class="split__media">
+
+<img src="/images/bold-x-counter-4.webp" srcset="/images/bold-x-counter-4-400.webp 400w, /images/bold-x-counter-4.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1600" loading="lazy" decoding="async" alt="X post composer ending in plain Watch with the character counter reading 4" />
+
+*X composer: plain Watch, counter reading 4*
+
+</div>
+
+</div>
+
+<div class="split">
+
+The same near-limit draft ending in styled Watch This left the counter at 1.
+
+<div class="split__media">
+
+<img src="/images/bold-x-counter-1.webp" srcset="/images/bold-x-counter-1-400.webp 400w, /images/bold-x-counter-1.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1600" loading="lazy" decoding="async" alt="X post composer ending in styled Watch This with the character counter reading 1" />
+
+*X composer: styled Watch This, counter reading 1*
+
+</div>
+
+</div>
+
+<div class="split">
+
+Styled Watch This alone against the remaining room left the counter at 14, for a phrase that is only 10 plain characters long.
+
+<div class="split__media">
+
+<img src="/images/bold-x-counter-14.webp" srcset="/images/bold-x-counter-14-400.webp 400w, /images/bold-x-counter-14.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1600" loading="lazy" decoding="async" alt="X post composer ending in styled Watch This with the character counter reading 14" />
+
+*X composer: styled Watch This, counter reading 14*
+
+</div>
+
+</div>
 
 The cost is identical across all six styles. Switching from bold to italic saves nothing, and neither does choosing sans serif over serif. The only thing that buys back room is styling less of the text. Our small text page hits the same rule from the opposite direction, where people assume smaller letters take up less space and they take up more.
 
@@ -196,6 +340,34 @@ Bold is the safest thing on this page. Serif and sans serif bold have been in sy
 When a device doesn't have a character, it does one of two things. It borrows the shape from a different font, which is why one word can come out taller or thinner than the rest of your sentence. Or it draws an empty rectangle, the failure everyone recognises. The second one is honest. The first one is worse, because your post looks slightly off and you never find out why.
 
 None of this is the tool or your phone. It's whichever fonts are installed on the device of the person reading, which is outside everyone's control including the platform's. Heads-up: the only reliable test is your own phone plus one older one, which takes two minutes and settles the question for good.
+
+<div class="split">
+
+On an iPhone, Watch This 24 renders in all six bold and italic styles with no empty boxes. The three italic cards leave 24 in plain text, which is the digit gap the tool labels on the card.
+
+<div class="split__media">
+
+<img src="/images/bold-styles-iphone.webp" srcset="/images/bold-styles-iphone-400.webp 400w, /images/bold-styles-iphone.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1558" loading="lazy" decoding="async" alt="iPhone showing Watch This 24 in all six bold and italic styles with no empty boxes" />
+
+*iPhone: all six styles for Watch This 24*
+
+</div>
+
+</div>
+
+<div class="split">
+
+The same phrase on a Redmi A2+, an older handset, also shows all six styles without boxes. That is the safer outcome for these alphabets, and it is why bold stays the first pick when the audience may include older phones.
+
+<div class="split__media">
+
+<img src="/images/bold-styles-redmi-a2.webp" srcset="/images/bold-styles-redmi-a2-400.webp 400w, /images/bold-styles-redmi-a2.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1509" loading="lazy" decoding="async" alt="Redmi A2 phone showing Watch This 24 in all six bold and italic styles with no empty boxes" />
+
+*Redmi A2+: all six styles for Watch This 24*
+
+</div>
+
+</div>
 
 ## Bold Has Numbers. Italic Does Not.
 

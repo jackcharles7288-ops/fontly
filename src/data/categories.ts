@@ -47,6 +47,8 @@ export const categories: Category[] = [
   { id: 'cute', name: 'Cute', browsePage: 'cute-font-generator' },
   // bold and italic alphabets shared by the bold text generator page
   { id: 'bold-italic', name: 'Bold & Italic', chip: false, browsePage: 'bold-text-generator' },
+  // Bold Script alone, used by the freaky font generator page
+  { id: 'freaky', name: 'Freaky', heading: 'Freaky Fonts', chip: false, browsePage: 'freaky-font-generator' },
   // converts the digits 0 to 9
   { id: 'number', name: 'Number', heading: 'Number Fonts', browsePage: 'number-font-generator' },
   // turned letters with reversed order

@@ -20,11 +20,14 @@ interface Props {
   hasTool: boolean;
 }
 
-const { title, description, canonical, h1, faq, breadcrumbs, hasTool } = Astro.props;
+const { pageId, title, description, canonical, h1, faq, breadcrumbs, hasTool } = Astro.props;
 
-// JSON-LD is for machine understanding only. Do not claim FAQ or app markup
-// produces a visible Google search feature. FAQ rich results stopped for every
-// site on 7 May 2026. HowTo is not generated (deprecated on desktop 13 Sep 2023).
+// JSON-LD is for machine understanding only. Do not claim FAQ, HowTo or app
+// markup produces a visible Google search feature. FAQ rich results stopped
+// for every site on 7 May 2026. HowTo was deprecated on desktop on 13 Sep 2023.
+// HowTo is emitted only when includeHowTo is true (bold page today).
+
+const includeHowTo = pageId === 'bold-text-generator' && hasTool;
 
 const graphs: Record<string, unknown>[] = [];
 
@@ -47,6 +50,41 @@ if (hasTool) {
     url: canonical,
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Any',
+  });
+}
+
+if (includeHowTo) {
+  graphs.push({
+    '@type': 'HowTo',
+    name: 'How to make text bold or italic',
+    description:
+      'Type a phrase, pick one of the six Unicode bold and italic styles, copy it, and check it in the real field before you publish.',
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Type your whole phrase',
+        text: 'Type the full thing you plan to post, including any numbers, so you can see which styles leave digits plain.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Pick one of the six styles',
+        text: 'Choose serif or sans serif, then bold, italic or both, and compare all six against your own words.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Copy it',
+        text: 'Use the copy button on the style card so the whole line copies cleanly, especially on a phone.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Check it where it is going',
+        text: 'Paste into the real field and look at it before you publish, because a desktop preview does not prove how a phone will render it.',
+      },
+    ],
   });
 }
 

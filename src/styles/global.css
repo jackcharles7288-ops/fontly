@@ -453,6 +453,14 @@ main {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
+  /* Short prose beside a tall image: centre in the row, then stick while the image scrolls. */
+  .article .split > p {
+    align-self: center;
+    position: sticky;
+    /* Header is position: relative (not sticky). Small viewport clearance only. */
+    top: 1rem;
+  }
+
   .article .split img {
     max-height: 32rem;
     object-fit: contain;

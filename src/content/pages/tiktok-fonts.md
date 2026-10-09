@@ -43,13 +43,12 @@ relatedTools:
   - discord-fonts
   - pubg-fonts
   - freaky-font-generator
+heroIntro: "TikTok gives you up to 160 characters for your bio. Some accounts still show the older limit of 80, so check your own field before you plan around it. That is not much room, and styled letters do not all take up the same amount of space. Some styles let you use the full 160. Others eat half of it before you finish your first line."
 ---
 
-TikTok gives you up to 160 characters for your bio. Some accounts still show the older limit of 80, so check your own field before you plan around it. That is not much room, and styled letters do not all take up the same amount of space. Some styles let you use the full 160. Others eat half of it before you finish your first line.
+TOOL PLACEHOLDER
 
 Every field on TikTok behaves differently too. Your nickname accepts styled text, your @username refuses it outright, and your caption counts it under a different rule again. Pick the wrong field and the letters disappear the second you press save. This page shows which style belongs in which field, and what each one costs you.
-
-TOOL PLACEHOLDER
 
 <h2 id="how-to">How to Change Your TikTok Font in 4 Steps</h2>
 

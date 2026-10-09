@@ -105,13 +105,14 @@ relatedTools:
   - bold-text-generator
   - aesthetic-font-generator
   - bubble-text-generator
+heroIntro: "This cursive font generator turns your text into six cursive styles you can copy and paste straight into an Instagram bio, a TikTok display name, a Discord nickname, or a WhatsApp About line."
 ---
 
-This cursive font generator turns your text into six cursive styles you can copy and paste straight into an Instagram bio, a TikTok display name, a Discord nickname, or a WhatsApp About line. Type once and every style updates together, then tap any card to copy and paste cursive text wherever you need it. Cursive fonts here are free. There is no signup, and nothing gets installed on your phone or computer.
+TOOL PLACEHOLDER
+
+Type once and every style updates together, then tap any card to copy and paste cursive text wherever you need it. Cursive fonts here are free. There is no signup, and nothing gets installed on your phone or computer.
 
 One thing worth understanding before you start: these are not fonts. They are Unicode characters that happen to look like joined-up handwriting, and that is exactly why they survive being pasted into apps with no font settings at all. It is also why a small number of places show them as empty boxes instead. The compatibility table further down this page names those places, so you can pick a style that holds up wherever you are putting it.
-
-TOOL PLACEHOLDER
 
 ## How to Copy and Paste Cursive Fonts
 

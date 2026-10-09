@@ -57,11 +57,12 @@ faq:
       fonts. Bubble text is a set of characters that travels with the words wherever you
       paste them.
 relatedTools: []
+heroIntro: "Bubble text puts every letter inside its own circle, and the result pastes into a bio, a username or a message without the shape being stripped out."
 ---
 
-Bubble text puts every letter inside its own circle, and the result pastes into a bio, a username or a message without the shape being stripped out. This bubble text generator is free, needs no account, and behaves the same on a phone as it does on a desktop. The useful thing to know up front is that nothing is being styled here. Each bubble letter is a separate character that Unicode drew with the circle already attached, which is why it survives a copy and paste when bold and italic do not.
-
 TOOL PLACEHOLDER
+
+This bubble text generator is free, needs no account, and behaves the same on a phone as it does on a desktop. The useful thing to know up front is that nothing is being styled here. Each bubble letter is a separate character that Unicode drew with the circle already attached, which is why it survives a copy and paste when bold and italic do not.
 
 ## How to Make Bubble Text in Four Steps
 

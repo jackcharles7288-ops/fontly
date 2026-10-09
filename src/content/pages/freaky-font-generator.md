@@ -45,6 +45,7 @@ relatedTools:
   - instagram-fonts
   - small-text-generator
   - upside-down-text-generator
+heroIntro: "Freaky text is not a font. It is Mathematical Bold Script, a set of maths symbols from Unicode, and this page turns any words you type into it, ready to copy and paste."
 ---
 
 TOOL PLACEHOLDER

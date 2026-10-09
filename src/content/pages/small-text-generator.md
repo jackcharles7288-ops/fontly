@@ -47,11 +47,12 @@ faq:
   - q: Can screen readers read small text?
     a: >-
       Often badly. Small capitals come from phonetic blocks, so a screen reader may announce them as pronunciation notation and never say the word itself. Keep anything important in plain letters.
+heroIntro: "Most people find small text the same way. You copy a line of tiny letters from somewhere, paste it into a bio, and one letter comes out full size while the rest stay small."
 ---
 
-Most people find small text the same way. You copy a line of tiny letters from somewhere, paste it into a bio, and one letter comes out full size while the rest stay small. Nothing you do fixes it, and no generator explains why. The short answer is that there is no complete alphabet of small letters, and there never has been. This page gives you the three alphabets that do exist, marks every letter that is real, borrowed or missing, and tells you where each one survives.
-
 TOOL PLACEHOLDER
+
+Nothing you do fixes it, and no generator explains why. The short answer is that there is no complete alphabet of small letters, and there never has been. This page gives you the three alphabets that do exist, marks every letter that is real, borrowed or missing, and tells you where each one survives.
 
 ## How to Make Your Text Small in Four Steps
 

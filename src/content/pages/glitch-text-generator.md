@@ -49,11 +49,12 @@ relatedTools:
   - small-text-generator
   - aesthetic-font-generator
   - index
+heroIntro: "Your letters don't get replaced here. Glitch text works by stacking combining marks onto the letters you already typed, which is why the effect can be turned up, turned down, and taken back off again."
 ---
 
-Your letters don't get replaced here. Glitch text works by stacking combining marks onto the letters you already typed, which is why the effect can be turned up, turned down, and taken back off again. That makes it behave differently from every other generator on this site. Heavier settings can slow an app down, some platforms delete it the moment you post, and a few cut the effect off at a fixed number of marks. This page has ten settings, and it says where each one survives.
-
 TOOL PLACEHOLDER
+
+That makes it behave differently from every other generator on this site. Heavier settings can slow an app down, some platforms delete it the moment you post, and a few cut the effect off at a fixed number of marks. This page has ten settings, and it says where each one survives.
 
 <h2 id="how-to">How to Make Glitch Text in Four Steps</h2>
 

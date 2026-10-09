@@ -74,13 +74,12 @@ relatedTools:
   - bubble-text-generator
   - number-font-generator
   - glitch-text-generator
+heroIntro: "Discord fonts are not fonts you install. They are Unicode characters that already sit on every phone and computer, shaped to look like bold, script, gothic or bubble letters. Type your name into the generator above, pick a style, then paste it into your display name, your server nickname, your bio or a message."
 ---
 
-Discord fonts are not fonts you install. They are Unicode characters that already sit on every phone and computer, shaped to look like bold, script, gothic or bubble letters. Type your name into the generator above, pick a style, then paste it into your display name, your server nickname, your bio or a message.
+TOOL PLACEHOLDER
 
 Three separate systems style text on Discord, and mixing them up is the reason most people think their font is broken. Markdown works in messages and nowhere else. Unicode works almost everywhere and costs nothing. Nitro's Display Name Styles are Discord's own fonts, and they carry a limitation that most guides leave out. This page covers all three, plus the exact character limit on every field you can paste into.
-
-TOOL PLACEHOLDER
 
 ## How to Use the Discord Font Generator
 

@@ -70,11 +70,19 @@ a {
   letter-spacing: -0.035em;
   line-height: 1;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .site-header__brand:hover {
   color: var(--accent);
+}
+
+.site-header__logo {
+  display: block;
+  width: 2rem;
+  height: 2rem;
 }
 
 /* Header tool nav. Open state is script-driven (.is-open), not hover. */

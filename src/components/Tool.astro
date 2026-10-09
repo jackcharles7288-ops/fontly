@@ -278,6 +278,9 @@ function browseFor(section: { id: string; builder?: boolean }): {
     };
   }
   if (category.browsePage === pageFile) {
+    // On the freaky page, a sibling fallback wrongly pointed at Number fonts.
+    // Hide rather than self-link; other category pages keep the sibling browse.
+    if (category.id === 'freaky') return null;
     const sibling = nearestSibling(section.id);
     if (!sibling?.browsePage) return null;
     return {

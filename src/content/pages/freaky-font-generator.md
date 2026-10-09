@@ -122,6 +122,32 @@ Fraktur is the one genuine outlier on that list. It is a different block with a 
 
 Italics are worth a note of their own, since people search for freaky font italics alongside the real thing. Mathematical Italic and Mathematical Bold Italic are real Unicode sets, published in the same 2001 release, and they look nothing like the curly script. Anything sold to you as a freaky italic is a different alphabet under a borrowed name. It still works perfectly well, it is just not the thing the meme made popular.
 
+<div class="split">
+
+The cards above the article are the real list. Type freaky into the box and you get Bold Script first, then Classic Script, Circled, Bold Fraktur, Monospace and Double-struck, each with its own caveat badge where Unicode is incomplete.
+
+<div class="split__media">
+
+<img src="/images/freaky-styles-top.webp" srcset="/images/freaky-styles-top-400.webp 400w, /images/freaky-styles-top.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1624" loading="lazy" decoding="async" alt="The Fonti freaky tool with freaky typed in, showing six style cards from Bold Script through Double-struck, including Uneven and Emoji caveat badges" />
+
+*Cards from the tool on this page, with freaky typed in. Bold Script through Double-struck.*
+
+</div>
+</div>
+
+<div class="split">
+
+Scroll the same results and the rest of the set appears: Fullwidth, Small Caps, Squared and Upside Down, again with Partial or Caps only notes where the alphabet has holes.
+
+<div class="split__media">
+
+<img src="/images/freaky-styles-bottom.webp" srcset="/images/freaky-styles-bottom-400.webp 400w, /images/freaky-styles-bottom.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="1701" loading="lazy" decoding="async" alt="The Fonti freaky tool scrolled further, showing Double-struck, Fullwidth, Small Caps, Squared and Upside Down cards with Partial and Caps only badges" />
+
+*Same tool scrolled on: Double-struck through Upside Down.*
+
+</div>
+</div>
+
 ## Freaky, Cursed and Glitch Are Three Different Things
 
 Search results for this term keep bundling freaky together with cursed and glitch text. The three get treated as one category, and they are built in completely different ways. Knowing which one you actually want saves you pasting the wrong thing into a username field and wondering why it came back rejected. Freaky is a ready-made alphabet. Cursed and glitch are ordinary letters with marks piled on top, which is why games and apps treat them differently.
@@ -160,7 +186,18 @@ Comments, captions and display names all take styled text without complaint, whi
 
 ### Instagram
 
+<div class="split">
+
 Your bio, captions and comments all take it without complaint, and the bio limit stays at 150 characters because each freaky letter still counts as one character there. Your handle is the exception and always has been, since Instagram restricts usernames to plain letters, numbers, full stops and underscores. Hashtags are the trap worth knowing about, because a styled tag will post and look fine while quietly matching nothing. There is more on how the app handles styled text on the [Instagram fonts page](/instagram-fonts/).
+
+<div class="split__media">
+
+<img src="/images/freaky-instagram-bio.webp" srcset="/images/freaky-instagram-bio-400.webp 400w, /images/freaky-instagram-bio.webp 720w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="720" height="917" loading="lazy" decoding="async" alt="Instagram Edit Profile bio field in dark mode with freaky pasted in Bold Script, the counter reading 6 of 150, and Instagram Change font button below the text" />
+
+*Instagram's own bio field with freaky pasted in, reading 6 of 150.*
+
+</div>
+</div>
 
 ### Discord
 

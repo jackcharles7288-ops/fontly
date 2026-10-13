@@ -1,7 +1,7 @@
 ---
 title: "Aesthetic Font Generator – Copy and Paste Wide Text | Fonti"
 h1: "Aesthetic Font Generator"
-description: "Turn any words into aesthetic wide text and copy it in one tap. Eight styles free, which apps keep them, and why your numbers sometimes stay plain."
+description: "Free aesthetic font generator: turn any words into wide text and copy it in one tap. Eight styles, which apps keep them, why numbers stay plain."
 primaryKeyword: aesthetic font generator
 testPhrase: Aesthetic
 toolCategories:
@@ -203,7 +203,7 @@ Every app treats pasted characters slightly differently, and the differences are
 
 <div class="split">
 
-Bios and captions both keep fullwidth without complaint, and it is one of the most common places you will see it. The bio gives you 150 characters and a caption gives you 2,200, with only the first 125 showing before the more link. Your display name field, which is separate from your username, takes 30 characters and accepts wide letters. The username itself does not, because that field only allows letters, numbers, full stops and underscores. The Instagram fonts page runs through every field on the app in detail.
+Bios and captions both keep fullwidth without complaint, and it is one of the most common places you will see it. The bio gives you 150 characters and a caption gives you 2,200, with only the first 125 showing before the more link. Your display name field, which is separate from your username, takes 30 characters and accepts wide letters. The username itself does not, because that field only allows letters, numbers, full stops and underscores. The [Instagram fonts page](/instagram-fonts/) runs through every field on the app in detail.
 
 <img src="/images/instagram-profile-fullwidth-bio.webp" srcset="/images/instagram-profile-fullwidth-bio-400.webp 400w, /images/instagram-profile-fullwidth-bio.webp 478w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="478" height="364" loading="lazy" decoding="async" alt="Instagram profile showing a fullwidth bio line on a live account" />
 
@@ -219,7 +219,7 @@ Bios, display names and posts all accept every style on this page. The catch is 
 
 ### Discord
 
-Display names, server nicknames, channel topics and messages all take wide letters. Discord also has real markdown, so wide text and actual formatting can sit in the same message without fighting. The Discord fonts page gets into which fields have limits and which ones silently trim. Server and channel names accept fullwidth too, though a long wide channel name gets cut in the sidebar quickly.
+Display names, server nicknames, channel topics and messages all take wide letters. Discord also has real markdown, so wide text and actual formatting can sit in the same message without fighting. The [Discord fonts page](/discord-fonts/) gets into which fields have limits and which ones silently trim. Server and channel names accept fullwidth too, though a long wide channel name gets cut in the sidebar quickly.
 
 ### Pinterest and Tumblr
 
@@ -268,7 +268,7 @@ If a style does come out as empty boxes, the character is fine and the font is m
 
 Most of these styles have digits and one does not. Fullwidth, monospace, double-struck and circled all carry a full set, so ９５ stays in style with the letters around it, and the two vaporwave variants inherit the fullwidth digits. Squared has no digits at all. Spaced out leaves your digits as ordinary numerals with a space between them.
 
-That is why <span class="sample">🄵🄰🄳🄴 🄰🅆🄰🅈 95</span> comes out with a plain 95 on the end. There is no fix, because the characters were never created. If your text has a year, a handle number or a date in it, pick one of the styles that covers digits. The number font generator goes deeper on which digit styles exist and how complete each one is.
+That is why <span class="sample">🄵🄰🄳🄴 🄰🅆🄰🅈 95</span> comes out with a plain 95 on the end. There is no fix, because the characters were never created. If your text has a year, a handle number or a date in it, pick one of the styles that covers digits. The [number font generator](/number-font-generator/) goes deeper on which digit styles exist and how complete each one is.
 
 ## Nobody Can Search for Your ｗｉｄｅ Username
 

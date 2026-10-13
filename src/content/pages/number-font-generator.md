@@ -1,7 +1,7 @@
 ---
 title: "Number Fonts: Copy and Paste Number Generator | Fonti"
-h1: "Number Font Generator: Copy and Paste Fancy Numbers"
-description: "Copy and paste fancy numbers in bold, circled, superscript and more. See which styles cover every digit, where they work and what they break."
+h1: "Number Fonts: Copy and Paste Fancy Numbers"
+description: "Free number fonts: copy and paste fancy numbers in bold, circled, superscript and more. See which styles cover every digit and what they break."
 primaryKeyword: number fonts
 testPhrase: "2026"
 toolCategories:
@@ -56,7 +56,7 @@ Type a number, pick a style, tap it, paste it. Every style here swaps your digit
 
 TOOL PLACEHOLDER
 
-## How to Use the Number Font Generator
+## How to Use Number Fonts in Four Steps
 
 The whole job takes about ten seconds. Type the number you want, scroll until a style catches your eye, then tap it to copy. The four steps below add the parts that are easy to get wrong, mostly around long numbers and where you test the result.
 

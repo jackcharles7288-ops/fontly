@@ -1,7 +1,7 @@
 ---
 title: "Upside Down Text Generator – Flip and Invert Text"
 h1: "Upside Down Text Generator"
-description: "Flip your text upside down and copy it anywhere. See every flipped letter, its code point, which characters vary by device, and why two digits stay plain."
+description: "Free upside down text generator: flip your text and copy it anywhere. See every flipped letter, its code point, and why two digits stay plain."
 primaryKeyword: upside down text generator
 toolCategories:
   - upside-down

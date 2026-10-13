@@ -1,8 +1,8 @@
 ---
-title: "Bold & Italic Text Generator - Copy and Paste | Fonti"
-h1: "Bold & Italic Text Generator"
-description: "Bold and italic text you can copy and paste. All six styles that exist, why italic has no numbers, and which apps already have real bold built in."
-primaryKeyword: "bold generator"
+title: "Bold Copy and Paste & Italic Text Generator | Fonti"
+h1: "Bold Copy and Paste & Italic Text Generator"
+description: "Free bold copy and paste text, plus italic. All six styles that exist, why italic has no numbers, and which apps already have real bold built in."
+primaryKeyword: "bold copy and paste"
 testPhrase: "Bold"
 toolCategories: ["bold-italic", "cool-fonts", "combo"]
 faq:
@@ -46,7 +46,7 @@ TOOL PLACEHOLDER
 
 This generator is for everywhere else: Instagram bios, LinkedIn headlines, TikTok profiles, and any field that gives you no formatting at all. It makes six styles, which is every bold and italic alphabet Unicode contains, and the characters hold their shape wherever you paste them. Free, no sign-up, works on a phone.
 
-## How to Make Text Bold or Italic in Four Steps
+## How to Do Bold Copy and Paste in Four Steps
 
 The whole thing takes about ten seconds. Everything updates as you type, so you can line up all six styles and compare them before you copy anything. The step worth slowing down for is the last one, because bold text can look perfect in the box you typed it into and fall apart in the place you posted it.
 
@@ -82,7 +82,7 @@ Before you copy anything, check whether you need to. Several of the places peopl
 
 The asterisk convention is older than any of these apps. It came from plain text email, where people wrapped a word in asterisks because there was no other way to stress it. The apps kept the habit and taught it to almost nobody.
 
-Discord goes furthest of any chat app, adding underline, strikethrough, spoilers and code blocks on top of the two above. Our Discord font guide lists the full set with the exact characters. The opposite case is the small text generator, where no app anywhere offers a native version, so pasted characters are the only route there is.
+Discord goes furthest of any chat app, adding underline, strikethrough, spoilers and code blocks on top of the two above. Our [Discord font guide](/discord-fonts/) lists the full set with the exact characters. The opposite case is the [small text generator](/small-text-generator/), where no app anywhere offers a native version, so pasted characters are the only route there is.
 
 Real formatting wins in three ways that show up later. Search still finds the words, because underneath the styling they're ordinary letters. A screen reader still reads them as a sentence instead of a run of symbols. And the text survives a redesign, since the formatting belongs to the app rather than to the characters sitting in your clipboard.
 
@@ -120,7 +120,7 @@ Two more bold styles exist, and they live on other pages because they're differe
 
 ## Bold Text Is Not Bold Formatting. Here Is What It Actually Is
 
-Press Ctrl+B and the letter stays a letter. The app just draws it heavier. Copy a bold word from this page and you get something else entirely, a different character that happens to be shaped like a heavy B. That difference explains everything else on this page.
+Press Ctrl+B and the letter stays a letter. The app just draws it heavier. A bold copy and paste of a word from this page gets you something else entirely, a different character that happens to be shaped like a heavy B. That difference explains everything else on this page.
 
 |  | Real bold formatting | Pasted bold characters |
 |---|---|---|
@@ -168,7 +168,7 @@ One rule covers most cases. Pick a style, keep it for the whole profile or post,
 
 The middle column is the part other pages leave out. A field can accept these characters perfectly and still be the wrong place for them, which is true of about half the rows above. Where an app has its own formatting, use the app's version every time.
 
-Handles follow different rules from display names, on every platform. Instagram usernames accept letters, numbers, periods and underscores and nothing else, so the styled version goes in the name field instead. The Instagram font guide breaks down each field separately, and our Facebook font guide walks through names, Page names and Marketplace listings, which each behave differently again.
+Handles follow different rules from display names, on every platform. Instagram usernames accept letters, numbers, periods and underscores and nothing else, so the styled version goes in the name field instead. The [Instagram font guide](/instagram-fonts/) breaks down each field separately, and our [Facebook font guide](/facebook-fonts/) walks through names, Page names and Marketplace listings, which each behave differently again.
 
 YouTube comments do not turn asterisks into bold. A posted comment with *single asterisk* wrapping and **double asterisk* wrapping both stayed plain, with the asterisks visible as ordinary characters. Pasted Unicode is the only way to get bold or italic there.
 

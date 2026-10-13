@@ -1,7 +1,7 @@
 ---
 title: "PUBG Fonts – Name Symbols and Styles That Work | Fonti"
 h1: "PUBG Fonts"
-description: "PUBG name symbols and fonts you can copy and paste. Which styles the 14 character name field keeps, which it strips, and how to test one free."
+description: "Free PUBG fonts and name symbols you can copy and paste. Which styles the 14 character name field keeps, strips, and how to test one free."
 primaryKeyword: "pubg fonts"
 toolCategories:
   - symbols
@@ -56,7 +56,7 @@ That changes what a useful page about PUBG fonts looks like. Styled alphabets ar
 
 Below you will find which styles pasted and which vanished, the most likely reason for the split, the symbol sets you can copy straight into the field, and why a fourteen character limit pushes decorated names down to four or five letters. There is a way to test a name for free before you spend a Rename Card, and a fix for the phones where pasting does not work at all. If you only came to build a name, the box above is enough.
 
-<h2 id="how-to">How to Get a Styled PUBG Name in Three Steps</h2>
+<h2 id="how-to">How to Get PUBG Fonts into a Name in Three Steps</h2>
 
 ### 1. Type your name into the box
 
@@ -235,7 +235,7 @@ Worth knowing before you try it: this is the least reliable thing on the page. W
 
 ## What PUBG's Own Rules Say About Symbol Names
 
-Krafton publishes a naming policy, and it is worth reading once because almost nobody links to it. Nicknames that are offensive, impersonate staff, infringe a trademark or read as sexually explicit are all covered by it. A name found in breach can be changed without your consent, and penalties can follow on top of that.
+[Krafton publishes a naming policy](https://www.pubg.com/rules-of-conduct/), and it is worth reading once because almost nobody links to it. Nicknames that are offensive, impersonate staff, infringe a trademark or read as sexually explicit are all covered by it. A name found in breach can be changed without your consent, and penalties can follow on top of that.
 
 One clause goes further than most players expect, and it is the reason this section is here at all. It deals with players who try to work around the filter rather than break it outright. The wording is worth reading exactly as it was published.
 

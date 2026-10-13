@@ -1,7 +1,7 @@
 ---
 title: "Discord Fonts: Copy and Paste Font Generator | Fonti"
 h1: "Discord Font Generator: Copy and Paste Discord Fonts"
-description: "Free Discord font generator: copy and paste styled text into your display name, nickname, server or messages. No Nitro needed, no signup."
+description: "Free Discord fonts: copy and paste styled text into your display name, nickname, server or messages. No Nitro needed, no signup."
 primaryKeyword: discord fonts
 testPhrase: Wumpus
 toolCategories:

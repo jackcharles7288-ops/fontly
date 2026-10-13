@@ -1,7 +1,7 @@
 ---
 title: "Instagram Font Generator – Copy and Paste Fonts for Bio"
 h1: "Instagram Font Generator"
-description: "Copy and paste Instagram fonts for your bio, Name and captions. Every style labelled with where it breaks, plus the one field to never style."
+description: "Free Instagram font generator: copy and paste fonts for your bio, Name and captions. Every style labelled with where it breaks."
 primaryKeyword: "instagram font generator"
 toolCategories:
   - cool-fonts
@@ -50,7 +50,7 @@ Instagram has no font setting. There is no menu, no dropdown, no hidden toggle b
 
 TOOL PLACEHOLDER
 
-## How to Change Your Instagram Font in Four Steps
+## How to Use the Instagram Font Generator
 
 The whole process happens outside Instagram and finishes with a paste. It takes about ten seconds once you have done it once. The only step people skip is the last one, and it is the step that saves you from publishing a row of empty rectangles.
 
@@ -165,11 +165,11 @@ Good to know: the first 125 characters or so of a caption are what people see be
 
 This is the part most people get wrong, and it is the reason a lot of styled profiles quietly stop showing up in search. The two fields sit inches apart on your profile and look like they belong together. They do not, and they behave nothing alike.
 
-Your username is the @handle. It sits under your photo, it is how people tag you, and it is locked to plain characters: letters, numbers, periods, underscores, thirty characters maximum. Nothing you paste will change it. TikTok divides its profile the same way, and our TikTok fonts guide names which of its two fields will actually keep what you paste.
+Your username is the @handle. It sits under your photo, it is how people tag you, and it is locked to plain characters: letters, numbers, periods, underscores, thirty characters maximum. Nothing you paste will change it. TikTok divides its profile the same way, and our [TikTok fonts guide](/tiktok-fonts/) names which of its two fields will actually keep what you paste.
 
 <div class="split">
 
-Your Name is the bold line that appears above your bio. It is a completely separate field, it has nothing to do with your handle, and it accepts any character you can paste into it. It also holds more than most people think. Instagram raised the limit from thirty to 64 characters in 2022, and a surprising amount of the internet still prints the old number.
+Your Name is the bold line that appears above your bio. It is a completely separate field, it has nothing to do with your handle, and it accepts any character you can paste into it. It also holds more than most people think. Instagram raised the limit from thirty to 64 characters, a change widely reported in 2022.
 
 <div class="split__media">
 
@@ -193,7 +193,7 @@ The numbers are worth knowing before you write anything, because they are tighte
 
 Worth knowing: some styled characters cost you more than one character each. Most Unicode letters are a single character, so a styled bio uses up exactly as much room as a plain one. The exceptions are the decorative ones built out of several pieces stacked together.
 
-Keycap numbers are the clearest example. A single keycap digit is actually three separate code points glued into one shape, which means writing a four-digit year that way spends twelve characters of your 150. There is a full breakdown of how those are put together in our guide to number fonts.
+Keycap numbers are the clearest example. A single keycap digit is actually three separate code points glued into one shape, which means writing a four-digit year that way spends twelve characters of your 150. There is a full breakdown of how those are put together in our guide to [number fonts](/number-font-generator/).
 
 Emoji behave similarly. A plain emoji is usually two characters, and the ones with skin tones or gender variants can be more. None of this is a reason to avoid them, but it does explain why a bio that looks half empty refuses to accept another word.
 
@@ -213,7 +213,7 @@ What font generators produce is something else entirely. Unicode, the standard t
 
 The useful name for these is borrowed characters. A mathematician needed a bold letter that meant something different from a plain one, so Unicode gave them a separate character with its own permanent number. You are using that character as decoration. It works, and it works everywhere text works, but nobody designed it for this.
 
-That single fact explains almost every strange thing about styled text. It survives copy and paste because it is the text. It shows up as a box when a device has no drawing for that particular character. And it is invisible to search because, as far as the software is concerned, a styled letter is not the letter it resembles. The same logic applies to every platform, which is why the styles on our cursive font generator behave the same way in a document as they do in a bio.
+That single fact explains almost every strange thing about styled text. It survives copy and paste because it is the text. It shows up as a box when a device has no drawing for that particular character. And it is invisible to search because, as far as the software is concerned, a styled letter is not the letter it resembles. The same logic applies to every platform, which is why the styles on our [cursive font generator](/cursive-font-generator/) behave the same way in a document as they do in a bio.
 
 ## What Font Does Instagram Actually Use?
 

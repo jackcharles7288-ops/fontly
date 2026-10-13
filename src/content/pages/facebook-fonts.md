@@ -1,7 +1,7 @@
 ---
-title: "Facebook Font Generator – Bold Text and Fonts Copy Paste"
-h1: "Facebook Font Generator"
-description: "Change your Facebook font in seconds. Copy and paste bold, italic and fancy text for posts, bios and comments, plus where Facebook blocks it."
+title: "Facebook Fonts – Bold Text and Fonts Copy Paste"
+h1: "Facebook Fonts"
+description: "Free Facebook fonts: copy and paste bold, italic and fancy text for posts, bios and comments, plus where Facebook blocks it."
 primaryKeyword: "facebook fonts"
 toolCategories:
   - cool-fonts
@@ -76,7 +76,7 @@ Paste it where you actually plan to publish, then look at the result before you 
 
 <h2 id="bold">2. Facebook Does Have Bold and Italic. It Is Just Hidden in One Place</h2>
 
-Most people working out how to bold text on Facebook assume the feature does not exist, and go hunting for a Facebook bold text generator instead. It does exist, and it gives you genuine formatting, the same kind you would get in a word processor. The catch is where Facebook put it.
+Most people working out how to bold text on Facebook assume the feature does not exist, and go hunting for a Facebook [bold text generator](/bold-text-generator/) instead. It does exist, and it gives you genuine formatting, the same kind you would get in a word processor. The catch is where Facebook put it.
 
 <div class="split">
 
@@ -198,7 +198,7 @@ A lot of sites lump these together and tell you to style your name. They are thr
 
 This is the name that appears above your posts. Facebook's help page on the subject is direct about what is not allowed: no unusual capitalisation, no punctuation, no unusual characters, no random words. The banned list also covers numbers, repeating characters, characters from more than one language, professional or religious titles, and words used in place of a name.
 
-Then there is the part that catches people out. Once you change your name, you cannot change it again for sixty days. Fair warning: if you push a styled name through and Facebook later reverts it or you decide you hate it, that sixty-day clock may already be running. TikTok runs a far looser version of the same rule, and our TikTok fonts guide puts a nickname with no waiting period next to a handle locked for thirty days.
+Then there is the part that catches people out. Once you change your name, you cannot change it again for sixty days. Fair warning: if you push a styled name through and Facebook later reverts it or you decide you hate it, that sixty-day clock may already be running. TikTok runs a far looser version of the same rule, and our [TikTok fonts guide](/tiktok-fonts/) puts a nickname with no waiting period next to a handle locked for thirty days.
 
 ### Your username
 

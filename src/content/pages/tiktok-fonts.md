@@ -1,7 +1,7 @@
 ---
 title: "TikTok Fonts – Copy and Paste Font Generator | Fonti"
 h1: "TikTok Fonts Copy and Paste"
-description: "Free TikTok font generator. See which styles fit a 160-character bio, which ones TikTok deletes on save, and where each one actually works."
+description: "Free TikTok fonts. See which styles fit a 160-character bio, which ones TikTok deletes on save, and where each one actually works."
 primaryKeyword: "tiktok fonts"
 toolCategories:
   - cool-fonts
@@ -50,7 +50,7 @@ TOOL PLACEHOLDER
 
 Every field on TikTok behaves differently too. Your nickname accepts styled text, your @username refuses it outright, and your caption counts it under a different rule again. Pick the wrong field and the letters disappear the second you press save. This page shows which style belongs in which field, and what each one costs you.
 
-<h2 id="how-to">How to Change Your TikTok Font in 4 Steps</h2>
+<h2 id="how-to">How to Use TikTok Fonts in 4 Steps</h2>
 
 The tool above does the conversion for you. You type once, then copy whichever style you want. TikTok has no font button of its own, so pasting styled characters is the only way to get this look into your profile.
 
@@ -122,9 +122,9 @@ Twelve styles are worth your time on TikTok. They split into three groups by how
 
 Four styles cost you nothing extra. Small Caps, Superscript, Fullwidth and Circled letters all sit in the older part of Unicode, which means each one takes a single slot. You can fill all 160 characters of your bio with any of them and still have the same room you started with.
 
-Small Caps letters give you ᴄʜɪʟʟ ʜᴏᴜʀꜱ, which reads cleanly at small sizes and looks deliberate rather than decorated. Superscript shrinks the whole line to ᶜʰⁱˡˡ ʰᵒᵘʳˢ, which suits a short tagline better than a full sentence. Our small text generator keeps every one of those tiny alphabets in one place.
+Small Caps letters give you ᴄʜɪʟʟ ʜᴏᴜʀꜱ, which reads cleanly at small sizes and looks deliberate rather than decorated. Superscript shrinks the whole line to ᶜʰⁱˡˡ ʰᵒᵘʳˢ, which suits a short tagline better than a full sentence. Our [small text generator](/small-text-generator/) keeps every one of those tiny alphabets in one place.
 
-Fullwidth spreads your letters out as Ｃｈｉｌｌ Ｈｏｕｒｓ, with a wide gap built into every character. It costs the same as plain text but looks twice as long, which is a useful trade in a short bio. Our aesthetic font generator lines up the wide and boxy sets side by side.
+Fullwidth spreads your letters out as Ｃｈｉｌｌ Ｈｏｕｒｓ, with a wide gap built into every character. It costs the same as plain text but looks twice as long, which is a useful trade in a short bio. Our [aesthetic font generator](/aesthetic-font-generator/) lines up the wide and boxy sets side by side.
 
 <div class="split">
 
@@ -144,7 +144,7 @@ Circled letters turn the line into Ⓒⓗⓘⓛⓛ Ⓗⓞⓤⓡⓢ, the softest 
 
 Classic Script and blackletter sit in the middle of the range. Both measure roughly twenty-two units for a fourteen-character phrase, which leaves you about one hundred characters of usable bio. That is enough for a short styled line with a few plain words after it.
 
-Classic Script gives you 𝒞𝒽𝒾𝓁𝓁 ℋℴ𝓊𝓇𝓈, with the loops of handwriting. Bold Script pushes the same shapes harder as 𝓒𝓱𝓲𝓵𝓵 𝓗𝓸𝓾𝓻𝓼 and costs slightly more per letter. Our cursive font generator traces where those looping letters come from.
+Classic Script gives you 𝒞𝒽𝒾𝓁𝓁 ℋℴ𝓊𝓇𝓈, with the loops of handwriting. Bold Script pushes the same shapes harder as 𝓒𝓱𝓲𝓵𝓵 𝓗𝓸𝓾𝓻𝓼 and costs slightly more per letter. Our [cursive font generator](/cursive-font-generator/) traces where those looping letters come from.
 
 Fraktur reads as ℭ𝔥𝔦𝔩𝔩 ℌ𝔬𝔲𝔯𝔰, heavy and old. It reads slowly, so it does better across a short nickname than a full bio. Both of these styles share a habit that catches people out, and the examples table below shows it plainly.
 
@@ -241,7 +241,7 @@ TikTok now uses a typeface of its own, called TikTok Sans. The original was draw
 
 That stage was handled by Type Network alongside Contrast Foundry, with an engineer brought in for the technical side. What came out is a variable font carrying seven weights and three adjustable axes for weight, slant and width. It reaches past four hundred and sixty languages across Latin, Greek and Cyrillic. For a company shipping one app to most of the world, that coverage is the entire point of the exercise.
 
-The confirmation comes from TikTok itself. Their developer blog states that TikTok Sans is available in the app as Classic, Bold and Oblique among other options. So the font labelled Classic in your video editor is TikTok Sans, and has been for a while.
+The confirmation comes from TikTok itself. Their [developer blog](https://developers.tiktok.com/blog/tiktok-sans-open-source) states that TikTok Sans is available in the app as Classic, Bold and Oblique among other options. So the font labelled Classic in your video editor is TikTok Sans, and has been for a while.
 
 In 2025 TikTok released the whole family under an open licence and put it on Google Fonts. You can download it free, use it commercially, and install it on your own machine. Good to know: none of that helps you style your bio. A downloaded font lives on your computer, while your bio needs characters that travel along with the text, which is what the generator above produces.
 

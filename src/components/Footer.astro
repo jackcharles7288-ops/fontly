@@ -9,28 +9,80 @@ const links = [
 
 <footer class="site-footer">
   <div class="site-footer__inner">
-    <p class="site-footer__name">Fonti</p>
-    <nav class="site-footer__links" aria-label="Footer">
-      <ul>
-        {
-          links.map((link) => (
-            <li>
-              <a href={link.href}>{link.label}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-    <p class="site-footer__contact">
-      <a href="mailto:contact@fonti.cool">contact@fonti.cool</a>
-    </p>
-    <p class="site-footer__copy">© 2026 Fonti</p>
+    <div class="site-footer__top">
+      <div class="site-footer__about">
+        <a class="site-footer__brand" href="/">
+          <img class="site-footer__logo" src="/logo-mark.png" width="24" height="24" alt="" decoding="async" />
+          Fonti
+        </a>
+        <p class="site-footer__tagline">Free copy and paste font generator.</p>
+      </div>
+      <nav class="site-footer__links" aria-label="Footer">
+        <ul>
+          {
+            links.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+    <div class="site-footer__bottom">
+      <a class="site-footer__contact" href="mailto:contact@fonti.cool">contact@fonti.cool</a>
+      <span class="site-footer__divider" aria-hidden="true">&middot;</span>
+      <span class="site-footer__copy">&copy; 2026 Fonti</span>
+    </div>
   </div>
 </footer>
 
 <style>
+  .site-footer__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .site-footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #111;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-decoration: none;
+  }
+
+  .site-footer__brand:hover {
+    color: var(--accent);
+  }
+
+  .site-footer__about {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .site-footer__tagline {
+    margin: 0;
+    color: #555;
+    font-size: 0.875rem;
+  }
+
+  .site-footer__logo {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
   .site-footer__links {
-    margin: 0 0 0.35rem;
+    margin: 0;
   }
 
   .site-footer__links ul {
@@ -46,5 +98,34 @@ const links = [
     display: inline-block;
     padding: 0.2rem 0;
     font-size: 0.9375rem;
+    color: #111;
+    text-decoration: none;
+  }
+
+  .site-footer__links a:hover {
+    color: var(--accent);
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    padding-top: 1.25rem;
+    color: #555;
+    font-size: 0.875rem;
+  }
+
+  .site-footer__contact {
+    color: #555;
+    text-decoration: none;
+  }
+
+  .site-footer__contact:hover {
+    color: var(--accent);
+  }
+
+  .site-footer__divider {
+    color: var(--border);
   }
 </style>

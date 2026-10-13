@@ -168,9 +168,9 @@ Unicode contains two true script alphabets, plus four italic alphabets that the 
 | Handwriting | 𝘊𝘶𝘳𝘴𝘪𝘷𝘦 | Sans italic | Casual captions, notes, personal messages | Check older devices |
 | Slanted | 𝘾𝙪𝙧𝙨𝙞𝙫𝙚 | Sans italic | Gaming tags and usernames that allow Unicode | Check older devices |
 
-That middle column is the part other generators leave out. Only Bold Script and Classic Script are genuinely script alphabets, drawn from handwriting. The other four are italics, which read as cursive at a glance and are perfectly usable, but they are slanted letterforms rather than joined ones. Those same four sit on the bold and italic text generator, sorted there by weight and slant instead of by how closely they resemble handwriting.
+That middle column is the part other generators leave out. Only Bold Script and Classic Script are genuinely script alphabets, drawn from handwriting. The other four are italics, which read as cursive at a glance and are perfectly usable, but they are slanted letterforms rather than joined ones. Those same four sit on the [bold and italic text generator](/bold-text-generator/), sorted there by weight and slant instead of by how closely they resemble handwriting.
 
-Bold Script has a second life you may already have run into. It is the same alphabet behind the 𝓯𝓻𝓮𝓪𝓴𝔂 text that spread out of a SpongeBob meme at the end of 2023, so the characters on the first card above and the ones filling TikTok comments are identical. That changes nothing about what you paste from here. If you arrived chasing that particular joke rather than the typography, the freaky font generator covers where the name came from and what the letters are really called.
+Bold Script has a second life you may already have run into. It is the same alphabet behind the 𝓯𝓻𝓮𝓪𝓴𝔂 text that spread out of a SpongeBob meme at the end of 2023, so the characters on the first card above and the ones filling TikTok comments are identical. That changes nothing about what you paste from here. If you arrived chasing that particular joke rather than the typography, the [freaky font generator](/freaky-font-generator/) covers where the name came from and what the letters are really called.
 
 Heads-up about Classic Script, because this quirk rarely gets explained anywhere. Unicode already had eleven of those script letters filed elsewhere, so it never duplicated them, and generators have to pull B, E, F, H, I, L, M, R, e, g and o from a different block called Letterlike Symbols. Those eleven characters come from a different part of your device's font, so one letter in a Classic Script word sometimes sits at a slightly different weight than its neighbours. Nothing is broken when that happens, and you can see it for yourself in the table below.
 
@@ -212,7 +212,7 @@ Your bio and your display name both accept cursive, and the display name is wher
 
 ### TikTok and Discord usernames
 
-On both platforms the display name takes cursive and the handle does not. Discord replaced its old system in 2023, so your username is lowercase letters, numbers, underscores and periods only, while your display name accepts full Unicode. Worth checking on Discord: nicknames have a tight character ceiling, so paste your styled name in and confirm it saves before relying on it. The full walkthrough lives in our Discord Fonts guide.
+On both platforms the display name takes cursive and the handle does not. Discord replaced its old system in 2023, so your username is lowercase letters, numbers, underscores and periods only, while your display name accepts full Unicode. Worth checking on Discord: nicknames have a tight character ceiling, so paste your styled name in and confirm it saves before relying on it. The full walkthrough lives in our [Discord Fonts guide](/discord-fonts/).
 
 ### WhatsApp and messaging
 

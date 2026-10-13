@@ -1,7 +1,7 @@
 ---
 title: "Small Text Generator – Tiny Text and Small Caps Copy Paste"
 h1: "Small Text Generator"
-description: "Turn your text small in three alphabets: small caps, superscript and subscript. See which letters are real, which are missing, and where each one works."
+description: "Free small text generator: turn your text small in small caps, superscript and subscript. See which letters are real and where each works."
 primaryKeyword: small text generator
 testPhrase: "quick fox"
 toolCategories:

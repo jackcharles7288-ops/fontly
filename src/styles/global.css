@@ -380,7 +380,10 @@ main {
 }
 
 .hero-intro--below {
+  max-width: 72rem;
   margin-top: 1.5rem;
+  margin-inline: 0;
+  text-align: start;
 }
 
 @media (max-width: 39.99rem) {
@@ -429,6 +432,25 @@ main {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+.article .featured-image {
+  max-width: 45rem;
+  margin: 1.5rem auto;
+  text-align: center;
+}
+
+.article .featured-image img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+.article .featured-image figcaption {
+  margin: 0.5rem 0 0;
+  color: #555;
+  font-size: 0.875rem;
 }
 
 @media (max-width: 39.99rem) {

@@ -70,6 +70,11 @@ The whole job takes about ten seconds. Type the number you want, scroll until a 
 
 These steps cover digits only. If you need letters styled the same way, switch over to [the full font generator](/) and do the whole line at once. The styles carry the same names there, so a bold number and a bold word will match.
 
+<figure class="featured-image">
+<img src="/images/featured/number-featured-1200.webp" srcset="/images/featured/number-featured-400.webp 400w, /images/featured/number-featured-800.webp 800w, /images/featured/number-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="629" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Number Fonts lettering above the digits 0 to 9, with the Fonti mark." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 ## Number Styles You Can Copy and Paste
 
 Ten styles, one number, so you can see the difference side by side. The table runs from the safest at the top to the most decorative at the bottom. Every row shows 2026, because a four-digit year is a fair test.

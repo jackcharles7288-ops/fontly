@@ -180,7 +180,13 @@ A server nickname overrides your display name in that server only, which makes i
 
 Saved, and visible to everyone else in the member list. Discord draws member names in a heavy weight anyway, so the shape proves nothing on its own; what it shows is that the field kept the pasted characters.
 
+<div class="split__media">
+
 <img src="/images/discord-nickname-memberlist.webp" srcset="/images/discord-nickname-memberlist-400.webp 400w, /images/discord-nickname-memberlist.webp 480w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="480" height="600" loading="lazy" decoding="async" alt="a Discord member list showing a saved styled server nickname" />
+
+*A styled server nickname in the Discord member list.*
+
+</div>
 
 </div>
 
@@ -218,7 +224,13 @@ Channel names have their own quirk. Discord forces them to lowercase and replace
 
 Plain letters do not survive the paste. TestChannel became testchannel in the Create Channel dialog itself, before the channel existed.
 
+<div class="split__media">
+
 <img src="/images/discord-channel-plain-lowercased.webp" srcset="/images/discord-channel-plain-lowercased-400.webp 400w, /images/discord-channel-plain-lowercased.webp 480w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="480" height="580" loading="lazy" decoding="async" alt="Discord's Create Channel dialog showing a pasted plain name already reduced to testchannel" />
+
+*Discord reduced the plain channel name to lowercase in the Create Channel dialog.*
+
+</div>
 
 </div>
 
@@ -226,7 +238,13 @@ Plain letters do not survive the paste. TestChannel became testchannel in the Cr
 
 The same dialog and the same paste action with a Bold Sans name, which is the style this was tested with rather than the Fraktur above. The capitals came through untouched.
 
+<div class="split__media">
+
 <img src="/images/discord-channel-styled-preserved.webp" srcset="/images/discord-channel-styled-preserved-400.webp 400w, /images/discord-channel-styled-preserved.webp 480w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="480" height="580" loading="lazy" decoding="async" alt="Discord's Create Channel dialog keeping capital letters in a styled channel name" />
+
+*The styled channel name kept its capital forms in the Create Channel dialog.*
+
+</div>
 
 </div>
 
@@ -258,7 +276,13 @@ So if you bought Nitro expecting a styled @name, no amount of settings will prod
 
 The profile editor shows the same boundary: the display name carries the styled characters, and the handle row underneath stays plain text.
 
+<div class="split__media">
+
 <img src="/images/discord-name-vs-handle.webp" srcset="/images/discord-name-vs-handle-400.webp 400w, /images/discord-name-vs-handle.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="228" loading="lazy" decoding="async" alt="a Discord profile with a styled display name above a plain @handle" />
+
+*A styled Discord display name above a plain username.*
+
+</div>
 
 </div>
 
@@ -316,7 +340,13 @@ Small Caps works particularly well for role hierarchies, because it stays legibl
 
 The same display name set in Fraktur and again in Bold Fraktur, at the size the member list uses: the regular cut keeps thin strokes, the bold cut draws the same letters much heavier.
 
+<div class="split__media">
+
 <img src="/images/discord-name-fraktur-vs-bold.webp" width="215" height="83" loading="lazy" decoding="async" alt="a Discord display name shown in Fraktur and in bold Fraktur at member-list size" />
+
+*Fraktur and bold Fraktur display names at Discord member-list size.*
+
+</div>
 
 </div>
 
@@ -326,7 +356,13 @@ Channel names carry a cost the limits table above does not show. A styled channe
 
 Both channels in the sidebar afterwards. The plain name sits in lowercase, the styled one keeps its capitals, and neither was edited after creation.
 
+<div class="split__media">
+
 <img src="/images/discord-channel-list-both.webp" srcset="/images/discord-channel-list-both-400.webp 400w, /images/discord-channel-list-both.webp 480w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="480" height="825" loading="lazy" decoding="async" alt="a Discord channel sidebar showing a lowercased plain channel beside a styled channel that kept its capitals" />
+
+*A plain lowercase channel name beside a styled channel name that kept its capital forms.*
+
+</div>
 
 </div>
 

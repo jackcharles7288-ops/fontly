@@ -9,6 +9,14 @@ interface Breadcrumb {
   url: string;
 }
 
+interface ArticleImageNode {
+  contentUrl: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption?: string;
+}
+
 interface Props {
   pageId: string;
   title: string;
@@ -18,9 +26,20 @@ interface Props {
   faq: FaqItem[];
   breadcrumbs: Breadcrumb[];
   hasTool: boolean;
+  articleImages?: ArticleImageNode[];
 }
 
-const { pageId, title, description, canonical, h1, faq, breadcrumbs, hasTool } = Astro.props;
+const {
+  pageId,
+  title,
+  description,
+  canonical,
+  h1,
+  faq,
+  breadcrumbs,
+  hasTool,
+  articleImages = [],
+} = Astro.props;
 
 // JSON-LD is for machine understanding only. Do not claim FAQ, HowTo or app
 // markup produces a visible Google search feature. FAQ rich results stopped
@@ -107,10 +126,25 @@ if (faq.length > 0) {
   });
 }
 
+for (const image of articleImages) {
+  const node: Record<string, unknown> = {
+    '@type': 'ImageObject',
+    '@id': `${image.contentUrl}#image`,
+    contentUrl: image.contentUrl,
+    width: image.width,
+    height: image.height,
+    description: image.alt,
+  };
+  if (image.caption) {
+    node.caption = image.caption;
+  }
+  graphs.push(node);
+}
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': graphs,
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />

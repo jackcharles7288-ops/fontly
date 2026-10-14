@@ -84,6 +84,11 @@ Tap or click the copy button beside the style you want. Dragging to select works
 
 Paste into the real field before you save. Instagram bios, Discord nicknames and TikTok display names each treat these characters slightly differently, and a style that looks perfect here can render as empty boxes on someone else's device. Test this one on a phone if you own one, since phone fonts and desktop fonts are not the same. Thirty seconds of checking beats finding out from a friend that your name shows up as squares.
 
+<figure class="featured-image">
+<img src="/images/featured/bubble-featured-1200.webp" srcset="/images/featured/bubble-featured-400.webp 400w, /images/featured/bubble-featured-800.webp 800w, /images/featured/bubble-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="629" loading="lazy" decoding="async" fetchpriority="low" alt="Purple rounded Bubble Fonts lettering with the Fonti mark on a white background." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 ## Five Bubble Alphabets, and Only One Is Complete
 
 Most generators hand you a row of bubble styles and let you assume they all work the same way. They do not. There are five separate enclosed alphabets in Unicode, they were added seventeen years apart, and only one of them covers the full alphabet in a place your device is likely to have. Knowing which is which saves you from a broken username.
@@ -258,7 +263,13 @@ Generic compatibility promises are useless, because the answer changes field by 
 
 Instagram is the most common destination and it has one hard rule people learn too late. Usernames accept only letters, numbers, periods and underscores, so bubble characters are rejected outright there. The display name is a different field with no such restriction, which is where styled text belongs, and the bio allows 150 characters. If your bio is already close to that limit, remember that every bubble letter counts as its own character just like a plain one.
 
+<div class="split__media">
+
 <img src="/images/bubble-bio-counter.webp" srcset="/images/bubble-bio-counter-400.webp 400w, /images/bubble-bio-counter.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="406" loading="lazy" decoding="async" alt="ten filled circled capitals A to J in an Instagram bio with the counter reading 10/150" />
+
+*Ten filled circled capitals in the Instagram bio field, with the counter reading 10 of 150.*
+
+</div>
 
 </div>
 
@@ -296,7 +307,13 @@ Mostly safe. Circled digits up to twenty, and the same characters in messaging a
 
 Riskiest. Filled circles, bracketed capitals, and both square sets. All arrived in 2010 or later and all live in the newer part of Unicode that many fonts never bothered to add. On one current Android, filled circles and bracketed capitals rendered as letters, none as empty boxes.
 
+<div class="split__media">
+
 <img src="/images/bubble-four-styles-rendered.webp" srcset="/images/bubble-four-styles-rendered-400.webp 400w, /images/bubble-four-styles-rendered.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="366" loading="lazy" decoding="async" alt="four bubble alphabets pasted into a WhatsApp chat, all rendering as flat monochrome letters with no empty boxes" />
+
+*Four bubble styles rendered as monochrome letters in a WhatsApp chat.*
+
+</div>
 
 </div>
 

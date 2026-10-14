@@ -7,6 +7,11 @@ import { combinations } from '../data/combinations';
 import { glitchSettings, applyGlitch } from '../data/glitch';
 import { applyStyle, applyCombination, countCharacters } from '../scripts/generator.js';
 import { hrefForPageId } from '../data/pages';
+import {
+  mergedToolCategories,
+  defaultFilterFor,
+  isPlatformToolPage,
+} from '../data/tool-config';
 
 interface Props {
   toolCategories: string[];
@@ -26,15 +31,22 @@ interface Props {
 }
 
 const {
-  toolCategories,
+  toolCategories: pageCuratedCategories,
   testPhrase,
-  showDecorations = false,
-  showEffects = false,
-  showCombined = false,
-  showGlitch = false,
+  showGlitch: showGlitchProp = false,
   charLimit,
   pageFile,
 } = Astro.props;
+
+/** Curated page topics; used for Recommended and page-local extras. */
+const toolCategories = mergedToolCategories(pageCuratedCategories);
+const defaultFilter = defaultFilterFor(pageFile);
+const showRecommended = isPlatformToolPage(pageFile);
+/** Shared catalog enables decoration/effect/combined shells; glitch stays page-local. */
+const showDecorations = true;
+const showEffects = true;
+const showCombined = true;
+const showGlitch = showGlitchProp || pageCuratedCategories.includes('glitch');
 
 if (testPhrase === undefined) {
   console.warn(
@@ -360,38 +372,137 @@ const sections: Section[] = toolCategories.map((id) => {
 });
 
 const sectionById = new Map(sections.map((section) => [section.id, section]));
-const pageStyleCount = new Set(
-  sections.flatMap((section) => section.cards.map((card) => card.id)),
-).size;
 // Builder sections first so the builder sits above the card sections when shown.
-// First card section stays the SSR-mounted one (was toolCategories[0]).
 const builderSections = sections.filter((section) => section.builder);
 const cardSections = sections.filter((section) => !section.builder);
 const displaySections = [...builderSections, ...cardSections];
-const firstCardSectionId = cardSections[0]?.id;
+
+/** Which section shells get SSR cards for the initial selection. */
+function sectionShouldSsr(sectionId: string): boolean {
+  if (defaultFilter === 'all') {
+    return sectionId === cardSections[0]?.id;
+  }
+  if (defaultFilter === 'recommended') {
+    return pageCuratedCategories.includes(sectionId) && sectionId !== 'combo';
+  }
+  if (defaultFilter === 'cool-fonts' || defaultFilter === 'cute' || defaultFilter === 'decorated') {
+    // Real section on this page (e.g. Cute): SSR that section, not the first membership hit.
+    if (sectionById.has(defaultFilter)) {
+      return sectionId === defaultFilter;
+    }
+    // Virtual membership chip: SSR only the first section that carries matching cards.
+    const firstMatch = cardSections.find((section) =>
+      section.cards.some((card) => card.membership.split(' ').includes(defaultFilter)),
+    );
+    return sectionId === firstMatch?.id;
+  }
+  return sectionId === defaultFilter;
+}
+
+const fullCatalogCount = new Set(
+  sections.flatMap((section) => section.cards.map((card) => card.id)),
+).size;
+/** Distinct ids in the initial selection (section, Recommended, or membership). */
+function countForDefaultFilter(): number {
+  if (defaultFilter === 'all') return fullCatalogCount;
+  const ids = new Set<string>();
+  for (const section of sections) {
+    if (section.builder) continue;
+    if (defaultFilter === 'recommended') {
+      if (!pageCuratedCategories.includes(section.id)) continue;
+      for (const card of section.cards) ids.add(card.id);
+      continue;
+    }
+    if (
+      defaultFilter === 'cool-fonts' ||
+      defaultFilter === 'cute' ||
+      defaultFilter === 'decorated'
+    ) {
+      // Membership chip that is also a section id: count that section only.
+      if (sectionById.has(defaultFilter)) {
+        if (section.id !== defaultFilter) continue;
+        for (const card of section.cards) ids.add(card.id);
+      } else {
+        for (const card of section.cards) {
+          if (card.membership.split(' ').includes(defaultFilter)) ids.add(card.id);
+        }
+      }
+      continue;
+    }
+    if (section.id !== defaultFilter) continue;
+    for (const card of section.cards) ids.add(card.id);
+  }
+  return ids.size;
+}
+const pageStyleCount = countForDefaultFilter();
+
+// Clear cards from non-SSR sections so specialist pages stay cold-light.
+for (const section of sections) {
+  if (!sectionShouldSsr(section.id)) {
+    section.cards = [];
+  }
+}
+
 // Chip order follows categories.ts. cool-fonts, cute and decorated are chips
-// with no section. Entries with chip: false are sections only.
+// with no section. chip:false stays hidden unless it is this page's default.
 const filterChips = categories
   .filter((category) => {
-    if (category.chip === false) return false;
     if (category.id === 'all' || category.id === 'favourites' || category.id === 'recent') {
       return false;
+    }
+    if (category.chip === false) {
+      return category.id === defaultFilter;
     }
     if (
       category.id === 'cool-fonts' ||
       category.id === 'cute' ||
-      (category.id === 'decorated' &&
-        toolCategories.some((id) => DECORATION_GROUP_IDS.has(id) || id === 'combined'))
+      category.id === 'decorated'
     ) {
       return true;
     }
-    const section = sectionById.get(category.id);
-    return section !== undefined && section.cards.length > 0;
+    return sectionById.has(category.id);
   })
   .map((category) => ({ id: category.id, label: category.name }));
+
+if (showRecommended) {
+  filterChips.unshift({ id: 'recommended', label: 'Recommended' });
+}
+
+const recommendedAttr = pageCuratedCategories.join(' ');
+
+function sectionInitiallyHidden(sectionId: string, isBuilder: boolean): boolean {
+  if (isBuilder) return true;
+  if (defaultFilter === 'all') return false;
+  if (defaultFilter === 'recommended') {
+    return !pageCuratedCategories.includes(sectionId);
+  }
+  if (
+    defaultFilter === 'cool-fonts' ||
+    defaultFilter === 'cute' ||
+    defaultFilter === 'decorated'
+  ) {
+    // Membership chip that is also a section: hide every other section.
+    if (sectionById.has(defaultFilter)) {
+      return sectionId !== defaultFilter;
+    }
+    const section = sectionById.get(sectionId);
+    if (!section) return true;
+    return !section.cards.some((card) =>
+      card.membership.split(' ').includes(defaultFilter),
+    );
+  }
+  return sectionId !== defaultFilter;
+}
 ---
 
-<section class="tool" data-tool id="fonti-tool" data-group-sections={groupSectionsAttr}>
+<section
+  class="tool"
+  data-tool
+  id="fonti-tool"
+  data-group-sections={groupSectionsAttr}
+  data-default-filter={defaultFilter}
+  data-recommended={showRecommended ? recommendedAttr : undefined}
+>
   <svg class="tool__sprite" aria-hidden="true" focusable="false">
     <symbol
       id="icon-copy"
@@ -454,17 +565,17 @@ const filterChips = categories
       <div class="tool__filters" role="toolbar" aria-label="Filter styles and decorations">
         <button
           type="button"
-          class="tool__chip is-active"
+          class:list={['tool__chip', { 'is-active': defaultFilter === 'all' }]}
           data-filter="all"
-          aria-pressed="true">All</button
+          aria-pressed={defaultFilter === 'all' ? 'true' : 'false'}>All</button
         >
         {
           filterChips.map((chip) => (
             <button
               type="button"
-              class="tool__chip"
+              class:list={['tool__chip', { 'is-active': defaultFilter === chip.id }]}
               data-filter={chip.id}
-              aria-pressed="false"
+              aria-pressed={defaultFilter === chip.id ? 'true' : 'false'}
             >
               {chip.label}
             </button>
@@ -741,8 +852,8 @@ const filterChips = categories
       <section
         class:list={['tool__category', { tool__decorated: section.decorated }]}
         data-category={section.id}
-        data-mounted={section.id === firstCardSectionId ? 'true' : 'false'}
-        hidden={section.builder ? true : undefined}
+        data-mounted={sectionShouldSsr(section.id) ? 'true' : 'false'}
+        hidden={sectionInitiallyHidden(section.id, !!section.builder) ? true : undefined}
       >
         <h2 class="tool__category-heading">{section.heading}</h2>
         {section.note ? <p class="tool__section-note">{section.note}</p> : null}
@@ -818,7 +929,7 @@ const filterChips = categories
             <>
             <ul class="tool__cards">
               {
-                section.id === firstCardSectionId
+                sectionShouldSsr(section.id)
                   ? section.cards.map((card) => (
                       <li
                         class="tool-card"

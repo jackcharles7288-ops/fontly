@@ -74,6 +74,11 @@ Because the styling lives in the characters, your text keeps its look after you 
 
 **Small catch** before you commit to a look: a few of the styles further down are built from characters that older phones do not carry. The compatibility table near the bottom says which ones to trust.
 
+<figure class="featured-image">
+<img src="/images/featured/cute-featured-1200.webp" srcset="/images/featured/cute-featured-400.webp 400w, /images/featured/cute-featured-800.webp 800w, /images/featured/cute-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="629" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Cute Fonts lettering with heart shapes and the Fonti mark." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 ## Every Cute Font Is One of Three Things
 
 There is no Unicode block called cute. Knowing that makes the rest of this page easy to read. What tools label as cute fonts always comes from one of three places, and the place it comes from tells you how safe it is.

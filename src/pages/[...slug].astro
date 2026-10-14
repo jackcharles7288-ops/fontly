@@ -10,6 +10,7 @@ import Tool from '../components/Tool.astro';
 import Faq from '../components/Faq.astro';
 import RelatedTools from '../components/RelatedTools.astro';
 import Schema from '../components/Schema.astro';
+import { collectArticleImages } from '../lib/article-images';
 
 const SATTERI_PINNED_VERSION = '0.3.7';
 const createSatteriMarkdownProcessor = markdownSatteri.createSatteriMarkdownProcessor;
@@ -67,6 +68,7 @@ if (!hasToolCategories && markerCount === 1) {
 
 const parts = articleHtml.split(PLACEHOLDER_HTML);
 const hasPlaceholder = markerCount === 1;
+const articleImages = await collectArticleImages(parts.filter(Boolean).join('\n'), Astro.site!);
 
 const breadcrumbs =
   page.id === 'index'
@@ -97,6 +99,7 @@ const breadcrumbs =
     faq={page.data.faq}
     breadcrumbs={breadcrumbs}
     hasTool={hasToolCategories}
+    articleImages={articleImages}
   />
   {
     hasPlaceholder ? (

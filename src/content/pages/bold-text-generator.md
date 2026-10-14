@@ -66,6 +66,11 @@ One tap copies the whole line. On a phone, use the copy button instead of select
 
 Paste it into the real field and look at it before you publish. A composer preview and a published post don't always render the same, and a desktop browser proves nothing about what a phone will do. Fair warning: this is also the step where some people discover the app had a bold button the whole time.
 
+<figure class="featured-image">
+<img src="/images/featured/bold-italic-featured-1200.webp" srcset="/images/featured/bold-italic-featured-400.webp 400w, /images/featured/bold-italic-featured-800.webp 800w, /images/featured/bold-italic-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="628" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Bold and Italic Fonts lettering with the Fonti mark on a white background." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 ## Most Apps Already Have Real Bold. Use That First
 
 Before you copy anything, check whether you need to. Several of the places people ask about most already have real bold and italic built in, and the shortcut is usually two characters. Most people never learn it because there's no visible button, just a typing habit nobody announced.

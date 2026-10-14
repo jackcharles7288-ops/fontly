@@ -136,6 +136,11 @@ Press and hold the field and tap Paste on mobile, or use Ctrl+V and Cmd+V on des
 
 Quick note before you commit to anything permanent: a handful of platforms strip or reject these characters, and the compatibility table below tells you which ones.
 
+<figure class="featured-image">
+<img src="/images/featured/cursive-featured-1200.webp" srcset="/images/featured/cursive-featured-400.webp 400w, /images/featured/cursive-featured-800.webp 800w, /images/featured/cursive-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="629" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Cursive Fonts lettering with the Fonti mark on a white background." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 ## What a Cursive Font Generator Actually Does (It's Not a Font)
 
 Nothing here is being installed and no font file is downloading to your device. The tool swaps each letter you type for a different letter that already exists in Unicode and happens to look cursive. Your regular "h" and the cursive 𝓱 are two separate characters with two separate ID numbers, in the same way that "h" and "n" are separate characters.

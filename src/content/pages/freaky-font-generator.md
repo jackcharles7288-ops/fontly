@@ -70,6 +70,11 @@ Tap the copy button next to the result. On a phone you can also press and hold t
 
 Drop it into an Instagram bio, a TikTok comment, a Discord message or a game profile. No download, no install, no image. The characters travel with the text, which is why they keep their shape in places that give you no font settings at all. Check the finished paste in the real field before you publish, because a preview inside this page cannot prove what another phone will draw.
 
+<figure class="featured-image">
+<img src="/images/featured/freaky-featured-1200.webp" srcset="/images/featured/freaky-featured-400.webp 400w, /images/featured/freaky-featured-800.webp 800w, /images/featured/freaky-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="628" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Freaky Fonts lettering with a face motif and the Fonti mark." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 <h2 id="meme">How a SpongeBob Meme Named a Set of Maths Symbols</h2>
 
 ### The original was in Papyrus

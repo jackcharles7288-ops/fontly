@@ -94,6 +94,11 @@ Fullwidth converts your letters and digits and leaves your spaces exactly as the
 
 Paste it where it is actually going and look at it before you save. Username fields are the ones to watch, because wide letters eat horizontal room fast and a name that fits inside the box on this page can arrive cut short over there. A desktop browser also tells you very little about what the same string will do on a phone.
 
+<figure class="featured-image">
+<img src="/images/featured/aesthetic-featured-1200.webp" srcset="/images/featured/aesthetic-featured-400.webp 400w, /images/featured/aesthetic-featured-800.webp 800w, /images/featured/aesthetic-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="628" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Aesthetic Fonts lettering with the Fonti mark on a white background." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 ## Aesthetic Means Two Different Things, Depending on Who Is Asking
 
 Ask ten people what an aesthetic font looks like and you get two answers that share almost nothing. One group pictures soft handwriting, pale colours and small drawn shapes sitting around the words. The other pictures wide, evenly spaced capitals laid over a sunset gradient with a Japanese city behind them. Both groups type the same words into a search box, which is why most pages on this subject feel like they are answering somebody else's question.
@@ -205,7 +210,13 @@ Every app treats pasted characters slightly differently, and the differences are
 
 Bios and captions both keep fullwidth without complaint, and it is one of the most common places you will see it. The bio gives you 150 characters and a caption gives you 2,200, with only the first 125 showing before the more link. Your display name field, which is separate from your username, takes 30 characters and accepts wide letters. The username itself does not, because that field only allows letters, numbers, full stops and underscores. The [Instagram fonts page](/instagram-fonts/) runs through every field on the app in detail.
 
+<div class="split__media">
+
 <img src="/images/instagram-profile-fullwidth-bio.webp" srcset="/images/instagram-profile-fullwidth-bio-400.webp 400w, /images/instagram-profile-fullwidth-bio.webp 478w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="478" height="364" loading="lazy" decoding="async" alt="Instagram profile showing a fullwidth bio line on a live account" />
+
+*Fullwidth text in an Instagram profile bio.*
+
+</div>
 
 </div>
 
@@ -239,7 +250,13 @@ X does not count characters the way you count them. Its published rule gives mos
 
 Instagram counts fullwidth as a single character. We pasted ten wide capitals into the bio field on a live account and the counter read 10 of 150, not 20. Some guides claim wide text doubles there too; it does not. Your 150 characters are 150 wide letters.
 
+<div class="split__media">
+
 <img src="/images/instagram-bio-fullwidth-counter.webp" srcset="/images/instagram-bio-fullwidth-counter-400.webp 400w, /images/instagram-bio-fullwidth-counter.webp 476w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="476" height="280" loading="lazy" decoding="async" alt="Ten fullwidth capitals in an Instagram bio with the counter reading 10 of 150" />
+
+*Ten fullwidth capitals in the Instagram bio field, with the counter reading 10 of 150.*
+
+</div>
 
 </div>
 

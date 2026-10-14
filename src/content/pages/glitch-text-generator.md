@@ -76,6 +76,11 @@ One tap copies the whole line. Use the button, because a long press on a phone t
 
 Paste it into the real field and look at it before anyone else does. Composer previews lie, a desktop browser proves nothing about a phone, and this style has more ways to fail than anything else on this site. Test this first: paste into the actual app rather than a notes app, because the app is what decides whether your marks survive.
 
+<figure class="featured-image">
+<img src="/images/featured/glitch-featured-1200.webp" srcset="/images/featured/glitch-featured-400.webp 400w, /images/featured/glitch-featured-800.webp 800w, /images/featured/glitch-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="628" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Glitch Fonts lettering with horizontal distortion and the Fonti mark." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 <h2 id="styles">Glitch Text Styles, From Barely Broken to Unreadable</h2>
 
 <div class="split">

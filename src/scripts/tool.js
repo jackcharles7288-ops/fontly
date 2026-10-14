@@ -620,7 +620,14 @@ function initTool() {
    */
   const visibleCards = new Set();
 
-  let activeFilter = 'all';
+  const defaultFilter = root.getAttribute('data-default-filter') || 'all';
+  let activeFilter = defaultFilter;
+  const recommendedIds = new Set(
+    (root.getAttribute('data-recommended') || '')
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean),
+  );
   let cardBudget = CARD_BUDGET;
   let mountedCardCount = 0;
   const favourites = readFavourites();
@@ -1041,7 +1048,7 @@ function initTool() {
     { root: null, rootMargin: SECTION_ROOT_MARGIN, threshold: 0 },
   );
 
-  // Register the first section's server-rendered cards; observe the rest to mount.
+  // Register server-rendered cards; observe the rest to mount.
   for (const section of sections) {
     if (section.getAttribute('data-mounted') === 'true') {
       for (const card of section.querySelectorAll('.tool-card')) {
@@ -1197,8 +1204,18 @@ function initTool() {
     });
   }
 
+  const styleCountEl = root.querySelector('.tool__style-count');
+
+  /** True when the chip id is a real mounted section, not a membership-only chip. */
+  function isSectionFilter(filter) {
+    return catalogByCategory.has(filter);
+  }
+
   /**
    * Chip and search decided from catalogue data, not from mounted DOM.
+   * Section chips match only that section. Recommended matches curated
+   * section ids only. cool-fonts/cute/decorated stay membership-wide when
+   * those ids are not themselves sections on the page.
    * @param {CardData} data
    * @param {string} query
    * @returns {boolean}
@@ -1211,11 +1228,35 @@ function initTool() {
       chipOk = favourites.has(data.id);
     } else if (activeFilter === 'recent') {
       chipOk = recents.includes(data.id);
+    } else if (activeFilter === 'recommended') {
+      chipOk = recommendedIds.has(data.category);
+    } else if (isSectionFilter(activeFilter)) {
+      chipOk = data.category === activeFilter;
     } else {
       chipOk = data.membership.split(' ').includes(activeFilter);
     }
     const searchOk = query === '' || data.searchName.includes(query);
     return chipOk && searchOk;
+  }
+
+  /**
+   * Distinct matching catalog ids for the current chip + search.
+   * @param {string} query
+   * @returns {void}
+   */
+  function updateStyleCount(query) {
+    if (!(styleCountEl instanceof HTMLElement)) return;
+    const ids = new Set();
+    for (const [catId, catalog] of catalogByCategory) {
+      if (catId === 'combo') continue;
+      if (activeFilter === 'recommended' && !recommendedIds.has(catId)) continue;
+      if (isSectionFilter(activeFilter) && catId !== activeFilter) continue;
+      for (const data of catalog) {
+        if (cardMatches(data, query)) ids.add(data.id);
+      }
+    }
+    const n = ids.size;
+    styleCountEl.textContent = n === 1 ? '1 style' : `${n} styles`;
   }
 
   /**
@@ -1232,6 +1273,7 @@ function initTool() {
     let anyRecentMatch = false;
     let anyShown = false;
     const filtering = query !== '' || activeFilter !== 'all';
+    const seenIds = new Set();
 
     for (const section of sections) {
       const catId = section.getAttribute('data-category');
@@ -1239,6 +1281,15 @@ function initTool() {
       if (catId === 'combo') {
         section.hidden =
           query !== '' || activeFilter !== 'combo';
+        continue;
+      }
+      // Section / Recommended chips must not mount unrelated catalogs.
+      if (activeFilter === 'recommended' && !recommendedIds.has(catId)) {
+        section.hidden = true;
+        continue;
+      }
+      if (isSectionFilter(activeFilter) && catId !== activeFilter) {
+        section.hidden = true;
         continue;
       }
       const catalog = catalogByCategory.get(catId) ?? [];
@@ -1249,16 +1300,20 @@ function initTool() {
         matching.push(data);
         if (activeFilter === 'favourites') anyFavMatch = true;
         if (activeFilter === 'recent') anyRecentMatch = true;
-        anyShown = true;
       }
+
+      const matchIds = new Set();
+      for (const data of matching) {
+        if (activeFilter !== 'all' && seenIds.has(data.id)) continue;
+        matchIds.add(data.id);
+        seenIds.add(data.id);
+      }
+      if (matchIds.size > 0) anyShown = true;
 
       // Filtering ignores the budget so a match is never stuck behind Load more.
-      if (matching.length > 0 && section.getAttribute('data-mounted') !== 'true') {
+      if (matchIds.size > 0 && section.getAttribute('data-mounted') !== 'true') {
         mountSection(section, filtering);
       }
-
-      const visibleInSection = matching.length;
-      const matchIds = new Set(matching.map((d) => d.id));
 
       if (section.getAttribute('data-mounted') === 'true') {
         for (const data of catalog) {
@@ -1274,13 +1329,11 @@ function initTool() {
       }
 
       if (activeFilter === 'favourites' || activeFilter === 'recent') {
-        section.hidden = visibleInSection === 0;
+        section.hidden = matchIds.size === 0;
       } else if (activeFilter === 'all') {
-        section.hidden = visibleInSection === 0 && query !== '';
+        section.hidden = matchIds.size === 0 && query !== '';
       } else {
-        // Membership chip: hide the whole section (heading and note included)
-        // when no card in this section matches.
-        section.hidden = visibleInSection === 0;
+        section.hidden = matchIds.size === 0;
       }
     }
 
@@ -1301,19 +1354,41 @@ function initTool() {
     if (emptySearchEl instanceof HTMLElement) {
       emptySearchEl.hidden = !(query !== '' && !anyShown);
     }
-    syncLoadMore();
+    updateStyleCount(query);
+    if (activeFilter === 'all' && query === '') fillBudget();
+    else syncLoadMore();
+  }
+
+  // Apply the page default selection after helpers exist so the count and
+  // section gates run on the configured chip without waiting for a click.
+  if (defaultFilter !== 'all') {
+    applyFilter();
+  } else {
+    updateStyleCount('');
   }
 
   input.addEventListener('input', () => {
     if (debounceTimer !== undefined) clearTimeout(debounceTimer);
-    // Glitch cards stack up to 30 marks per letter, so they get a longer
-    // debounce than the rest. Pages without a glitch section keep DEBOUNCE_MS.
-    const hasGlitch = catalogByCategory.has('glitch');
+    // Longer debounce only while glitch work is actively shown, not merely because
+    // a shared page could mount glitch later.
+    let glitchDebounce = false;
+    if (catalogByCategory.has('glitch')) {
+      if (activeFilter === 'glitch') glitchDebounce = true;
+      else if (activeFilter === 'all' || activeFilter === 'recommended') {
+        for (const section of sections) {
+          if (section.getAttribute('data-category') !== 'glitch') continue;
+          if (!section.hidden) {
+            glitchDebounce = true;
+            break;
+          }
+        }
+      }
+    }
     debounceTimer = setTimeout(
       () => {
         refreshVisible(input.value);
       },
-      hasGlitch ? GLITCH_DEBOUNCE_MS : DEBOUNCE_MS,
+      glitchDebounce ? GLITCH_DEBOUNCE_MS : DEBOUNCE_MS,
     );
   });
 

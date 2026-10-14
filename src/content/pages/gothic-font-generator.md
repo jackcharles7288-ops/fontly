@@ -117,6 +117,11 @@ Press and hold and tap Paste on mobile, or use Ctrl+V and Cmd+V on desktop. When
 
 Worth knowing: a few fields reject styled characters by rule rather than failing to display them, and usernames are the usual culprit. The platform table further down gives the verdict for each one.
 
+<figure class="featured-image">
+<img src="/images/featured/gothic-featured-1200.webp" srcset="/images/featured/gothic-featured-400.webp 400w, /images/featured/gothic-featured-800.webp 800w, /images/featured/gothic-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="628" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Gothic Fonts lettering with the Fonti mark on a white background." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 ## What a Gothic Font Generator Actually Does (It's Not a Font)
 
 Nothing here installs and nothing downloads. The tool swaps each letter you type for a different character that already exists inside Unicode, the standard that assigns an ID number to every character on the internet. Your ordinary "h" and the blackletter 𝔥 are two separate characters with two separate ID numbers, not one letter wearing a costume.
@@ -231,7 +236,13 @@ Steam, Xbox and Discord all accept Unicode in display names, and gaming is still
 
 Your @handle allows only letters, numbers, periods and underscores, capped at 30 characters, so blackletter goes in the display name or one line of the bio. One line is the honest limit, because gothic is dense and a fully styled bio stops being read. Reality check: your name still has to be recognisable to people who already follow you.
 
+<div class="split__media">
+
 <img src="/images/gothic-profile-name-handle.webp" srcset="/images/gothic-profile-name-handle-400.webp 400w, /images/gothic-profile-name-handle.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="455" loading="lazy" decoding="async" alt="an Instagram profile with a blackletter display name above a plain username" />
+
+*A blackletter Instagram display name above a plain username.*
+
+</div>
 
 </div>
 
@@ -269,7 +280,13 @@ One pattern predicts every case that is not in this table. Where text is only di
 
 On X, the six letters of 𝔊𝔬𝔱𝔥𝔦𝔠 cost twelve characters of your post limit rather than six. These characters are counted twice. Most other platforms count them once, so a 150-character Instagram bio behaves normally.
 
+<div class="split__media">
+
 <img src="/images/gothic-bio-counter.webp" srcset="/images/gothic-bio-counter-400.webp 400w, /images/gothic-bio-counter.webp 700w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="700" height="418" loading="lazy" decoding="async" alt="the word Gothic in blackletter in an Instagram bio with the counter reading 6 of 150" />
+
+*Gothic in blackletter in the Instagram bio field, with the counter reading 6 of 150.*
+
+</div>
 
 </div>
 

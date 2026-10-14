@@ -72,6 +72,11 @@ Press Copy on the row you want. What lands on your clipboard is plain text as fa
 
 This step matters more for small text than for any other style. Paste it into the real field on the real device before you save, and read it once. You are looking for two things: a box or blank where a character did not render, and a letter that stayed full size because no small version exists. Both are common, and both are easier to fix before you publish.
 
+<figure class="featured-image">
+<img src="/images/featured/small-text-featured-1200.webp" srcset="/images/featured/small-text-featured-400.webp 400w, /images/featured/small-text-featured-800.webp 800w, /images/featured/small-text-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="629" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Small Text Fonts lettering with the Fonti mark on a white background." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 <h2 id="alphabets">The Three Small Alphabets, and What Each One Is For</h2>
 
 There are exactly three sets of small letters in wide use, and they were built for three unrelated jobs. Small caps are capital letters drawn at roughly the height of lowercase, and printers were using them for acronyms and quiet emphasis centuries before computers existed. Superscript letters sit raised above the line and exist because mathematicians and phoneticians needed them. Subscript letters sit below the line and exist mainly for chemistry and indices.

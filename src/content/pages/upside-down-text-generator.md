@@ -80,6 +80,11 @@ Use the copy button rather than selecting the text by hand. Several of these cha
 
 This is the step every other flipped-text page leaves out, and it is the one that saves you. Paste your line into the app you actually plan to use, on the device you actually plan to use, and read it back. Capital letters and digits are where this breaks, and you would rather find that out now than after two hundred people have seen a row of empty rectangles in your bio.
 
+<figure class="featured-image">
+<img src="/images/featured/upside-down-featured-1200.webp" srcset="/images/featured/upside-down-featured-400.webp 400w, /images/featured/upside-down-featured-800.webp 800w, /images/featured/upside-down-featured-1200.webp 1200w" sizes="(min-width: 45rem) 45rem, calc(100vw - 2rem)" width="1200" height="629" loading="lazy" decoding="async" fetchpriority="low" alt="Purple Upside Down Fonts artwork with inverted lettering and the Fonti mark." />
+<figcaption>Illustration for this guide, not a preview of the generator's copyable text.</figcaption>
+</figure>
+
 <h2 id="types">Flipped, Backwards and Mirrored Are Three Different Things</h2>
 
 Three words get used as if they mean the same thing, and they do not. Unicode itself is precise about this, and the precision is built into the names of the characters. Once you know which word means what, half the tools online start making more sense.

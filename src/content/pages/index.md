@@ -165,6 +165,8 @@ Go to your bio, caption, chat, or profile field and paste: press and hold the te
   <img src="/images/workflow-steps.webp" alt="Four Fonti steps: type or paste your text, browse the font styles, copy one, then paste it into a bio, caption or chat" width="1600" height="1000" loading="lazy" decoding="async" fetchpriority="low" />
 </picture>
 
+*Type or paste your text, choose a style, copy it, then paste it into the field you want to use.*
+
 ## Popular Font Styles You Can Create
 
 Every style below is made of real Unicode characters, and each one has its own story. Most were never designed for social media. Here are the most-used families, with a note on each.
@@ -249,6 +251,8 @@ Fancy fonts work in your display name, bio, captions, and comments on all the bi
 
 <img src="/images/instagram-bio-saved-username-rejected.webp" srcset="/images/instagram-bio-saved-username-rejected-400.webp 400w, /images/instagram-bio-saved-username-rejected.webp 1600w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="1600" height="1076" loading="lazy" decoding="async" alt="Instagram Bio with three styled lines saved at 17 of 150 beside Username refusing styled characters." />
 
+*Instagram saved the styled bio but rejected styled characters in the Username field.*
+
 We keep dedicated guides for the three platforms people ask about most: [Instagram Fonts](/instagram-fonts/), [TikTok Fonts](/tiktok-fonts/) and [Facebook Fonts](/facebook-fonts/). Facebook is the odd one out here, because it is the only major platform with real bold and italic buttons hiding in one corner of it. TikTok is the strictest of the three about what it keeps, and that guide works out what each style costs against the one hundred and sixty characters an Android TikTok bio field showed before you paste it.
 
 ### Chat Apps & Communities: WhatsApp, Discord, Telegram
@@ -257,6 +261,8 @@ Messages are the easy case: paste any style into a WhatsApp, Discord, or Telegra
 
 <img src="/images/discord-display-name-messages.webp" srcset="/images/discord-display-name-messages-400.webp 400w, /images/discord-display-name-messages.webp 1600w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="1600" height="976" loading="lazy" decoding="async" alt="A Discord profile with a styled display name above a plain username, beside a chat showing several styled messages that sent." />
 
+*Discord shows a styled display name above a plain username, alongside sent styled messages.*
+
 WhatsApp has real built-in formatting too, using asterisks for bold, underscores for italic, and tildes for strikethrough, so the native option is more reliable than styled characters inside messages. Use Fonti instead for your profile name and About line, where the built-in formatting doesn't reach.
 
 ### Gaming: Steam, Fortnite, PUBG, Roblox, Minecraft
@@ -264,6 +270,8 @@ WhatsApp has real built-in formatting too, using asterisks for bold, underscores
 Gaming is the most restrictive category by a distance, and the rules change from title to title rather than following any standard. Steam accepts almost anything, Roblox accepts almost nothing, and everything else sits between those two. The full breakdown, including which styles clear which filters, is in the names and usernames section below. One rule carries across all of them: if a game rejects your styled name, that's the game's filter, not a bug in the text. The [PUBG fonts guide](/pubg-fonts/) singles out that game, where the PC and mobile versions follow different rules entirely.
 
 <img src="/images/steam-saved-roblox-rejected.webp" srcset="/images/steam-saved-roblox-rejected-400.webp 400w, /images/steam-saved-roblox-rejected.webp 1600w" sizes="(min-width: 40rem) 34rem, calc(100vw - 2rem)" width="1600" height="796" loading="lazy" decoding="async" alt="Steam Community with a saved double-struck profile name beside Roblox rejecting a circled display name as unsupported characters." />
+
+*Steam saved the double-struck profile name, while Roblox rejected the circled display name.*
 
 ### Everywhere Else
 

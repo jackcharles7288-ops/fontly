@@ -167,6 +167,8 @@ Go to your bio, caption, chat, or profile field and paste: press and hold the te
 
 *Type or paste your text, choose a style, copy it, then paste it into the field you want to use.*
 
+HOME VIDEO PLACEHOLDER
+
 ## Popular Font Styles You Can Create
 
 Every style below is made of real Unicode characters, and each one has its own story. Most were never designed for social media. Here are the most-used families, with a note on each.

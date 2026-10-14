@@ -1,14 +1,14 @@
 ---
 title: "Privacy Policy | Fonti"
 h1: "Privacy Policy"
-description: "How Fonti handles your data: the text you type never leaves your browser, we set no cookies, and we run no analytics or ads."
+description: "How Fonti handles your data: typed text stays in your browser. Fonti sets no cookies; optional YouTube playback connects to YouTube."
 primaryKeyword: "fonti privacy policy"
 toolCategories: []
-heroIntro: "Short version: the text you type stays in your browser, Fonti sets no cookies, and there is no tracking or advertising on this site."
-updatedDate: 2026-10-07
+heroIntro: "Your text stays in your browser. Fonti itself sets no cookies and runs no analytics or ads. Playing the optional video connects to YouTube."
+updatedDate: 2026-10-15
 ---
 
-Last updated: 7 October 2026
+Last updated: 15 October 2026
 
 This policy explains what happens to your information when you use Fonti at fonti.cool. It is short because there is very little to explain. Fonti does not ask for accounts, does not track visitors, and does not need your text to do its job.
 
@@ -35,7 +35,13 @@ Cloudflare handles that data under its own [privacy policy](https://www.cloudfla
 
 ## Cookies, analytics and advertising
 
-Fonti does not set cookies. It has no analytics tools, no advertising, no social media tracking pixels and no embedded third-party content. The site uses the fonts already on your device, so no font service is contacted when you visit.
+Fonti itself does not set cookies. It has no analytics tools, advertising, or social media tracking pixels. The site uses the fonts already on your device, so no font service is contacted when you visit.
+
+## Optional YouTube video
+
+The homepage has an optional YouTube video. Its thumbnail is hosted by Fonti. YouTube is contacted only when you choose to play the video or follow the YouTube link. The embedded player uses YouTube's privacy-enhanced mode. Once you activate it, YouTube may process technical information such as your IP address and device information, and its own [privacy terms](https://policies.google.com/privacy) apply. Fonti does not send the text you enter in the generator to YouTube.
+
+You can use the font tools without playing the video.
 
 If that ever changes, we will update this policy before the change goes live, and where the law requires it we will ask for your consent first.
 

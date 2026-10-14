@@ -17,6 +17,17 @@ interface ArticleImageNode {
   caption?: string;
 }
 
+interface VideoNode {
+  '@id': string;
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  duration: string;
+  embedUrl: string;
+  url: string;
+}
+
 interface Props {
   pageId: string;
   title: string;
@@ -27,6 +38,8 @@ interface Props {
   breadcrumbs: Breadcrumb[];
   hasTool: boolean;
   articleImages?: ArticleImageNode[];
+  /** Homepage-only overview VideoObject fields. */
+  video?: VideoNode;
 }
 
 const {
@@ -39,6 +52,7 @@ const {
   breadcrumbs,
   hasTool,
   articleImages = [],
+  video,
 } = Astro.props;
 
 // JSON-LD is for machine understanding only. Do not claim FAQ, HowTo or app
@@ -139,6 +153,20 @@ for (const image of articleImages) {
     node.caption = image.caption;
   }
   graphs.push(node);
+}
+
+if (video) {
+  graphs.push({
+    '@type': 'VideoObject',
+    '@id': video['@id'],
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    uploadDate: video.uploadDate,
+    duration: video.duration,
+    embedUrl: video.embedUrl,
+    url: video.url,
+  });
 }
 
 const jsonLd = {

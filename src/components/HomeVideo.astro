@@ -1,0 +1,63 @@
+---
+import { HOME_VIDEO as V } from '../data/home-video';
+
+interface Props {
+  site: URL | string;
+}
+
+const { site: _site } = Astro.props;
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Root-relative paths: srcdoc resolves against the embedding page origin.
+const poster480 = V.thumbnail.path480;
+const poster800 = V.thumbnail.path800;
+const poster1200 = V.thumbnail.path1200;
+const playback = V.playbackUrl;
+const playLabel = V.playLabel;
+
+// Trusted fixed metadata only. No user or generator text.
+const posterAlt = 'Fonti overview video thumbnail';
+// Single-quoted attributes inside srcdoc so entity-encoded double quotes do not
+// break homepage image audits that scan the outer HTML string.
+// Scrollbar cause: img default display:inline + vertical-align:baseline left a
+// ~4px descender gap (scrollHeight 409 vs clientHeight 405). display:block
+// removes that gap. outline-offset:-3px keeps the focus ring inside the frame.
+const srcdoc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(playLabel)}</title><style>html,body{margin:0;height:100%;background:#111}a{display:block;height:100%;position:relative}a:focus-visible{outline:3px solid #fff;outline-offset:-3px}img{display:block;width:100%;height:100%;object-fit:cover}b{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;background:#111;border:3px solid #fff;display:grid;place-items:center}</style></head><body><a href='${escapeHtml(playback)}' target='_self' aria-label='${escapeHtml(playLabel)}'><img src='${escapeHtml(poster1200)}' srcset='${escapeHtml(poster480)} 480w, ${escapeHtml(poster800)} 800w, ${escapeHtml(poster1200)} 1200w' sizes='(min-width:45rem) 45rem, calc(100vw - 2rem)' width='1200' height='675' alt='${escapeHtml(posterAlt)}' decoding='async'><b aria-hidden='true'><svg viewBox='0 0 24 24' width='24' height='24' fill='#fff' focusable='false'><path d='M8 5v14l11-7z'/></svg></b></a></body></html>`;
+
+const iframeTitle = `${V.title} (click to play)`;
+---
+
+<section class="home-video hv" aria-labelledby="home-video-heading">
+  <h2 id="home-video-heading">{V.heading}</h2>
+  <p class="hv-i">{V.intro}</p>
+  <div class="hv-f">
+    <iframe
+      class="hv-v"
+      title={iframeTitle}
+      width="1200"
+      height="675"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      srcdoc={srcdoc}
+    ></iframe>
+  </div>
+  <p class="hv-p">
+    Playing this video connects to YouTube. See our <a href="/privacy-policy/">Privacy Policy</a>.
+  </p>
+  <p class="hv-y">
+    <a href={V.watchUrl}>Watch on YouTube</a>
+  </p>
+</section>
+
+<style is:inline>
+.hv{max-width:45rem;margin:2rem auto;text-align:center}.hv-i{margin:.5rem 0 1rem}.hv-f{aspect-ratio:16/9;background:#111}.hv-v{display:block;width:100%;height:100%;border:0}.hv-p,.hv-y{margin:.75rem 0 0}.hv-p{color:#555}.hv-y a{display:inline-block;min-height:44px;line-height:44px;padding:0 12px;border:1px solid var(--accent);border-radius:4px;text-decoration:none}.hv-y a:hover{opacity:.8}
+</style>

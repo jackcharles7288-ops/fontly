@@ -1,5 +1,5 @@
 ---
-title: "Cool Font Generator – Copy and Paste 350+ Cool Fonts"
+title: "Font Generator – Copy and Paste 350+ Cool Fonts"
 h1: "Cool Font Generator: Copy and Paste Cool Fonts"
 description: "Free cool font generator with 350+ styles. Type once, then copy and paste cool fonts into Instagram, TikTok, Discord, Steam and gaming names."
 primaryKeyword: cool fonts
